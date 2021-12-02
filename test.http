@@ -1,0 +1,23 @@
+# Extension Information
+# Name: REST Client
+# Id: humao.rest-client
+# Description: REST Client for Visual Studio Code
+# Version: 0.24.5
+# Publisher: Huachao Mao
+# VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+@API_URL = url_here
+
+GET {{API_URL}}
+
+###
+
+POST {{API_URL}}/users/login
+
+# example
+Content-Type: application/json
+Authorization: token
+{
+  "username": "",
+  "password": ""
+}
