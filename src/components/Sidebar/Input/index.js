@@ -58,7 +58,7 @@ const styles = () => ({
  * @description Input component is an text input created for the login sidebar.
  */
 
-const Input = ({
+function Input({
   onChange,
   ariaLabel,
   label,
@@ -73,7 +73,7 @@ const Input = ({
   formHelperText,
   ariaDescribedBy,
   ...props
-}) => {
+}) {
   const sx = styles();
   // placeholder
   const handleRouteChange = () => {};
@@ -105,7 +105,7 @@ const Input = ({
       )}
     </FormControl>
   );
-};
+}
 
 Input.propTypes = {
   ariaDescribedBy: PropTypes.string,
