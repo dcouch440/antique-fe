@@ -4,19 +4,27 @@ import React from 'react';
 import { Sidebar } from 'components';
 import bottles from 'assets/img/bottles.webp';
 
+const styles = () => ({
+  root: {
+    display: 'flex',
+    height: '100vh',
+    background: `url(${bottles})`,
+    backgroundSize: 'cover',
+    backdropFilter: 'blur(12px)',
+  },
+  content: {
+    flex: 1,
+    height: '100vh',
+  },
+});
+
 export default function AppLayout({ Router }) {
+  const sx = styles();
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        height: '100vh',
-        background: `url(${bottles})`,
-        backgroundSize: 'cover',
-        backdropFilter: 'blur(12px)',
-      }}
-    >
+    <Box sx={sx.root}>
       <Sidebar />
-      <Box sx={{ flex: 1, height: '100vh' }}>
+      <Box sx={sx.content}>
         <Router />
       </Box>
     </Box>
@@ -24,6 +32,5 @@ export default function AppLayout({ Router }) {
 }
 
 AppLayout.propTypes = {
-  Router: PropTypes.node.isRequired,
-  Sidebar: PropTypes.node.isRequired,
+  Router: PropTypes.any,
 };

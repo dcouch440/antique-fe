@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
-
 import { Button } from '@mui/material';
 import Form from '../Form';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { sidebarAC } from 'store/sidebar';
 
-const useSX = () => ({
+const styles = () => ({
   toggleButton: {
-    position: 'absolute',
-    top: (theme) => theme.spacing(1),
-    right: (theme) => theme.spacing(1),
     color: 'white.main',
+    pt: 2,
+    alignSelf: 'flex-end',
   },
 });
 
-function Authorize() {
-  const [authVersion, setAuthVersion] = useState('LOGIN');
-  const [error, setError] = useState({
-    passwordConfirm: '',
-  });
-  const sx = useSX();
+function Authorize({
+  authType,
+  authTypeChanged,
+  passwordConfirmErrorOccurred,
+}) {
+  const sx = styles();
 
-  const handleAuthVersionChange = () =>
-    authVersion === 'LOGIN'
-      ? setAuthVersion('SIGNUP')
-      : setAuthVersion('LOGIN');
+  const isLoginForm = authType === 'LOGIN';
+
+  const handleAuthVersionChange = () => {
+    isLoginForm ? authTypeChanged('SIGNUP') : authTypeChanged('LOGIN');
+  };
 
   const handleLogin = ({ username, password }) => ({ username, password });
   const handleSignup = ({ username, password, passwordConfirm, email }) => {
@@ -32,28 +34,38 @@ function Authorize() {
     email;
 
     if (passwordConfirm !== password) {
-      setError({ passwordConfirm: 'Passwords Must Match' });
+      passwordConfirmErrorOccurred('Passwords Must Match');
     }
   };
 
   return (
     <>
-      {authVersion === 'LOGIN' && (
+      {isLoginForm ? (
         <Form handleAuth={handleLogin} header="Login" />
-      )}
-      {authVersion === 'SIGNUP' && (
-        <Form
-          handleAuth={handleSignup}
-          error={error.passwordConfirm}
-          header="Signup"
-          withSignup
-        />
+      ) : (
+        <Form handleAuth={handleSignup} header="Signup" withSignup />
       )}
       <Button sx={sx.toggleButton} onClick={handleAuthVersionChange}>
-        Signup
+        {isLoginForm ? 'Need an Account?' : 'Already have an account?'}
       </Button>
     </>
   );
 }
 
-export default Authorize;
+Authorize.propTypes = {
+  passwordConfirmErrorOccurred: PropTypes.func.isRequired,
+  authType: PropTypes.string.isRequired,
+  authTypeChanged: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({ sidebar }) => ({
+  authType: sidebar.authType,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  authTypeChanged: (authType) => dispatch(sidebarAC.authTypeChanged(authType)),
+  passwordConfirmErrorOccurred: (error) =>
+    dispatch(sidebarAC.passwordConfirmErrorOccurred(error)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Authorize);

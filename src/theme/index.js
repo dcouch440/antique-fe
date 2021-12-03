@@ -35,6 +35,7 @@ export const theme = createTheme({
       cursive: 'Pacifico, cursive',
     },
     sizes: {
+      reg: 14,
       xl: 46,
     },
   },

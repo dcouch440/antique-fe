@@ -10,8 +10,6 @@ const useSX = () => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    px: 3,
-    pt: 6,
     '& .MuiFormControl-root, & button': {
       mt: 2,
     },
@@ -78,10 +76,10 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
           name="password"
           autoComplete="new-password"
           error={hasPasswordError}
-          AuthorizeHelperText={error}
+          formHelperText={error}
           onChange={handleChange}
           value={password}
-          forgot={withSignup ? false : true}
+          forgot={!withSignup}
           required
         />
         {withSignup && (
@@ -94,7 +92,7 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
             inputProps={{ minLength: 6 }}
             name="confirmPassword"
             error={hasPasswordError}
-            AuthorizeHelperText={error}
+            formHelperText={error}
             onChange={handleChange}
             value={confirmPassword}
             required
@@ -109,10 +107,14 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
 }
 
 AuthForm.propTypes = {
-  error: PropTypes.bool,
+  error: PropTypes.string.isRequired,
   handleAuth: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,
   withSignup: PropTypes.bool,
 };
 
-export default connect(null, null)(AuthForm);
+const mapStateToProps = ({ sidebar }) => ({
+  error: sidebar.errors.passwordConfirm,
+});
+
+export default connect(mapStateToProps, null)(AuthForm);

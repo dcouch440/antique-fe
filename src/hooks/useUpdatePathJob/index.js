@@ -1,4 +1,4 @@
-import { navigationActions } from 'store/navigation';
+import { navigationActions } from 'store/sidebar';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 

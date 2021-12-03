@@ -37,15 +37,19 @@ const StyledInput = styled(TextField)`
   }
 `;
 
-const useSX = () => ({
+const styles = () => ({
   input: {
     position: 'relative',
   },
   forgot: {
     position: 'absolute',
-    bottom: (theme) => theme.spacing(1),
+    top: (theme) => theme.spacing(4),
     right: (theme) => theme.spacing(1),
     cursor: 'pointer',
+    color: 'white.main',
+    fontSize: 'sizes.reg',
+  },
+  helperText: {
     color: 'white.main',
   },
 });
@@ -70,7 +74,7 @@ const Input = ({
   ariaDescribedBy,
   ...props
 }) => {
-  const sx = useSX();
+  const sx = styles();
   // placeholder
   const handleRouteChange = () => {};
 
@@ -89,14 +93,16 @@ const Input = ({
         aria-describedby={ariaDescribedBy}
         {...props}
       />
-      {forgot ? (
+      {forgot && (
         <Typography sx={sx.forgot} onClick={handleRouteChange}>
           Forgot?
         </Typography>
-      ) : null}
-      {formHelperText ? (
-        <FormHelperText id={ariaDescribedBy}>{formHelperText}</FormHelperText>
-      ) : null}
+      )}
+      {formHelperText && (
+        <FormHelperText color="white" id={ariaDescribedBy}>
+          {formHelperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };

@@ -1,1 +1,7 @@
-export const UPDATE_PATH = 'navigation/update-path';
+// sidebar
+export const UPDATE_VERSION = 'sidebar/update-version';
+export const UPDATE_AUTH_TYPE = 'sidebar/update-auth-type';
+export const ADD_PASSWORD_ERROR = 'sidebar/add-password-confirm-error';
+
+// user
+export const ADD_USER_TO_STORE = 'user/add-user-to-store';

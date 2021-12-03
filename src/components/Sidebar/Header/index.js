@@ -3,22 +3,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Typography } from '@mui/material';
 
+const styles = () => ({
+  root: {
+    width: '100%',
+    textAlign: 'center',
+    pt: 3,
+    pb: 1,
+  },
+  text: {
+    fontFamily: 'families.cursive',
+    fontSize: 'sizes.xl',
+  },
+});
+
 export default function Header({ text }) {
+  const sx = styles();
+
   return (
-    <Box
-      sx={{
-        width: '100%',
-        textAlign: 'center',
-        pt: 3,
-      }}
-    >
-      <Typography
-        color="white.main"
-        sx={{
-          fontFamily: 'families.cursive',
-          fontSize: 'sizes.xl',
-        }}
-      >
+    <Box sx={sx.root}>
+      <Typography color="white.main" sx={sx.text}>
         {text}
       </Typography>
     </Box>

@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 import loggerMiddleware from 'redux-logger';
-import { navigationReducer } from '../navigation';
+import { sidebarReducer } from '../sidebar';
 import thunkMiddleware from 'redux-thunk';
+import { userReducer } from 'store/user';
 
 const rootReducer = combineReducers({
-  navigation: navigationReducer,
+  sidebar: sidebarReducer,
+  user: userReducer,
 });
 
 const store = createStore(
