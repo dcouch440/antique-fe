@@ -120,7 +120,7 @@ Input.propTypes = {
   inputProps: PropTypes.object,
   required: PropTypes.bool,
   type: PropTypes.string,
-  value: PropTypes.PropTypes.string,
+  value: PropTypes.string.isRequired,
 };
 
 export default Input;
