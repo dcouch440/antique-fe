@@ -1,5 +1,6 @@
+import { Box } from '@mui/system';
 import React from 'react';
 
 export default function Home() {
-  return <div className="page-container">Hello World</div>;
+  return <Box component="main">Hello World</Box>;
 }
