@@ -10,13 +10,13 @@ function Sidebar() {
       component="nav"
       sx={{
         width: {
-          sm: '90%',
+          xs: '90%',
           md: 400,
         },
         backgroundColor: 'black.transparent',
         backdropFilter: 'blur(12px)',
         position: {
-          sm: 'absolute',
+          xs: 'absolute',
         },
         minHeight: '100%',
       }}
