@@ -4,6 +4,8 @@ import {
   UPDATE_VERSION,
 } from 'store/actions';
 
+import { createReducer } from 'store/utils';
+
 const initialState = {
   sidebarVersion: 'NAVIGATION',
   authType: 'LOGIN',
@@ -12,26 +14,22 @@ const initialState = {
   },
 };
 
-const reducer = (state = initialState, action) => {
-  const switchObj = {
-    [UPDATE_VERSION]: () => ({
-      ...state,
-      sidebarVersion: action.payload,
-    }),
-    [UPDATE_AUTH_TYPE]: () => ({
-      ...state,
-      authType: action.payload,
-    }),
-    [ADD_PASSWORD_ERROR]: () => ({
-      ...state,
-      errors: {
-        ...state.error,
-        passwordConfirm: action.payload,
-      },
-    }),
-  };
-
-  return (switchObj[action.type] || (() => state))();
-};
+const reducer = createReducer(initialState, (state, payload) => ({
+  [UPDATE_VERSION]: () => ({
+    ...state,
+    sidebarVersion: payload,
+  }),
+  [UPDATE_AUTH_TYPE]: () => ({
+    ...state,
+    authType: payload,
+  }),
+  [ADD_PASSWORD_ERROR]: () => ({
+    ...state,
+    errors: {
+      ...state.error,
+      passwordConfirm: payload,
+    },
+  }),
+}));
 
 export default reducer;
