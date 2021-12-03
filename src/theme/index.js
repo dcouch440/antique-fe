@@ -3,14 +3,18 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#3A86FF',
+      main: '#C2C2C2',
     },
     secondary: {
-      main: '#D63230',
+      main: '#FF0000',
+    },
+    danger: {
+      main: '#B86D6D',
     },
     white: {
       main: '#ffffff',
       darker: '#fff5f5',
+      transparent: '#FFFFFF47',
     },
     black: {
       main: '#212529',
@@ -29,8 +33,13 @@ export const theme = createTheme({
     backgroundColor: {
       main: '#ffffff',
     },
+    antiqueWhite: {
+      main: '#FAEBD7',
+      transparent: '#FAEBD723',
+    },
   },
   typography: {
+    fontFamily: 'sans-serif',
     families: {
       cursive: 'Pacifico, cursive',
     },

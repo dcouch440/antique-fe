@@ -15,9 +15,9 @@ const StyledInput = styled(TextField)`
     border-bottom: 1px solid white;
     color: white;
     * {
+      outline: none;
       color: white;
       box-shadow: none;
-      border: none;
       background-color: none;
     }
     input:-webkit-autofill,
@@ -85,6 +85,7 @@ function Input({
         onChange={onChange}
         aria-label={ariaLabel}
         label={label}
+        variant="standard"
         name={name}
         inputProps={inputProps}
         autoComplete={autoComplete}

@@ -13,6 +13,7 @@ const styles = () => ({
   text: {
     fontFamily: 'families.cursive',
     fontSize: 'sizes.xl',
+    textShadow: ' 2px 3px 8px black',
   },
 });
 

@@ -6,7 +6,7 @@ import Input from '../Input';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const useSX = () => ({
+const styles = () => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -24,7 +24,7 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
       password: '',
       confirmPassword: '',
     });
-  const sx = useSX();
+  const sx = styles();
   const hasPasswordError = Boolean(error);
 
   const handleChange = ({ target }) => {
@@ -98,7 +98,7 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
             required
           />
         )}
-        <Button type="submit" color="white" variant="contained" size="large">
+        <Button type="submit" variant="contained" size="large">
           {withSignup ? 'Sign Up' : 'Login'}
         </Button>
       </Box>

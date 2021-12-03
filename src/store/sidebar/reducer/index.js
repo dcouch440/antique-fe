@@ -1,5 +1,6 @@
 import {
   ADD_PASSWORD_ERROR,
+  TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
   UPDATE_VERSION,
 } from 'store/actions';
@@ -9,6 +10,7 @@ import { createReducer } from 'store/utils';
 const initialState = {
   sidebarVersion: 'NAVIGATION',
   authType: 'LOGIN',
+  sidebarVisibility: true,
   errors: {
     passwordConfirm: '',
   },
@@ -29,6 +31,10 @@ const reducer = createReducer(initialState, (state, payload) => ({
       ...state.error,
       passwordConfirm: payload,
     },
+  }),
+  [TOGGLE_SIDEBAR_VISIBILITY]: () => ({
+    ...state,
+    sidebarVisibility: !state.sidebarVisibility,
   }),
 }));
 
