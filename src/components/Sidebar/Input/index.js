@@ -7,18 +7,39 @@ import {
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledInput = styled(TextField)`
+  && {
+    position: relative;
+    border-bottom: 1px solid white;
+    color: white;
+    * {
+      color: white;
+      box-shadow: none;
+      border: none;
+      background-color: none;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      border-bottom: 1px solid #4c6779;
+      -webkit-text-fill-color: #ffffff;
+      -webkit-box-shadow: 0 0 0px 1000px #f1f1f142 inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+`;
 
 const useSX = () => ({
   input: {
     position: 'relative',
-    borderBottom: '1px solid white',
-    color: 'white',
-    label: {
-      color: 'white.main',
-    },
-    input: {
-      color: 'white',
-    },
   },
   forgot: {
     position: 'absolute',
@@ -55,8 +76,7 @@ const Input = ({
 
   return (
     <FormControl required={required} error={error}>
-      <TextField
-        sx={sx.input}
+      <StyledInput
         color="white"
         onChange={onChange}
         aria-label={ariaLabel}

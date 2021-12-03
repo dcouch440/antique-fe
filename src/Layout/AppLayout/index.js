@@ -10,8 +10,9 @@ export default function AppLayout({ Router }) {
       sx={{
         display: 'flex',
         height: '100vh',
-        backgroundImage: `url(${bottles})`,
+        background: `url(${bottles})`,
         backgroundSize: 'cover',
+        backdropFilter: 'blur(12px)',
       }}
     >
       <Sidebar />

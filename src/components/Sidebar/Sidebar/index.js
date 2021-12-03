@@ -9,11 +9,25 @@ function Sidebar() {
     <Box
       component="nav"
       sx={{
-        width: 400,
+        width: {
+          sm: '90%',
+          md: 400,
+        },
         backgroundColor: 'black.transparent',
-        position: 'relative',
+        backdropFilter: 'blur(12px)',
+        position: {
+          sm: 'absolute',
+        },
+        minHeight: '100%',
       }}
     >
+      <Box
+        sx={{
+          position: 'relative',
+          width: 'inherit',
+          height: 'inherit',
+        }}
+      ></Box>
       <Authorize />
     </Box>
   );
@@ -23,10 +37,4 @@ Sidebar.propTypes = {
   path: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ navigation }) => ({
-  path: navigation.path,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(null, null)(Sidebar);

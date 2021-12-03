@@ -14,7 +14,7 @@ export const theme = createTheme({
     },
     black: {
       main: '#212529',
-      transparent: '#21252990',
+      transparent: '#21252983',
     },
     lightGray: {
       main: '#dddedf',

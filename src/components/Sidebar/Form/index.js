@@ -10,11 +10,11 @@ const useSX = () => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    p: 3,
+    px: 3,
+    pt: 6,
     '& .MuiFormControl-root, & button': {
-      mt: 3,
+      mt: 2,
     },
-    '& input': {},
   },
 });
 
@@ -101,7 +101,7 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
           />
         )}
         <Button type="submit" color="white" variant="contained" size="large">
-          Submit
+          {withSignup ? 'Sign Up' : 'Login'}
         </Button>
       </Box>
     </form>
