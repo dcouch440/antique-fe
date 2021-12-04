@@ -1,6 +1,13 @@
-import { SIDEBAR_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
+import {
+  SIDEBAR_AUTH,
+  SIDEBAR_FEED,
+  SIDEBAR_MESSAGES,
+  SIDEBAR_NAVIGATION,
+} from 'constantVariables';
 
 import Authorize from '../Authorize';
+import { Feed } from '../Feed';
+import { Messages } from '../Messages';
 import Nav from '../Nav';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -10,8 +17,12 @@ export const RenderSidebarType = ({ sidebarType }) => {
   switch (sidebarType) {
     case SIDEBAR_NAVIGATION:
       return <Nav />;
-    case SIDEBAR_LOGIN:
+    case SIDEBAR_AUTH:
       return <Authorize />;
+    case SIDEBAR_MESSAGES:
+      return <Messages />;
+    case SIDEBAR_FEED:
+      return <Feed />;
     default:
       return null;
   }

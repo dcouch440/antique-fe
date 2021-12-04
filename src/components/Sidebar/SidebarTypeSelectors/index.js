@@ -1,10 +1,12 @@
 import {
-  SIDEBAR_LOGIN,
+  SIDEBAR_AUTH,
+  SIDEBAR_FEED,
   SIDEBAR_MESSAGES,
   SIDEBAR_NAVIGATION,
 } from 'constantVariables';
 
 import { Box } from '@mui/system';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EmailIcon from '@mui/icons-material/Email';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -17,8 +19,10 @@ import { connect } from 'react-redux';
 const styles = () => ({
   root: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(5, 1fr)',
+    gridTemplateColumns: 'repeat(5, auto)',
+    gridGap: (theme) => theme.spacing(2),
     pb: 1,
+    justifyContent: 'center',
   },
 });
 
@@ -34,7 +38,10 @@ function SidebarTypeSelectors({ user }) {
       <SidebarTypeSelector constantVariable={SIDEBAR_MESSAGES}>
         <EmailIcon />
       </SidebarTypeSelector>
-      <SidebarTypeSelector constantVariable={SIDEBAR_LOGIN} withLogout>
+      <SidebarTypeSelector constantVariable={SIDEBAR_FEED}>
+        <DynamicFeedIcon />
+      </SidebarTypeSelector>
+      <SidebarTypeSelector constantVariable={SIDEBAR_AUTH} withLogout>
         {userIsLoggedIn ? <LogoutIcon /> : <PersonIcon />}
       </SidebarTypeSelector>
     </Box>

@@ -17,6 +17,15 @@ const styles = () => ({
     height: '100vh',
     backgroundColor: 'antiqueWhite.transparent',
     backdropFilter: 'blur(10px)',
+    pl: {
+      sm: 0,
+      md: '450px',
+    },
+    overflowY: 'scroll',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none' /* for Chrome, Safari, and Opera */,
+    },
   },
   toggleButton: {
     position: 'absolute',

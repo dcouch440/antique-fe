@@ -5,6 +5,7 @@ import Header from '../Header';
 
 const styles = () => ({
   root: {
+    borderRadius: 1,
     height: '100%',
     overflowY: 'scroll',
     scrollbarWidth: 'none',

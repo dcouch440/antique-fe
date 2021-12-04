@@ -9,8 +9,8 @@ import { sidebarAC } from 'store/sidebar';
 const styles = () => ({
   root: {
     width: {
-      xs: '70%',
-      md: 425,
+      xs: '100%',
+      md: 450,
     },
     backgroundColor: 'black.transparent',
     backdropFilter: 'blur(12px)',
