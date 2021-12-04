@@ -11,7 +11,7 @@ const styles = () => ({
 });
 
 function SidebarTypeSelector({
-  versionChanged,
+  sidebarTypeChanged,
   constantVariable,
   children,
   withLogout,
@@ -20,7 +20,7 @@ function SidebarTypeSelector({
   const sx = styles();
 
   const handleClick = () => {
-    versionChanged(constantVariable);
+    sidebarTypeChanged(constantVariable);
   };
 
   const handleLogout = () => {
@@ -50,7 +50,8 @@ const mapStateToProps = ({ sidebar: { sidebarType }, user }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  versionChanged: (version) => dispatch(sidebarAC.versionChanged(version)),
+  sidebarTypeChanged: (version) =>
+    dispatch(sidebarAC.sidebarTypeChanged(version)),
 });
 
 SidebarTypeSelector.propTypes = {
@@ -59,7 +60,7 @@ SidebarTypeSelector.propTypes = {
     PropTypes.arrayOf(PropTypes.node.isRequired),
   ]),
   constantVariable: PropTypes.string.isRequired,
-  versionChanged: PropTypes.func.isRequired,
+  sidebarTypeChanged: PropTypes.func.isRequired,
   withLogout: PropTypes.bool,
   user: PropTypes.object.isRequired,
 };

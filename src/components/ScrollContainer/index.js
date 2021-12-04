@@ -5,9 +5,12 @@ import styled from 'styled-components';
 
 // hiding horizontal scrollbar
 const StyledScrollbars = styled(Scrollbars)`
-  overflow-x: hidden;
-  overflow-y: hidden;
-  all: inherit;
+  height: inherit;
+  width: inherit;
+  position: inherit;
+  display: inherit;
+  flex: inherit;
+  scrollbar-width: none;
 `;
 
 const VerticalThumb = styled.div`
@@ -36,7 +39,6 @@ export default function ScrollContainer({ style, children, hideScrollBar }) {
       renderTrackVertical={(props) => (
         <VerticalTrack hideScrollBar={hideScrollBar} {...props} />
       )}
-      thumbMinSize={40}
       autoHide
       hidden
       style={style}

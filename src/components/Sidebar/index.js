@@ -14,15 +14,12 @@ const styles = () => ({
     },
     backgroundColor: 'black.transparent',
     backdropFilter: 'blur(12px)',
-    position: {
-      xs: 'absolute',
-      sm: 'initial',
-    },
-    minHeight: '100%',
+    position: 'absolute',
+    height: '100%',
+    zIndex: 1,
     pt: 2,
     px: 2,
     boxShadow: (theme) => '5px 0 15px ' + theme.palette.black.transparent,
-    overflowX: 'auto',
   },
   relativeBox: {
     position: 'relative',
@@ -30,6 +27,7 @@ const styles = () => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    zIndex: 50,
   },
 });
 
@@ -57,7 +55,7 @@ Sidebar.propTypes = {
   sidebarType: PropTypes.string,
   sidebarVisibility: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
-  versionChanged: PropTypes.func,
+  sidebarTypeChanged: PropTypes.func,
 };
 
 const mapStateToProps = ({
@@ -70,7 +68,8 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  versionChanged: (version) => dispatch(sidebarAC.versionChanged(version)),
+  sidebarTypeChanged: (version) =>
+    dispatch(sidebarAC.sidebarTypeChanged(version)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

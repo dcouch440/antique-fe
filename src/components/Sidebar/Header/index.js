@@ -12,7 +12,7 @@ const styles = () => ({
   },
   text: {
     fontFamily: 'families.cursive',
-    fontSize: 'sizes.xl',
+    fontSize: 'sizes.xxl',
     textShadow: ' 2px 3px 8px black',
   },
 });
@@ -22,7 +22,7 @@ export default function Header({ text }) {
 
   return (
     <Box sx={sx.root}>
-      <Typography color="white.main" sx={sx.text}>
+      <Typography color="primary" sx={sx.text}>
         {text}
       </Typography>
     </Box>

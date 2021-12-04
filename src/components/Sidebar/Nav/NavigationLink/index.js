@@ -1,8 +1,8 @@
+import { Divider, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
-import { Typography } from '@mui/material';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,8 +21,8 @@ const styles = () => ({
     boxShadow: (theme) => theme.appStyles.boxShadow,
     '&:hover': {
       '& img': {
-        transform: 'scale(1.05)',
-        filter: 'grayscale(0%)',
+        transform: 'scale(1.03)',
+        filter: 'none',
       },
     },
   },
@@ -32,40 +32,39 @@ const styles = () => ({
     backgroundSize: 'cover',
     transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
     width: '100%',
-    filter: 'grayscale(80%)',
+    filter: 'grayscale(60%)',
   },
   activeImage: {
     opacity: 0.8,
   },
   textBox: {
     position: 'absolute',
-    color: 'white.main',
     cursor: 'pointer',
     transition: '0.2s',
     letterSpacing: '2px',
-    backgroundColor: 'black.transparent',
-    backdropFilter: 'blur(24px)',
+    backgroundColor: 'antiqueWhite.transparent',
+    backdropFilter: 'blur(3px)',
     borderRadius: 2,
+    height: '100%',
+    width: '100%',
+    p: 1,
+    bottom: 0,
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
   },
   title: {
     fontWeight: 'bold',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    mt: 1,
-    ml: 1,
+    fontSize: 'sizes.lg',
+    textShadow: (theme) => theme.appStyles.textShadow,
     p: 1,
-    py: 1,
   },
   description: {
     zIndex: 1,
-    mb: 1,
-    mx: 1,
-    bottom: 0,
-    right: 0,
     p: 1,
     borderRadius: 2,
-    fontSize: 'sizes.reg',
+    fontSize: 'sizes.lg',
+    textShadow: (theme) => theme.appStyles.textShadow,
   },
 });
 
@@ -99,10 +98,15 @@ export default function NavigationLink({ path, title, images, description }) {
           src={image}
         />
       ))}
-      <Typography sx={[style.title, style.textBox]}>{title}</Typography>
-      <Typography sx={[style.description, style.textBox]}>
-        {description}
-      </Typography>
+      <Box sx={style.textBox}>
+        <Typography color="primary" sx={style.title}>
+          {title}
+        </Typography>
+        <Divider variant="middle" color="white" />
+        <Typography color="primary" sx={style.description}>
+          {description}
+        </Typography>
+      </Box>
     </Box>
   );
 }

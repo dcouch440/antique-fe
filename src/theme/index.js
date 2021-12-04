@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#C2C2C2',
+      main: '#ffffff',
     },
     secondary: {
       main: '#FF0000',
@@ -24,6 +24,9 @@ export const theme = createTheme({
       main: '#dddedf',
       darker: '#636363',
     },
+    lightSkyBlue: {
+      main: '#83C9F4',
+    },
     honeyYellow: {
       main: '#F6AE2D',
     },
@@ -42,6 +45,7 @@ export const theme = createTheme({
   appStyles: {
     boxShadow:
       '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)',
+    textShadow: '1px 1px 2px black',
   },
   typography: {
     fontFamily: 'sans-serif',
@@ -50,7 +54,9 @@ export const theme = createTheme({
     },
     sizes: {
       reg: 14,
-      xl: 46,
+      lg: 18,
+      xs: 24,
+      xxl: 46,
     },
   },
   components: {

@@ -2,7 +2,7 @@ import {
   ADD_PASSWORD_ERROR,
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
-  UPDATE_VERSION,
+  UPDATE_SIDEBAR_TYPE,
 } from 'store/actions';
 import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
 
@@ -19,7 +19,7 @@ const initialState = {
 
 const reducer = createReducer(initialState, (state, payload) => ({
   // toggles between login/signup and navigation sidebars
-  [UPDATE_VERSION]: () => ({
+  [UPDATE_SIDEBAR_TYPE]: () => ({
     ...state,
     sidebarType: payload,
   }),

@@ -6,7 +6,7 @@
  * @example
  * ```
  * const reducer = createReducer(initialState, (state, payload) => ({
- *  [UPDATE_VERSION]: () => ({
+ *  [UPDATE_SIDEBAR_TYPE]: () => ({
  *   ...state,
  *    sidebarType: payload,
  *  }),

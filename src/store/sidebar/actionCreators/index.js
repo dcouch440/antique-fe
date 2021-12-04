@@ -2,11 +2,11 @@ import {
   ADD_PASSWORD_ERROR,
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
-  UPDATE_VERSION,
+  UPDATE_SIDEBAR_TYPE,
 } from 'store/actions';
 
-export const versionChanged = (payload) => ({
-  type: UPDATE_VERSION,
+export const sidebarTypeChanged = (payload) => ({
+  type: UPDATE_SIDEBAR_TYPE,
   payload,
 });
 
