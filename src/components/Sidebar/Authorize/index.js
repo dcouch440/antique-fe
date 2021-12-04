@@ -1,5 +1,10 @@
+import {
+  SIDEBAR_AUTH_TYPE_LOGIN,
+  SIDEBAR_AUTH_TYPE_SIGNUP,
+} from 'constantVariables';
+
 import { Button } from '@mui/material';
-import Form from '../Form';
+import Form from './Form';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -20,10 +25,12 @@ function Authorize({
 }) {
   const sx = styles();
 
-  const isLoginForm = authType === 'LOGIN';
+  const isLoginForm = authType === SIDEBAR_AUTH_TYPE_LOGIN;
 
   const handleAuthVersionChange = () => {
-    isLoginForm ? authTypeChanged('SIGNUP') : authTypeChanged('LOGIN');
+    isLoginForm
+      ? authTypeChanged(SIDEBAR_AUTH_TYPE_SIGNUP)
+      : authTypeChanged(SIDEBAR_AUTH_TYPE_LOGIN);
   };
 
   const handleLogin = ({ username, password }) => ({ username, password });

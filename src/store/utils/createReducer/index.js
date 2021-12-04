@@ -8,7 +8,7 @@
  * const reducer = createReducer(initialState, (state, payload) => ({
  *  [UPDATE_VERSION]: () => ({
  *   ...state,
- *    sidebarVersion: payload,
+ *    sidebarType: payload,
  *  }),
  *  [UPDATE_AUTH_TYPE]: () => ({
  *    ...state,

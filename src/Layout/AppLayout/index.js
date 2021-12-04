@@ -1,7 +1,4 @@
 import { Box } from '@mui/system';
-import { Menu } from 'components';
-import OpenCloseButton from 'components/OpenCloseButton';
-import { PresenceContainer } from 'animation';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Sidebar } from 'components';
@@ -26,14 +23,6 @@ const styles = () => ({
     left: (theme) => theme.spacing(1),
     top: (theme) => theme.spacing(1),
   },
-  menuContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 });
 
 export default function AppLayout({ Router }) {
@@ -43,12 +32,6 @@ export default function AppLayout({ Router }) {
     <Box sx={style.root}>
       <Sidebar />
       <Box sx={style.content}>
-        <OpenCloseButton sx={style.toggleButton} />
-        <Box sx={style.menuContainer}>
-          <PresenceContainer>
-            <Menu />
-          </PresenceContainer>
-        </Box>
         <Router />
       </Box>
     </Box>

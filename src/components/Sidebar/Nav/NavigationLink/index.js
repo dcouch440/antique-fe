@@ -9,17 +9,20 @@ import { useNavigate } from 'react-router-dom';
 const styles = () => ({
   root: {
     position: 'relative',
-    height: 150,
+    height: 200,
     overflow: 'hidden',
     borderRadius: 2,
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     cursor: 'pointer',
+    mt: 2,
+    '&:last-child': {
+      mb: 2,
+    },
     boxShadow: (theme) => theme.appStyles.boxShadow,
     '&:hover': {
-      '.NavigationLink-text': {
-        fontSize: 22,
+      '& img': {
+        transform: 'scale(1.05)',
+        filter: 'grayscale(0%)',
       },
     },
   },
@@ -27,33 +30,48 @@ const styles = () => ({
     position: 'absolute',
     opacity: 0,
     backgroundSize: 'cover',
-    transition: 'opacity 5s ease-in-out',
+    transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
     width: '100%',
     filter: 'grayscale(80%)',
   },
   activeImage: {
     opacity: 0.8,
   },
-  text: {
+  textBox: {
     position: 'absolute',
     color: 'white.main',
     cursor: 'pointer',
     transition: '0.2s',
     letterSpacing: '2px',
-    backgroundColor: 'black.main',
+    backgroundColor: 'black.transparent',
+    backdropFilter: 'blur(24px)',
     borderRadius: 2,
+  },
+  title: {
+    fontWeight: 'bold',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    mt: 1,
+    ml: 1,
     p: 1,
     py: 1,
-    width: '90%',
-    '&:hover': {
-      backgroundColor: 'black.transparent',
-    },
+  },
+  description: {
+    zIndex: 1,
+    mb: 1,
+    mx: 1,
+    bottom: 0,
+    right: 0,
+    p: 1,
+    borderRadius: 2,
+    fontSize: 'sizes.reg',
   },
 });
 
-export default function NavigationLink({ path, text, images = [] }) {
+export default function NavigationLink({ path, title, images, description }) {
   const navigate = useNavigate();
-  const sx = styles();
+  const style = styles();
   const handleRouteChange = () => navigate(path);
   const [int, setInt] = useState(0);
   const handleClick = throttle(handleRouteChange, 500, { trailing: false });
@@ -73,16 +91,17 @@ export default function NavigationLink({ path, text, images = [] }) {
   }, [imagesLength]);
 
   return (
-    <Box sx={sx.root} onClick={handleClick}>
+    <Box sx={style.root} onClick={handleClick}>
       {images.map((image, key) => (
         <img
-          style={{ ...sx.image, ...(key === int ? sx.activeImage : {}) }}
+          style={{ ...style.image, ...(key === int ? style.activeImage : {}) }}
           key={key}
           src={image}
         />
       ))}
-      <Typography className="NavigationLink-text" sx={sx.text}>
-        {text}
+      <Typography sx={[style.title, style.textBox]}>{title}</Typography>
+      <Typography sx={[style.description, style.textBox]}>
+        {description}
       </Typography>
     </Box>
   );
@@ -90,6 +109,7 @@ export default function NavigationLink({ path, text, images = [] }) {
 
 NavigationLink.propTypes = {
   path: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   images: PropTypes.array,
+  description: PropTypes.string.isRequired,
 };

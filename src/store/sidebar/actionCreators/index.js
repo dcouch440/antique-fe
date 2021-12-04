@@ -1,7 +1,5 @@
 import {
   ADD_PASSWORD_ERROR,
-  SET_MENU_CLOSED,
-  SET_MENU_SELECTED,
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
   UPDATE_VERSION,
@@ -24,13 +22,4 @@ export const passwordConfirmErrorOccurred = (payload) => ({
 
 export const visibilityToggled = () => ({
   type: TOGGLE_SIDEBAR_VISIBILITY,
-});
-
-export const menuClosed = () => ({
-  type: SET_MENU_CLOSED,
-});
-
-export const menuSelected = (payload) => ({
-  type: SET_MENU_SELECTED,
-  payload,
 });

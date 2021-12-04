@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React, { useState } from 'react';
 
-import Header from '../Header';
+import Header from '../../Header';
 import Input from '../Input';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

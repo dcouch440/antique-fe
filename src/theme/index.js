@@ -36,6 +36,7 @@ export const theme = createTheme({
     antiqueWhite: {
       main: '#FAEBD7',
       transparent: '#FAEBD723',
+      lessTransparent: '#FAEBD753',
     },
   },
   appStyles: {
