@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import Header from '../Header';
+import MenuSelector from '../MenuSelector';
 import NavigationLink from '../NavigationLink';
 import React from 'react';
 
@@ -50,6 +51,7 @@ export default function Nav() {
           'https://res.cloudinary.com/dbyretay5/image/upload/v1620686973/category/pexels-charlotte-may-5824485_ssonxa.jpg',
         ]}
       />
+      <MenuSelector />
     </Box>
   );
 }

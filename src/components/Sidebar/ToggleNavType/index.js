@@ -1,4 +1,6 @@
-import { Button } from '@mui/material';
+import { SIDEBAR_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
+
+import { Fab } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
 import PropTypes from 'prop-types';
@@ -11,26 +13,27 @@ const styles = () => ({
     position: 'absolute',
     top: (theme) => theme.spacing(1),
     left: (theme) => theme.spacing(1),
+    backgroundColor: 'white.transparent',
   },
 });
 
 function ToggleNavType({ sidebarVersion, versionChanged }) {
   const sx = styles();
-  const showNavigation = sidebarVersion === 'NAVIGATION';
+  const showNavigation = sidebarVersion === SIDEBAR_NAVIGATION;
 
   const handleClick = () =>
-    sidebarVersion === 'NAVIGATION'
-      ? versionChanged('LOGIN')
-      : versionChanged('NAVIGATION');
+    sidebarVersion === SIDEBAR_NAVIGATION
+      ? versionChanged(SIDEBAR_LOGIN)
+      : versionChanged(SIDEBAR_NAVIGATION);
 
   return (
-    <Button sx={sx.root} onClick={handleClick}>
+    <Fab sx={sx.root} onClick={handleClick}>
       {showNavigation ? (
-        <PersonIcon sx={{ color: 'white.main' }} size={36} />
+        <PersonIcon sx={{ color: 'black.main' }} size={36} />
       ) : (
-        <MenuIcon sx={{ color: 'white.main' }} size={36} />
+        <MenuIcon sx={{ color: 'black.main' }} size={36} />
       )}
-    </Button>
+    </Fab>
   );
 }
 

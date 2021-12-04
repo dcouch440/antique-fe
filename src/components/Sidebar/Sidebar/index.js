@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import Nav from '../Nav';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { SIDEBAR_NAVIGATION } from 'constantVariables';
 import ToggleNavType from '../ToggleNavType';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
@@ -41,15 +42,17 @@ const styles = () => ({
 function Sidebar({ user, sidebarVersion, sidebarVisibility }) {
   const sx = styles();
   const userIsOnline = Boolean(user.id);
-  const showNavigation = sidebarVersion === 'NAVIGATION';
+  // if navigation type is set to SIDEBAR_NAVIGATION or if user is online render nav.
+  // else prompt user to log in.
+  const showNavigation = sidebarVersion === SIDEBAR_NAVIGATION;
+  const renderNavType = () =>
+    showNavigation || userIsOnline ? <Nav /> : <Authorize />;
 
   return (
     sidebarVisibility && (
       <Box component="nav" sx={sx.root}>
         {!userIsOnline && <ToggleNavType />}
-        <Box sx={sx.relativeBox}>
-          {showNavigation || userIsOnline ? <Nav /> : <Authorize />}
-        </Box>
+        <Box sx={sx.relativeBox}>{renderNavType()}</Box>
       </Box>
     )
   );

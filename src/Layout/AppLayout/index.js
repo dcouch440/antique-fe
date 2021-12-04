@@ -1,5 +1,7 @@
 import { Box } from '@mui/system';
+import { Menu } from 'components';
 import OpenCloseButton from 'components/OpenCloseButton';
+import { PresenceContainer } from 'animation';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Sidebar } from 'components';
@@ -16,7 +18,6 @@ const styles = () => ({
     position: 'relative',
     flex: 1,
     height: '100vh',
-    p: 2,
     backgroundColor: 'antiqueWhite.transparent',
     backdropFilter: 'blur(10px)',
   },
@@ -25,16 +26,29 @@ const styles = () => ({
     left: (theme) => theme.spacing(1),
     top: (theme) => theme.spacing(1),
   },
+  menuContainer: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default function AppLayout({ Router }) {
-  const sx = styles();
+  const style = styles();
 
   return (
-    <Box sx={sx.root}>
+    <Box sx={style.root}>
       <Sidebar />
-      <Box sx={sx.content}>
-        <OpenCloseButton sx={sx.toggleButton} />
+      <Box sx={style.content}>
+        <OpenCloseButton sx={style.toggleButton} />
+        <Box sx={style.menuContainer}>
+          <PresenceContainer>
+            <Menu />
+          </PresenceContainer>
+        </Box>
         <Router />
       </Box>
     </Box>
@@ -43,4 +57,5 @@ export default function AppLayout({ Router }) {
 
 AppLayout.propTypes = {
   Router: PropTypes.any,
+  Menu: PropTypes.node,
 };

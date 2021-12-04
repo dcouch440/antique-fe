@@ -9,19 +9,19 @@ import { useNavigate } from 'react-router-dom';
 const styles = () => ({
   root: {
     position: 'relative',
-    height: 70,
+    height: 150,
     overflow: 'hidden',
     borderRadius: 2,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
+    boxShadow: (theme) => theme.appStyles.boxShadow,
     '&:hover': {
       '.NavigationLink-text': {
         fontSize: 22,
       },
     },
-    boxShadow: (theme) => `0 2px 7px 1px ${theme.palette.black.main}`,
   },
   image: {
     position: 'absolute',
@@ -35,7 +35,6 @@ const styles = () => ({
     opacity: 0.8,
   },
   text: {
-    fontFamily: 'families.cursive',
     position: 'absolute',
     color: 'white.main',
     cursor: 'pointer',
