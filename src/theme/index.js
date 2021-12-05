@@ -17,8 +17,9 @@ export const theme = createTheme({
       transparent: '#FFFFFF47',
     },
     black: {
-      main: '#212529',
+      main: '#171717f7',
       transparent: '#21252983',
+      lessTransparent: '#000000cf',
     },
     lightGray: {
       main: '#dddedf',
@@ -69,3 +70,10 @@ export const theme = createTheme({
   spacing: 12,
   radius: (radius) => radius * 12,
 });
+
+export const globalSX = {
+  transparentBlur: {
+    backgroundColor: 'black.transparent',
+    backdropFilter: 'blur(12px)',
+  },
+};

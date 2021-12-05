@@ -5,12 +5,16 @@ import { Typography } from '@mui/material';
 
 const styles = () => ({
   root: {
-    p: 2,
+    flex: '0 1 1200px',
+    margin: '0 auto',
+    pt: 2,
+    px: 1,
   },
   headerContainer: {
-    backgroundColor: 'black.transparent',
-    backdropFilter: 'blur(12px)',
-    borderRadius: 1,
+    borderBottom: (theme) => '1px solid ' + theme.palette.black.transparent,
+  },
+  content: {
+    height: '100%',
   },
   header: {
     fontSize: 64,
@@ -23,11 +27,11 @@ export default function PageLayout({ header, children }) {
   return (
     <Box sx={style.root} component="main">
       <Box sx={style.headerContainer} component="header">
-        <Typography color="primary" sx={style.header} component="h1">
+        <Typography color="black" sx={style.header} component="h1">
           {header}
         </Typography>
       </Box>
-      {children}
+      <Box sx={style.content}>{children}</Box>
     </Box>
   );
 }

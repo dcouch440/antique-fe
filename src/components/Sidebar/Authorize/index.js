@@ -12,7 +12,7 @@ import { sidebarAC } from 'store/sidebar';
 
 const styles = () => ({
   toggleButton: {
-    color: 'white.main',
+    color: 'primary.main',
     pt: 2,
     alignSelf: 'flex-end',
   },

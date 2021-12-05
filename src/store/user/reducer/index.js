@@ -2,9 +2,9 @@ import { ADD_USER_TO_STORE } from 'store/actions';
 import { createReducer } from 'store/utils';
 
 const initialState = {
-  id: null,
-  username: null,
-  email: null,
+  id: 1,
+  username: 'seed user',
+  email: 'seed_user@user.com',
   admin: false,
 };
 

@@ -22,7 +22,7 @@ function MenuButton({ selectedMenu, menuSelected, menuConstant, text }) {
         height: 150,
       }}
     >
-      <Typography sx={{ color: 'white.main', fontSize: 'sizes.reg' }}>
+      <Typography sx={{ color: 'primary.main', fontSize: 'sizes.reg' }}>
         {text}
       </Typography>
     </Paper>

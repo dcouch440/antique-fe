@@ -4,6 +4,7 @@ import React from 'react';
 import SidebarRouter from './SidebarRouter';
 import SidebarTypeSelectors from './SidebarTypeSelectors';
 import { connect } from 'react-redux';
+import { globalSX } from 'theme';
 import { sidebarAC } from 'store/sidebar';
 
 const styles = () => ({
@@ -12,8 +13,6 @@ const styles = () => ({
       xs: '100%',
       md: 450,
     },
-    backgroundColor: 'black.transparent',
-    backdropFilter: 'blur(12px)',
     position: 'absolute',
     height: '100%',
     zIndex: 1,
@@ -41,7 +40,7 @@ function Sidebar({ sidebarVisibility }) {
 
   return (
     sidebarVisibility && (
-      <Box component="nav" sx={sx.root}>
+      <Box component="nav" sx={[sx.root, globalSX.transparentBlur]}>
         <Box sx={sx.relativeBox}>
           <SidebarTypeSelectors />
           <SidebarRouter />

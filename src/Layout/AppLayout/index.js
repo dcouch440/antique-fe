@@ -17,6 +17,7 @@ const styles = () => ({
     height: '100vh',
     backgroundColor: 'antiqueWhite.transparent',
     backdropFilter: 'blur(10px)',
+    display: 'flex',
     pl: {
       sm: 0,
       md: '450px',

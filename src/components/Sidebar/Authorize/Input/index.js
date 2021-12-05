@@ -46,11 +46,11 @@ const styles = () => ({
     top: (theme) => theme.spacing(4),
     right: (theme) => theme.spacing(1),
     cursor: 'pointer',
-    color: 'white.main',
+    color: 'primary.main',
     fontSize: 'sizes.reg',
   },
   helperText: {
-    color: 'white.main',
+    color: 'primary.main',
   },
 });
 
