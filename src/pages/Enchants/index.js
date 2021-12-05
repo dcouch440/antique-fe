@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import { PageLayout } from 'Layout';
+import { PageWithBackplateLayout } from 'Layout';
 import React from 'react';
 
 const makeStyles = () => ({
@@ -21,15 +21,20 @@ export default function Enchants() {
   const styles = makeStyles();
 
   const actions = [
-    { icon: <GroupIcon />, name: 'Friends' },
-    { icon: <FiberNewIcon />, name: 'New' },
-    { icon: <LocalFireDepartmentIcon />, name: 'Popular' },
+    { icon: <GroupIcon />, name: 'Friends', onClick: () => {} },
+    { icon: <FiberNewIcon />, name: 'New', onClick: () => {} },
+    { icon: <LocalFireDepartmentIcon />, name: 'Popular', onClick: () => {} },
   ];
 
   return (
-    <PageLayout header="Enchants">
+    <PageWithBackplateLayout header="Enchants">
       <Box sx={{ p: 1 }}>
-        <SearchBar placeholder="Search" formSX={{ width: '40%' }} />
+        <SearchBar
+          onSubmit={() => {}}
+          onChange={() => {}}
+          placeholder="Search"
+          formSX={{ width: '40%' }}
+        />
       </Box>
       <CollapsableDials
         sx={styles.dials}
@@ -37,6 +42,6 @@ export default function Enchants() {
         actions={actions}
         direction="left"
       />
-    </PageLayout>
+    </PageWithBackplateLayout>
   );
 }

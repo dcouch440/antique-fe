@@ -4,22 +4,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
 
-const styles = (tooltip) => ({
+const styles = ({ tooltip, orientation }) => ({
   root: {
     position: 'relative',
     '&:after': {
       content: `"${tooltip ?? ''}"`,
       position: 'absolute',
       backgroundColor: 'primary.main',
-      top: 'calc(4px + 100%)',
-      p: '2px',
+      p: 0.5,
       fontSize: 'sizes.sm',
       borderRadius: 1,
       opacity: 0,
       userSelect: 'none',
-      transition: 'opacity 0.3s ease 1s',
+      transition: 'opacity 225ms cubic-bezier(0.4, 0, 0.2, 1)',
       textTransform: 'capitalize',
       fontWeight: 'bold',
+      ...(orientation === 'horizontal'
+        ? {
+            top: 'calc(4px + 100%)',
+          }
+        : {
+            left: 'calc(4px + 100%)',
+          }),
     },
     '&:hover': {
       '&:after': {
@@ -38,8 +44,9 @@ function SidebarTypeSelector({
   tooltip,
   sidebarVisibility,
   visibilityToggled,
+  orientation,
 }) {
-  const style = styles(tooltip);
+  const style = styles({ tooltip, orientation });
 
   const handleClick = () => {
     // if sidebar is closed open it.
@@ -85,10 +92,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 SidebarTypeSelector.propTypes = {
-  children: PropTypes.oneOf([
-    PropTypes.node.isRequired,
-    PropTypes.arrayOf(PropTypes.node.isRequired),
-  ]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
   constantVariable: PropTypes.string.isRequired,
   sidebarTypeChanged: PropTypes.func.isRequired,
   sidebarVisibility: PropTypes.bool.isRequired,
@@ -96,6 +103,7 @@ SidebarTypeSelector.propTypes = {
   user: PropTypes.object.isRequired,
   visibilityToggled: PropTypes.func.isRequired,
   withLogout: PropTypes.bool,
+  orientation: PropTypes.string,
 };
 
 export default connect(

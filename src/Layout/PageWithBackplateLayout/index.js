@@ -34,7 +34,7 @@ const styles = () => ({
   },
 });
 
-function PageLayout({ header, children, sidebarVisibility }) {
+function PageWithBackplateLayout({ header, children, sidebarVisibility }) {
   const style = styles(sidebarVisibility);
 
   return (
@@ -62,12 +62,12 @@ const mapStateToProps = ({ sidebar: { sidebarVisibility } }) => ({
   sidebarVisibility,
 });
 
-export default connect(mapStateToProps)(PageLayout);
+export default connect(mapStateToProps)(PageWithBackplateLayout);
 
-PageLayout.propTypes = {
+PageWithBackplateLayout.propTypes = {
   children: PropTypes.oneOfType([
-    PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
   ]).isRequired,
   header: PropTypes.string.isRequired,
   sidebarVisibility: PropTypes.bool.isRequired,

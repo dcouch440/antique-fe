@@ -34,7 +34,7 @@ CollapsableDials.propTypes = {
     PropTypes.shape({
       icon: PropTypes.node.isRequired,
       name: PropTypes.string.isRequired,
-      onClick: PropTypes.string.isRequired,
+      onClick: PropTypes.func.isRequired,
     })
   ).isRequired,
   ariaLabel: PropTypes.string,

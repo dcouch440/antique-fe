@@ -27,7 +27,7 @@ const styles = () => ({
   vertical: {
     display: 'flex',
     flexDirection: 'column',
-    '& > *': {
+    '& > button': {
       mt: 1,
     },
   },
@@ -76,4 +76,4 @@ const mapStateToProps = ({ user }) => ({
   user,
 });
 
-export default connect(mapStateToProps)(SidebarTypeSelectors);
+export default connect(mapStateToProps, null)(SidebarTypeSelectors);

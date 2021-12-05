@@ -24,7 +24,10 @@ export default function MotionDiv({
 
 MotionDiv.propTypes = {
   animate: PropTypes.object.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
   initial: PropTypes.object.isRequired,
   transition: PropTypes.object.isRequired,
 };

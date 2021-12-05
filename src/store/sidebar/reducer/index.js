@@ -11,7 +11,7 @@ import { createReducer } from 'store/utils';
 const initialState = {
   sidebarType: SIDEBAR_NAVIGATION,
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
-  sidebarVisibility: true,
+  sidebarVisibility: false,
   errors: {
     passwordConfirm: '',
   },
