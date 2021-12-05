@@ -1,6 +1,6 @@
 import './fonts.css';
 
-import { App } from 'App';
+import App from 'App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import React from 'react';

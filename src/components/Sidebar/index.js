@@ -4,20 +4,17 @@ import React from 'react';
 import SidebarRouter from './SidebarRouter';
 import SidebarTypeSelectors from './SidebarTypeSelectors';
 import { connect } from 'react-redux';
-import { globalSX } from 'theme';
 import { sidebarAC } from 'store/sidebar';
 
 const styles = () => ({
   root: {
-    width: {
-      xs: '100%',
-      md: 450,
-    },
+    width: ['100%', '100%', '100%', 450],
     position: 'absolute',
     height: '100%',
     zIndex: 1,
     pt: 2,
     px: 2,
+    backgroundColor: 'secondary.main',
     boxShadow: (theme) => '5px 0 15px ' + theme.palette.black.transparent,
   },
   relativeBox: {
@@ -26,7 +23,7 @@ const styles = () => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    zIndex: 50,
+    zIndex: 2,
   },
 });
 
@@ -40,7 +37,7 @@ function Sidebar({ sidebarVisibility }) {
 
   return (
     sidebarVisibility && (
-      <Box component="nav" sx={[sx.root, globalSX.transparentBlur]}>
+      <Box component="nav" sx={sx.root}>
         <Box sx={sx.relativeBox}>
           <SidebarTypeSelectors />
           <SidebarRouter />

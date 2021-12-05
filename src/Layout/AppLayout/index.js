@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Sidebar } from 'components';
 import bottles from 'assets/img/bottles.webp';
+import { globalSX } from 'theme';
 
 const styles = () => ({
   root: {
@@ -15,17 +16,12 @@ const styles = () => ({
     position: 'relative',
     flex: 1,
     height: '100vh',
-    backgroundColor: 'antiqueWhite.transparent',
-    backdropFilter: 'blur(10px)',
+    backgroundColor: 'antiqueWhite.main',
+    backdropFilter: 'blur(12px)',
     display: 'flex',
     pl: {
       sm: 0,
       md: '450px',
-    },
-    overflowY: 'scroll',
-    scrollbarWidth: 'none',
-    '&::-webkit-scrollbar': {
-      display: 'none' /* for Chrome, Safari, and Opera */,
     },
   },
   toggleButton: {
@@ -35,20 +31,20 @@ const styles = () => ({
   },
 });
 
-export default function AppLayout({ Router }) {
+export default function AppLayout({ children }) {
   const style = styles();
 
   return (
     <Box sx={style.root}>
       <Sidebar />
-      <Box sx={style.content}>
-        <Router />
-      </Box>
+      <Box sx={[style.content, globalSX.scrollContainer]}>{children}</Box>
     </Box>
   );
 }
 
 AppLayout.propTypes = {
-  Router: PropTypes.any,
-  Menu: PropTypes.node,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };

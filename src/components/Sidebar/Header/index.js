@@ -7,13 +7,11 @@ const styles = () => ({
   root: {
     width: '100%',
     textAlign: 'center',
-    pt: 3,
     pb: 1,
   },
   text: {
     fontFamily: 'families.cursive',
     fontSize: 'sizes.xxl',
-    textShadow: ' 2px 3px 8px black',
   },
 });
 

@@ -4,9 +4,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
 
-const styles = () => ({
+const styles = (tooltip) => ({
   root: {
-    backgroundColor: 'white.transparent',
+    position: 'relative',
+    '&:after': {
+      content: `"${tooltip ?? ''}"`,
+      position: 'absolute',
+      backgroundColor: 'primary.main',
+      top: 'calc(4px + 100%)',
+      p: '2px',
+      fontSize: 'sizes.sm',
+      borderRadius: 1,
+      opacity: 0,
+      userSelect: 'none',
+      transition: 'opacity 0.3s ease 1s',
+      textTransform: 'capitalize',
+      fontWeight: 'bold',
+    },
+    '&:hover': {
+      '&:after': {
+        opacity: 1,
+      },
+    },
   },
 });
 
@@ -16,8 +35,9 @@ function SidebarTypeSelector({
   children,
   withLogout,
   user,
+  tooltip,
 }) {
-  const sx = styles();
+  const style = styles(tooltip);
 
   const handleClick = () => {
     sidebarTypeChanged(constantVariable);
@@ -38,7 +58,7 @@ function SidebarTypeSelector({
   };
 
   return (
-    <Fab sx={sx} color="primary" onClick={handlePickCorrectHandler}>
+    <Fab sx={style.root} color="primary" onClick={handlePickCorrectHandler}>
       {children}
     </Fab>
   );
@@ -60,9 +80,10 @@ SidebarTypeSelector.propTypes = {
     PropTypes.arrayOf(PropTypes.node.isRequired),
   ]),
   constantVariable: PropTypes.string.isRequired,
+  tooltip: PropTypes.string.isRequired,
   sidebarTypeChanged: PropTypes.func.isRequired,
-  withLogout: PropTypes.bool,
   user: PropTypes.object.isRequired,
+  withLogout: PropTypes.bool,
 };
 
 export default connect(

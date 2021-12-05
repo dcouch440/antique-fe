@@ -32,7 +32,7 @@ const styles = () => ({
     backgroundSize: 'cover',
     transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
     width: '100%',
-    filter: 'grayscale(60%)',
+    filter: 'grayscale(10%)',
   },
   activeImage: {
     opacity: 0.8,
@@ -42,21 +42,16 @@ const styles = () => ({
     cursor: 'pointer',
     transition: '0.2s',
     letterSpacing: '2px',
-    backgroundColor: 'antiqueWhite.transparent',
     backdropFilter: 'blur(3px)',
     borderRadius: 2,
     height: '100%',
     width: '100%',
     p: 1,
     bottom: 0,
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
   },
   title: {
     fontWeight: 'bold',
     fontSize: 'sizes.lg',
-    textShadow: (theme) => theme.appStyles.textShadow,
     p: 1,
   },
   description: {
@@ -64,7 +59,6 @@ const styles = () => ({
     p: 1,
     borderRadius: 2,
     fontSize: 'sizes.lg',
-    textShadow: (theme) => theme.appStyles.textShadow,
   },
 });
 

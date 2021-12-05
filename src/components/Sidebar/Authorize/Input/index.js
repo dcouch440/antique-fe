@@ -85,7 +85,6 @@ function Input({
         onChange={onChange}
         aria-label={ariaLabel}
         label={label}
-        variant="standard"
         name={name}
         inputProps={inputProps}
         autoComplete={autoComplete}

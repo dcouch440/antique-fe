@@ -21,7 +21,7 @@ const styles = () => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(5, auto)',
     gridGap: (theme) => theme.spacing(2),
-    pb: 1,
+    pb: 3,
     justifyContent: 'center',
   },
 });
@@ -32,16 +32,26 @@ function SidebarTypeSelectors({ user }) {
 
   return (
     <Box sx={style.root}>
-      <SidebarTypeSelector constantVariable={SIDEBAR_NAVIGATION}>
+      <SidebarTypeSelector
+        tooltip="Navigate"
+        constantVariable={SIDEBAR_NAVIGATION}
+      >
         <MenuIcon />
       </SidebarTypeSelector>
-      <SidebarTypeSelector constantVariable={SIDEBAR_MESSAGES}>
+      <SidebarTypeSelector
+        tooltip="Messages"
+        constantVariable={SIDEBAR_MESSAGES}
+      >
         <EmailIcon />
       </SidebarTypeSelector>
-      <SidebarTypeSelector constantVariable={SIDEBAR_FEED}>
+      <SidebarTypeSelector tooltip="Feed" constantVariable={SIDEBAR_FEED}>
         <DynamicFeedIcon />
       </SidebarTypeSelector>
-      <SidebarTypeSelector constantVariable={SIDEBAR_AUTH} withLogout>
+      <SidebarTypeSelector
+        tooltip={userIsLoggedIn ? 'Logout' : 'Login'}
+        constantVariable={SIDEBAR_AUTH}
+        withLogout
+      >
         {userIsLoggedIn ? <LogoutIcon /> : <PersonIcon />}
       </SidebarTypeSelector>
     </Box>

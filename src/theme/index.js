@@ -6,7 +6,7 @@ export const theme = createTheme({
       main: '#ffffff',
     },
     secondary: {
-      main: '#FF0000',
+      main: '#171717',
     },
     danger: {
       main: '#B86D6D',
@@ -54,9 +54,11 @@ export const theme = createTheme({
       cursive: 'Pacifico, cursive',
     },
     sizes: {
+      xs: 8,
+      sm: 12,
       reg: 14,
       lg: 18,
-      xs: 24,
+      xl: 24,
       xxl: 46,
     },
   },
@@ -75,5 +77,12 @@ export const globalSX = {
   transparentBlur: {
     backgroundColor: 'black.transparent',
     backdropFilter: 'blur(12px)',
+  },
+  scrollContainer: {
+    overflowY: 'scroll',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none' /* for Chrome, Safari, and Opera */,
+    },
   },
 };
