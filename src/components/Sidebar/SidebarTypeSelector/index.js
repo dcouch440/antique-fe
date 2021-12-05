@@ -36,10 +36,15 @@ function SidebarTypeSelector({
   withLogout,
   user,
   tooltip,
+  sidebarVisibility,
+  visibilityToggled,
 }) {
   const style = styles(tooltip);
 
   const handleClick = () => {
+    // if sidebar is closed open it.
+    !sidebarVisibility && visibilityToggled();
+    // set the type as well.
     sidebarTypeChanged(constantVariable);
   };
 
@@ -64,14 +69,19 @@ function SidebarTypeSelector({
   );
 }
 
-const mapStateToProps = ({ sidebar: { sidebarType }, user }) => ({
+const mapStateToProps = ({
+  sidebar: { sidebarType, sidebarVisibility },
+  user,
+}) => ({
   sidebarType,
   user,
+  sidebarVisibility,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   sidebarTypeChanged: (version) =>
     dispatch(sidebarAC.sidebarTypeChanged(version)),
+  visibilityToggled: () => dispatch(sidebarAC.visibilityToggled()),
 });
 
 SidebarTypeSelector.propTypes = {
@@ -80,9 +90,11 @@ SidebarTypeSelector.propTypes = {
     PropTypes.arrayOf(PropTypes.node.isRequired),
   ]),
   constantVariable: PropTypes.string.isRequired,
-  tooltip: PropTypes.string.isRequired,
   sidebarTypeChanged: PropTypes.func.isRequired,
+  sidebarVisibility: PropTypes.bool.isRequired,
+  tooltip: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
+  visibilityToggled: PropTypes.func.isRequired,
   withLogout: PropTypes.bool,
 };
 

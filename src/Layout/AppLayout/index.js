@@ -2,37 +2,35 @@ import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Sidebar } from 'components';
-import bottles from 'assets/img/bottles.webp';
+import { connect } from 'react-redux';
 import { globalSX } from 'theme';
 
 const styles = () => ({
   root: {
     display: 'flex',
     height: '100vh',
-    background: `url(${bottles})`,
     backgroundSize: 'cover',
+    width: '100vw',
   },
   content: {
     position: 'relative',
     flex: 1,
-    height: '100vh',
+    height: '100%',
+    width: '100vw',
     backgroundColor: 'antiqueWhite.main',
     backdropFilter: 'blur(12px)',
     display: 'flex',
-    pl: {
-      sm: 0,
-      md: '450px',
-    },
   },
   toggleButton: {
     position: 'absolute',
-    left: (theme) => theme.spacing(1),
-    top: (theme) => theme.spacing(1),
+    left: 0,
+    m: 1,
+    zIndex: 2,
   },
 });
 
-export default function AppLayout({ children }) {
-  const style = styles();
+function AppLayout({ children, sidebarVisibility }) {
+  const style = styles(sidebarVisibility);
 
   return (
     <Box sx={style.root}>
@@ -42,9 +40,15 @@ export default function AppLayout({ children }) {
   );
 }
 
+const mapStateToProps = ({ sidebar: { sidebarVisibility } }) => ({
+  sidebarVisibility,
+});
+
+export default connect(mapStateToProps)(AppLayout);
 AppLayout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  sidebarVisibility: PropTypes.bool.isRequired,
 };

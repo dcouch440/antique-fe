@@ -17,21 +17,28 @@ import SidebarTypeSelector from '../SidebarTypeSelector';
 import { connect } from 'react-redux';
 
 const styles = () => ({
-  root: {
+  horizontal: {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, auto)',
     gridGap: (theme) => theme.spacing(2),
     pb: 3,
     justifyContent: 'center',
   },
+  vertical: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& > *': {
+      mt: 1,
+    },
+  },
 });
 
-function SidebarTypeSelectors({ user }) {
+function SidebarTypeSelectors({ user, orientation = 'horizontal' }) {
   const userIsLoggedIn = Boolean(user.id);
   const style = styles();
 
   return (
-    <Box sx={style.root}>
+    <Box sx={style[orientation]}>
       <SidebarTypeSelector
         tooltip="Navigate"
         constantVariable={SIDEBAR_NAVIGATION}
@@ -59,6 +66,7 @@ function SidebarTypeSelectors({ user }) {
 }
 
 SidebarTypeSelectors.propTypes = {
+  orientation: PropTypes.string,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }),

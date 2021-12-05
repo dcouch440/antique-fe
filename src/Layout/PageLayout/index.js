@@ -2,16 +2,19 @@ import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Typography } from '@mui/material';
+import { connect } from 'react-redux';
 import waxSeal from 'assets/img/waxSealImg.webp';
 
 const styles = () => ({
   root: {
-    flex: '0 1 1300px',
+    flex: `0 1 1750px`,
+    maxWidth: '80vw',
     margin: '0 auto',
     px: 1,
     '& > *': {
       backgroundColor: 'secondary.main',
     },
+    position: 'relative',
   },
   headerContainer: {
     borderBottom: (theme) => '1px solid ' + theme.palette.black.transparent,
@@ -31,8 +34,9 @@ const styles = () => ({
   },
 });
 
-export default function PageLayout({ header, children }) {
-  const style = styles();
+function PageLayout({ header, children, sidebarVisibility }) {
+  const style = styles(sidebarVisibility);
+
   return (
     <Box sx={style.root} component="main">
       <Box sx={style.headerContainer} component="header">
@@ -46,7 +50,7 @@ export default function PageLayout({ header, children }) {
           src={waxSeal}
           alt="Application logo - red wax seal"
         />
-        <Typography color="black" sx={style.header} component="h1">
+        <Typography key="header" color="black" sx={style.header} component="h1">
           {header}
         </Typography>
       </Box>
@@ -54,6 +58,11 @@ export default function PageLayout({ header, children }) {
     </Box>
   );
 }
+const mapStateToProps = ({ sidebar: { sidebarVisibility } }) => ({
+  sidebarVisibility,
+});
+
+export default connect(mapStateToProps)(PageLayout);
 
 PageLayout.propTypes = {
   children: PropTypes.oneOfType([
@@ -61,4 +70,5 @@ PageLayout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   header: PropTypes.string.isRequired,
+  sidebarVisibility: PropTypes.bool.isRequired,
 };
