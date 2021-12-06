@@ -19,6 +19,7 @@ const styles = ({ tooltip, orientation }) => ({
       transition: 'opacity 225ms cubic-bezier(0.4, 0, 0.2, 1)',
       textTransform: 'capitalize',
       fontWeight: 'bold',
+      pointerEvents: 'none',
       ...(orientation === 'horizontal'
         ? {
             top: 'calc(4px + 100%)',

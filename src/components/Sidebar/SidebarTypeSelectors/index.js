@@ -75,7 +75,7 @@ function SidebarTypeSelectors({ user, orientation = 'horizontal' }) {
 SidebarTypeSelectors.propTypes = {
   orientation: PropTypes.string,
   user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequiredButNullable,
   }),
 };
 

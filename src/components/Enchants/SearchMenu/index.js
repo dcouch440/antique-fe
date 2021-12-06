@@ -5,24 +5,29 @@ import { Box } from '@mui/system';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { Fab } from '@mui/material';
 import MotionDiv from 'animation/MotionDiv';
+import PropTypes from 'prop-types';
 import Search from '@mui/icons-material/Search';
 import { SearchBar } from 'components';
 import { connect } from 'react-redux';
+import { enchantAC } from 'store/enchant';
 
 /**
  * @description When a user enters search terms, the body and title will searched through. The term will be submitted to the store and one of 3 variable will decide Friends, New, and Hot will change the users search preference. The selected preference will be stored in the store and change what the user will receive.
  */
 
-function SearchMenu() {
+function SearchMenu({ searchQueryUpdated }) {
   const [show, setShow] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  searchQuery;
 
   // TODO: Setup Thunk for Query
   const handleChange = ({ target: { value } }) => setSearchQuery(value);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setShow((prev) => !prev);
+
+    //TODO: ADD ERRORS FOR SEARCH TERMS THAT ARE NOT CORRECT.
+    searchQueryUpdated(searchQuery);
   };
 
   return (
@@ -64,8 +69,14 @@ function SearchMenu() {
   );
 }
 
+SearchMenu.propTypes = {
+  searchQueryUpdated: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  searchQueryUpdated: (query) => enchantAC.searchQueryUpdated(query),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchMenu);

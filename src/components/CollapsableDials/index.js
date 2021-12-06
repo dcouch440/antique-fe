@@ -12,11 +12,37 @@ import React from 'react';
  *
  * @example
  * ```
-   const actions = [
-    { icon: <GroupIcon />, name: 'Friends' },
-    { icon: <FiberNewIcon />, name: 'New' },
-    { icon: <LocalFireDepartmentIcon />, name: 'Popular' },
-   ];
+  const primaryColorIfActive = (type) =>
+    searchType === type ? 'primary' : 'secondary';
+
+  const actions = [
+    {
+      icon: (
+        <GroupIcon color={primaryColorIfActive(ENCHANT_SEARCH_TYPE_FRIEND)} />
+      ),
+      name: 'Friends',
+      onClick: () => searchTypeUpdated(ENCHANT_SEARCH_TYPE_FRIEND),
+      isActive: searchType === ENCHANT_SEARCH_TYPE_FRIEND,
+    },
+    {
+      icon: (
+        <FiberNewIcon color={primaryColorIfActive(ENCHANT_SEARCH_TYPE_NEW)} />
+      ),
+      name: 'New',
+      onClick: () => searchTypeUpdated(ENCHANT_SEARCH_TYPE_NEW),
+      isActive: searchType === ENCHANT_SEARCH_TYPE_NEW,
+    },
+    {
+      icon: (
+        <LocalFireDepartmentIcon
+          color={primaryColorIfActive(ENCHANT_SEARCH_TYPE_POPULAR)}
+        />
+      ),
+      name: 'Popular',
+      onClick: () => searchTypeUpdated(ENCHANT_SEARCH_TYPE_POPULAR),
+      isActive: searchType === ENCHANT_SEARCH_TYPE_POPULAR,
+    },
+  ];
  * ```
  */
 
@@ -27,18 +53,30 @@ export default function CollapsableDials({
   ...props
 }) {
   return (
-    <Box {...props}>
+    <Box sx={{ height: 'fit-content' }} {...props}>
       <SpeedDial
         ariaLabel={ariaLabel}
         icon={<SpeedDialIcon />}
         direction={direction}
       >
-        {actions.map(({ name, icon, onClick }) => (
+        {actions.map(({ name, icon, onClick, isActive }) => (
           <SpeedDialAction
             key={name}
             icon={icon}
             onClick={onClick}
             tooltipTitle={name}
+            sx={{
+              backgroundColor: isActive ? 'secondary.main' : 'primary.main',
+              border: (theme) =>
+                isActive && '1px solid ' + theme.palette.primary.light,
+              '&:hover': {
+                ...(isActive
+                  ? {
+                      backgroundColor: 'secondary.main',
+                    }
+                  : {}),
+              },
+            }}
           />
         ))}
       </SpeedDial>
@@ -52,6 +90,7 @@ CollapsableDials.propTypes = {
       icon: PropTypes.node.isRequired,
       name: PropTypes.string.isRequired,
       onClick: PropTypes.func.isRequired,
+      isActive: PropTypes.bool.isRequired,
     })
   ).isRequired,
   ariaLabel: PropTypes.string,

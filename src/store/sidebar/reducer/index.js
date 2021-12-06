@@ -23,14 +23,12 @@ function reducer(state = initialState, { type, payload }) {
         ...state,
         sidebarType: payload,
       };
-
     // toggle between login - signup
     case UPDATE_AUTH_TYPE:
       return {
         ...state,
         authType: payload,
       };
-
     // if passwords did not match on login
     case ADD_PASSWORD_ERROR:
       return {
@@ -40,7 +38,6 @@ function reducer(state = initialState, { type, payload }) {
           passwordConfirm: payload,
         },
       };
-
     // opens and closes sidebar
     case TOGGLE_SIDEBAR_VISIBILITY:
       return {

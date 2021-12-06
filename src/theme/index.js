@@ -41,11 +41,8 @@ export const theme = createTheme(themeBase, {
     },
     MuiFab: {
       styleOverrides: {
-        root: {
-          [themeBase.breakpoints.down('sm')]: {
-            height: 40,
-            width: 40,
-          },
+        circle: {
+          [themeBase.breakpoints.down('sm')]: {},
         },
       },
     },

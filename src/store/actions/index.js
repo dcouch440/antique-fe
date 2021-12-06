@@ -6,3 +6,7 @@ export const TOGGLE_SIDEBAR_VISIBILITY = 'sidebar/toggle-sidebar-visibility';
 
 // user
 export const ADD_USER_TO_STORE = 'user/add-user-to-store';
+
+// enchant
+export const ENCHANT_UPDATE_SEARCH_TYPE = 'enchant/update-search-type';
+export const ENCHANT_UPDATE_SEARCH_QUERY = 'enchant/update-search-query';

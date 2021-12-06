@@ -1,18 +1,12 @@
 import { Box } from '@mui/system';
-import { CollapsableDials } from 'components';
-import FiberNewIcon from '@mui/icons-material/FiberNew';
-import GroupIcon from '@mui/icons-material/Group';
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import CollapseMenu from '../CollapseMenu';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { SearchMenu } from '..';
+import { connect } from 'react-redux';
+import { enchantAC } from 'store/enchant';
 
-export default function SideMenu({ sx, ...props }) {
-  const actions = [
-    { icon: <GroupIcon />, name: 'Friends', onClick: () => {} },
-    { icon: <FiberNewIcon />, name: 'New', onClick: () => {} },
-    { icon: <LocalFireDepartmentIcon />, name: 'Popular', onClick: () => {} },
-  ];
+function SideMenu({ sx, ...props }) {
   return (
     <Box sx={sx}>
       <Box
@@ -24,13 +18,9 @@ export default function SideMenu({ sx, ...props }) {
         {...props}
       >
         <Box sx={{ m: 1 }}>
-          <CollapsableDials
-            ariaLabel="Category select"
-            actions={actions}
-            direction="left"
-          />
+          <CollapseMenu />
         </Box>
-        <Box sx={{ m: 1, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
           <SearchMenu />
         </Box>
       </Box>
@@ -39,5 +29,17 @@ export default function SideMenu({ sx, ...props }) {
 }
 
 SideMenu.propTypes = {
+  searchType: PropTypes.string.isRequired,
+  searchTypeUpdated: PropTypes.func.isRequired,
   sx: PropTypes.object,
 };
+
+const mapStateToProps = ({ enchant: { searchType } }) => ({
+  searchType,
+});
+
+const mapDispatchToProps = {
+  searchTypeUpdated: (type) => enchantAC.searchTypeUpdated(type),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);
