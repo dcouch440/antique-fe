@@ -36,4 +36,4 @@ const mapStateToProps = ({ sidebar: { sidebarType } }) => ({
   sidebarType,
 });
 
-export default connect(mapStateToProps, null)(RenderSidebarType);
+export default connect(mapStateToProps)(RenderSidebarType);

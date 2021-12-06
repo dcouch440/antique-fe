@@ -117,4 +117,4 @@ const mapStateToProps = ({ sidebar }) => ({
   error: sidebar.errors.passwordConfirm,
 });
 
-export default connect(mapStateToProps, null)(AuthForm);
+export default connect(mapStateToProps)(AuthForm);

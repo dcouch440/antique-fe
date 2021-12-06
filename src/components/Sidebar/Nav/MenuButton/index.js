@@ -38,10 +38,8 @@ MenuButton.propTypes = {
 
 const mapStateToProps = ({ sidebar: { selectedMenu } }) => ({ selectedMenu });
 
-const mapDispatchToProps = (dispatch) => ({
-  menuSelected: (menu) => {
-    dispatch(sidebarAC.menuSelected(menu));
-  },
-});
+const mapDispatchToProps = {
+  menuSelected: (menu) => sidebarAC.menuSelected(menu),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuButton);

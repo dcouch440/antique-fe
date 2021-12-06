@@ -76,21 +76,6 @@ function SidebarTypeSelector({
   );
 }
 
-const mapStateToProps = ({
-  sidebar: { sidebarType, sidebarVisibility },
-  user,
-}) => ({
-  sidebarType,
-  user,
-  sidebarVisibility,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  sidebarTypeChanged: (version) =>
-    dispatch(sidebarAC.sidebarTypeChanged(version)),
-  visibilityToggled: () => dispatch(sidebarAC.visibilityToggled()),
-});
-
 SidebarTypeSelector.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -104,6 +89,20 @@ SidebarTypeSelector.propTypes = {
   visibilityToggled: PropTypes.func.isRequired,
   withLogout: PropTypes.bool,
   orientation: PropTypes.string,
+};
+
+const mapStateToProps = ({
+  sidebar: { sidebarType, sidebarVisibility },
+  user,
+}) => ({
+  sidebarType,
+  user,
+  sidebarVisibility,
+});
+
+const mapDispatchToProps = {
+  sidebarTypeChanged: (version) => sidebarAC.sidebarTypeChanged(version),
+  visibilityToggled: () => sidebarAC.visibilityToggled(),
 };
 
 export default connect(

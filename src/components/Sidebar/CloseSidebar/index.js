@@ -27,8 +27,8 @@ const mapStateToProps = ({ sidebar: { sidebarVisibility } }) => ({
   sidebarVisibility,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  visibilityToggled: () => dispatch(sidebarAC.visibilityToggled()),
-});
+const mapDispatchToProps = {
+  visibilityToggled: () => sidebarAC.visibilityToggled(),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CloseSidebar);

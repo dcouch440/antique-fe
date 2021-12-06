@@ -69,10 +69,10 @@ const mapStateToProps = ({ sidebar }) => ({
   authType: sidebar.authType,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  authTypeChanged: (authType) => dispatch(sidebarAC.authTypeChanged(authType)),
+const mapDispatchToProps = {
+  authTypeChanged: (authType) => sidebarAC.authTypeChanged(authType),
   passwordConfirmErrorOccurred: (error) =>
-    dispatch(sidebarAC.passwordConfirmErrorOccurred(error)),
-});
+    sidebarAC.passwordConfirmErrorOccurred(error),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authorize);

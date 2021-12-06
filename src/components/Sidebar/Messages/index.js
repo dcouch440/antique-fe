@@ -10,6 +10,4 @@ Messages.propTypes = {};
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Messages);
+export default connect(mapStateToProps)(Messages);
