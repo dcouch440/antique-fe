@@ -43,7 +43,7 @@ function PageWithBackplateLayout({ header, children, sidebarVisibility }) {
         <img
           style={{
             position: 'absolute',
-            height: 'clamp(120px, 10vw, 150px)',
+            height: 'clamp(80px, 14vw, 150px)',
             right: '1%',
             top: 0,
           }}

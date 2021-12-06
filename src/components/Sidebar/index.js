@@ -49,7 +49,7 @@ function Sidebar({ sidebarVisibility }) {
               flexDirection: 'column',
             }}
           >
-            <SidebarTypeSelectors orientation="horizontal" />
+            <SidebarTypeSelectors />
             <SidebarRouter />
           </Box>
         </Box>
@@ -65,13 +65,17 @@ function Sidebar({ sidebarVisibility }) {
           as={MotionDiv}
           sx={{
             position: 'absolute',
-            left: 0,
-            top: 0,
-            m: 1,
+            right: 0,
+            left: [0, 0],
+            margin: ['0 auto', '0 auto', 1],
+            top: [null, null, 1],
+            width: 'fit-content',
+            bottom: [0, 0, 0],
+            pb: [1, 1, 0],
             zIndex: 1,
           }}
         >
-          <SidebarTypeSelectors orientation="vertical" />
+          <SidebarTypeSelectors orientation="closed" />
         </Box>
       )}
     </AnimatePresence>

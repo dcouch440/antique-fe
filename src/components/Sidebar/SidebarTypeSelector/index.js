@@ -4,36 +4,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
 
-const styles = ({ tooltip, orientation }) => ({
-  root: {
-    position: 'relative',
-    '&:after': {
-      content: `"${tooltip ?? ''}"`,
-      position: 'absolute',
-      backgroundColor: 'primary.main',
-      p: 0.5,
-      fontSize: 'sizes.sm',
-      borderRadius: 1,
-      opacity: 0,
-      userSelect: 'none',
-      transition: 'opacity 225ms cubic-bezier(0.4, 0, 0.2, 1)',
-      textTransform: 'capitalize',
-      fontWeight: 'bold',
-      pointerEvents: 'none',
-      ...(orientation === 'horizontal'
-        ? {
-            top: 'calc(4px + 100%)',
-          }
-        : {
-            left: 'calc(4px + 100%)',
-          }),
-    },
-    '&:hover': {
-      '&:after': {
-        opacity: 1,
-      },
-    },
-  },
+const styles = () => ({
+  // root: {
+  //   position: 'relative',
+  //   '&:after': {
+  //     content: `"${tooltip ?? ''}"`,
+  //     position: 'absolute',
+  //     backgroundColor: 'primary.main',
+  //     p: 0.5,
+  //     fontSize: 'sizes.sm',
+  //     borderRadius: 1,
+  //     opacity: 0,
+  //     userSelect: 'none',
+  //     transition: 'opacity 225ms cubic-bezier(0.4, 0, 0.2, 1)',
+  //     textTransform: 'capitalize',
+  //     fontWeight: 'bold',
+  //     pointerEvents: 'none',
+  //   },
+  //   '&:hover': {
+  //     '&:after': {
+  //       opacity: 1,
+  //     },
+  //   },
+  // },
 });
 
 function SidebarTypeSelector({

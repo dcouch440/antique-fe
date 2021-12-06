@@ -17,23 +17,24 @@ import SidebarTypeSelector from '../SidebarTypeSelector';
 import { connect } from 'react-redux';
 
 const styles = () => ({
-  horizontal: {
+  open: {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, auto)',
     gridGap: (theme) => theme.spacing(2),
     pb: 3,
     justifyContent: 'center',
   },
-  vertical: {
+  closed: {
     display: 'flex',
-    flexDirection: 'column',
-    '& > button': {
-      mt: 1,
+    flexDirection: ['row', 'row', 'column'],
+    '& > button:not(:last-child)': {
+      mr: [1, 1, 0],
+      mb: [0, 0, 1],
     },
   },
 });
 
-function SidebarTypeSelectors({ user, orientation = 'horizontal' }) {
+function SidebarTypeSelectors({ user, orientation = 'open' }) {
   const userIsLoggedIn = Boolean(user.id);
   const style = styles();
 
