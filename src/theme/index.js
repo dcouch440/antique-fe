@@ -1,52 +1,21 @@
 import { createTheme } from '@mui/material/styles';
 
-export const theme = createTheme({
+const themeBase = createTheme({
   palette: {
     primary: {
       main: '#ffffff',
     },
     secondary: {
       main: '#171717',
-    },
-    danger: {
-      main: '#B86D6D',
-    },
-    white: {
-      main: '#ffffff',
-      darker: '#fff5f5',
-      transparent: '#FFFFFF47',
-    },
-    black: {
-      main: '#171717f7',
+      lighter: '#1d1d1d',
       transparent: '#21252983',
       lessTransparent: '#000000cf',
-    },
-    lightGray: {
-      main: '#dddedf',
-      darker: '#636363',
-    },
-    lightSkyBlue: {
-      main: '#83C9F4',
-    },
-    honeyYellow: {
-      main: '#F6AE2D',
-    },
-    transparentWhite: {
-      main: '#FFFFFF40',
-    },
-    backgroundColor: {
-      main: '#ffffff',
     },
     antiqueWhite: {
       main: '#FAEBD7',
       transparent: '#FAEBD723',
       lessTransparent: '#FAEBD753',
     },
-  },
-  appStyles: {
-    boxShadow:
-      '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)',
-    textShadow: '1px 1px 2px black',
   },
   typography: {
     fontFamily: 'sans-serif',
@@ -58,24 +27,34 @@ export const theme = createTheme({
       sm: 12,
       reg: 14,
       lg: 18,
-      xl: 24,
-      xxl: 46,
     },
   },
+  spacing: 12,
+});
+
+export const theme = createTheme(themeBase, {
   components: {
     MuiInput: {
       styleOverrides: {
         root: {},
       },
     },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          [themeBase.breakpoints.down('sm')]: {
+            height: 40,
+            width: 40,
+          },
+        },
+      },
+    },
   },
-  spacing: 12,
-  radius: (radius) => radius * 12,
 });
 
 export const globalSX = {
   transparentBlur: {
-    backgroundColor: 'black.transparent',
+    backgroundColor: 'secondary.transparent',
     backdropFilter: 'blur(12px)',
   },
   scrollContainer: {
@@ -84,5 +63,9 @@ export const globalSX = {
     '&::-webkit-scrollbar': {
       display: 'none' /* for Chrome, Safari, and Opera */,
     },
+  },
+  fabDimension: {
+    height: [36, 46, 64],
+    width: [36, 46, 64],
   },
 };

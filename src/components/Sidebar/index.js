@@ -9,41 +9,7 @@ import SidebarTypeSelectors from './SidebarTypeSelectors';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
 
-const styles = () => ({
-  root: {
-    width: ['100%', '100%', '100%', 450],
-    height: '100vh',
-    zIndex: 4,
-    position: 'absolute',
-    pt: 2,
-    px: 2,
-    backgroundColor: 'secondary.main',
-    boxShadow: (theme) => '5px 0 15px ' + theme.palette.black.transparent,
-  },
-  relativeBox: {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  menuClosedContainer: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    m: 1,
-    zIndex: 1,
-  },
-});
-
-/** TODO:
- * Prevent password must match error from showing when changing back to login.
- * change error color.
- */
-
 function Sidebar({ sidebarVisibility }) {
-  const style = styles();
-
   return (
     <AnimatePresence>
       {sidebarVisibility ? (
@@ -51,11 +17,19 @@ function Sidebar({ sidebarVisibility }) {
           key="sidebar"
           initial={{ x: -1000 }}
           animate={{ x: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8 }}
           as={MotionDiv}
-          sx={style.root}
+          sx={{
+            width: ['100%', '100%', '100%', 450],
+            height: '100vh',
+            zIndex: 4,
+            position: 'absolute',
+            pt: 2,
+            px: 2,
+            backgroundColor: 'secondary.main',
+          }}
         >
-          <Box sx={style.toggleButton}>
+          <Box>
             <CloseSidebar
               sx={{
                 zIndex: 3,
@@ -66,12 +40,21 @@ function Sidebar({ sidebarVisibility }) {
               }}
             />
           </Box>
-          <Box sx={style.relativeBox}>
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
             <SidebarTypeSelectors orientation="horizontal" />
             <SidebarRouter />
           </Box>
         </Box>
       ) : (
+        // Sidebar Not Visible
         <Box
           key="vertical-menu"
           initial={{
@@ -80,7 +63,13 @@ function Sidebar({ sidebarVisibility }) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
           as={MotionDiv}
-          sx={style.menuClosedContainer}
+          sx={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            m: 1,
+            zIndex: 1,
+          }}
         >
           <SidebarTypeSelectors orientation="vertical" />
         </Box>

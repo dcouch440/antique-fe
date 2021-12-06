@@ -3,14 +3,31 @@ import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+/**
+ * @param {{
+ *  actions: Array<{icon: Svg, name: string, onClick: function}>,
+ *  ariaLabel: string,
+ *  direction: string,
+ * }}
+ *
+ * @example
+ * ```
+   const actions = [
+    { icon: <GroupIcon />, name: 'Friends' },
+    { icon: <FiberNewIcon />, name: 'New' },
+    { icon: <LocalFireDepartmentIcon />, name: 'Popular' },
+   ];
+ * ```
+ */
+
 export default function CollapsableDials({
   actions,
   ariaLabel,
-  sx = {},
   direction,
+  ...props
 }) {
   return (
-    <Box sx={sx}>
+    <Box {...props}>
       <SpeedDial
         ariaLabel={ariaLabel}
         icon={<SpeedDialIcon />}
@@ -39,5 +56,4 @@ CollapsableDials.propTypes = {
   ).isRequired,
   ariaLabel: PropTypes.string,
   direction: PropTypes.string,
-  sx: PropTypes.object,
 };

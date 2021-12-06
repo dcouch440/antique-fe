@@ -81,7 +81,7 @@ function Input({
   return (
     <FormControl required={required} error={error}>
       <StyledInput
-        color="white"
+        color="primary"
         onChange={onChange}
         aria-label={ariaLabel}
         label={label}
@@ -99,7 +99,7 @@ function Input({
         </Typography>
       )}
       {formHelperText && (
-        <FormHelperText color="white" id={ariaDescribedBy}>
+        <FormHelperText color="primary" id={ariaDescribedBy}>
           {formHelperText}
         </FormHelperText>
       )}

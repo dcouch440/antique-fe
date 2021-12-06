@@ -14,7 +14,9 @@ function MenuButton({ selectedMenu, menuSelected, menuConstant, text }) {
       variant="elevation"
       onClick={handleClick}
       sx={{
-        backgroundColor: isSelectedMenu ? 'black.main' : 'black.transparent',
+        backgroundColor: isSelectedMenu
+          ? 'secondary.main'
+          : 'secondary.transparent',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

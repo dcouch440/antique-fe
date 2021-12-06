@@ -18,7 +18,7 @@ const styles = () => ({
     '&:last-child': {
       mb: 2,
     },
-    boxShadow: (theme) => theme.appStyles.boxShadow,
+    boxShadow: 1,
     '&:hover': {
       '& img': {
         transform: 'scale(1.03)',
