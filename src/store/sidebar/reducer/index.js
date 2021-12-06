@@ -6,8 +6,6 @@ import {
 } from 'store/actions';
 import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
 
-import { createReducer } from 'store/utils';
-
 const initialState = {
   sidebarType: SIDEBAR_NAVIGATION,
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
@@ -17,33 +15,42 @@ const initialState = {
   },
 };
 
-const reducer = createReducer(initialState, (state, payload) => ({
-  // toggles between login/signup and navigation sidebars
-  [UPDATE_SIDEBAR_TYPE]: () => ({
-    ...state,
-    sidebarType: payload,
-  }),
+function reducer(state = initialState, { type, payload }) {
+  switch (type) {
+    // toggles between login/signup and navigation sidebars
+    case UPDATE_SIDEBAR_TYPE:
+      return {
+        ...state,
+        sidebarType: payload,
+      };
 
-  // toggle between login - signup
-  [UPDATE_AUTH_TYPE]: () => ({
-    ...state,
-    authType: payload,
-  }),
+    // toggle between login - signup
+    case UPDATE_AUTH_TYPE:
+      return {
+        ...state,
+        authType: payload,
+      };
 
-  // if passwords did not match on login
-  [ADD_PASSWORD_ERROR]: () => ({
-    ...state,
-    errors: {
-      ...state.error,
-      passwordConfirm: payload,
-    },
-  }),
+    // if passwords did not match on login
+    case ADD_PASSWORD_ERROR:
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          passwordConfirm: payload,
+        },
+      };
 
-  // opens and closes sidebar
-  [TOGGLE_SIDEBAR_VISIBILITY]: () => ({
-    ...state,
-    sidebarVisibility: !state.sidebarVisibility,
-  }),
-}));
+    // opens and closes sidebar
+    case TOGGLE_SIDEBAR_VISIBILITY:
+      return {
+        ...state,
+        sidebarVisibility: !state.sidebarVisibility,
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default reducer;

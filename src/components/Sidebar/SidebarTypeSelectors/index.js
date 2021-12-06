@@ -41,20 +41,27 @@ function SidebarTypeSelectors({ user, orientation = 'horizontal' }) {
     <Box sx={style[orientation]}>
       <SidebarTypeSelector
         tooltip="Navigate"
+        orientation={orientation}
         constantVariable={SIDEBAR_NAVIGATION}
       >
         <MenuIcon />
       </SidebarTypeSelector>
       <SidebarTypeSelector
         tooltip="Messages"
+        orientation={orientation}
         constantVariable={SIDEBAR_MESSAGES}
       >
         <EmailIcon />
       </SidebarTypeSelector>
-      <SidebarTypeSelector tooltip="Feed" constantVariable={SIDEBAR_FEED}>
+      <SidebarTypeSelector
+        tooltip="Feed"
+        orientation={orientation}
+        constantVariable={SIDEBAR_FEED}
+      >
         <DynamicFeedIcon />
       </SidebarTypeSelector>
       <SidebarTypeSelector
+        orientation={orientation}
         tooltip={userIsLoggedIn ? 'Logout' : 'Login'}
         constantVariable={SIDEBAR_AUTH}
         withLogout
@@ -76,4 +83,4 @@ const mapStateToProps = ({ user }) => ({
   user,
 });
 
-export default connect(mapStateToProps, null)(SidebarTypeSelectors);
+export default connect(mapStateToProps)(SidebarTypeSelectors);

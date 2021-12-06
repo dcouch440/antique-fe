@@ -51,7 +51,7 @@ function Sidebar({ sidebarVisibility }) {
           key="sidebar"
           initial={{ x: -1000 }}
           animate={{ x: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.5 }}
           as={MotionDiv}
           sx={style.root}
         >
@@ -67,7 +67,7 @@ function Sidebar({ sidebarVisibility }) {
             />
           </Box>
           <Box sx={style.relativeBox}>
-            <SidebarTypeSelectors />
+            <SidebarTypeSelectors orientation="horizontal" />
             <SidebarRouter />
           </Box>
         </Box>
@@ -78,7 +78,7 @@ function Sidebar({ sidebarVisibility }) {
             opacity: 0,
           }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           as={MotionDiv}
           sx={style.menuClosedContainer}
         >
