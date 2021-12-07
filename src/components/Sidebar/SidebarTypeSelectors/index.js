@@ -37,6 +37,7 @@ const styles = () => ({
 function SidebarTypeSelectors({ user, orientation = 'open' }) {
   const userIsLoggedIn = Boolean(user.id);
   const style = styles();
+  const isClosedVersion = orientation === 'closed';
 
   return (
     <Box sx={style[orientation]}>
@@ -61,14 +62,16 @@ function SidebarTypeSelectors({ user, orientation = 'open' }) {
       >
         <DynamicFeedIcon />
       </SidebarTypeSelector>
-      <SidebarTypeSelector
-        orientation={orientation}
-        tooltip={userIsLoggedIn ? 'Logout' : 'Login'}
-        constantVariable={SIDEBAR_AUTH}
-        withLogout
-      >
-        {userIsLoggedIn ? <LogoutIcon /> : <PersonIcon />}
-      </SidebarTypeSelector>
+      {!isClosedVersion && (
+        <SidebarTypeSelector
+          orientation={orientation}
+          tooltip={userIsLoggedIn ? 'Logout' : 'Login'}
+          constantVariable={SIDEBAR_AUTH}
+          withLogout
+        >
+          {userIsLoggedIn ? <LogoutIcon /> : <PersonIcon />}
+        </SidebarTypeSelector>
+      )}
     </Box>
   );
 }
