@@ -8,7 +8,7 @@ const styles = () => ({
   content: {
     flex: 1,
     minHeight: '100%',
-    backgroundColor: 'antiqueWhite.main',
+    backgroundColor: (theme) => theme.custom.palette.antiqueWhite.main,
     display: 'flex',
   },
 });

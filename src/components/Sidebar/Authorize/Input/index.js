@@ -58,7 +58,9 @@ function Input({
   ...props
 }) {
   // placeholder
-  const handleRouteChange = () => {};
+  const handleRouteChange = () => {
+    return;
+  };
 
   return (
     <FormControl required={required} error={error}>

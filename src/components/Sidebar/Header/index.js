@@ -15,7 +15,7 @@ export default function Header({ text }) {
       <Typography
         color="primary"
         sx={{
-          fontFamily: 'families.cursive',
+          fontFamily: (theme) => theme.custom.typography.families.cursive,
           fontSize: 'sizes.xxl',
         }}
         component="h2"

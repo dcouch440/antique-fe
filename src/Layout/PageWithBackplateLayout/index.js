@@ -17,7 +17,8 @@ const makeSX = () => ({
     position: 'relative',
   },
   headerContainer: {
-    borderBottom: (theme) => '1px solid ' + theme.palette.secondary.transparent,
+    borderBottom: (theme) =>
+      '1px solid ' + theme.custom.palette.secondary.transparent,
     color: 'primary.main',
     p: 2,
     backgroundColor: 'secondary.main',
@@ -30,7 +31,7 @@ const makeSX = () => ({
   header: {
     fontSize: [26, 46, 64],
     textAlign: 'center',
-    fontFamily: 'families.cursive',
+    fontFamily: (theme) => theme.custom.typography.families.cursive,
   },
 });
 
