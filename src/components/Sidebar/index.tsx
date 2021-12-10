@@ -38,19 +38,19 @@ function Sidebar({ sidebarVisibility }: Props) {
     <AnimatePresence>
       {sidebarVisibility ? (
         <MotionDiv
+          key="sidebar"
           initial={{ x: -1200 }}
           animate={{ x: 0 }}
           transition={{ duration: 0.8 }}
           style={{
+            zIndex: 4,
             position: 'fixed',
           }}
         >
           <Box
-            key="sidebar"
             sx={{
               width: ['100vw', '100vw', '100vw', 450],
               height: '100vh',
-              zIndex: 4,
               pt: 2,
               px: 2,
               backgroundColor: 'secondary.main',
@@ -84,12 +84,12 @@ function Sidebar({ sidebarVisibility }: Props) {
       ) : (
         // Sidebar Not Visible
         <MotionDiv
+          key="closed-menu"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           <Box
-            key="closed-menu"
             sx={{
               position: 'fixed',
               right: 0,
