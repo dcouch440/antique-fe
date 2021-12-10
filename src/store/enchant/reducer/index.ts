@@ -15,7 +15,7 @@ const initialState: IEnchantState = {
 export default function reducer(
   state = initialState,
   { type, payload }: AnyAction
-) {
+): IEnchantState {
   switch (type) {
     case ENCHANT_UPDATE_SEARCH_TYPE:
       return {

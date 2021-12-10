@@ -2,10 +2,10 @@ import {
   FormControl,
   FormHelperText,
   TextField,
+  TextFieldProps,
   Typography,
 } from '@mui/material';
 
-import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -41,6 +41,22 @@ const StyledInput = styled(TextField)`
  * @description Input component is an text input created for the login sidebar.
  */
 
+interface IProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  ariaLabel: string;
+  label: string;
+  forgot?: boolean;
+  required?: boolean;
+  value: string;
+  type: string;
+  name: string;
+  placeholder?: string;
+  autoComplete: string;
+  error?: boolean;
+  formHelperText?: string;
+  ariaDescribedBy?: string;
+}
+
 function Input({
   onChange,
   ariaLabel,
@@ -50,13 +66,13 @@ function Input({
   value,
   type,
   name,
-  inputProps,
+  placeholder,
   autoComplete,
   error,
   formHelperText,
   ariaDescribedBy,
   ...props
-}) {
+}: IProps & TextFieldProps): JSX.Element {
   // placeholder
   const handleRouteChange = () => {
     return;
@@ -70,10 +86,10 @@ function Input({
         aria-label={ariaLabel}
         label={label}
         name={name}
-        inputProps={inputProps}
         autoComplete={autoComplete}
         value={value}
         type={type}
+        placeholder={placeholder}
         aria-describedby={ariaDescribedBy}
         {...props}
       />
@@ -100,21 +116,5 @@ function Input({
     </FormControl>
   );
 }
-
-Input.propTypes = {
-  ariaDescribedBy: PropTypes.string,
-  ariaLabel: PropTypes.string.isRequired,
-  error: PropTypes.bool,
-  forgot: PropTypes.bool,
-  formHelperText: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  autoComplete: PropTypes.string,
-  onChange: PropTypes.func,
-  inputProps: PropTypes.object,
-  required: PropTypes.bool,
-  type: PropTypes.string,
-  value: PropTypes.string.isRequired,
-};
 
 export default Input;

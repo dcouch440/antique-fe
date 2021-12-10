@@ -1,26 +1,39 @@
+import { ConnectedProps, connect } from 'react-redux';
 import { SidebarType, SidebarVisibility } from 'store/sidebar/reducer/types';
+import {
+  sidebarTypeChanged,
+  swellMenuTypeUpdated,
+  visibilityToggled,
+} from 'store/sidebar/actionCreators';
 
 import { Fab } from '@mui/material';
-import { ISidebarState } from 'store/sidebar/reducer/interfaces';
-import { IUserState } from 'store/user/reducer/interfaces';
-import { connect } from 'react-redux';
-import { sidebarAC } from 'store/sidebar';
+import { IAppState } from 'store/types';
+import { ReactNode } from 'react';
 
-interface IStateProps {
-  sidebar: ISidebarState;
-  user: IUserState;
-}
-interface IDispatchProps {
-  sidebarTypeChanged: (version: SidebarType) => void;
-  visibilityToggled: () => void;
-}
-interface ISidebarTypeSelector {
+const mapStateToProps = ({
+  sidebar: { sidebarType, sidebarVisibility, sidebarSwellMenuType },
+  user,
+}: IAppState) => ({
+  sidebarType,
+  user,
+  sidebarVisibility,
+  sidebarSwellMenuType,
+});
+
+const mapDispatchToProps = {
+  sidebarTypeChanged,
+  visibilityToggled,
+  swellMenuTypeUpdated,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+interface OwnProps {
   constantVariable: string;
-  children: JSX.Element | JSX.Element[];
-  user: IUserState;
-  withLogout?: true;
-  sidebarVisibility: SidebarVisibility;
+  children: ReactNode;
+  withLogout?: boolean;
 }
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & OwnProps;
 
 function SidebarTypeSelector({
   sidebarTypeChanged,
@@ -30,13 +43,23 @@ function SidebarTypeSelector({
   user,
   sidebarVisibility,
   visibilityToggled,
+  sidebarSwellMenuType,
+  swellMenuTypeUpdated,
   ...props
-}: ISidebarTypeSelector & IDispatchProps) {
+}: Props): JSX.Element {
   const handleClick = () => {
     // if sidebar is closed open it.
     !sidebarVisibility && visibilityToggled();
     // set the type as well.
     sidebarTypeChanged(constantVariable);
+    closeSidebarMenuIfOpeningSidebar();
+  };
+
+  const closeSidebarMenuIfOpeningSidebar = () => {
+    if (sidebarSwellMenuType) {
+      // close it.
+      swellMenuTypeUpdated(null);
+    }
   };
 
   const handleLogout = () => {
@@ -60,21 +83,4 @@ function SidebarTypeSelector({
   );
 }
 
-const mapStateToProps = ({
-  sidebar: { sidebarType, sidebarVisibility },
-  user,
-}: IStateProps) => ({
-  sidebarType,
-  user,
-  sidebarVisibility,
-});
-
-const mapDispatchToProps: IDispatchProps = {
-  sidebarTypeChanged: (version) => sidebarAC.sidebarTypeChanged(version),
-  visibilityToggled: () => sidebarAC.visibilityToggled(),
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SidebarTypeSelector);
+export default connector(SidebarTypeSelector);

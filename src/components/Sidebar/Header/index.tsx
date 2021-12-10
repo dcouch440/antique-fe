@@ -1,9 +1,12 @@
 import { Box } from '@mui/system';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Typography } from '@mui/material';
 
-export default function Header({ text }) {
+interface IHeader {
+  text: string;
+}
+
+export default function Header({ text }: IHeader): JSX.Element {
   return (
     <Box
       sx={{
@@ -25,7 +28,3 @@ export default function Header({ text }) {
     </Box>
   );
 }
-
-Header.propTypes = {
-  text: PropTypes.string.isRequired,
-};

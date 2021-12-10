@@ -1,15 +1,13 @@
-import { SidebarType, SidebarVisibility } from 'store/sidebar/reducer/types';
+import { ConnectedProps, connect } from 'react-redux';
 
 import { AnimatePresence } from 'framer-motion';
 import { Box } from '@mui/material';
 import CloseSidebar from './CloseSidebar';
-import { ISidebarState } from 'store/sidebar/reducer/interfaces';
-import { IUserState } from 'store/user/reducer/interfaces';
+import { IAppState } from 'store/types';
 import MotionDiv from 'animation/MotionDiv';
 import SidebarRouter from './SidebarRouter';
 import SidebarTypeSelectors from './SidebarTypeSelectors';
-import { connect } from 'react-redux';
-import { sidebarAC } from 'store/sidebar';
+import { SidebarVisibility } from 'store/sidebar/reducer/types';
 
 /**
  * @description
@@ -18,22 +16,24 @@ import { sidebarAC } from 'store/sidebar';
  * - menuSelectors will be called twice, one with it's orientation chosen for closed menu. This is required because using state will change the orientation of the selector before it disappears
  */
 
-interface IStateProps {
-  user: IUserState;
-  sidebar: ISidebarState;
-}
+const mapStateToProps = ({
+  user,
+  sidebar: { sidebarType, sidebarVisibility },
+}: IAppState) => ({
+  user,
+  sidebarType,
+  sidebarVisibility,
+});
 
-interface IDispatchProps {
-  sidebarTypeChanged: (version: SidebarType) => void;
-}
+const connector = connect(mapStateToProps);
 
-interface ISidebar {
+interface IOwnProps {
   sidebarVisibility: SidebarVisibility;
 }
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & IOwnProps;
 
-type Props = IDispatchProps & ISidebar;
-
-function Sidebar({ sidebarVisibility }: Props) {
+function Sidebar({ sidebarVisibility }: Props): JSX.Element {
   return (
     <AnimatePresence>
       {sidebarVisibility ? (
@@ -110,19 +110,4 @@ function Sidebar({ sidebarVisibility }: Props) {
   );
 }
 
-const mapStateToProps = ({
-  user,
-  sidebar: { sidebarType, sidebarVisibility },
-}: IStateProps) => ({
-  user,
-  sidebarType: sidebarType,
-  sidebarVisibility,
-});
-
-const mapDispatchToProps = {
-  sidebarTypeChanged: (version: SidebarType): void => {
-    sidebarAC.sidebarTypeChanged(version);
-  },
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connector(Sidebar);

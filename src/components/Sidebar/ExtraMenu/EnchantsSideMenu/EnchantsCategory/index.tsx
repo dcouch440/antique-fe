@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from '@mui/material';
+import { ConnectedProps, connect } from 'react-redux';
 import {
   ENCHANT_SEARCH_TYPE_FRIEND,
   ENCHANT_SEARCH_TYPE_NEW,
@@ -9,22 +10,37 @@ import {
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import FilterNoneIcon from '@mui/icons-material/FilterNone';
 import GroupIcon from '@mui/icons-material/Group';
+import { IAppState } from 'store/types';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import PropTypes from 'prop-types';
 import React from 'react';
 import SwellMenuContainer from 'animation/SwellMenuContainer';
-import { connect } from 'react-redux';
-import { enchantAC } from 'store/enchant';
+import { searchTypeUpdated } from 'store/enchant/actionCreators';
 
 /**
  * @description CollapseMenu component changes what type of search it is based on constants in the store
  */
 
-function CollapseMenu({ searchType, searchTypeUpdated }) {
-  const primaryColorIfActive = (type) => [
-    searchType === type ? 'primary' : 'secondary',
-    searchType !== type ? 'primary' : 'secondary',
-  ];
+const mapStateToProps = ({ enchant: { searchType } }: IAppState) => ({
+  searchType,
+});
+
+const mapDispatchToProps = {
+  searchTypeUpdated,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+interface OwnProps {
+  orientation?: 'open' | 'closed';
+}
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & OwnProps;
+
+function CollapseMenu({ searchType, searchTypeUpdated }: Props): JSX.Element {
+  const primaryColorIfActive: (type: string) => Array<'primary' | 'secondary'> =
+    (type) => [
+      searchType === type ? 'primary' : 'secondary',
+      searchType !== type ? 'primary' : 'secondary',
+    ];
 
   const [friendIconColor, friendsButtonColor] = primaryColorIfActive(
     ENCHANT_SEARCH_TYPE_FRIEND
@@ -80,17 +96,4 @@ function CollapseMenu({ searchType, searchTypeUpdated }) {
   );
 }
 
-CollapseMenu.propTypes = {
-  searchType: PropTypes.string.isRequired,
-  searchTypeUpdated: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({ enchant: { searchType } }) => ({
-  searchType,
-});
-
-const mapDispatchToProps = {
-  searchTypeUpdated: (type) => enchantAC.searchTypeUpdated(type),
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CollapseMenu);
+export default connector(CollapseMenu);

@@ -1,36 +1,33 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, useTheme } from '@mui/system';
+import { ConnectedProps, connect } from 'react-redux';
 import { Fab, useMediaQuery } from '@mui/material';
 
-import { ISidebarState } from 'store/sidebar/reducer/interfaces';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { SidebarSwellMenuType } from 'store/sidebar/reducer/types';
-import { connect } from 'react-redux';
-import { sidebarAC } from 'store/sidebar';
+import { IAppState } from 'store/types';
+import { ReactNode } from 'react';
+import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
 
 /**
- *
- * @param {{icon: object, children: JSX.Element|JSX.Elements, constantVariable: string}}
  * @description SwellMenuContainer is used as a swell menu for the EXtraMenu part of the application SidebarTypeSelectors housing MUST be set to relative for it to work correctly.
  */
 
-interface IDispatchProps {
-  swellMenuTypeUpdated: (type: SidebarSwellMenuType) => void;
-}
+const mapStateToProps = (state: IAppState) => ({
+  sidebarSwellMenuType: state.sidebar.sidebarSwellMenuType,
+});
 
-interface IStateProps {
-  sidebar: ISidebarState;
-}
+const mapDispatchToProps = {
+  swellMenuTypeUpdated,
+};
 
-interface ISwellMenuContainer {
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+interface OwnProps {
   icon: JSX.Element;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
   constantVariable: string;
-  sidebarSwellMenuType: SidebarSwellMenuType;
 }
-
-type Props = IDispatchProps & ISwellMenuContainer;
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & OwnProps;
 
 function SwellMenuContainer({
   icon,
@@ -81,16 +78,4 @@ function SwellMenuContainer({
   );
 }
 
-const mapStateToProps = ({
-  sidebar: { sidebarSwellMenuType },
-}: IStateProps) => ({
-  sidebarSwellMenuType,
-});
-
-const mapDispatchToProps: IDispatchProps = {
-  swellMenuTypeUpdated: (type) => {
-    sidebarAC.swellMenuTypeUpdated(type);
-  },
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SwellMenuContainer);
+export default connector(SwellMenuContainer);

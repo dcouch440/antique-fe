@@ -12,7 +12,9 @@ interface IDispatchProps {
   searchQueryUpdated: (query: string) => void;
 }
 
-function EnchantsSearchBar({ searchQueryUpdated }: IDispatchProps) {
+function EnchantsSearchBar({
+  searchQueryUpdated,
+}: IDispatchProps): JSX.Element {
   const handleSubmit = (e: string) => searchQueryUpdated(e);
   return <SearchSwellMenu onSubmit={handleSubmit} />;
 }
@@ -24,7 +26,7 @@ EnchantsSearchBar.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps: IDispatchProps = {
-  searchQueryUpdated: (query: string) => enchantAC.searchQueryUpdated(query),
+  searchQueryUpdated: (query) => enchantAC.searchQueryUpdated(query),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnchantsSearchBar);

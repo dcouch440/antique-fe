@@ -9,7 +9,10 @@ const initialState: IUserState = {
   admin: false,
 };
 
-function reducer(state = initialState, { type, payload }: AnyAction) {
+function reducer(
+  state = initialState,
+  { type, payload }: AnyAction
+): IUserState {
   switch (type) {
     case ADD_USER_TO_STORE:
       return {

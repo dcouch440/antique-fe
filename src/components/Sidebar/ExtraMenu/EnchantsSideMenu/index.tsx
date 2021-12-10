@@ -11,6 +11,4 @@ function EnchantsSideMenu() {
   );
 }
 
-EnchantsSideMenu.propTypes = {};
-
 export default EnchantsSideMenu;

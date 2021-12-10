@@ -1,8 +1,14 @@
-import { Divider, IconButton, Paper, TextField } from '@mui/material';
+import { Divider, IconButton, Paper, SxProps, TextField } from '@mui/material';
 
-import PropTypes from 'prop-types';
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+
+interface IOwnProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: React.SyntheticEvent) => void;
+  placeholder?: string;
+  sx: SxProps;
+}
 
 export default function SearchBar({
   onChange,
@@ -10,7 +16,7 @@ export default function SearchBar({
   placeholder = 'Search',
   sx = {},
   ...props
-}) {
+}: IOwnProps): JSX.Element {
   return (
     <Paper
       sx={{
@@ -40,10 +46,3 @@ export default function SearchBar({
     </Paper>
   );
 }
-
-SearchBar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  sx: PropTypes.object,
-};

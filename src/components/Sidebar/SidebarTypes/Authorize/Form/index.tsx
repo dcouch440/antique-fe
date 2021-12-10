@@ -1,12 +1,39 @@
 import { Box, Button } from '@mui/material';
+import { ConnectedProps, connect } from 'react-redux';
 import React, { useState } from 'react';
 
-import Header from '../../Header';
+import Header from '../../../Header';
+import { IAppState } from 'store/types';
 import Input from '../Input';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-function AuthForm({ handleAuth, withSignup, error, header }) {
+interface IHandleSignUp {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+}
+export type HandleAuth = ({
+  username,
+  password,
+  confirmPassword,
+  email,
+}: IHandleSignUp) => void;
+
+interface IOwnProps {
+  handleAuth: HandleAuth;
+  withSignup?: boolean;
+  header: string;
+}
+
+const mapStateToProps = ({ sidebar }: IAppState) => ({
+  error: sidebar.errors.passwordConfirm,
+});
+
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = IOwnProps & PropsFromRedux;
+
+function Form({ handleAuth, withSignup, error, header }: Props): JSX.Element {
   const [{ username, email, password, confirmPassword }, setSignupInputs] =
     useState({
       username: '',
@@ -16,7 +43,7 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
     });
   const hasPasswordError = Boolean(error);
 
-  const handleChange = ({ target }) => {
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;
     setSignupInputs((prev) => ({
       ...prev,
@@ -24,7 +51,7 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     handleAuth({ username, password, email, confirmPassword });
   };
@@ -103,15 +130,4 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
   );
 }
 
-AuthForm.propTypes = {
-  error: PropTypes.string.isRequired,
-  handleAuth: PropTypes.func.isRequired,
-  header: PropTypes.string.isRequired,
-  withSignup: PropTypes.bool,
-};
-
-const mapStateToProps = ({ sidebar }) => ({
-  error: sidebar.errors.passwordConfirm,
-});
-
-export default connect(mapStateToProps)(AuthForm);
+export default connector(Form);

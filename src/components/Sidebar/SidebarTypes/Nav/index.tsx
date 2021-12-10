@@ -1,11 +1,11 @@
 import React, { Suspense, lazy } from 'react';
 
 import { Box } from '@mui/system';
-import Header from '../Header';
+import Header from '../../Header';
 
 const LazyNavigationLink = lazy(() => import('./NavigationLink'));
 
-export default function Nav() {
+export default function Nav(): JSX.Element {
   return (
     <Box
       sx={{

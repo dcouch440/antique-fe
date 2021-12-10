@@ -1,28 +1,25 @@
 import { Divider, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
 
-const styles = () => ({
-  image: {
-    position: 'absolute',
-    opacity: 0,
-    backgroundSize: 'cover',
-    transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
-    width: '100%',
-    filter: 'grayscale(10%)',
-  },
-  activeImage: {
-    opacity: 0.8,
-  },
-});
+interface IOwnProps {
+  path: string;
+  title: string;
+  images: string[];
+  description: string;
+}
 
-export default function NavigationLink({ path, title, images, description }) {
+export default function NavigationLink({
+  path,
+  title,
+  images,
+  description,
+}: IOwnProps): JSX.Element {
   const navigate = useNavigate();
-  const style = styles();
   const handleRouteChange = () => navigate(path);
   const [int, setInt] = useState(0);
   const handleClick = throttle(handleRouteChange, 500, { trailing: false });
@@ -64,11 +61,26 @@ export default function NavigationLink({ path, title, images, description }) {
       }}
       onClick={handleClick}
     >
-      {images.map((image, key) => (
+      {images.map((image: string, key: number) => (
         <img
-          style={{ ...style.image, ...(key === int ? style.activeImage : {}) }}
+          style={{
+            ...{
+              position: 'absolute',
+              opacity: 0,
+              backgroundSize: 'cover',
+              transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
+              width: '100%',
+              filter: 'grayscale(10%)',
+            },
+            ...(key === int
+              ? {
+                  opacity: 0.8,
+                }
+              : {}),
+          }}
           key={key}
           src={image}
+          alt="Navigation Image Slide"
         />
       ))}
       <Box

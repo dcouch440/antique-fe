@@ -1,3 +1,4 @@
+import { ConnectedProps, connect } from 'react-redux';
 import {
   SIDEBAR_AUTH,
   SIDEBAR_FEED,
@@ -9,26 +10,28 @@ import { Box } from '@mui/system';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EmailIcon from '@mui/icons-material/Email';
 import ExtraMenu from '../ExtraMenu';
-import { IUserState } from 'store/user/reducer/interfaces';
+import { IAppState } from 'store/types';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
-import React from 'react';
 import SidebarTypeSelector from '../SidebarTypeSelector';
-import { connect } from 'react-redux';
 import { useTheme } from '@mui/material';
 
-interface ISidebarTypeSelectors {
+const mapStateToProps = ({ user }: IAppState) => ({
+  user,
+});
+
+const connector = connect(mapStateToProps);
+interface OwnProps {
   orientation?: 'open' | 'closed';
 }
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & OwnProps;
 
-interface IStateProps {
-  user: IUserState;
-}
-
-type Props = ISidebarTypeSelectors & IStateProps;
-
-function SidebarTypeSelectors({ user, orientation = 'open' }: Props) {
+function SidebarTypeSelectors({
+  user,
+  orientation = 'open',
+}: Props): JSX.Element {
   const theme = useTheme();
   const userIsLoggedIn = Boolean(user.id);
   const isClosedVersion = orientation === 'closed';
@@ -88,8 +91,4 @@ function SidebarTypeSelectors({ user, orientation = 'open' }: Props) {
   );
 }
 
-const mapStateToProps = ({ user }: IStateProps) => ({
-  user,
-});
-
-export default connect(mapStateToProps)(SidebarTypeSelectors);
+export default connector(SidebarTypeSelectors);

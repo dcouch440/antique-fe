@@ -26,10 +26,3 @@ function AppLayout({ children }: IAppLayout) {
 }
 
 export default AppLayout;
-AppLayout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  sidebarVisibility: PropTypes.bool.isRequired,
-};

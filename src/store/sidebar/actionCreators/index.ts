@@ -45,7 +45,9 @@ export const visibilityToggled: ActionCreatorsNPL = () => ({
 
 export const swellMenuTypeUpdated: ActionCreators<SidebarSwellMenuType> = (
   payload
-) => ({
-  type: UPDATE_SIDEBAR_SWELL_MENU_TYPE,
-  payload,
-});
+) => {
+  return {
+    type: UPDATE_SIDEBAR_SWELL_MENU_TYPE,
+    payload,
+  };
+};

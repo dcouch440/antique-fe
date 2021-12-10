@@ -1,7 +1,6 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 
 import { EnchantSearchQuery } from 'store/enchant/reducer/types';
-import PropTypes from 'prop-types';
 import { SIDEBAR_SWELL_MENU_SEARCH } from 'constantVariables';
 import { Search } from '@mui/icons-material';
 import { SearchBar } from 'components';
@@ -27,13 +26,13 @@ interface ISearchWellMenu {
 function SearchSwellMenu({
   onSubmit,
   swellMenuTypeUpdated,
-}: IDispatchProps & ISearchWellMenu) {
+}: IDispatchProps & ISearchWellMenu): JSX.Element {
   const [searchQuery, setSearchQuery] = useState('');
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
   }) => setSearchQuery(value);
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     onSubmit(searchQuery);
     // close menu after search is submitted

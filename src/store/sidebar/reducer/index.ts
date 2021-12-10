@@ -21,7 +21,10 @@ const initialState: ISidebarState = {
   },
 };
 
-function reducer(state = initialState, { type, payload }: AnyAction) {
+function reducer(
+  state = initialState,
+  { type, payload }: AnyAction
+): ISidebarState {
   switch (type) {
     // toggles between login/signup and navigation sidebars
     case UPDATE_SIDEBAR_TYPE:
