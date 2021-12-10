@@ -2,6 +2,7 @@ import {
   ADD_PASSWORD_ERROR,
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
+  UPDATE_SIDEBAR_SWELL_MENU_TYPE,
   UPDATE_SIDEBAR_TYPE,
 } from 'store/actions';
 import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
@@ -10,6 +11,7 @@ const initialState = {
   sidebarType: SIDEBAR_NAVIGATION,
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
   sidebarVisibility: false,
+  sidebarSwellMenuType: null,
   errors: {
     passwordConfirm: '',
   },
@@ -43,6 +45,11 @@ function reducer(state = initialState, { type, payload }) {
       return {
         ...state,
         sidebarVisibility: !state.sidebarVisibility,
+      };
+    case UPDATE_SIDEBAR_SWELL_MENU_TYPE:
+      return {
+        ...state,
+        sidebarSwellMenuType: payload,
       };
 
     default:

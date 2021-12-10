@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Pangolin&display=swap');
+
+html,
+body,
+#root {
+  height: 100vh;
+  min-height: 100vh;
+}
