@@ -18,6 +18,7 @@ export default function SearchBar({
         flexDirection: 'row',
         backgroundColor: 'primary',
         overflow: 'hidden',
+        borderRadius: 5,
         ...sx,
       }}
       onSubmit={onSubmit}

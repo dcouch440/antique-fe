@@ -7,25 +7,6 @@ import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
 
 const styles = () => ({
-  root: {
-    position: 'relative',
-    height: 200,
-    overflow: 'hidden',
-    borderRadius: 2,
-    display: 'flex',
-    cursor: 'pointer',
-    mt: 2,
-    '&:last-child': {
-      mb: 2,
-    },
-    boxShadow: 1,
-    '&:hover': {
-      '& img': {
-        transform: 'scale(1.03)',
-        filter: 'none',
-      },
-    },
-  },
   image: {
     position: 'absolute',
     opacity: 0,
@@ -36,29 +17,6 @@ const styles = () => ({
   },
   activeImage: {
     opacity: 0.8,
-  },
-  textBox: {
-    position: 'absolute',
-    cursor: 'pointer',
-    transition: '0.2s',
-    letterSpacing: '2px',
-    backdropFilter: 'blur(3px)',
-    borderRadius: 2,
-    height: '100%',
-    width: '100%',
-    p: 1,
-    bottom: 0,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 'sizes.lg',
-    p: 1,
-  },
-  description: {
-    zIndex: 1,
-    p: 1,
-    borderRadius: 2,
-    fontSize: 'sizes.lg',
   },
 });
 
@@ -84,7 +42,28 @@ export default function NavigationLink({ path, title, images, description }) {
   }, [imagesLength]);
 
   return (
-    <Box sx={style.root} onClick={handleClick}>
+    <Box
+      sx={{
+        position: 'relative',
+        height: 200,
+        overflow: 'hidden',
+        borderRadius: 2,
+        display: 'flex',
+        cursor: 'pointer',
+        mt: 2,
+        '&:last-child': {
+          mb: 2,
+        },
+        boxShadow: 1,
+        '&:hover': {
+          '& img': {
+            transform: 'scale(1.03)',
+            filter: 'none',
+          },
+        },
+      }}
+      onClick={handleClick}
+    >
       {images.map((image, key) => (
         <img
           style={{ ...style.image, ...(key === int ? style.activeImage : {}) }}
@@ -92,12 +71,41 @@ export default function NavigationLink({ path, title, images, description }) {
           src={image}
         />
       ))}
-      <Box sx={style.textBox}>
-        <Typography color="primary" sx={style.title}>
+      <Box
+        sx={{
+          position: 'absolute',
+          cursor: 'pointer',
+          transition: '0.2s',
+          letterSpacing: '2px',
+          backdropFilter: 'blur(3px)',
+          borderRadius: 2,
+          height: '100%',
+          width: '100%',
+          p: 1,
+          bottom: 0,
+        }}
+      >
+        <Typography
+          color="primary"
+          sx={{
+            fontWeight: 'bold',
+            fontSize: 'sizes.lg',
+            p: 1,
+          }}
+          component="h3"
+        >
           {title}
         </Typography>
         <Divider variant="middle" color="white" />
-        <Typography color="primary" sx={style.description}>
+        <Typography
+          color="primary"
+          sx={{
+            zIndex: 1,
+            p: 1,
+            borderRadius: 2,
+            fontSize: 'sizes.lg',
+          }}
+        >
           {description}
         </Typography>
       </Box>

@@ -22,6 +22,9 @@ const themeBase = createTheme({
     families: {
       cursive: 'Pacifico, cursive',
     },
+    button: {
+      textTransform: 'none',
+    },
     sizes: {
       xs: 8,
       sm: 12,
@@ -41,10 +44,13 @@ export const theme = createTheme(themeBase, {
     },
     MuiFab: {
       styleOverrides: {
-        circle: {
+        root: {
           [themeBase.breakpoints.down('sm')]: {},
         },
       },
+    },
+    MuiButton: {
+      styleOverrides: {},
     },
   },
 });

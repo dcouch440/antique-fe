@@ -1,4 +1,4 @@
-import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -46,41 +46,34 @@ import React from 'react';
  * ```
  */
 
-export default function CollapsableDials({
-  actions,
-  ariaLabel,
-  direction,
-  ...props
-}) {
+export default function CollapsableDials({ actions, ariaLabel, direction }) {
   return (
-    <Box sx={{ height: 'fit-content' }} {...props}>
-      <SpeedDial
-        ariaLabel={ariaLabel}
-        icon={<SpeedDialIcon />}
-        direction={direction}
-      >
-        {actions.map(({ name, icon, onClick, isActive }) => (
-          <SpeedDialAction
-            key={name}
-            icon={icon}
-            onClick={onClick}
-            tooltipTitle={name}
-            sx={{
-              backgroundColor: isActive ? 'secondary.main' : 'primary.main',
-              border: (theme) =>
-                isActive && '1px solid ' + theme.palette.primary.light,
-              '&:hover': {
-                ...(isActive
-                  ? {
-                      backgroundColor: 'secondary.main',
-                    }
-                  : {}),
-              },
-            }}
-          />
-        ))}
-      </SpeedDial>
-    </Box>
+    <SpeedDial
+      ariaLabel={ariaLabel}
+      icon={<SpeedDialIcon />}
+      direction={direction}
+    >
+      {actions.map(({ name, icon, onClick, isActive }) => (
+        <SpeedDialAction
+          key={name}
+          icon={icon}
+          onClick={onClick}
+          tooltipTitle={name}
+          sx={{
+            backgroundColor: isActive ? 'secondary.main' : 'primary.main',
+            border: (theme) =>
+              isActive && '1px solid ' + theme.palette.primary.light,
+            '&:hover': {
+              ...(isActive
+                ? {
+                    backgroundColor: 'secondary.main',
+                  }
+                : {}),
+            },
+          }}
+        />
+      ))}
+    </SpeedDial>
   );
 }
 

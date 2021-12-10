@@ -3,25 +3,21 @@ import React, { Suspense, lazy } from 'react';
 import { Box } from '@mui/system';
 import Header from '../Header';
 
-const styles = () => ({
-  root: {
-    borderRadius: 1,
-    height: '100%',
-    overflowY: 'scroll',
-    scrollbarWidth: 'none',
-    '&::-webkit-scrollbar': {
-      display: 'none' /* for Chrome, Safari, and Opera */,
-    },
-  },
-});
-
 const LazyNavigationLink = lazy(() => import('./NavigationLink'));
 
 export default function Nav() {
-  const sx = styles();
-
   return (
-    <Box sx={sx.root}>
+    <Box
+      sx={{
+        borderRadius: 1,
+        height: '100%',
+        overflowY: 'scroll',
+        scrollbarWidth: 'none',
+        '&::-webkit-scrollbar': {
+          display: 'none' /* for Chrome, Safari, and Opera */,
+        },
+      }}
+    >
       <Header text="What Doing?" />
       <Suspense fallback={<div />}>
         <LazyNavigationLink

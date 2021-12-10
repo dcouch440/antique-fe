@@ -8,9 +8,9 @@ import waxSeal from 'assets/img/waxSealImg.webp';
 const makeSX = () => ({
   root: {
     flex: `0 1 1750px`,
-    maxWidth: ['100vw', '100vw', '80vw'],
+    maxWidth: ['100%', '100%', '80vw'],
     margin: '0 auto',
-    px: [0, 0, 1],
+    minHeight: '100vh',
     '& > *': {
       backgroundColor: 'secondary.main',
     },
@@ -20,12 +20,12 @@ const makeSX = () => ({
     borderBottom: (theme) => '1px solid ' + theme.palette.secondary.transparent,
     color: 'primary.main',
     p: 2,
-    position: 'relative',
+    backgroundColor: 'secondary.main',
   },
   content: {
-    minHeight: '100%',
-    position: 'relative',
+    backgroundColor: 'secondary.main',
     boxShadow: 1,
+    height: '6000px',
   },
   header: {
     fontSize: [26, 46, 64],

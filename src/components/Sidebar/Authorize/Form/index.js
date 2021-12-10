@@ -6,16 +6,6 @@ import Input from '../Input';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const styles = () => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    '& .MuiFormControl-root, & button': {
-      mt: 2,
-    },
-  },
-});
-
 function AuthForm({ handleAuth, withSignup, error, header }) {
   const [{ username, email, password, confirmPassword }, setSignupInputs] =
     useState({
@@ -24,7 +14,6 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
       password: '',
       confirmPassword: '',
     });
-  const sx = styles();
   const hasPasswordError = Boolean(error);
 
   const handleChange = ({ target }) => {
@@ -42,7 +31,15 @@ function AuthForm({ handleAuth, withSignup, error, header }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box sx={sx.root}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          '& .MuiFormControl-root, & button': {
+            mt: 2,
+          },
+        }}
+      >
         <Header text={header} />
         <Input
           ariaLabel="username"

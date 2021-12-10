@@ -18,6 +18,7 @@ export default function Header({ text }) {
           fontFamily: 'families.cursive',
           fontSize: 'sizes.xxl',
         }}
+        component="h2"
       >
         {text}
       </Typography>

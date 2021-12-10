@@ -8,6 +8,7 @@ import {
 import { Box } from '@mui/system';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EmailIcon from '@mui/icons-material/Email';
+import ExtraMenu from '../ExtraMenu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
@@ -25,10 +26,14 @@ const styles = () => ({
     justifyContent: 'center',
   },
   closed: {
+    position: 'relative',
     display: 'flex',
     flexDirection: ['row', 'row', 'column'],
-    '& > button:not(:last-child)': {
+    alignItems: ['baseline', 'baseline'],
+    '& > :is(button,div):not(:last-child)': {
       mr: [1, 1, 0],
+    },
+    '& > :is(button,div)': {
       mb: [0, 0, 1],
     },
   },
@@ -38,6 +43,7 @@ function SidebarTypeSelectors({ user, orientation = 'open' }) {
   const userIsLoggedIn = Boolean(user.id);
   const style = styles();
   const isClosedVersion = orientation === 'closed';
+  const authButtonText = userIsLoggedIn ? 'Logout' : 'Login';
 
   return (
     <Box sx={style[orientation]}>
@@ -65,13 +71,14 @@ function SidebarTypeSelectors({ user, orientation = 'open' }) {
       {!isClosedVersion && (
         <SidebarTypeSelector
           orientation={orientation}
-          tooltip={userIsLoggedIn ? 'Logout' : 'Login'}
+          tooltip={authButtonText}
           constantVariable={SIDEBAR_AUTH}
           withLogout
         >
           {userIsLoggedIn ? <LogoutIcon /> : <PersonIcon />}
         </SidebarTypeSelector>
       )}
+      {isClosedVersion && <ExtraMenu />}
     </Box>
   );
 }

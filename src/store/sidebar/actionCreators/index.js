@@ -2,6 +2,7 @@ import {
   ADD_PASSWORD_ERROR,
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
+  UPDATE_SIDEBAR_SWELL_MENU_TYPE,
   UPDATE_SIDEBAR_TYPE,
 } from 'store/actions';
 
@@ -22,4 +23,9 @@ export const passwordConfirmErrorOccurred = (payload) => ({
 
 export const visibilityToggled = () => ({
   type: TOGGLE_SIDEBAR_VISIBILITY,
+});
+
+export const swellMenuTypeUpdated = (payload) => ({
+  type: UPDATE_SIDEBAR_SWELL_MENU_TYPE,
+  payload,
 });

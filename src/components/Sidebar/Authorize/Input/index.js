@@ -37,23 +37,6 @@ const StyledInput = styled(TextField)`
   }
 `;
 
-const styles = () => ({
-  input: {
-    position: 'relative',
-  },
-  forgot: {
-    position: 'absolute',
-    top: (theme) => theme.spacing(4),
-    right: (theme) => theme.spacing(1),
-    cursor: 'pointer',
-    color: 'primary.main',
-    fontSize: 'sizes.reg',
-  },
-  helperText: {
-    color: 'primary.main',
-  },
-});
-
 /**
  * @description Input component is an text input created for the login sidebar.
  */
@@ -74,7 +57,6 @@ function Input({
   ariaDescribedBy,
   ...props
 }) {
-  const sx = styles();
   // placeholder
   const handleRouteChange = () => {};
 
@@ -94,7 +76,17 @@ function Input({
         {...props}
       />
       {forgot && (
-        <Typography sx={sx.forgot} onClick={handleRouteChange}>
+        <Typography
+          sx={{
+            position: 'absolute',
+            top: (theme) => theme.spacing(4),
+            right: (theme) => theme.spacing(1),
+            cursor: 'pointer',
+            color: 'primary.main',
+            fontSize: 'sizes.reg',
+          }}
+          onClick={handleRouteChange}
+        >
           Forgot?
         </Typography>
       )}
