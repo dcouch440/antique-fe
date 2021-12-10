@@ -2,8 +2,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Box, useTheme } from '@mui/system';
 import { Fab, useMediaQuery } from '@mui/material';
 
+import { ISidebarState } from 'store/sidebar/reducer/interfaces';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { SidebarSwellMenuType } from 'store/sidebar/reducer/types';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
 
@@ -13,13 +15,30 @@ import { sidebarAC } from 'store/sidebar';
  * @description SwellMenuContainer is used as a swell menu for the EXtraMenu part of the application SidebarTypeSelectors housing MUST be set to relative for it to work correctly.
  */
 
+interface IDispatchProps {
+  swellMenuTypeUpdated: (type: SidebarSwellMenuType) => void;
+}
+
+interface IStateProps {
+  sidebar: ISidebarState;
+}
+
+interface ISwellMenuContainer {
+  icon: JSX.Element;
+  children: JSX.Element | JSX.Element[];
+  constantVariable: string;
+  sidebarSwellMenuType: SidebarSwellMenuType;
+}
+
+type Props = IDispatchProps & ISwellMenuContainer;
+
 function SwellMenuContainer({
   icon,
   children,
   swellMenuTypeUpdated,
   sidebarSwellMenuType,
   constantVariable,
-}) {
+}: Props) {
   const theme = useTheme();
   const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
   const isActive = sidebarSwellMenuType === constantVariable;
@@ -62,23 +81,16 @@ function SwellMenuContainer({
   );
 }
 
-SwellMenuContainer.propTypes = {
-  icon: PropTypes.node.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
-  constantVariable: PropTypes.string.isRequired,
-  swellMenuTypeUpdated: PropTypes.func.isRequired,
-  sidebarSwellMenuType: PropTypes.string.Nullable,
-};
-
-const mapStateToProps = ({ sidebar: { sidebarSwellMenuType } }) => ({
+const mapStateToProps = ({
+  sidebar: { sidebarSwellMenuType },
+}: IStateProps) => ({
   sidebarSwellMenuType,
 });
 
-const mapDispatchToProps = {
-  swellMenuTypeUpdated: (type) => sidebarAC.swellMenuTypeUpdated(type),
+const mapDispatchToProps: IDispatchProps = {
+  swellMenuTypeUpdated: (type) => {
+    sidebarAC.swellMenuTypeUpdated(type);
+  },
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwellMenuContainer);

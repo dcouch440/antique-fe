@@ -1,8 +1,26 @@
+import { SidebarType, SidebarVisibility } from 'store/sidebar/reducer/types';
+
 import { Fab } from '@mui/material';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { ISidebarState } from 'store/sidebar/reducer/interfaces';
+import { IUserState } from 'store/user/reducer/interfaces';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
+
+interface IStateProps {
+  sidebar: ISidebarState;
+  user: IUserState;
+}
+interface IDispatchProps {
+  sidebarTypeChanged: (version: SidebarType) => void;
+  visibilityToggled: () => void;
+}
+interface ISidebarTypeSelector {
+  constantVariable: string;
+  children: JSX.Element | JSX.Element[];
+  user: IUserState;
+  withLogout?: true;
+  sidebarVisibility: SidebarVisibility;
+}
 
 function SidebarTypeSelector({
   sidebarTypeChanged,
@@ -12,7 +30,8 @@ function SidebarTypeSelector({
   user,
   sidebarVisibility,
   visibilityToggled,
-}) {
+  ...props
+}: ISidebarTypeSelector & IDispatchProps) {
   const handleClick = () => {
     // if sidebar is closed open it.
     !sidebarVisibility && visibilityToggled();
@@ -35,37 +54,22 @@ function SidebarTypeSelector({
   };
 
   return (
-    <Fab color="primary" onClick={handlePickCorrectHandler}>
+    <Fab {...props} color="primary" onClick={handlePickCorrectHandler}>
       {children}
     </Fab>
   );
 }
 
-SidebarTypeSelector.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  constantVariable: PropTypes.string.isRequired,
-  sidebarTypeChanged: PropTypes.func.isRequired,
-  sidebarVisibility: PropTypes.bool.isRequired,
-  tooltip: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
-  visibilityToggled: PropTypes.func.isRequired,
-  withLogout: PropTypes.bool,
-  orientation: PropTypes.string,
-};
-
 const mapStateToProps = ({
   sidebar: { sidebarType, sidebarVisibility },
   user,
-}) => ({
+}: IStateProps) => ({
   sidebarType,
   user,
   sidebarVisibility,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: IDispatchProps = {
   sidebarTypeChanged: (version) => sidebarAC.sidebarTypeChanged(version),
   visibilityToggled: () => sidebarAC.visibilityToggled(),
 };

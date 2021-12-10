@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router';
 
 import EnchantsSideMenu from './EnchantsSideMenu';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -12,10 +11,6 @@ function ExtraMenu() {
     </Routes>
   );
 }
-
-ExtraMenu.propTypes = {
-  props: PropTypes,
-};
 
 const mapStateToProps = () => ({});
 

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
+import { EnchantSearchQuery } from 'store/enchant/reducer/types';
 import PropTypes from 'prop-types';
 import { SIDEBAR_SWELL_MENU_SEARCH } from 'constantVariables';
 import { Search } from '@mui/icons-material';
 import { SearchBar } from 'components';
+import { SidebarSwellMenuType } from 'store/sidebar/reducer/types';
 import SwellMenuContainer from 'animation/SwellMenuContainer';
 import { connect } from 'react-redux';
 import { sidebarAC } from 'store/sidebar';
@@ -14,11 +16,24 @@ import { sidebarAC } from 'store/sidebar';
   @param {function} onSubmit default is prevented - returns search query only.
 */
 
-function SearchSwellMenu({ onSubmit, swellMenuTypeUpdated }) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const handleChange = ({ target: { value } }) => setSearchQuery(value);
+interface IDispatchProps {
+  swellMenuTypeUpdated: (type: SidebarSwellMenuType) => void;
+}
 
-  const handleSubmit = (e) => {
+interface ISearchWellMenu {
+  onSubmit: (searchQuery: EnchantSearchQuery) => void;
+}
+
+function SearchSwellMenu({
+  onSubmit,
+  swellMenuTypeUpdated,
+}: IDispatchProps & ISearchWellMenu) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
+    target: { value },
+  }) => setSearchQuery(value);
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     onSubmit(searchQuery);
     // close menu after search is submitted
@@ -40,12 +55,7 @@ function SearchSwellMenu({ onSubmit, swellMenuTypeUpdated }) {
   );
 }
 
-SearchSwellMenu.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  swellMenuTypeUpdated: PropTypes.func,
-};
-
-const mapDispatchToProps = {
+const mapDispatchToProps: IDispatchProps = {
   swellMenuTypeUpdated: (type) => sidebarAC.swellMenuTypeUpdated(type),
 };
 

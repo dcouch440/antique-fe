@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 // until a better option is found, the custom namespace will need to be used.
 declare module '@mui/material/styles' {
   interface Theme {
-    custom?: {
+    custom: {
       palette: {
         secondary: {
           transparent: string;
@@ -30,7 +30,7 @@ declare module '@mui/material/styles' {
 
   // allow configuration using `createTheme`
   interface ThemeOptions {
-    custom?: {
+    custom: {
       palette: {
         secondary: {
           transparent: string;

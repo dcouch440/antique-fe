@@ -7,17 +7,21 @@ import {
 } from 'store/actions';
 import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
 
-const initialState = {
+import { AnyAction } from 'redux';
+import { ISidebarState } from './interfaces';
+
+const initialState: ISidebarState = {
   sidebarType: SIDEBAR_NAVIGATION,
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
   sidebarVisibility: false,
   sidebarSwellMenuType: null,
+  // move application errors to it's own reducer
   errors: {
     passwordConfirm: '',
   },
 };
 
-function reducer(state = initialState, { type, payload }) {
+function reducer(state = initialState, { type, payload }: AnyAction) {
   switch (type) {
     // toggles between login/signup and navigation sidebars
     case UPDATE_SIDEBAR_TYPE:
