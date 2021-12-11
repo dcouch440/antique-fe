@@ -10,10 +10,9 @@ import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
 
 const mapStateToProps = ({
-  sidebar: { sidebarType, sidebarVisibility, sidebarSwellMenuType },
+  sidebar: { sidebarVisibility, sidebarSwellMenuType },
   user,
 }: IAppState) => ({
-  sidebarType,
   user,
   sidebarVisibility,
   sidebarSwellMenuType,

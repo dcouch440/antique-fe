@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 import { EnchantSearchQuery } from 'store/enchant/reducer/types';
@@ -44,12 +45,20 @@ function SearchSwellMenu({
       constantVariable={SIDEBAR_SWELL_MENU_SEARCH}
       icon={<Search />}
     >
-      <SearchBar
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        sx={{ flex: 1, ml: [0, 0, 1] }}
-        key="search-bar"
-      />
+      <Box
+        sx={{
+          width: ['100%', '80vw', '80vw'],
+          px: 1,
+        }}
+      >
+        <Typography color="primary">What Are You Looking for?</Typography>
+        <SearchBar
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          sx={{ flex: 1 }}
+          key="search-bar"
+        />
+      </Box>
     </SwellMenuContainer>
   );
 }

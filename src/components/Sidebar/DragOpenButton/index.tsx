@@ -1,17 +1,17 @@
-import { Fab, useMediaQuery, useTheme } from '@mui/material';
-import { MotionDiv, MotionDrag } from 'animation';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import {
   sidebarMiniMenuDragButtonVisibilityUpdated,
   sidebarMiniMenuVisibilityUpdated,
 } from 'store/sidebar/actionCreators';
 
-import { AnimatePresence } from 'framer-motion';
 import { Box } from '@mui/system';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { ConnectedProps } from 'react-redux';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import { Fab } from '@mui/material';
 import { IAppState } from 'store/types';
+import { MotionDrag } from 'animation';
 import { connect } from 'react-redux';
 
 const mapStateToProps = ({
@@ -45,25 +45,12 @@ function DragOpenButton({
   sidebarMiniMenuDragButtonVisibilityUpdated,
   sidebarMiniMenuDragButtonVisibility,
 }: Props): JSX.Element | null {
-  const theme = useTheme();
-  const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
-  const isAboveMedium = useMediaQuery(theme.breakpoints.up('lg'));
-
   useEffect(() => {
     // if any swell menu is visible or sidebar is open, remove the button.
     if (sidebarMiniMenuDragButtonVisibility && sidebarSwellMenuType) {
       sidebarMiniMenuDragButtonVisibilityUpdated(false);
     }
-
-    // if screen is larger than medium than make sure that the menu is visible
-    if (isAboveMedium) {
-      sidebarMiniMenuVisibilityUpdated(true);
-    }
-  }, [
-    sidebarSwellMenuType,
-    isAboveMedium,
-    sidebarMiniMenuDragButtonVisibility,
-  ]);
+  }, [sidebarSwellMenuType, sidebarMiniMenuDragButtonVisibility]);
 
   // if the mini menu is showing then give it a full opacity so the user knows to exit. else return a translucent version so the user can view the content through it.
   const opacity = sidebarMiniMenuVisibility ? 1 : 0.8;
@@ -82,9 +69,10 @@ function DragOpenButton({
   return (
     <AnimatePresence>
       {!sidebarSwellMenuType ? (
-        <MotionDiv
+        <motion.div
           key="closed-menu"
           initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
@@ -113,7 +101,7 @@ function DragOpenButton({
               </Fab>
             </MotionDrag>
           </Box>
-        </MotionDiv>
+        </motion.div>
       ) : null}
     </AnimatePresence>
   );

@@ -4,13 +4,13 @@ import { AppLayout } from 'Layout';
 import { CssBaseline } from '@mui/material';
 import { Enchants } from 'pages';
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <>
       <CssBaseline />
       <AppLayout>
         <Routes>
-          <Route exact path="/" element={<Enchants />} />
+          <Route path="/" element={<Enchants />} />
         </Routes>
       </AppLayout>
     </>

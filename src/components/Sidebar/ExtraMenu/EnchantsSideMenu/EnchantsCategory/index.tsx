@@ -15,6 +15,7 @@ import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import React from 'react';
 import SwellMenuContainer from 'animation/SwellMenuContainer';
 import { searchTypeUpdated } from 'store/enchant/actionCreators';
+import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
 
 /**
  * @description CollapseMenu component changes what type of search it is based on constants in the store
@@ -26,6 +27,7 @@ const mapStateToProps = ({ enchant: { searchType } }: IAppState) => ({
 
 const mapDispatchToProps = {
   searchTypeUpdated,
+  swellMenuTypeUpdated,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -35,7 +37,11 @@ interface OwnProps {
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
 
-function CollapseMenu({ searchType, searchTypeUpdated }: Props): JSX.Element {
+function CollapseMenu({
+  searchType,
+  searchTypeUpdated,
+  swellMenuTypeUpdated,
+}: Props): JSX.Element {
   const primaryColorIfActive: (type: string) => Array<'primary' | 'secondary'> =
     (type) => [
       searchType === type ? 'primary' : 'secondary',
@@ -54,6 +60,13 @@ function CollapseMenu({ searchType, searchTypeUpdated }: Props): JSX.Element {
     ENCHANT_SEARCH_TYPE_POPULAR
   );
 
+  const handleClick = (type: string) => {
+    setTimeout(() => {
+      searchTypeUpdated(type);
+      swellMenuTypeUpdated(null);
+    }, 200);
+  };
+
   return (
     <SwellMenuContainer
       icon={<FilterNoneIcon />}
@@ -67,26 +80,25 @@ function CollapseMenu({ searchType, searchTypeUpdated }: Props): JSX.Element {
           ml: [0, 0, 1],
           borderRadius: 5,
           overflow: 'hidden',
-          width: ['100%', '100%', 'unset'],
         }}
       >
         <Button
           color={friendsButtonColor}
-          onClick={() => searchTypeUpdated(ENCHANT_SEARCH_TYPE_FRIEND)}
+          onClick={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
         >
           Friends
           <GroupIcon color={friendIconColor} />
         </Button>
         <Button
           color={newButtonColor}
-          onClick={() => searchTypeUpdated(ENCHANT_SEARCH_TYPE_NEW)}
+          onClick={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
         >
           New
           <FiberNewIcon color={newIconColor} />
         </Button>
         <Button
           color={popularButtonColor}
-          onClick={() => searchTypeUpdated(ENCHANT_SEARCH_TYPE_POPULAR)}
+          onClick={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
         >
           Popular
           <LocalFireDepartmentIcon color={popularIconColor} />

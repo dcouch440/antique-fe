@@ -1,28 +1,40 @@
-import { Box } from '@mui/system';
-import PropTypes from 'prop-types';
-import { Sidebar } from 'components';
+import { ConnectedProps, connect } from 'react-redux';
+import { ScrollContainer, Sidebar } from 'components';
+
+import { IAppState } from 'store/types';
+import { ReactNode } from 'react';
 import { useTheme } from '@mui/material';
 
-interface IAppLayout {
-  children: JSX.Element | JSX.Element[];
+interface IOwnProps {
+  children: ReactNode;
 }
 
-function AppLayout({ children }: IAppLayout) {
+const mapStateToProps = ({ sidebar: { sidebarVisibility } }: IAppState) => ({
+  sidebarVisibility,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & IOwnProps;
+
+function AppLayout({ children, sidebarVisibility }: Props): JSX.Element {
   const theme = useTheme();
 
   return (
-    <Box
-      sx={{
+    <ScrollContainer
+      style={{
         flex: 1,
         minHeight: '100%',
         backgroundColor: theme.custom.palette.antiqueWhite.main,
         display: 'flex',
+        ...(sidebarVisibility ? { overflow: 'hidden' } : {}),
       }}
     >
       <Sidebar />
       {children}
-    </Box>
+    </ScrollContainer>
   );
 }
 
-export default AppLayout;
+export default connector(AppLayout);

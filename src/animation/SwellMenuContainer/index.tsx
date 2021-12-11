@@ -55,22 +55,31 @@ function SwellMenuContainer({
             // if the window is set to small display it at 100% of the width from the next relative container.
             animate={{
               opacity: 1,
-              width: isBelowMedium ? '100%' : '60vw',
+              width: '100%',
             }}
             transition={{ duration: 0.5 }}
             exit={{ width: 0, opacity: 0 }}
             style={{
               overflow: 'hidden',
               // set to absolute so menu can be used above itself.
-              position: isBelowMedium ? 'absolute' : 'initial',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              left: '-50%',
-              right: '-50%',
-              top: '-130%',
+              position: 'fixed',
+              right: 0,
+              left: 0,
+              display: 'flex',
+              width: '100%',
+              padding: '0 24px',
+              justifyContent: 'center',
+              bottom: isBelowMedium ? '10%' : 'unset',
+              top: !isBelowMedium ? theme.spacing(10) : 'unset',
             }}
           >
-            {children}
+            <div
+              style={{
+                position: 'sticky',
+              }}
+            >
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

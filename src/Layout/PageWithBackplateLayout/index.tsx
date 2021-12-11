@@ -13,7 +13,7 @@ interface IPageWithBackplateLayout {
 function PageWithBackplateLayout({
   header,
   children,
-}: IPageWithBackplateLayout) {
+}: IPageWithBackplateLayout): JSX.Element {
   const theme = useTheme();
   return (
     <Box
