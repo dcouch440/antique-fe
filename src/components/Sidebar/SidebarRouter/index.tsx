@@ -9,7 +9,7 @@ import {
 import Authorize from '../SidebarTypes/Authorize';
 import Feed from '../SidebarTypes/Feed';
 import { IAppState } from 'store/types';
-import { Messages } from '../SidebarTypes/Messages';
+import Messages from '../SidebarTypes/Messages';
 import Nav from '../SidebarTypes/Nav';
 
 const mapStateToProps = ({ sidebar: { sidebarType } }: IAppState) => ({

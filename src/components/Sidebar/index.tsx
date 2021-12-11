@@ -1,13 +1,15 @@
+import { AnimatePresence, motion } from 'framer-motion';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 
-import { AnimatePresence } from 'framer-motion';
-import { Box } from '@mui/material';
 import CloseSidebar from './CloseSidebar';
+import DragOpenButton from './DragOpenButton';
 import { IAppState } from 'store/types';
 import MotionDiv from 'animation/MotionDiv';
 import SidebarRouter from './SidebarRouter';
 import SidebarTypeSelectors from './SidebarTypeSelectors';
-import { SidebarVisibility } from 'store/sidebar/reducer/types';
+
+// TODO: Refactor and separate logic.
 
 /**
  * @description
@@ -18,22 +20,32 @@ import { SidebarVisibility } from 'store/sidebar/reducer/types';
 
 const mapStateToProps = ({
   user,
-  sidebar: { sidebarType, sidebarVisibility },
+  sidebar: {
+    sidebarType,
+    sidebarVisibility,
+    sidebarMiniMenuVisibility,
+    sidebarMiniMenuDragButtonVisibility,
+  },
 }: IAppState) => ({
   user,
+  sidebarMiniMenuDragButtonVisibility,
   sidebarType,
   sidebarVisibility,
+  sidebarMiniMenuVisibility,
 });
 
 const connector = connect(mapStateToProps);
 
-interface IOwnProps {
-  sidebarVisibility: SidebarVisibility;
-}
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type Props = PropsFromRedux & IOwnProps;
+type Props = PropsFromRedux;
 
-function Sidebar({ sidebarVisibility }: Props): JSX.Element {
+function Sidebar({
+  sidebarVisibility,
+  sidebarMiniMenuVisibility,
+}: Props): JSX.Element {
+  const theme = useTheme();
+  const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <AnimatePresence>
       {sidebarVisibility ? (
@@ -89,21 +101,24 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <Box
-            sx={{
-              position: 'fixed',
-              right: 0,
-              left: [0, 0],
-              margin: ['0 auto', '0 auto', 1],
-              top: [null, null, 1],
-              width: 'fit-content',
-              bottom: [0, 0, 0],
-              pb: [1, 1, 0],
-              zIndex: 1,
-            }}
-          >
-            <SidebarTypeSelectors orientation="closed" />
-          </Box>
+          {isBelowMedium && <DragOpenButton />}
+          {sidebarMiniMenuVisibility && (
+            <Box
+              sx={{
+                position: 'fixed',
+                right: 0,
+                left: [0, 0],
+                margin: ['0 auto', '0 auto', 1],
+                top: [null, null, 1],
+                width: 'fit-content',
+                bottom: [0, 0, 0],
+                pb: [1, 1, 0],
+                zIndex: 1,
+              }}
+            >
+              <SidebarTypeSelectors orientation="closed" />
+            </Box>
+          )}
         </MotionDiv>
       )}
     </AnimatePresence>

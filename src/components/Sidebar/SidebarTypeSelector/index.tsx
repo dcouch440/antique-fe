@@ -1,5 +1,4 @@
 import { ConnectedProps, connect } from 'react-redux';
-import { SidebarType, SidebarVisibility } from 'store/sidebar/reducer/types';
 import {
   sidebarTypeChanged,
   swellMenuTypeUpdated,

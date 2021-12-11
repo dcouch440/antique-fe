@@ -5,6 +5,11 @@ export const ADD_PASSWORD_ERROR = 'sidebar/add-password-confirm-error';
 export const TOGGLE_SIDEBAR_VISIBILITY = 'sidebar/toggle-sidebar-visibility';
 export const UPDATE_SIDEBAR_SWELL_MENU_TYPE =
   'sidebar/update-sidebar-swell-type';
+export const UPDATE_MINI_MENU_VISIBILITY =
+  'sidebar/update-mini-menu-visibility';
+export const UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY =
+  'sidebar/update-mini-menu-drag-button-visibility';
+
 // user
 export const ADD_USER_TO_STORE = 'user/add-user-to-store';
 

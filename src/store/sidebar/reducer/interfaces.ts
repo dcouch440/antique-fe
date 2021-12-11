@@ -1,5 +1,7 @@
 import {
   SidebarAuthType,
+  SidebarMiniMenuDragButtonVisibility,
+  SidebarMiniMenuVisibility,
   SidebarSwellMenuType,
   SidebarType,
   SidebarVisibility,
@@ -10,6 +12,8 @@ export interface ISidebarState {
   authType: SidebarAuthType;
   sidebarVisibility: SidebarVisibility;
   sidebarSwellMenuType: SidebarSwellMenuType;
+  sidebarMiniMenuVisibility: SidebarMiniMenuVisibility;
+  sidebarMiniMenuDragButtonVisibility: SidebarMiniMenuDragButtonVisibility;
   errors: {
     passwordConfirm: string;
   };

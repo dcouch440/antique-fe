@@ -2,6 +2,8 @@ import {
   ADD_PASSWORD_ERROR,
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
+  UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
+  UPDATE_MINI_MENU_VISIBILITY,
   UPDATE_SIDEBAR_SWELL_MENU_TYPE,
   UPDATE_SIDEBAR_TYPE,
 } from 'store/actions';
@@ -15,6 +17,8 @@ const initialState: ISidebarState = {
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
   sidebarVisibility: false,
   sidebarSwellMenuType: null,
+  sidebarMiniMenuVisibility: false,
+  sidebarMiniMenuDragButtonVisibility: true,
   // move application errors to it's own reducer
   errors: {
     passwordConfirm: '',
@@ -57,6 +61,16 @@ function reducer(
       return {
         ...state,
         sidebarSwellMenuType: payload,
+      };
+    case UPDATE_MINI_MENU_VISIBILITY:
+      return {
+        ...state,
+        sidebarMiniMenuVisibility: payload,
+      };
+    case UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY:
+      return {
+        ...state,
+        sidebarMiniMenuDragButtonVisibility: payload,
       };
 
     default:

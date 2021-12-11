@@ -2,9 +2,9 @@ import Header from '../../Header';
 import React from 'react';
 import { connect } from 'react-redux';
 
-export const Messages = () => {
+function Messages(): JSX.Element {
   return <Header text="Messages" />;
-};
+}
 
 Messages.propTypes = {};
 
