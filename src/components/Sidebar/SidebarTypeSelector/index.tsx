@@ -10,12 +10,12 @@ import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
 
 const mapStateToProps = ({
-  sidebar: { sidebarVisibility, sidebarSwellMenuType },
+  sidebar: { sidebarVisibility, swellMenuType },
   user,
 }: IAppState) => ({
   user,
   sidebarVisibility,
-  sidebarSwellMenuType,
+  swellMenuType,
 });
 
 const mapDispatchToProps = {
@@ -41,7 +41,7 @@ function SidebarTypeSelector({
   user,
   sidebarVisibility,
   visibilityToggled,
-  sidebarSwellMenuType,
+  swellMenuType,
   swellMenuTypeUpdated,
   ...props
 }: Props): JSX.Element {
@@ -54,7 +54,7 @@ function SidebarTypeSelector({
   };
 
   const closeSidebarMenuIfOpeningSidebar = () => {
-    if (sidebarSwellMenuType) {
+    if (swellMenuType) {
       // close it.
       swellMenuTypeUpdated(null);
     }

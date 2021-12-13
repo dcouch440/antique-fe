@@ -3,14 +3,12 @@ import {
   SIDEBAR_AUTH_TYPE_LOGIN,
   SIDEBAR_AUTH_TYPE_SIGNUP,
 } from 'constantVariables';
-import {
-  authTypeChanged,
-  passwordConfirmErrorOccurred,
-} from 'store/sidebar/actionCreators';
 
 import { Button } from '@mui/material';
 import Form from './Form';
 import { IAppState } from 'store/types';
+import { authTypeChanged } from 'store/sidebar/actionCreators';
+import { errorOccurred } from 'store/snackbar/actionCreators';
 
 const mapStateToProps = ({ sidebar }: IAppState) => ({
   authType: sidebar.authType,
@@ -18,7 +16,7 @@ const mapStateToProps = ({ sidebar }: IAppState) => ({
 
 const mapDispatchToProps = {
   authTypeChanged,
-  passwordConfirmErrorOccurred,
+  errorOccurred,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -42,7 +40,7 @@ export type HandleAuth = ({
 function Authorize({
   authType,
   authTypeChanged,
-  passwordConfirmErrorOccurred,
+  errorOccurred,
 }: Props): JSX.Element {
   const isLoginForm = authType === SIDEBAR_AUTH_TYPE_LOGIN;
 
@@ -68,7 +66,7 @@ function Authorize({
     email;
 
     if (confirmPassword !== password) {
-      passwordConfirmErrorOccurred('Passwords Must Match');
+      errorOccurred('Passwords Must Match');
     }
   };
 

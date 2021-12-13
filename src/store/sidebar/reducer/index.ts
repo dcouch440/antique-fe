@@ -12,13 +12,13 @@ import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
 import { AnyAction } from 'redux';
 import { ISidebarState } from './interfaces';
 
-const initialState: ISidebarState = {
+export const sidebarInitialState: ISidebarState = {
   sidebarType: SIDEBAR_NAVIGATION,
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
   sidebarVisibility: false,
-  sidebarSwellMenuType: null,
-  sidebarMiniMenuVisibility: false,
-  sidebarMiniMenuDragButtonVisibility: true,
+  swellMenuType: null,
+  miniMenuVisibility: false,
+  miniMenuDragButtonVisibility: true,
   // move application errors to it's own reducer
   errors: {
     passwordConfirm: '',
@@ -26,7 +26,7 @@ const initialState: ISidebarState = {
 };
 
 function reducer(
-  state = initialState,
+  state = sidebarInitialState,
   { type, payload }: AnyAction
 ): ISidebarState {
   switch (type) {
@@ -60,17 +60,17 @@ function reducer(
     case UPDATE_SIDEBAR_SWELL_MENU_TYPE:
       return {
         ...state,
-        sidebarSwellMenuType: payload,
+        swellMenuType: payload,
       };
     case UPDATE_MINI_MENU_VISIBILITY:
       return {
         ...state,
-        sidebarMiniMenuVisibility: payload,
+        miniMenuVisibility: payload,
       };
     case UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY:
       return {
         ...state,
-        sidebarMiniMenuDragButtonVisibility: payload,
+        miniMenuDragButtonVisibility: payload,
       };
 
     default:

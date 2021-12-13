@@ -32,10 +32,10 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.1, delay: 0.3 }}
           style={{ position: 'fixed', zIndex: 5 }}
         >
-          <SidebarOpen />
+          <SidebarOpen key="SidebarOpen" />
         </motion.div>
       ) : (
         // Sidebar Not Visible
@@ -44,9 +44,9 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.1, delay: 0.3 }}
         >
-          <SidebarClosed />
+          <SidebarClosed key="SidebarClosed" />
         </motion.div>
       )}
     </AnimatePresence>

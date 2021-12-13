@@ -1,21 +1,21 @@
 import { ConnectedProps, connect } from 'react-redux';
 import { useMediaQuery, useTheme } from '@mui/material';
 
+import { AnimatePresence } from 'framer-motion';
 import { Box } from '@mui/system';
 import DragOpenButton from '../DragOpenButton';
 import { IAppState } from 'store/types';
+import OpacityContainer from 'animation/OpacityContainer';
 import SidebarTypeSelectors from '../SidebarTypeSelectors';
-import { sidebarMiniMenuVisibilityUpdated } from 'store/sidebar/actionCreators';
+import { miniMenuVisibilityUpdated } from 'store/sidebar/actionCreators';
 import { useEffect } from 'react';
 
 const mapDispatchToProps = {
-  sidebarMiniMenuVisibilityUpdated,
+  miniMenuVisibilityUpdated,
 };
 
-const mapStateToProps = ({
-  sidebar: { sidebarMiniMenuVisibility },
-}: IAppState) => ({
-  sidebarMiniMenuVisibility,
+const mapStateToProps = ({ sidebar: { miniMenuVisibility } }: IAppState) => ({
+  miniMenuVisibility,
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -24,8 +24,8 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
 function SidebarClosed({
-  sidebarMiniMenuVisibility,
-  sidebarMiniMenuVisibilityUpdated,
+  miniMenuVisibility,
+  miniMenuVisibilityUpdated,
 }: Props): JSX.Element {
   const theme = useTheme();
   const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
@@ -34,14 +34,14 @@ function SidebarClosed({
   useEffect(() => {
     // if screen ever becomes larger that what the user had and menu was closed. make sure that is renders shows the menu.
     if (isLargerThanMedium) {
-      sidebarMiniMenuVisibilityUpdated(true);
+      miniMenuVisibilityUpdated(true);
     }
   }, [isLargerThanMedium]);
 
   return (
     <>
       {isBelowMedium && <DragOpenButton />}
-      {sidebarMiniMenuVisibility && (
+      {miniMenuVisibility && (
         <Box
           sx={{
             position: 'fixed',

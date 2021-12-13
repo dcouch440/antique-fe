@@ -4,11 +4,11 @@ import { ConnectedProps, connect } from 'react-redux';
 import CloseSidebar from '../CloseSidebar';
 import SidebarRouter from '../SidebarRouter';
 import SidebarTypeSelectors from '../SidebarTypeSelectors';
-import { sidebarMiniMenuDragButtonVisibilityUpdated } from 'store/sidebar/actionCreators';
+import { miniMenuDragButtonVisibilityUpdated } from 'store/sidebar/actionCreators';
 import { useEffect } from 'react';
 
 const mapDispatchToProps = {
-  sidebarMiniMenuDragButtonVisibilityUpdated,
+  miniMenuDragButtonVisibilityUpdated,
 };
 
 const connector = connect(null, mapDispatchToProps);
@@ -17,14 +17,14 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
 function SidebarOpen({
-  sidebarMiniMenuDragButtonVisibilityUpdated,
+  miniMenuDragButtonVisibilityUpdated,
 }: Props): JSX.Element {
   const theme = useTheme();
   const isLargerThanMedium = useMediaQuery(theme.breakpoints.up('md'));
 
   useEffect(() => {
     if (isLargerThanMedium) {
-      sidebarMiniMenuDragButtonVisibilityUpdated(true);
+      miniMenuDragButtonVisibilityUpdated(true);
     }
   }, [isLargerThanMedium]);
 

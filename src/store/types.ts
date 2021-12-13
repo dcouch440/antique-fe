@@ -1,6 +1,7 @@
 import { IEnchantState } from './enchant/reducer/interfaces';
 import { ISidebarState } from './sidebar/reducer/interfaces';
-import { IUserState } from './user/reducer/interfaces';
+import { ISnackbarState } from './snackbar/reducer/interfaces';
+import { UserState } from './user/reducer/interfaces';
 
 /*
  * Holds types for use across multiple files within the store space.
@@ -19,8 +20,17 @@ export type ActionCreatorsNPL = () => { type: string };
 /**
  * @description Gives a total overview of types from their respected location.
  */
+
 export interface IAppState {
-  user: IUserState;
+  user: UserState;
   enchant: IEnchantState;
   sidebar: ISidebarState;
+  snackbar: ISnackbarState;
 }
+
+/**
+ * @description types object values as string;
+ */
+export type TypeKeysAsString<Type> = {
+  [Property in keyof Type as string]: Type[Property];
+};

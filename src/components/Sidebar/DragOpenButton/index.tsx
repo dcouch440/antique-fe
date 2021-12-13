@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import {
-  sidebarMiniMenuDragButtonVisibilityUpdated,
-  sidebarMiniMenuVisibilityUpdated,
+  miniMenuDragButtonVisibilityUpdated,
+  miniMenuVisibilityUpdated,
 } from 'store/sidebar/actionCreators';
 
 import { Box } from '@mui/system';
@@ -16,21 +16,21 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = ({
   sidebar: {
-    sidebarMiniMenuVisibility,
+    miniMenuVisibility,
     sidebarVisibility,
-    sidebarSwellMenuType,
-    sidebarMiniMenuDragButtonVisibility,
+    swellMenuType,
+    miniMenuDragButtonVisibility,
   },
 }: IAppState) => ({
-  sidebarMiniMenuDragButtonVisibility,
-  sidebarSwellMenuType,
-  sidebarMiniMenuVisibility,
+  miniMenuDragButtonVisibility,
+  swellMenuType,
+  miniMenuVisibility,
   sidebarVisibility,
 });
 
 const mapDispatchToProps = {
-  sidebarMiniMenuVisibilityUpdated,
-  sidebarMiniMenuDragButtonVisibilityUpdated,
+  miniMenuVisibilityUpdated,
+  miniMenuDragButtonVisibilityUpdated,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -39,36 +39,36 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
 function DragOpenButton({
-  sidebarSwellMenuType,
-  sidebarMiniMenuVisibility,
-  sidebarMiniMenuVisibilityUpdated,
-  sidebarMiniMenuDragButtonVisibilityUpdated,
-  sidebarMiniMenuDragButtonVisibility,
+  swellMenuType,
+  miniMenuVisibility,
+  miniMenuVisibilityUpdated,
+  miniMenuDragButtonVisibilityUpdated,
+  miniMenuDragButtonVisibility,
 }: Props): JSX.Element | null {
   useEffect(() => {
     // if any swell menu is visible or sidebar is open, remove the button.
-    if (sidebarMiniMenuDragButtonVisibility && sidebarSwellMenuType) {
-      sidebarMiniMenuDragButtonVisibilityUpdated(false);
+    if (miniMenuDragButtonVisibility && swellMenuType) {
+      miniMenuDragButtonVisibilityUpdated(false);
     }
-  }, [sidebarSwellMenuType, sidebarMiniMenuDragButtonVisibility]);
+  }, [swellMenuType, miniMenuDragButtonVisibility]);
 
   // if the mini menu is showing then give it a full opacity so the user knows to exit. else return a translucent version so the user can view the content through it.
-  const opacity = sidebarMiniMenuVisibility ? 1 : 0.8;
+  const opacity = miniMenuVisibility ? 0.8 : 0.3;
 
   // On release of the bounds set the mini menu to open
   const handleReleaseOutOfBounds = () => {
-    sidebarMiniMenuVisibilityUpdated(true);
+    miniMenuVisibilityUpdated(true);
   };
 
   const handleClick = () => {
-    if (sidebarMiniMenuVisibility) {
-      sidebarMiniMenuVisibilityUpdated(false);
+    if (miniMenuVisibility) {
+      miniMenuVisibilityUpdated(false);
     }
   };
 
   return (
     <AnimatePresence>
-      {!sidebarSwellMenuType ? (
+      {!swellMenuType && (
         <motion.div
           key="closed-menu"
           initial={{ opacity: 0 }}
@@ -80,7 +80,7 @@ function DragOpenButton({
             sx={{
               position: 'fixed',
               zIndex: 10,
-              bottom: sidebarMiniMenuVisibility ? 90 : 12,
+              bottom: miniMenuVisibility ? 84 : 24,
               right: 0,
               left: 0,
               display: 'flex',
@@ -92,9 +92,13 @@ function DragOpenButton({
               range={50}
               onReleaseOutOfBounds={handleReleaseOutOfBounds}
             >
-              <Fab color="primary" onClick={handleClick}>
-                {sidebarMiniMenuVisibility ? (
-                  <CloseOutlinedIcon />
+              <Fab
+                color="primary"
+                sx={{ width: 40, height: 40 }}
+                onClick={handleClick}
+              >
+                {miniMenuVisibility ? (
+                  <CloseOutlinedIcon fontSize="small" />
                 ) : (
                   <DragIndicatorIcon color="secondary" />
                 )}
@@ -102,7 +106,7 @@ function DragOpenButton({
             </MotionDrag>
           </Box>
         </motion.div>
-      ) : null}
+      )}
     </AnimatePresence>
   );
 }

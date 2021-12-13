@@ -11,9 +11,9 @@ export interface ISidebarState {
   sidebarType: SidebarType;
   authType: SidebarAuthType;
   sidebarVisibility: SidebarVisibility;
-  sidebarSwellMenuType: SidebarSwellMenuType;
-  sidebarMiniMenuVisibility: SidebarMiniMenuVisibility;
-  sidebarMiniMenuDragButtonVisibility: SidebarMiniMenuDragButtonVisibility;
+  swellMenuType: SidebarSwellMenuType;
+  miniMenuVisibility: SidebarMiniMenuVisibility;
+  miniMenuDragButtonVisibility: SidebarMiniMenuDragButtonVisibility;
   errors: {
     passwordConfirm: string;
   };
