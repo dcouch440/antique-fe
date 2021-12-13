@@ -1,5 +1,5 @@
-import EnchantsCategory from './EnchantsCategory';
-import EnchantsSearchBar from './EnchantsSearchBar';
+import EnchantsCategory from '../../../TopBar/EnchantTopBar/Category';
+import EnchantsSearchBar from '../../../TopBar/EnchantTopBar/SearchBar';
 import React from 'react';
 
 function EnchantsSideMenu(): JSX.Element {

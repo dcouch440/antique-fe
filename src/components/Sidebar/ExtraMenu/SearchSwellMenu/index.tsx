@@ -28,13 +28,7 @@ function SearchSwellMenu({
   onSubmit,
   swellMenuTypeUpdated,
 }: IDispatchProps & ISearchWellMenu): JSX.Element {
-  const [searchQuery, setSearchQuery] = useState('');
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
-    target: { value },
-  }) => setSearchQuery(value);
-
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const handleSubmit = (searchQuery: string) => {
     onSubmit(searchQuery);
     // close menu after search is submitted
     swellMenuTypeUpdated(null);
@@ -52,12 +46,7 @@ function SearchSwellMenu({
         }}
       >
         <Typography color="primary">What Are You Looking for?</Typography>
-        <SearchBar
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          sx={{ flex: 1 }}
-          key="search-bar"
-        />
+        <SearchBar onSubmit={handleSubmit} sx={{ flex: 1 }} key="search-bar" />
       </Box>
     </SwellMenuContainer>
   );

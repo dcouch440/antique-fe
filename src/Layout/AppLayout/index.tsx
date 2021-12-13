@@ -3,6 +3,7 @@ import { ScrollContainer, Sidebar } from 'components';
 
 import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
+import TopBar from 'components/TopBar';
 import { useTheme } from '@mui/material';
 
 interface IOwnProps {
@@ -28,7 +29,6 @@ function AppLayout({ children, sidebarVisibility }: Props): JSX.Element {
         minHeight: '100%',
         backgroundColor: theme.custom.palette.antiqueWhite.main,
         display: 'flex',
-        ...(sidebarVisibility ? { overflow: 'hidden' } : {}),
       }}
     >
       <Sidebar />

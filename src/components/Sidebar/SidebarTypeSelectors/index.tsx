@@ -9,7 +9,6 @@ import {
 import { Box } from '@mui/system';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EmailIcon from '@mui/icons-material/Email';
-import ExtraMenu from '../ExtraMenu';
 import { IAppState } from 'store/types';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -86,7 +85,6 @@ function SidebarTypeSelectors({
           {userIsLoggedIn ? <LogoutIcon /> : <PersonIcon />}
         </SidebarTypeSelector>
       )}
-      {isClosedVersion && <ExtraMenu />}
     </Box>
   );
 }

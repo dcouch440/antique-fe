@@ -3,6 +3,7 @@ import { Typography, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
+import TopBar from 'components/TopBar';
 import waxSeal from 'assets/img/waxSealImg.webp';
 
 interface IPageWithBackplateLayout {
@@ -68,6 +69,7 @@ function PageWithBackplateLayout({
           height: '6000px',
         }}
       >
+        <TopBar />
         {children}
       </Box>
     </Box>
