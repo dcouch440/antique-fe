@@ -32,14 +32,6 @@ export const authTypeChanged: ActionCreators<SidebarAuthType> = (payload) => ({
   payload,
 });
 
-// relocate me!
-export const passwordConfirmErrorOccurred: ActionCreators<string> = (
-  payload
-) => ({
-  type: ADD_PASSWORD_ERROR,
-  payload,
-});
-
 /**
  * Hide or show sidebar.
  */
@@ -57,7 +49,7 @@ export const swellMenuTypeUpdated: ActionCreators<SidebarSwellMenuType> = (
 /**
  * set the sidebar mini menu open and closed for mobile
  */
-export const sidebarMiniMenuVisibilityUpdated: ActionCreators<SidebarMiniMenuVisibility> =
+export const miniMenuVisibilityUpdated: ActionCreators<SidebarMiniMenuVisibility> =
   (payload) => ({
     type: UPDATE_MINI_MENU_VISIBILITY,
     payload,
@@ -66,7 +58,7 @@ export const sidebarMiniMenuVisibilityUpdated: ActionCreators<SidebarMiniMenuVis
 /**
  * set the sidebar mini menu button open and closed for mobile screens.
  */
-export const sidebarMiniMenuDragButtonVisibilityUpdated: ActionCreators<SidebarMiniMenuDragButtonVisibility> =
+export const miniMenuDragButtonVisibilityUpdated: ActionCreators<SidebarMiniMenuDragButtonVisibility> =
   (payload) => ({
     type: UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
     payload,

@@ -7,13 +7,13 @@ import { AnyAction } from 'redux';
 import { ENCHANT_SEARCH_TYPE_POPULAR } from 'constantVariables';
 import { IEnchantState } from './interfaces';
 
-const initialState: IEnchantState = {
+export const enchantInitialState: IEnchantState = {
   searchType: ENCHANT_SEARCH_TYPE_POPULAR,
   searchQuery: '',
 };
 
 export default function reducer(
-  state = initialState,
+  state = enchantInitialState,
   { type, payload }: AnyAction
 ): IEnchantState {
   switch (type) {

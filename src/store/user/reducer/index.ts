@@ -1,8 +1,8 @@
 import { ADD_USER_TO_STORE } from 'store/actions';
 import { AnyAction } from 'redux';
-import { IUserState } from './interfaces';
+import { UserState } from './interfaces';
 
-const initialState: IUserState = {
+export const userInitialState: UserState = {
   id: null,
   username: 'seed user',
   email: 'seed_user@user.com',
@@ -10,14 +10,14 @@ const initialState: IUserState = {
 };
 
 function reducer(
-  state = initialState,
+  state = userInitialState,
   { type, payload }: AnyAction
-): IUserState {
+): UserState {
   switch (type) {
     case ADD_USER_TO_STORE:
       return {
         ...state,
-        id: payload.username,
+        id: payload.id,
         username: payload.username,
         email: payload.email,
         admin: payload.admin,

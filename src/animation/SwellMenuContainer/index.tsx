@@ -12,7 +12,7 @@ import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
  */
 
 const mapStateToProps = (state: IAppState) => ({
-  sidebarSwellMenuType: state.sidebar.sidebarSwellMenuType,
+  swellMenuType: state.sidebar.swellMenuType,
 });
 
 const mapDispatchToProps = {
@@ -33,12 +33,12 @@ function SwellMenuContainer({
   icon,
   children,
   swellMenuTypeUpdated,
-  sidebarSwellMenuType,
+  swellMenuType,
   constantVariable,
 }: Props) {
   const theme = useTheme();
   const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
-  const isActive = sidebarSwellMenuType === constantVariable;
+  const isActive = swellMenuType === constantVariable;
   const handleClick = () =>
     swellMenuTypeUpdated(isActive ? null : constantVariable);
 

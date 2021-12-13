@@ -10,6 +10,10 @@ export const UPDATE_MINI_MENU_VISIBILITY =
 export const UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY =
   'sidebar/update-mini-menu-drag-button-visibility';
 
+// snackbar
+export const UPDATE_ERROR = 'snackbar/update-error';
+export const CLEAR_ERROR = 'snackbar/clear-error';
+
 // user
 export const ADD_USER_TO_STORE = 'user/add-user-to-store';
 
