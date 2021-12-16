@@ -4,8 +4,11 @@ import { AppLayout } from 'Layout';
 import AppSnackBar from 'components/AppSnackBar';
 import { CssBaseline } from '@mui/material';
 import { Enchants } from 'pages';
+import axiosSetup from 'config/axiosSetup';
 
 export default function App(): JSX.Element {
+  axiosSetup();
+
   return (
     <>
       <CssBaseline />

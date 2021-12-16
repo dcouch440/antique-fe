@@ -1,6 +1,4 @@
-import { AnyAction } from 'redux';
-import { IAppState } from 'store/types';
-import { ThunkAction } from 'redux-thunk';
+import { ThunkCreators } from 'store/types';
 import axios from 'axios';
 import { userLoggedIn } from '../actionCreators';
 
@@ -11,15 +9,11 @@ interface ISignup {
 }
 
 export const thunkSignup =
-  ({
-    username,
-    password,
-    email,
-  }: ISignup): ThunkAction<void, IAppState, unknown, AnyAction> =>
+  ({ username, password, email }: ISignup): ThunkCreators =>
   async (dispatch) => {
     try {
       const { data } = await axios.post(
-        'http://localhost:3001/users/sign-up',
+        '/users/sign-up',
         { username, password, email },
         { withCredentials: true }
       );
@@ -31,6 +25,19 @@ export const thunkSignup =
       },
     }) {
       //TODO: handle error, snackbar?
+      // if Unprocessable entity, log message for "wrong email text from server."
       console.error(message);
     }
   };
+
+export const thunkSession = (): ThunkCreators => async (dispatch) => {
+  try {
+    const { data } = await axios.post('/users/session', {
+      withCredentials: true,
+    });
+    dispatch(userLoggedIn(data));
+  } catch (err) {
+    //TODO: handle error, snackbar?
+    console.error(err);
+  }
+};
