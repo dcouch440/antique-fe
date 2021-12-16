@@ -33,7 +33,7 @@ export default function SearchBar({
         backgroundColor: 'transparent',
         alignItems: 'center',
         overflow: 'hidden',
-        width: [null, null, '40%'],
+        width: ['100%', '50%'],
         flex: [2, 2, 'none'],
         ...sx,
       }}

@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, useMediaQuery, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   ENCHANT_SEARCH_TYPE_FRIEND,
@@ -10,7 +10,6 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import { IAppState } from 'store/types';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import React from 'react';
 import { searchTypeUpdated } from 'store/enchant/actionCreators';
 import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
 
@@ -35,6 +34,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
 
 function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const primaryColorIfActive: (type: string) => Array<'primary' | 'secondary'> =
     (type) => [
       searchType === type ? 'primary' : 'secondary',
@@ -63,11 +65,12 @@ function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
   return (
     <ButtonGroup
       variant="contained"
-      size="small"
+      size={isSmallScreen ? 'small' : 'medium'}
       aria-label="outlined primary button group"
       sx={{
         overflow: 'hidden',
         border: '1px solid white',
+        width: 'fit-content',
       }}
     >
       <Button

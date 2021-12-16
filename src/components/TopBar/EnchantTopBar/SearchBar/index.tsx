@@ -1,8 +1,6 @@
 import { ConnectedProps, connect } from 'react-redux';
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { SearchBar } from 'components';
+import { AppSearchBar } from 'components';
 import { searchQueryUpdated } from 'store/enchant/actionCreators';
 
 /**
@@ -19,7 +17,7 @@ type Props = PropsFromRedux;
 
 function EnchantsSearchBar({ searchQueryUpdated }: Props): JSX.Element {
   const handleSubmit = (e: string) => searchQueryUpdated(e);
-  return <SearchBar onSubmit={handleSubmit} />;
+  return <AppSearchBar onSubmit={handleSubmit} />;
 }
 
 export default connector(EnchantsSearchBar);

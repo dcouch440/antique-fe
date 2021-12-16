@@ -5,8 +5,8 @@ import SearchBar from './SearchBar';
 export default function EnchantTopBar() {
   return (
     <>
-      <Category />
       <SearchBar />
+      <Category />
     </>
   );
 }
