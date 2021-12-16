@@ -1,4 +1,4 @@
-import { Admin, Email, UserId, Username } from './types';
+import { Email, UserId, Username } from './types';
 
 import { TypeKeysAsString } from 'store/types';
 
@@ -10,7 +10,6 @@ export interface User {
   id: UserId;
   username: Username;
   email: Email;
-  admin: Admin;
 }
 
 export type UserInfo = TypeKeysAsString<User>;

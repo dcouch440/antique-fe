@@ -6,7 +6,6 @@ export const userInitialState: UserState = {
   id: null,
   username: 'seed user',
   email: 'seed_user@user.com',
-  admin: false,
 };
 
 function reducer(
@@ -20,7 +19,6 @@ function reducer(
         id: payload.id,
         username: payload.username,
         email: payload.email,
-        admin: payload.admin,
       };
     default:
       return state;

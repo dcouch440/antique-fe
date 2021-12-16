@@ -54,7 +54,7 @@ function Authorize({
     username;
     password;
   };
-  const handleSignup: HandleAuth = ({
+  const handleSignup: HandleAuth = async ({
     username,
     password,
     confirmPassword,

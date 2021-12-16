@@ -10,18 +10,16 @@ import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
 
 const mapStateToProps = ({
-  sidebar: { sidebarVisibility, swellMenuType },
+  sidebar: { sidebarVisibility },
   user,
 }: IAppState) => ({
   user,
   sidebarVisibility,
-  swellMenuType,
 });
 
 const mapDispatchToProps = {
   sidebarTypeChanged,
   visibilityToggled,
-  swellMenuTypeUpdated,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -41,8 +39,6 @@ function SidebarTypeSelector({
   user,
   sidebarVisibility,
   visibilityToggled,
-  swellMenuType,
-  swellMenuTypeUpdated,
   ...props
 }: Props): JSX.Element {
   const handleClick = () => {
@@ -50,14 +46,6 @@ function SidebarTypeSelector({
     !sidebarVisibility && visibilityToggled();
     // set the type as well.
     sidebarTypeChanged(constantVariable);
-    closeSidebarMenuIfOpeningSidebar();
-  };
-
-  const closeSidebarMenuIfOpeningSidebar = () => {
-    if (swellMenuType) {
-      // close it.
-      swellMenuTypeUpdated(null);
-    }
   };
 
   const handleLogout = () => {

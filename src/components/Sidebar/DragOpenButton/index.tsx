@@ -16,14 +16,12 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = ({
   sidebar: {
-    miniMenuVisibility,
     sidebarVisibility,
-    swellMenuType,
     miniMenuDragButtonVisibility,
+    miniMenuVisibility,
   },
 }: IAppState) => ({
   miniMenuDragButtonVisibility,
-  swellMenuType,
   miniMenuVisibility,
   sidebarVisibility,
 });
@@ -39,7 +37,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
 function DragOpenButton({
-  swellMenuType,
   miniMenuVisibility,
   miniMenuVisibilityUpdated,
   miniMenuDragButtonVisibilityUpdated,
@@ -47,10 +44,10 @@ function DragOpenButton({
 }: Props): JSX.Element | null {
   useEffect(() => {
     // if any swell menu is visible or sidebar is open, remove the button.
-    if (miniMenuDragButtonVisibility && swellMenuType) {
+    if (miniMenuDragButtonVisibility) {
       miniMenuDragButtonVisibilityUpdated(false);
     }
-  }, [swellMenuType, miniMenuDragButtonVisibility]);
+  }, [miniMenuDragButtonVisibility]);
 
   // if the mini menu is showing then give it a full opacity so the user knows to exit. else return a translucent version so the user can view the content through it.
   const opacity = miniMenuVisibility ? 0.8 : 0.3;
@@ -68,45 +65,43 @@ function DragOpenButton({
 
   return (
     <AnimatePresence>
-      {!swellMenuType && (
-        <motion.div
-          key="closed-menu"
-          initial={{ opacity: 0 }}
-          exit={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+      <motion.div
+        key="closed-menu"
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Box
+          sx={{
+            position: 'fixed',
+            zIndex: 10,
+            bottom: miniMenuVisibility ? 84 : 24,
+            right: 0,
+            left: 0,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
         >
-          <Box
-            sx={{
-              position: 'fixed',
-              zIndex: 10,
-              bottom: miniMenuVisibility ? 84 : 24,
-              right: 0,
-              left: 0,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
+          <MotionDrag
+            opacity={opacity}
+            range={50}
+            onReleaseOutOfBounds={handleReleaseOutOfBounds}
           >
-            <MotionDrag
-              opacity={opacity}
-              range={50}
-              onReleaseOutOfBounds={handleReleaseOutOfBounds}
+            <Fab
+              color="primary"
+              sx={{ width: 40, height: 40 }}
+              onClick={handleClick}
             >
-              <Fab
-                color="primary"
-                sx={{ width: 40, height: 40 }}
-                onClick={handleClick}
-              >
-                {miniMenuVisibility ? (
-                  <CloseOutlinedIcon fontSize="small" />
-                ) : (
-                  <DragIndicatorIcon color="secondary" />
-                )}
-              </Fab>
-            </MotionDrag>
-          </Box>
-        </motion.div>
-      )}
+              {miniMenuVisibility ? (
+                <CloseOutlinedIcon fontSize="small" />
+              ) : (
+                <DragIndicatorIcon color="secondary" />
+              )}
+            </Fab>
+          </MotionDrag>
+        </Box>
+      </motion.div>
     </AnimatePresence>
   );
 }

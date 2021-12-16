@@ -4,7 +4,6 @@ import {
   UPDATE_AUTH_TYPE,
   UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
   UPDATE_MINI_MENU_VISIBILITY,
-  UPDATE_SIDEBAR_SWELL_MENU_TYPE,
   UPDATE_SIDEBAR_TYPE,
 } from 'store/actions';
 import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
@@ -16,7 +15,6 @@ export const sidebarInitialState: ISidebarState = {
   sidebarType: SIDEBAR_NAVIGATION,
   authType: SIDEBAR_AUTH_TYPE_LOGIN,
   sidebarVisibility: false,
-  swellMenuType: null,
   miniMenuVisibility: false,
   miniMenuDragButtonVisibility: true,
   // move application errors to it's own reducer
@@ -56,11 +54,6 @@ function reducer(
       return {
         ...state,
         sidebarVisibility: !state.sidebarVisibility,
-      };
-    case UPDATE_SIDEBAR_SWELL_MENU_TYPE:
-      return {
-        ...state,
-        swellMenuType: payload,
       };
     case UPDATE_MINI_MENU_VISIBILITY:
       return {
