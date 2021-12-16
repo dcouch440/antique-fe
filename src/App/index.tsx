@@ -12,7 +12,7 @@ export default function App(): JSX.Element {
       <AppSnackBar />
       <AppLayout>
         <Routes>
-          <Route path="/" element={<Enchants />} />
+          <Route path="//*" element={<Enchants />} />
         </Routes>
       </AppLayout>
     </>

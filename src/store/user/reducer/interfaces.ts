@@ -7,7 +7,7 @@ import { TypeKeysAsString } from 'store/types';
  */
 
 export interface User {
-  id: UserId;
+  userId: UserId;
   username: Username;
   email: Email;
 }
