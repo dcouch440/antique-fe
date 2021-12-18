@@ -1,7 +1,6 @@
 import { ConnectedProps, connect } from 'react-redux';
 import {
   sidebarTypeChanged,
-  swellMenuTypeUpdated,
   visibilityToggled,
 } from 'store/sidebar/actionCreators';
 

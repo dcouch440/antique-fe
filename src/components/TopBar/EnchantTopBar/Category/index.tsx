@@ -1,5 +1,4 @@
 import {
-  Button,
   ButtonGroup,
   Typography,
   useMediaQuery,
@@ -16,6 +15,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import { IAppState } from 'store/types';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import TopBarButton from 'components/TopBar/TopBarButton';
 import { searchTypeUpdated } from 'store/enchant/actionCreators';
 import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
 
@@ -41,18 +41,12 @@ type Props = PropsFromRedux & OwnProps;
 
 function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const isActive: (type: string) => string = (type) =>
-    searchType === type ? '#636363' : '';
+    searchType === type ? '#616161' : '';
 
-  const handleClick = (type: string) => {
-    setTimeout(() => {
-      searchTypeUpdated(type);
-      swellMenuTypeUpdated(null);
-    }, 200);
-  };
+  const handleClick = (type: string) => searchTypeUpdated(type);
 
   return (
     <ButtonGroup
@@ -62,35 +56,34 @@ function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
         overflow: 'hidden',
         display: 'flex',
         height: '100%',
-        width: '50%',
+        flex: [null, 1],
       }}
     >
-      <Button
+      <TopBarButton
         onClick={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
         sx={{
-          flex: 1,
           backgroundColor: isActive(ENCHANT_SEARCH_TYPE_FRIEND),
-          p: 1,
-          height: '100%',
         }}
       >
         {!isMediumScreen && <Typography color="primary">Friends</Typography>}
         <GroupIcon />
-      </Button>
-      <Button
+      </TopBarButton>
+      <TopBarButton
         onClick={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
-        sx={{ flex: 1, backgroundColor: isActive(ENCHANT_SEARCH_TYPE_NEW) }}
+        sx={{
+          backgroundColor: isActive(ENCHANT_SEARCH_TYPE_NEW),
+        }}
       >
         {!isMediumScreen && <Typography color="primary">New</Typography>}
         <FiberNewIcon />
-      </Button>
-      <Button
+      </TopBarButton>
+      <TopBarButton
         onClick={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
-        sx={{ flex: 1, backgroundColor: isActive(ENCHANT_SEARCH_TYPE_POPULAR) }}
+        sx={{ backgroundColor: isActive(ENCHANT_SEARCH_TYPE_POPULAR) }}
       >
         {!isMediumScreen && <Typography color="primary">Popular</Typography>}
         <LocalFireDepartmentIcon />
-      </Button>
+      </TopBarButton>
     </ButtonGroup>
   );
 }

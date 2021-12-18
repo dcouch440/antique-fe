@@ -46,7 +46,7 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.1, delay: 0.3 }}
         >
-          <SidebarClosed key="SidebarClosed" />
+          <SidebarClosed />
         </motion.div>
       )}
     </AnimatePresence>
