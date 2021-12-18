@@ -5,15 +5,6 @@ import { IAppState } from 'store/types';
 import SidebarClosed from './SidebarClosed';
 import SidebarOpen from './SidebarOpen';
 
-// TODO: Refactor and separate logic.
-
-/**
- * @description
- * - Sidebar Component has an animated presence that slides in and out. If the screen is above md it will take up only part of the screen.
- * - Menu selectors are used to conditionally render different aspects of the menu.
- * - menuSelectors will be called twice, one with it's orientation chosen for closed menu. This is required because using state will change the orientation of the selector before it disappears
- */
-
 const mapStateToProps = ({ sidebar: { sidebarVisibility } }: IAppState) => ({
   sidebarVisibility,
 });
@@ -22,6 +13,14 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
+
+/**
+ * * Renders variants of the sidebar that decides how the menu icons should behave
+ * * Sidebar Open displays the entire sidebar that houses the option menu.
+ * * Sidebar Closed Houses the small icons that display on the side of the screen.
+ * * The small icons move to the bottom of the screen so many variations of the Boxes would be needed
+ * * For now these components will be duplicated with different versions.
+ */
 
 function Sidebar({ sidebarVisibility }: Props): JSX.Element {
   return (

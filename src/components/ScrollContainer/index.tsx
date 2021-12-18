@@ -35,7 +35,11 @@ interface IScrollContainer {
   style?: React.CSSProperties | undefined;
 }
 
-// a container that uses react-custom-scrollbars library to emulate mobile like scrollbars.
+/**
+ * * A container that uses react-custom-scrollbars library to emulate mobile like scrollbars.
+ * * Other Variant's are available such as left-to-right.
+ * * Please See: https://www.npmjs.com/package/react-scrollbars-custom
+ */
 export default function ScrollContainer({
   children,
   style,

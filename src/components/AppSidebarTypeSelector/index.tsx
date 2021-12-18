@@ -31,6 +31,12 @@ interface OwnProps {
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
 
+/**
+ * * Selects a sidebar "Type" such as Nav, Feed, etc..
+ * * Can be used anywhere in the app to open and close the navbar and bring up the sidebar.
+ * * At this time it is currently being used on the navbar closed variant and mobile "Top bar"
+ */
+
 function SidebarTypeSelector({
   sidebarTypeChanged,
   constantVariable,

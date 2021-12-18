@@ -2,9 +2,8 @@ import { Box, useTheme } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 
 import EnchantTopBar from './EnchantTopBar';
-import React from 'react';
 
-export default function TopBar() {
+export default function TopBar(): JSX.Element {
   const theme = useTheme();
 
   return (

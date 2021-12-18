@@ -4,7 +4,7 @@ import axios from 'axios';
  * @description Invoke early in the application to setup axios defaults and configurations.
  */
 
-const axiosSetup = () => {
+const axiosSetup = (): void => {
   axios.defaults.baseURL = 'http://localhost:3001';
 };
 

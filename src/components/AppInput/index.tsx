@@ -27,6 +27,12 @@ const StyledInput = styled(TextField)`
     }
   }
 `;
+
+/**
+ * * Used for AppSearchBar and Logins etc.
+ * * This is a highly stylized version of Mui's TextField.
+ */
+
 export default function AppInput({ ...props }): JSX.Element {
   return <StyledInput color="primary" {...props} />;
 }

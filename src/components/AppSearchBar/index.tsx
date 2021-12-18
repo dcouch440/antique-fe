@@ -12,6 +12,14 @@ interface IOwnProps {
   sx?: SxProps;
 }
 
+/**
+ * * SearchBar collects it's input and has it's own on submit button
+ * * Prevent default is called within this search bar
+ * * This component is housed in a form.
+ * * Stretches to the full width of it's container on large screens, 50% on large.
+ * * can be over ridden from props
+ */
+
 export default function SearchBar({
   onSubmit,
   placeholder = 'Search',

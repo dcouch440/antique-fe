@@ -8,7 +8,7 @@ import { ButtonGroup } from '@mui/material';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
-import SidebarTypeSelector from 'components/Sidebar/SidebarTypeSelector';
+import SidebarTypeSelector from 'components/AppSidebarTypeSelector';
 
 export default function MobileSidebarOptions() {
   return (
