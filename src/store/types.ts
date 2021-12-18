@@ -29,7 +29,7 @@ export type ThunkCreators = ThunkAction<void, IAppState, unknown, AnyAction>;
 
 /**
  * @description Gives a generic return type for actions with no payload.
- *  * @example
+ * @example
  * ```
  * const action: ActionCreatorsNPL = () => ({})
  * ```

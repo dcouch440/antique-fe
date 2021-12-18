@@ -32,9 +32,13 @@ export const thunkSignup =
 
 export const thunkSession = (): ThunkCreators => async (dispatch) => {
   try {
-    const { data } = await axios.post('/users/session', {
-      withCredentials: true,
-    });
+    const { data } = await axios.post(
+      '/users/session',
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     dispatch(userLoggedIn(data));
   } catch (err) {
     //TODO: handle error, snackbar?

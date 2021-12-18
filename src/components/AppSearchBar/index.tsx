@@ -31,7 +31,7 @@ export default function SearchBar({
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: 'transparent',
-        alignItems: 'center',
+        alignItems: 'end',
         overflow: 'hidden',
         width: ['100%', '50%'],
         flex: [2, 2, 'none'],
@@ -54,7 +54,7 @@ export default function SearchBar({
         type="submit"
         sx={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-end',
         }}
         aria-label="search"
       >

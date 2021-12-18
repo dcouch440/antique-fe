@@ -1,4 +1,10 @@
-import { Button, ButtonGroup, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Button,
+  ButtonGroup,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   ENCHANT_SEARCH_TYPE_FRIEND,
@@ -36,24 +42,10 @@ type Props = PropsFromRedux & OwnProps;
 function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const primaryColorIfActive: (type: string) => Array<'primary' | 'secondary'> =
-    (type) => [
-      searchType === type ? 'primary' : 'secondary',
-      searchType !== type ? 'primary' : 'secondary',
-    ];
-
-  const [friendIconColor, friendsButtonColor] = primaryColorIfActive(
-    ENCHANT_SEARCH_TYPE_FRIEND
-  );
-
-  const [newIconColor, newButtonColor] = primaryColorIfActive(
-    ENCHANT_SEARCH_TYPE_NEW
-  );
-
-  const [popularIconColor, popularButtonColor] = primaryColorIfActive(
-    ENCHANT_SEARCH_TYPE_POPULAR
-  );
+  const isActive: (type: string) => string = (type) =>
+    searchType === type ? '#636363' : '';
 
   const handleClick = (type: string) => {
     setTimeout(() => {
@@ -64,35 +56,40 @@ function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
 
   return (
     <ButtonGroup
-      variant="contained"
-      size={isSmallScreen ? 'small' : 'medium'}
+      variant="text"
       aria-label="outlined primary button group"
       sx={{
         overflow: 'hidden',
-        border: '1px solid white',
-        width: 'fit-content',
+        display: 'flex',
+        height: '100%',
+        width: '50%',
       }}
     >
       <Button
-        color={friendsButtonColor}
         onClick={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
+        sx={{
+          flex: 1,
+          backgroundColor: isActive(ENCHANT_SEARCH_TYPE_FRIEND),
+          p: 1,
+          height: '100%',
+        }}
       >
-        Friends
-        <GroupIcon color={friendIconColor} />
+        {!isMediumScreen && <Typography color="primary">Friends</Typography>}
+        <GroupIcon />
       </Button>
       <Button
-        color={newButtonColor}
         onClick={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
+        sx={{ flex: 1, backgroundColor: isActive(ENCHANT_SEARCH_TYPE_NEW) }}
       >
-        New
-        <FiberNewIcon color={newIconColor} />
+        {!isMediumScreen && <Typography color="primary">New</Typography>}
+        <FiberNewIcon />
       </Button>
       <Button
-        color={popularButtonColor}
         onClick={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
+        sx={{ flex: 1, backgroundColor: isActive(ENCHANT_SEARCH_TYPE_POPULAR) }}
       >
-        Popular
-        <LocalFireDepartmentIcon color={popularIconColor} />
+        {!isMediumScreen && <Typography color="primary">Popular</Typography>}
+        <LocalFireDepartmentIcon />
       </Button>
     </ButtonGroup>
   );

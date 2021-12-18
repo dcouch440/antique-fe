@@ -16,7 +16,6 @@ export default function TopBar() {
         display: 'flex',
         flexDirection: ['column', 'row'],
         justifyContent: ['center', 'space-around'],
-        alignItems: ['center', 'flex-end'],
         top: 0,
         p: 1,
         background: theme.custom.palette.secondary.transparent,
