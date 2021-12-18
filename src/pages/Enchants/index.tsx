@@ -1,5 +1,4 @@
 import { PageWithBackplateLayout } from 'Layout';
-import React from 'react';
 
 export default function Enchants(): JSX.Element {
   return (

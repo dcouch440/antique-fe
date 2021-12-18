@@ -1,10 +1,10 @@
+import { Button, Fab } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   sidebarTypeChanged,
   visibilityToggled,
 } from 'store/sidebar/actionCreators';
 
-import { Fab } from '@mui/material';
 import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
 
@@ -24,8 +24,9 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 interface OwnProps {
   constantVariable: string;
-  children: ReactNode;
   withLogout?: boolean;
+  children?: ReactNode;
+  variantType?: 'Fab' | 'Button';
 }
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
@@ -33,11 +34,12 @@ type Props = PropsFromRedux & OwnProps;
 function SidebarTypeSelector({
   sidebarTypeChanged,
   constantVariable,
-  children,
   withLogout,
   user,
+  children,
   sidebarVisibility,
   visibilityToggled,
+  variantType = 'Fab',
   ...props
 }: Props): JSX.Element {
   const handleClick = () => {
@@ -62,9 +64,19 @@ function SidebarTypeSelector({
   };
 
   return (
-    <Fab {...props} color="primary" onClick={handlePickCorrectHandler}>
-      {children}
-    </Fab>
+    <>
+      {variantType === 'Fab' ? (
+        <Fab {...props} color="primary" onClick={handlePickCorrectHandler}>
+          {children}
+        </Fab>
+      ) : (
+        variantType === 'Button' && (
+          <Button {...props} color="primary" onClick={handlePickCorrectHandler}>
+            {children}
+          </Button>
+        )
+      )}
+    </>
   );
 }
 

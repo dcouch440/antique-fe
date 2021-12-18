@@ -13,6 +13,7 @@ declare module '@mui/material/styles' {
           transparent: string;
           lessTransparent: string;
         };
+        backgroundColor: string;
       };
       typography: {
         families: {
@@ -40,6 +41,7 @@ declare module '@mui/material/styles' {
           transparent: string;
           lessTransparent: string;
         };
+        backgroundColor: string;
       };
       typography: {
         families: {
@@ -83,6 +85,7 @@ const themeBase = createTheme({
         transparent: '#FAEBD723',
         lessTransparent: '#FAEBD753',
       },
+      backgroundColor: 'rgb(47 47 47)',
     },
     typography: {
       sizes: {

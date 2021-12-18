@@ -13,10 +13,10 @@ export default function EnchantTopBar() {
     <>
       <Box
         sx={{
-          width: '100%',
           display: 'flex',
           justifyContent: ['space-between', null],
           px: [1, null],
+          flex: 1,
         }}
       >
         <Category />

@@ -1,5 +1,4 @@
-import { TextField } from '@mui/material';
-import styled from 'styled-components';
+import { TextField, styled } from '@mui/material';
 
 const StyledInput = styled(TextField)`
   && {

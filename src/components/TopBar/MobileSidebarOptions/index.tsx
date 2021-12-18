@@ -1,8 +1,14 @@
+import {
+  SIDEBAR_FEED,
+  SIDEBAR_MESSAGES,
+  SIDEBAR_NAVIGATION,
+} from 'constantVariables';
+
 import { ButtonGroup } from '@mui/material';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
-import TopBarButton from '../TopBarButton';
+import SidebarTypeSelector from 'components/Sidebar/SidebarTypeSelector';
 
 export default function MobileSidebarOptions() {
   return (
@@ -14,15 +20,21 @@ export default function MobileSidebarOptions() {
         flex: [null, 1],
       }}
     >
-      <TopBarButton>
+      <SidebarTypeSelector
+        constantVariable={SIDEBAR_NAVIGATION}
+        variantType="Button"
+      >
         <MenuIcon />
-      </TopBarButton>
-      <TopBarButton>
+      </SidebarTypeSelector>
+      <SidebarTypeSelector
+        constantVariable={SIDEBAR_MESSAGES}
+        variantType="Button"
+      >
         <EmailIcon />
-      </TopBarButton>
-      <TopBarButton>
+      </SidebarTypeSelector>
+      <SidebarTypeSelector variantType="Button" constantVariable={SIDEBAR_FEED}>
         <DynamicFeedIcon />
-      </TopBarButton>
+      </SidebarTypeSelector>
     </ButtonGroup>
   );
 }

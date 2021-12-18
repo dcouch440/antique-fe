@@ -21,8 +21,7 @@ export default function TopBar() {
         background: theme.custom.palette.secondary.transparent,
         backdropFilter: 'blur(3px)',
         borderBottom: '1px solid ' + theme.palette.primary.main,
-        borderTop: '1px solid ' + theme.palette.primary.main,
-        '& > div:not(:first-child)': {
+        '& > div:not(:first-of-type)': {
           mt: 1,
         },
       }}
