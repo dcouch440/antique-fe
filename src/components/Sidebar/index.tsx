@@ -27,7 +27,7 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
     <AnimatePresence>
       {sidebarVisibility ? (
         <motion.div
-          key="sidebar-open"
+          data-testid="Sidebar-open"
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -40,6 +40,7 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
         // Sidebar Not Visible
         <motion.div
           key="sidebar-closed"
+          data-testid="Sidebar-closed"
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -37,7 +37,7 @@ type Props = PropsFromRedux & OwnProps;
  * * At this time it is currently being used on the navbar closed variant and mobile "Top bar"
  */
 
-function SidebarTypeSelector({
+function AppSidebarTypeSelector({
   sidebarTypeChanged,
   constantVariable,
   withLogout,
@@ -72,12 +72,22 @@ function SidebarTypeSelector({
   return (
     <>
       {variantType === 'Fab' ? (
-        <Fab {...props} color="primary" onClick={handlePickCorrectHandler}>
+        <Fab
+          {...props}
+          data-testid={`AppSidebarTypeSelector-${constantVariable}`}
+          color="primary"
+          onClick={handlePickCorrectHandler}
+        >
           {children}
         </Fab>
       ) : (
         variantType === 'Button' && (
-          <Button {...props} color="primary" onClick={handlePickCorrectHandler}>
+          <Button
+            data-testid={`AppSidebarTypeSelector-${constantVariable}`}
+            {...props}
+            color="primary"
+            onClick={handlePickCorrectHandler}
+          >
             {children}
           </Button>
         )
@@ -86,4 +96,4 @@ function SidebarTypeSelector({
   );
 }
 
-export default connector(SidebarTypeSelector);
+export default connector(AppSidebarTypeSelector);

@@ -8,6 +8,7 @@ const LazyNavigationLink = lazy(() => import('./NavigationLink'));
 export default function Nav(): JSX.Element {
   return (
     <Box
+      data-testid="Nav-SidebarType"
       sx={{
         borderRadius: 1,
         height: '100%',

@@ -75,9 +75,18 @@ function Authorize({
   return (
     <>
       {isLoginForm ? (
-        <Form handleAuth={handleLogin} header="Login" />
+        <Form
+          data-testid="Authorize-Login-SidebarType"
+          handleAuth={handleLogin}
+          header="Login"
+        />
       ) : (
-        <Form handleAuth={handleSignup} header="Signup" withSignup />
+        <Form
+          data-testid="Authorize-Signup-SidebarType"
+          handleAuth={handleSignup}
+          header="Signup"
+          withSignup
+        />
       )}
       <Button
         sx={{
@@ -85,6 +94,7 @@ function Authorize({
           pt: 2,
           alignSelf: 'flex-end',
         }}
+        data-testid="Authorize-Button-SidebarType"
         onClick={handleAuthVersionChange}
       >
         {isLoginForm ? 'Need an Account?' : 'Already have an account?'}

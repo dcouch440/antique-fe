@@ -1,11 +1,9 @@
-import { Divider, IconButton, Paper, SxProps, TextField } from '@mui/material';
+import { Divider, IconButton, Paper, SxProps } from '@mui/material';
 import React, { useState } from 'react';
 
 import AppInput from 'components/AppInput';
 import SearchIcon from '@mui/icons-material/Search';
 
-type ReactOnChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
-type ReactOnSubmit = (e: React.SyntheticEvent) => void;
 interface IOwnProps {
   onSubmit: (e: string) => void;
   placeholder?: string;
