@@ -15,14 +15,12 @@ export default function EnchantTopBar() {
         sx={{
           display: 'flex',
           justifyContent: ['space-between', null],
-          px: [1, null],
           flex: 1,
         }}
       >
         <Category />
         {isBelowSm && <MobileSidebarOptions />}
       </Box>
-      <Box sx={{ pr: 1, display: ['none', 'none', 'initial'] }} />
       <SearchBar />
     </>
   );

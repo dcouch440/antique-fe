@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
-import { IEnchantState } from './enchant/reducer/interfaces';
-import { ISidebarState } from './sidebar/reducer/interfaces';
-import { ISnackbarState } from './snackbar/reducer/interfaces';
+import { IEnchantState } from './enchant/reducer';
+import { ISidebarState } from './sidebar/reducer';
+import { ISnackbarState } from './snackbar/reducer';
 import { ThunkAction } from 'redux-thunk';
 import { UserState } from './user/reducer/interfaces';
 

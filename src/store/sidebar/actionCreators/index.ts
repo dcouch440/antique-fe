@@ -5,7 +5,7 @@ import {
   SidebarMiniMenuVisibility,
   SidebarSwellMenuType,
   SidebarType,
-} from '../reducer/types';
+} from '../reducer';
 import {
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,

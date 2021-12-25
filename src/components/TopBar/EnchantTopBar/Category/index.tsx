@@ -44,8 +44,8 @@ function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const isActive: (type: string) => string = (type) =>
-    searchType === type ? '#616161' : '';
-
+    searchType === type ? '#616161' : 'transparent';
+  console.log(isActive(ENCHANT_SEARCH_TYPE_NEW));
   const handleClick = (type: string) => searchTypeUpdated(type);
 
   return (
@@ -60,26 +60,39 @@ function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
       }}
     >
       <TopBarButton
-        onClick={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
+        onMouseDown={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
+        key="friends"
         sx={{
           backgroundColor: isActive(ENCHANT_SEARCH_TYPE_FRIEND),
+          '&:focus': {
+            backgroundColor: '#616161',
+          },
         }}
       >
         {!isMediumScreen && <Typography color="primary">Friends</Typography>}
         <GroupIcon />
       </TopBarButton>
       <TopBarButton
-        onClick={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
+        key="new"
+        onMouseDown={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
         sx={{
           backgroundColor: isActive(ENCHANT_SEARCH_TYPE_NEW),
+          '&:focus': {
+            backgroundColor: '#616161',
+          },
         }}
       >
         {!isMediumScreen && <Typography color="primary">New</Typography>}
         <FiberNewIcon />
       </TopBarButton>
       <TopBarButton
-        onClick={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
-        sx={{ backgroundColor: isActive(ENCHANT_SEARCH_TYPE_POPULAR) }}
+        onMouseDown={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
+        sx={{
+          backgroundColor: isActive(ENCHANT_SEARCH_TYPE_POPULAR),
+          '&:focus': {
+            backgroundColor: '#616161',
+          },
+        }}
       >
         {!isMediumScreen && <Typography color="primary">Popular</Typography>}
         <LocalFireDepartmentIcon />

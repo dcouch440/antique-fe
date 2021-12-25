@@ -13,6 +13,7 @@ export default function TopBar(): JSX.Element {
         backgroundColor: 'secondary.main',
         position: 'sticky',
         display: 'flex',
+        gap: 1,
         flexDirection: ['column', 'row'],
         justifyContent: ['center', 'space-around'],
         top: 0,

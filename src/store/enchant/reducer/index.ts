@@ -5,11 +5,18 @@ import {
 
 import { AnyAction } from 'redux';
 import { ENCHANT_SEARCH_TYPE_POPULAR } from 'constantVariables';
-import { IEnchantState } from './interfaces';
+
+export type EnchantSearchType = string;
+export type EnchantSearchQuery = string | null;
+
+export interface IEnchantState {
+  searchType: EnchantSearchType;
+  searchQuery: EnchantSearchQuery;
+}
 
 export const enchantInitialState: IEnchantState = {
   searchType: ENCHANT_SEARCH_TYPE_POPULAR,
-  searchQuery: '',
+  searchQuery: null,
 };
 
 export default function reducer(

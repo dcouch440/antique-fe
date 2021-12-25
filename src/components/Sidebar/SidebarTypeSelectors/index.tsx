@@ -38,6 +38,7 @@ function SidebarTypeSelectors({
 
   return (
     <Box
+      key="SidebyTypeSectorsz"
       sx={{
         ...(orientation === 'closed'
           ? {

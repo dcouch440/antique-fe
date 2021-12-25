@@ -24,17 +24,18 @@ type Props = PropsFromRedux;
 
 function Sidebar({ sidebarVisibility }: Props): JSX.Element {
   return (
-    <AnimatePresence>
+    <AnimatePresence exitBeforeEnter>
       {sidebarVisibility ? (
         <motion.div
+          key="Side-bar-open"
           data-testid="Sidebar-open"
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: 0.3 }}
+          transition={{ duration: 0.5 }}
           style={{ position: 'fixed', zIndex: 5 }}
         >
-          <SidebarOpen key="SidebarOpen" />
+          <SidebarOpen key="SidebarOpenx" />
         </motion.div>
       ) : (
         // Sidebar Not Visible
@@ -44,9 +45,9 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: 0.3 }}
+          transition={{ duration: 0.5 }}
         >
-          <SidebarClosed />
+          <SidebarClosed key="sidebarclosedx" />
         </motion.div>
       )}
     </AnimatePresence>
