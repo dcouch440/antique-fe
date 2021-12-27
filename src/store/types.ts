@@ -1,6 +1,8 @@
-import { IEnchantState } from './enchant/reducer/interfaces';
-import { ISidebarState } from './sidebar/reducer/interfaces';
-import { ISnackbarState } from './snackbar/reducer/interfaces';
+import { AnyAction } from 'redux';
+import { IEnchantState } from './enchant/reducer';
+import { ISidebarState } from './sidebar/reducer';
+import { ISnackbarState } from './snackbar/reducer';
+import { ThunkAction } from 'redux-thunk';
 import { UserState } from './user/reducer/interfaces';
 
 /*
@@ -9,11 +11,28 @@ import { UserState } from './user/reducer/interfaces';
 
 /**
  * @description Gives a generic return type for type with the given argument
+ * @example
+ * ```
+ * const action: ActionCreators<PayloadType> = (payload) => ({})
+ * ```
  */
 export type ActionCreators<T> = (payload: T) => { type: string; payload: T };
 
 /**
+ * @description Gives a type for a thunk creator, one use on the outer function will set types for everything.
+ * @example
+ * ```
+ * const thunk = (): ThunkCreators => () => { Logic }
+ * ```
+ */
+export type ThunkCreators = ThunkAction<void, IAppState, unknown, AnyAction>;
+
+/**
  * @description Gives a generic return type for actions with no payload.
+ * @example
+ * ```
+ * const action: ActionCreatorsNPL = () => ({})
+ * ```
  */
 export type ActionCreatorsNPL = () => { type: string };
 

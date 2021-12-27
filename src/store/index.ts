@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 import { enchantReducer } from 'store/enchant';
 import loggerMiddleware from 'redux-logger';
-import { sidebarReducer } from './sidebar';
+import { reducer as sidebarReducer } from './sidebar/reducer';
 import { snackbarReducer } from './snackbar';
 import thunkMiddleware from 'redux-thunk';
 import { userReducer } from 'store/user';

@@ -9,7 +9,24 @@ import {
 import { SIDEBAR_AUTH_TYPE_LOGIN, SIDEBAR_NAVIGATION } from 'constantVariables';
 
 import { AnyAction } from 'redux';
-import { ISidebarState } from './interfaces';
+
+export type SidebarType = string;
+export type SidebarAuthType = string;
+export type SidebarVisibility = boolean;
+export type SidebarSwellMenuType = string | null;
+export type SidebarMiniMenuVisibility = boolean;
+export type SidebarMiniMenuDragButtonVisibility = boolean;
+
+export interface ISidebarState {
+  sidebarType: SidebarType;
+  authType: SidebarAuthType;
+  sidebarVisibility: SidebarVisibility;
+  miniMenuVisibility: SidebarMiniMenuVisibility;
+  miniMenuDragButtonVisibility: SidebarMiniMenuDragButtonVisibility;
+  errors: {
+    passwordConfirm: string;
+  };
+}
 
 export const sidebarInitialState: ISidebarState = {
   sidebarType: SIDEBAR_NAVIGATION,
@@ -23,7 +40,7 @@ export const sidebarInitialState: ISidebarState = {
   },
 };
 
-function reducer(
+export function reducer(
   state = sidebarInitialState,
   { type, payload }: AnyAction
 ): ISidebarState {

@@ -69,7 +69,6 @@ function PageWithBackplateLayout({
           height: '6000px',
         }}
       >
-        <TopBar />
         {children}
       </Box>
     </Box>

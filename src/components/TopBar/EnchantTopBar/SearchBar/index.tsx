@@ -17,7 +17,8 @@ type Props = PropsFromRedux;
 
 function EnchantsSearchBar({ searchQueryUpdated }: Props): JSX.Element {
   const handleSubmit = (e: string) => searchQueryUpdated(e);
-  return <AppSearchBar onSubmit={handleSubmit} />;
+  const handleOnClear = () => searchQueryUpdated(null);
+  return <AppSearchBar onSubmit={handleSubmit} onClear={handleOnClear} />;
 }
 
 export default connector(EnchantsSearchBar);

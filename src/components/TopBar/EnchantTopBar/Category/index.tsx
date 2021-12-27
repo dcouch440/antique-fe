@@ -1,4 +1,9 @@
-import { Button, ButtonGroup, useMediaQuery, useTheme } from '@mui/material';
+import {
+  ButtonGroup,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   ENCHANT_SEARCH_TYPE_FRIEND,
@@ -10,6 +15,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import { IAppState } from 'store/types';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import TopBarButton from 'components/TopBar/TopBarButton';
 import { searchTypeUpdated } from 'store/enchant/actionCreators';
 import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
 
@@ -35,65 +41,62 @@ type Props = PropsFromRedux & OwnProps;
 
 function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const primaryColorIfActive: (type: string) => Array<'primary' | 'secondary'> =
-    (type) => [
-      searchType === type ? 'primary' : 'secondary',
-      searchType !== type ? 'primary' : 'secondary',
-    ];
-
-  const [friendIconColor, friendsButtonColor] = primaryColorIfActive(
-    ENCHANT_SEARCH_TYPE_FRIEND
-  );
-
-  const [newIconColor, newButtonColor] = primaryColorIfActive(
-    ENCHANT_SEARCH_TYPE_NEW
-  );
-
-  const [popularIconColor, popularButtonColor] = primaryColorIfActive(
-    ENCHANT_SEARCH_TYPE_POPULAR
-  );
-
-  const handleClick = (type: string) => {
-    setTimeout(() => {
-      searchTypeUpdated(type);
-      swellMenuTypeUpdated(null);
-    }, 200);
-  };
+  const isActive: (type: string) => string = (type) =>
+    searchType === type ? '#616161' : 'transparent';
+  console.log(isActive(ENCHANT_SEARCH_TYPE_NEW));
+  const handleClick = (type: string) => searchTypeUpdated(type);
 
   return (
     <ButtonGroup
-      variant="contained"
-      size={isSmallScreen ? 'small' : 'medium'}
+      variant="text"
       aria-label="outlined primary button group"
       sx={{
         overflow: 'hidden',
-        border: '1px solid white',
-        width: 'fit-content',
+        display: 'flex',
+        height: '100%',
+        flex: [null, 1],
       }}
     >
-      <Button
-        color={friendsButtonColor}
-        onClick={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
+      <TopBarButton
+        onMouseDown={() => handleClick(ENCHANT_SEARCH_TYPE_FRIEND)}
+        key="friends"
+        sx={{
+          backgroundColor: isActive(ENCHANT_SEARCH_TYPE_FRIEND),
+          '&:focus': {
+            backgroundColor: '#616161',
+          },
+        }}
       >
-        Friends
-        <GroupIcon color={friendIconColor} />
-      </Button>
-      <Button
-        color={newButtonColor}
-        onClick={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
+        {!isMediumScreen && <Typography color="primary">Friends</Typography>}
+        <GroupIcon />
+      </TopBarButton>
+      <TopBarButton
+        key="new"
+        onMouseDown={() => handleClick(ENCHANT_SEARCH_TYPE_NEW)}
+        sx={{
+          backgroundColor: isActive(ENCHANT_SEARCH_TYPE_NEW),
+          '&:focus': {
+            backgroundColor: '#616161',
+          },
+        }}
       >
-        New
-        <FiberNewIcon color={newIconColor} />
-      </Button>
-      <Button
-        color={popularButtonColor}
-        onClick={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
+        {!isMediumScreen && <Typography color="primary">New</Typography>}
+        <FiberNewIcon />
+      </TopBarButton>
+      <TopBarButton
+        onMouseDown={() => handleClick(ENCHANT_SEARCH_TYPE_POPULAR)}
+        sx={{
+          backgroundColor: isActive(ENCHANT_SEARCH_TYPE_POPULAR),
+          '&:focus': {
+            backgroundColor: '#616161',
+          },
+        }}
       >
-        Popular
-        <LocalFireDepartmentIcon color={popularIconColor} />
-      </Button>
+        {!isMediumScreen && <Typography color="primary">Popular</Typography>}
+        <LocalFireDepartmentIcon />
+      </TopBarButton>
     </ButtonGroup>
   );
 }

@@ -1,10 +1,10 @@
 import { PageWithBackplateLayout } from 'Layout';
-import React from 'react';
+import TopBar from 'components/TopBar';
 
 export default function Enchants(): JSX.Element {
   return (
     <PageWithBackplateLayout header="Enchants">
-      <div />
+      <TopBar />
     </PageWithBackplateLayout>
   );
 }

@@ -1,7 +1,12 @@
 import { CLEAR_ERROR, UPDATE_ERROR } from 'store/actions';
 
 import { AnyAction } from 'redux';
-import { ISnackbarState } from './interfaces';
+
+export type SnackBarError = string | null;
+
+export interface ISnackbarState {
+  error: SnackBarError;
+}
 
 export const errorInitialState: ISnackbarState = {
   error: '',

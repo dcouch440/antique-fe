@@ -3,7 +3,7 @@ import { AnyAction } from 'redux';
 import { UserState } from './interfaces';
 
 export const userInitialState: UserState = {
-  id: null,
+  userId: null,
   username: 'seed user',
   email: 'seed_user@user.com',
 };
@@ -16,7 +16,7 @@ function reducer(
     case ADD_USER_TO_STORE:
       return {
         ...state,
-        id: payload.id,
+        userId: payload.userId,
         username: payload.username,
         email: payload.email,
       };

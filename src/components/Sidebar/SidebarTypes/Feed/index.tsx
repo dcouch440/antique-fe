@@ -1,4 +1,6 @@
+import { Box } from '@mui/system';
 import Header from '../../Header';
+import React from 'react';
 import { connect } from 'react-redux';
 
 // const mapStateToProps = () => ({});
@@ -8,7 +10,11 @@ const connector = connect(null, null);
 // type Props = PropsFromRedux;
 
 function Feed(): JSX.Element {
-  return <Header text="Feed" />;
+  return (
+    <Box data-testid="Feed-SidebarType">
+      <Header text="Feed" />;
+    </Box>
+  );
 }
 
 export default connector(Feed);

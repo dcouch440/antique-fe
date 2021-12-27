@@ -13,7 +13,7 @@ import { IAppState } from 'store/types';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
-import SidebarTypeSelector from '../SidebarTypeSelector';
+import SidebarTypeSelector from '../../AppSidebarTypeSelector';
 import { useTheme } from '@mui/material';
 
 const mapStateToProps = ({ user }: IAppState) => ({
@@ -38,6 +38,7 @@ function SidebarTypeSelectors({
 
   return (
     <Box
+      key="SidebyTypeSectorsz"
       sx={{
         ...(orientation === 'closed'
           ? {

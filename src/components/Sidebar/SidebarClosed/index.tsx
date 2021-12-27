@@ -1,11 +1,7 @@
 import { ConnectedProps, connect } from 'react-redux';
 import { useMediaQuery, useTheme } from '@mui/material';
 
-import { AnimatePresence } from 'framer-motion';
 import { Box } from '@mui/system';
-import DragOpenButton from '../DragOpenButton';
-import { IAppState } from 'store/types';
-import OpacityContainer from 'animation/OpacityContainer';
 import SidebarTypeSelectors from '../SidebarTypeSelectors';
 import { miniMenuVisibilityUpdated } from 'store/sidebar/actionCreators';
 import { useEffect } from 'react';
@@ -14,21 +10,16 @@ const mapDispatchToProps = {
   miniMenuVisibilityUpdated,
 };
 
-const mapStateToProps = ({ sidebar: { miniMenuVisibility } }: IAppState) => ({
-  miniMenuVisibility,
-});
+const mapStateToProps = () => ({});
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
-function SidebarClosed({
-  miniMenuVisibility,
-  miniMenuVisibilityUpdated,
-}: Props): JSX.Element {
+function SidebarClosed({ miniMenuVisibilityUpdated }: Props): JSX.Element {
   const theme = useTheme();
-  const isBelowMedium = useMediaQuery(theme.breakpoints.down('md'));
+  const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isLargerThanMedium = useMediaQuery(theme.breakpoints.up('md'));
 
   useEffect(() => {
@@ -40,8 +31,7 @@ function SidebarClosed({
 
   return (
     <>
-      {isBelowMedium && <DragOpenButton />}
-      {miniMenuVisibility && (
+      {!isBelowSm && (
         <Box
           sx={{
             position: 'fixed',
@@ -61,4 +51,5 @@ function SidebarClosed({
     </>
   );
 }
+
 export default connector(SidebarClosed);

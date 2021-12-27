@@ -9,6 +9,7 @@ import Form from './Form';
 import { IAppState } from 'store/types';
 import { authTypeChanged } from 'store/sidebar/actionCreators';
 import { errorOccurred } from 'store/snackbar/actionCreators';
+import { thunkSignup } from 'store/user/thunkCreators';
 
 const mapStateToProps = ({ sidebar }: IAppState) => ({
   authType: sidebar.authType,
@@ -17,6 +18,7 @@ const mapStateToProps = ({ sidebar }: IAppState) => ({
 const mapDispatchToProps = {
   authTypeChanged,
   errorOccurred,
+  thunkSignup,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -40,6 +42,7 @@ export type HandleAuth = ({
 function Authorize({
   authType,
   authTypeChanged,
+  thunkSignup,
   errorOccurred,
 }: Props): JSX.Element {
   const isLoginForm = authType === SIDEBAR_AUTH_TYPE_LOGIN;
@@ -54,28 +57,36 @@ function Authorize({
     username;
     password;
   };
+
   const handleSignup: HandleAuth = async ({
     username,
     password,
     confirmPassword,
     email,
   }) => {
-    username;
-    password;
-    confirmPassword;
-    email;
-
     if (confirmPassword !== password) {
       errorOccurred('Passwords Must Match');
+      return;
     }
+
+    thunkSignup({ username, password, email });
   };
 
   return (
     <>
       {isLoginForm ? (
-        <Form handleAuth={handleLogin} header="Login" />
+        <Form
+          data-testid="Authorize-Login-SidebarType"
+          handleAuth={handleLogin}
+          header="Login"
+        />
       ) : (
-        <Form handleAuth={handleSignup} header="Signup" withSignup />
+        <Form
+          data-testid="Authorize-Signup-SidebarType"
+          handleAuth={handleSignup}
+          header="Signup"
+          withSignup
+        />
       )}
       <Button
         sx={{
@@ -83,6 +94,7 @@ function Authorize({
           pt: 2,
           alignSelf: 'flex-end',
         }}
+        data-testid="Authorize-Button-SidebarType"
         onClick={handleAuthVersionChange}
       >
         {isLoginForm ? 'Need an Account?' : 'Already have an account?'}

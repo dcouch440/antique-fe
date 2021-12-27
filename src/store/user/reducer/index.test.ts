@@ -14,7 +14,7 @@ describe('user/Reducer', () => {
 
     const user: UserInfo = {
       email: 'testing',
-      id: null,
+      userId: null,
       username: 'testing',
     };
     store.dispatch(ac.userLoggedIn(user));

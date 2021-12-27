@@ -1,11 +1,10 @@
+import { Button, Fab } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   sidebarTypeChanged,
-  swellMenuTypeUpdated,
   visibilityToggled,
 } from 'store/sidebar/actionCreators';
 
-import { Fab } from '@mui/material';
 import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
 
@@ -25,20 +24,28 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 interface OwnProps {
   constantVariable: string;
-  children: ReactNode;
   withLogout?: boolean;
+  children?: ReactNode;
+  variantType?: 'Fab' | 'Button';
 }
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
 
-function SidebarTypeSelector({
+/**
+ * * Selects a sidebar "Type" such as Nav, Feed, etc..
+ * * Can be used anywhere in the app to open and close the navbar and bring up the sidebar.
+ * * At this time it is currently being used on the navbar closed variant and mobile "Top bar"
+ */
+
+function AppSidebarTypeSelector({
   sidebarTypeChanged,
   constantVariable,
-  children,
   withLogout,
   user,
+  children,
   sidebarVisibility,
   visibilityToggled,
+  variantType = 'Fab',
   ...props
 }: Props): JSX.Element {
   const handleClick = () => {
@@ -63,10 +70,30 @@ function SidebarTypeSelector({
   };
 
   return (
-    <Fab {...props} color="primary" onClick={handlePickCorrectHandler}>
-      {children}
-    </Fab>
+    <>
+      {variantType === 'Fab' ? (
+        <Fab
+          {...props}
+          data-testid={`AppSidebarTypeSelector-${constantVariable}`}
+          color="primary"
+          onClick={handlePickCorrectHandler}
+        >
+          {children}
+        </Fab>
+      ) : (
+        variantType === 'Button' && (
+          <Button
+            data-testid={`AppSidebarTypeSelector-${constantVariable}`}
+            {...props}
+            color="primary"
+            onClick={handlePickCorrectHandler}
+          >
+            {children}
+          </Button>
+        )
+      )}
+    </>
   );
 }
 
-export default connector(SidebarTypeSelector);
+export default connector(AppSidebarTypeSelector);

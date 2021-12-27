@@ -2,7 +2,7 @@ import {
   ENCHANT_UPDATE_SEARCH_QUERY,
   ENCHANT_UPDATE_SEARCH_TYPE,
 } from 'store/actions';
-import { EnchantSearchQuery, EnchantSearchType } from '../reducer/types';
+import { EnchantSearchQuery, EnchantSearchType } from '../reducer';
 
 import { ActionCreators } from 'store/types';
 

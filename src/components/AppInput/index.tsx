@@ -1,5 +1,4 @@
-import { TextField } from '@mui/material';
-import styled from 'styled-components';
+import { TextField, styled } from '@mui/material';
 
 const StyledInput = styled(TextField)`
   && {
@@ -28,6 +27,12 @@ const StyledInput = styled(TextField)`
     }
   }
 `;
+
+/**
+ * * Used for AppSearchBar and Logins etc.
+ * * This is a highly stylized version of Mui's TextField.
+ */
+
 export default function AppInput({ ...props }): JSX.Element {
   return <StyledInput color="primary" {...props} />;
 }

@@ -1,12 +1,3 @@
-import {
-  ADD_PASSWORD_ERROR,
-  TOGGLE_SIDEBAR_VISIBILITY,
-  UPDATE_AUTH_TYPE,
-  UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
-  UPDATE_MINI_MENU_VISIBILITY,
-  UPDATE_SIDEBAR_SWELL_MENU_TYPE,
-  UPDATE_SIDEBAR_TYPE,
-} from 'store/actions';
 import { ActionCreators, ActionCreatorsNPL } from 'store/types';
 import {
   SidebarAuthType,
@@ -14,7 +5,15 @@ import {
   SidebarMiniMenuVisibility,
   SidebarSwellMenuType,
   SidebarType,
-} from '../reducer/types';
+} from './reducer';
+import {
+  TOGGLE_SIDEBAR_VISIBILITY,
+  UPDATE_AUTH_TYPE,
+  UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
+  UPDATE_MINI_MENU_VISIBILITY,
+  UPDATE_SIDEBAR_SWELL_MENU_TYPE,
+  UPDATE_SIDEBAR_TYPE,
+} from 'store/actions';
 
 /**
  * Inner menu selector, menu, nav, messages, etc..
@@ -63,3 +62,5 @@ export const miniMenuDragButtonVisibilityUpdated: ActionCreators<SidebarMiniMenu
     type: UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
     payload,
   });
+
+export * as sidebarAC from './actionCreators';
