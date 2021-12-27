@@ -7,9 +7,13 @@ type HandleChange = React.ChangeEventHandler<HTMLInputElement>;
 
 interface Props {
   handleChange: HandleChange;
+  value: string | number | readonly string[] | undefined;
 }
 
-export default function FileInput({ handleChange }: Props): ReactElement {
+export default function FileInput({
+  handleChange,
+  value,
+}: Props): ReactElement {
   return (
     <label htmlFor="upload-photo">
       <input
@@ -20,22 +24,15 @@ export default function FileInput({ handleChange }: Props): ReactElement {
         type="file"
         onChange={handleChange}
         multiple
+        value={value}
       />
       <Fab
-        sx={{
-          outline: 'none',
-          boxShadow: 'none',
-        }}
+        sx={{ outline: 'none', boxShadow: 'none' }}
         size="small"
         component="span"
         aria-label="add"
       >
-        <FileCopyIcon
-          sx={{
-            width: '60%',
-            height: '60%',
-          }}
-        />
+        <FileCopyIcon sx={{ width: '60%', height: '60%' }} />
       </Fab>
     </label>
   );

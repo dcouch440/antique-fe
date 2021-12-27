@@ -23,7 +23,10 @@ function ImageActionButton({ onClick, children, sx }: Props): ReactElement {
         width: 'fit-content',
         ...sx,
       }}
-      onClick={onClick}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
     >
       {children}
     </Box>

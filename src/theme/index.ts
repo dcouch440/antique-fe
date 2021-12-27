@@ -7,6 +7,7 @@ declare module '@mui/material/styles' {
       palette: {
         secondary: {
           transparent: string;
+          slightlyLighter: string;
         };
         antiqueWhite: {
           main: string;
@@ -27,6 +28,7 @@ declare module '@mui/material/styles' {
         };
       };
     };
+    headerHeight: number;
   }
 
   // allow configuration using `createTheme`
@@ -35,6 +37,7 @@ declare module '@mui/material/styles' {
       palette: {
         secondary: {
           transparent: string;
+          slightlyLighter: string;
         };
         antiqueWhite: {
           main: string;
@@ -55,6 +58,7 @@ declare module '@mui/material/styles' {
         };
       };
     };
+    headerHeight: number;
   }
 }
 
@@ -79,6 +83,7 @@ const themeBase = createTheme({
     palette: {
       secondary: {
         transparent: '#21252983',
+        slightlyLighter: '#171717',
       },
       antiqueWhite: {
         main: '#FAEBD7',
@@ -99,6 +104,7 @@ const themeBase = createTheme({
       },
     },
   },
+  headerHeight: 135,
 });
 
 // for self theme use.
@@ -119,6 +125,13 @@ export const theme = createTheme(themeBase, {
     MuiButton: {
       styleOverrides: {},
     },
+  },
+  headerHeight: 145,
+  [themeBase.breakpoints.down('md')]: {
+    headerHeight: 118,
+  },
+  [themeBase.breakpoints.down('sm')]: {
+    headerHeight: 88,
   },
 });
 

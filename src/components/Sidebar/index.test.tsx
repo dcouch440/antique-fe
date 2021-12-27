@@ -5,7 +5,7 @@ import {
 } from './SidebarTypeSelectors/index.test';
 import { render, screen } from '@testing-library/react';
 
-import MockProviders from 'components/testUtils/MockProviders';
+import MockProviders from 'components/testUtils/MockProvider';
 import Sidebar from '.';
 import { act } from 'react-dom/test-utils';
 

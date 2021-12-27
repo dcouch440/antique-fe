@@ -22,7 +22,8 @@ function PageWithBackplateLayout({
         flex: `0 1 1750px`,
         maxWidth: ['100%', '100%', '80vw'],
         margin: '0 auto',
-        minHeight: '100vh',
+        height: '100%',
+        minHeight: '100%',
         '& > *': {
           backgroundColor: 'secondary.main',
         },
@@ -35,6 +36,7 @@ function PageWithBackplateLayout({
           borderBottom: `1px solid ${theme.custom.palette.secondary.transparent}`,
           color: 'primary.main',
           p: 2,
+          height: theme.headerHeight,
           backgroundColor: 'secondary.main',
         }}
         component="header"
@@ -64,9 +66,10 @@ function PageWithBackplateLayout({
       </Box>
       <Box
         sx={{
-          backgroundColor: 'secondary.main',
-          boxShadow: 1,
-          height: '6000px',
+          minHeight: `calc(100% - ${theme.headerHeight}px)`,
+          height: `calc(100% - ${theme.headerHeight}px)`,
+          width: '100%',
+          flexDirection: 'column',
         }}
       >
         {children}

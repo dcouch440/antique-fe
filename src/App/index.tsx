@@ -2,7 +2,7 @@ import { ConnectedProps, connect } from 'react-redux';
 import { Route, Routes } from 'react-router';
 
 import { AppLayout } from 'Layout';
-import AppSnackBar from 'components/AppSnackBar';
+import AppSnackBar from 'components/AppSnackbar';
 import CreateEnchants from 'pages/CreateEnchants';
 import { CssBaseline } from '@mui/material';
 import { Enchants } from 'pages';

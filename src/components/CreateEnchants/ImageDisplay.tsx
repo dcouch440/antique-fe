@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { IImageData, RemoveImage } from './EnchantImageData';
 import React, { ReactElement } from 'react';
 
@@ -29,9 +29,12 @@ export default function ImageDisplay({
   const theme = useTheme();
   return (
     <>
-      {images?.map(({ previewImage, favorite, id }, index) => (
+      {images?.map(({ previewImage, favorite, id, caption }, index) => (
         <Box
-          sx={{ position: 'relative', width: '100%' }}
+          sx={{
+            position: 'relative',
+            width: '100%',
+          }}
           key={previewImage as string}
           onClick={() => setActiveImage(index)}
         >
@@ -51,15 +54,31 @@ export default function ImageDisplay({
           >
             <Close color="primary" />
           </ImageActionButton>
-          <img
-            style={{
+          <Box
+            component="img"
+            sx={{
               width: '100%',
               height: 'auto',
               borderRadius: theme.spacing(1),
+              transition: '0.2s',
+              cursor: 'pointer',
             }}
             src={previewImage as string}
             alt="user preview image"
           />
+          <Typography
+            color="primary"
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              m: 1,
+              p: 0.5,
+              backgroundColor: theme.custom.palette.secondary.transparent,
+              borderRadius: 1,
+            }}
+          >
+            {caption ? caption : 'No caption set.'}
+          </Typography>
         </Box>
       ))}
     </>

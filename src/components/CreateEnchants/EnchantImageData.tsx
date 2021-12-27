@@ -1,11 +1,12 @@
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useState } from 'react';
+import { Typography, useTheme } from '@mui/material';
 
 import { Box } from '@mui/system';
 import FileInput from './FileInput';
 import ImageDisplay from './ImageDisplay';
 import MainPreviewImage from './MainPreviewImage';
-import { Typography } from '@mui/material';
+import { ScrollContainer } from 'components';
 import { v4 as uuidv4 } from 'uuid';
 import { validateImage } from 'image-validator';
 
@@ -29,12 +30,21 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux;
 
+/**
+ * * EnchantImageData is used to create enchants.
+ * * This component prepares id'd objects that will be sent with
+ * * their respective images.
+ */
+
 function EnchantImageData(): ReactElement {
   const [imageData, setImageData] = useState<Array<IImageData>>([]);
   // holding file state to stay consistent.
   const [fileState, setFileState] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const theme = useTheme();
 
+  // handle change adds images to the image state and creates an object that
+  // will be used to interact with the ui.
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined =
     async ({ target }) => {
       // putting files into an array to gain array methods.
@@ -120,8 +130,9 @@ function EnchantImageData(): ReactElement {
     const fs = [...fileState];
     fs.splice(index, 1);
 
-    setFileState(fs);
     setImageData((prev) => prev.filter(({ id: prevId }) => prevId != id));
+    if (index === activeIndex) setActiveIndex(0);
+    setFileState(fs);
   };
 
   // new caption will be updated
@@ -143,13 +154,23 @@ function EnchantImageData(): ReactElement {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        p: 1,
+        height: `100%`,
+        backgroundColor: theme.custom.palette.secondary.slightlyLighter,
+      }}
+    >
       <Box
         sx={{
           flex: 1,
-          height: '100vh',
+          minHeight: '100%',
           width: '80%',
           position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
         }}
       >
         {imageData.length > 0 ? (
@@ -168,6 +189,7 @@ function EnchantImageData(): ReactElement {
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          height: '100%',
           width: '20%',
         }}
       >
@@ -177,7 +199,6 @@ function EnchantImageData(): ReactElement {
             justifyContent: 'space-between',
             width: '100%',
             p: 1,
-            alignItems: 'center',
           }}
         >
           <Box
@@ -187,19 +208,23 @@ function EnchantImageData(): ReactElement {
               flexDirection: 'column',
             }}
           >
-            <Typography color="primary">Pick something You Love!</Typography>
-            <Typography fontSize={12} color="primary">
+            <Typography fontSize={16} color="primary">
+              Pick something You Love!
+            </Typography>
+            <Typography fontSize={10} color="primary">
               Limit 4
             </Typography>
           </Box>
-          <FileInput handleChange={handleChange} />;
+          <FileInput value={fileState} handleChange={handleChange} />
         </Box>
-        <ImageDisplay
-          images={imageData}
-          removeImage={handleRemoveImage}
-          updateFavorites={handleUpdateFavorite}
-          setActiveImage={handleSetActiveIndex}
-        />
+        <ScrollContainer style={{ height: '100%', width: '100%' }}>
+          <ImageDisplay
+            images={imageData}
+            removeImage={handleRemoveImage}
+            updateFavorites={handleUpdateFavorite}
+            setActiveImage={handleSetActiveIndex}
+          />
+        </ScrollContainer>
       </Box>
     </Box>
   );

@@ -6,7 +6,7 @@ import {
 } from 'constantVariables';
 import { render, screen } from '@testing-library/react';
 
-import MockProviders from 'components/testUtils/MockProviders';
+import MockProviders from 'components/testUtils/MockProvider';
 import SidebarTypeSelectors from '.';
 
 const setup = () => {

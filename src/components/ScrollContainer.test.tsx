@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import ScrollContainer from '.';
+import ScrollContainer from './ScrollContainer';
 
 function MockComponent() {
   return (
