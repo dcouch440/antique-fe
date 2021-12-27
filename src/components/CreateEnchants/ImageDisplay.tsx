@@ -1,16 +1,17 @@
 import { Box, useTheme } from '@mui/material';
-import { IImageData, RemoveImage } from '../EnchantImageData';
+import { IImageData, RemoveImage } from './EnchantImageData';
 import React, { ReactElement } from 'react';
 
 import Close from '@mui/icons-material/Close';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ImageActionButton from '../ImageActionButton';
+import ImageActionButton from './ImageActionButton';
 
 interface Props {
   images: IImageData[];
   updateFavorites: (updateIndex: number) => void;
   removeImage: RemoveImage;
+  setActiveImage: (n: number) => void;
 }
 
 /**
@@ -23,19 +24,16 @@ export default function ImageDisplay({
   images,
   updateFavorites,
   removeImage,
+  setActiveImage,
 }: Props): ReactElement {
   const theme = useTheme();
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <>
       {images?.map(({ previewImage, favorite, id }, index) => (
         <Box
-          sx={{ position: 'relative', width: '20%' }}
+          sx={{ position: 'relative', width: '100%' }}
           key={previewImage as string}
+          onClick={() => setActiveImage(index)}
         >
           <ImageActionButton
             sx={{ right: 0 }}
@@ -64,6 +62,6 @@ export default function ImageDisplay({
           />
         </Box>
       ))}
-    </Box>
+    </>
   );
 }

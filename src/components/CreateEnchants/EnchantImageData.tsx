@@ -1,9 +1,11 @@
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useState } from 'react';
 
-import { Fab } from '@mui/material';
-import FileInput from '../FileInput';
-import ImageDisplay from '../ImageDisplay';
+import { Box } from '@mui/system';
+import FileInput from './FileInput';
+import ImageDisplay from './ImageDisplay';
+import MainPreviewImage from './MainPreviewImage';
+import { Typography } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { validateImage } from 'image-validator';
 
@@ -31,6 +33,7 @@ function EnchantImageData(): ReactElement {
   const [imageData, setImageData] = useState<Array<IImageData>>([]);
   // holding file state to stay consistent.
   const [fileState, setFileState] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined =
     async ({ target }) => {
@@ -78,9 +81,6 @@ function EnchantImageData(): ReactElement {
       }
     };
 
-  const getFavoriteCount = (state: IImageData[]) =>
-    state.reduce((a, { favorite }) => (favorite === true ? a + 1 : a), 0);
-
   const handleUpdateFavorite = (updateIndex: number) => {
     // find the value that is not the current index.
     // and remove its so the new top two can be added.
@@ -104,48 +104,103 @@ function EnchantImageData(): ReactElement {
     });
   };
 
+  // active index is the index that is going to be displayed on the main
+  // screen so the use can view their own image closely as they choose a favorite.
+  // and caption.
+  const handleSetActiveIndex = (index: number) => {
+    if (index === activeIndex) {
+      return;
+    }
+
+    setActiveIndex(index);
+  };
+
+  // if a user changes their mind about uploading an image
   const handleRemoveImage = (id: string, index: number) => {
     const fs = [...fileState];
     fs.splice(index, 1);
 
-    const updateImage = (prev: IImageData[]) => {
-      const updatedState = prev.filter(({ id: prevId }) => prevId != id);
-
-      // check if the user still has two images selected as a favorite image.
-      // if theres only one image that is liked that means that they removed a liked image
-      // loop through the new array and find the first false value as true so there is at least
-      // two images they have liked.
-
-      // this way the database will always have two images to find in the query where they have favorite set to true.
-      // the user should be told that "These are the images that are going to be displayed when your images are searched"
-      const favoriteCount = getFavoriteCount(updatedState);
-
-      // if the favorite count is below 2 and there is at least two images
-      if (favoriteCount < 2 && imageData.length > 2) {
-        for (const imgData of updatedState) {
-          if (imgData.favorite === false) {
-            imgData.favorite = true;
-            break;
-          }
-        }
-      }
-
-      return updatedState;
-    };
-
     setFileState(fs);
-    setImageData(updateImage);
+    setImageData((prev) => prev.filter(({ id: prevId }) => prevId != id));
+  };
+
+  // new caption will be updated
+  // the onchange state is held within its component
+  // and only triggers an update when the user hits submit.
+  const handleUpdateCaption = (caption: string) => {
+    setImageData((prev) => {
+      return prev.map((data, index) => {
+        if (index === activeIndex) {
+          return {
+            ...data,
+            caption,
+          };
+        } else {
+          return data;
+        }
+      });
+    });
   };
 
   return (
-    <>
-      <ImageDisplay
-        images={imageData}
-        removeImage={handleRemoveImage}
-        updateFavorites={handleUpdateFavorite}
-      />
-      <FileInput handleChange={handleChange} />;
-    </>
+    <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          flex: 1,
+          height: '100vh',
+          width: '80%',
+        }}
+      >
+        {imageData.length > 0 ? (
+          <MainPreviewImage
+            imageCaption={imageData[activeIndex].caption}
+            imageToDisplay={imageData[activeIndex].previewImage as string}
+            updateCaption={handleUpdateCaption}
+          />
+        ) : (
+          <Typography fontSize={25} color="primary">
+            Placeholder... Make a selection!
+          </Typography>
+        )}
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '20%',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            p: 1,
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Typography color="primary">Pick something You Love!</Typography>
+            <Typography fontSize={12} color="primary">
+              Limit 4
+            </Typography>
+          </Box>
+          <FileInput handleChange={handleChange} />;
+        </Box>
+        <ImageDisplay
+          images={imageData}
+          removeImage={handleRemoveImage}
+          updateFavorites={handleUpdateFavorite}
+          setActiveImage={handleSetActiveIndex}
+        />
+      </Box>
+    </Box>
   );
 }
 

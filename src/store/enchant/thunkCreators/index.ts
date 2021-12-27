@@ -1,4 +1,4 @@
-import { IEnchantInfo } from 'components/CreateEnchants/enchantInfoForm';
+import { IEnchantInfo } from 'components/CreateEnchants/EnchantInfoForm';
 import { IImageData } from 'components/CreateEnchants/EnchantImageData';
 import { ThunkCreators } from 'store/types';
 import axios from 'axios';
