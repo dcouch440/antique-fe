@@ -149,6 +149,7 @@ function EnchantImageData(): ReactElement {
           flex: 1,
           height: '100vh',
           width: '80%',
+          position: 'relative',
         }}
       >
         {imageData.length > 0 ? (
