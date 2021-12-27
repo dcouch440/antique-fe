@@ -40,7 +40,7 @@ export const sidebarInitialState: ISidebarState = {
   },
 };
 
-function reducer(
+export function reducer(
   state = sidebarInitialState,
   { type, payload }: AnyAction
 ): ISidebarState {

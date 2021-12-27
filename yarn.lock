@@ -2119,6 +2119,11 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/uuid@^8.3.3":
+  version "8.3.3"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.3.tgz#c6a60686d953dbd1b1d45e66f4ecdbd5d471b4d0"
+  integrity sha512-0LbEEx1zxrYB3pgpd1M5lEhLcXjKJnYghvhTRgaBeUivLHMDM1TzF3IJ6hXU2+8uA4Xz+5BA63mtZo5DjVT8iA==
+
 "@types/webpack-sources@*":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-3.2.0.tgz#16d759ba096c289034b26553d2df1bf45248d38b"
@@ -6110,6 +6115,11 @@ ignore@^5.1.4, ignore@^5.1.8:
   version "5.1.9"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.9.tgz#9ec1a5cbe8e1446ec60d4420060d43aa6e7382fb"
   integrity sha512-2zeMQpbKz5dhZ9IwL0gbxSW5w0NK/MSAMtNuhgIHEPmaU3vPdKPL0UdvUCXs5SS4JAwsBxysK5sFMW8ocFiVjQ==
+
+image-validator@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/image-validator/-/image-validator-1.2.1.tgz#6c4da29d9d6a74e107941f3588ceb9d07dee35c6"
+  integrity sha512-mNV9ABWD9rKaMvBH0BeYOWtZaV6s459RNfPL+WJ+NMDO4qchucbQRFzePVg1+V5c09NjOOOOTMSaU2OtHcX1Ig==
 
 immer@8.0.1:
   version "8.0.1"

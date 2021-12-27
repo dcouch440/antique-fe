@@ -5,7 +5,7 @@ import {
   SidebarMiniMenuVisibility,
   SidebarSwellMenuType,
   SidebarType,
-} from '../reducer';
+} from './reducer';
 import {
   TOGGLE_SIDEBAR_VISIBILITY,
   UPDATE_AUTH_TYPE,
@@ -62,3 +62,5 @@ export const miniMenuDragButtonVisibilityUpdated: ActionCreators<SidebarMiniMenu
     type: UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY,
     payload,
   });
+
+export * as sidebarAC from './actionCreators';

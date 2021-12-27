@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router';
 
 import { AppLayout } from 'Layout';
 import AppSnackBar from 'components/AppSnackBar';
+import CreateEnchants from 'pages/CreateEnchants';
 import { CssBaseline } from '@mui/material';
 import { Enchants } from 'pages';
 import axiosSetup from 'config/axiosSetup';
@@ -31,7 +32,7 @@ function App({ thunkSession }: Props): JSX.Element {
       <AppSnackBar />
       <AppLayout>
         <Routes>
-          <Route path="//*" element={<Enchants />} />
+          <Route path="//*" element={<CreateEnchants />} />
         </Routes>
       </AppLayout>
     </>

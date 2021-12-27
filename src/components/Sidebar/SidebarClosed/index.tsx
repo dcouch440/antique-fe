@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { ConnectedProps, connect } from 'react-redux';
 import { useMediaQuery, useTheme } from '@mui/material';
 

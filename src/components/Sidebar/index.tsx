@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { ConnectedProps, connect } from 'react-redux';
 
+import { Box } from '@mui/material';
 import { IAppState } from 'store/types';
 import SidebarClosed from './SidebarClosed';
 import SidebarOpen from './SidebarOpen';
@@ -24,33 +24,21 @@ type Props = PropsFromRedux;
 
 function Sidebar({ sidebarVisibility }: Props): JSX.Element {
   return (
-    <AnimatePresence exitBeforeEnter>
+    <>
       {sidebarVisibility ? (
-        <motion.div
-          key="Side-bar-open"
+        <Box
           data-testid="Sidebar-open"
-          initial={{ opacity: 0 }}
-          exit={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
           style={{ position: 'fixed', zIndex: 5 }}
         >
           <SidebarOpen key="SidebarOpenx" />
-        </motion.div>
+        </Box>
       ) : (
         // Sidebar Not Visible
-        <motion.div
-          key="sidebar-closed"
-          data-testid="Sidebar-closed"
-          initial={{ opacity: 0 }}
-          exit={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        <Box data-testid="Sidebar-closed">
           <SidebarClosed key="sidebarclosedx" />
-        </motion.div>
+        </Box>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 
