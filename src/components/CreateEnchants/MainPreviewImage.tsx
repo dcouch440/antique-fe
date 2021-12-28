@@ -40,9 +40,9 @@ export default function MainPreviewImage({
         <img
           src={imageToDisplay}
           style={{
-            maxHeight: '90%',
-            maxWidth: '80%%',
-            objectFit: 'cover',
+            height: '90%',
+            width: 'auto',
+            objectFit: 'scale-down',
             borderRadius: 12,
           }}
         />
