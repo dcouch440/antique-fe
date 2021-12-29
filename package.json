@@ -14,6 +14,7 @@
     "@types/react-custom-scrollbars": "^4.0.9",
     "@types/testing-library__jest-dom": "^5.14.2",
     "axios": "^0.24.0",
+    "bad-words": "^3.0.4",
     "glob-parent": "^6.0.2",
     "image-validator": "^1.2.1",
     "lodash.throttle": "^4.1.1",

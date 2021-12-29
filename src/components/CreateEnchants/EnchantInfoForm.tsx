@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import AppInput from 'components/AppInput';
-import { EnchantState } from './EnchantImageData';
+import { EnchantState } from './EnchantCreate';
 import FormWidthContainer from 'Layout/FormWidthContainer';
 
 interface OwnProps {
@@ -24,34 +24,38 @@ function EnchantInfoForm({
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        '& > * ': { marginBottom: 2, width: '100%' },
       }}
     >
       <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
         onChange={onChange}
         value={itemName}
         label="Enchant Name"
         name="itemName"
       />
       <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
         onChange={onChange}
         value={condition}
         label="What condition is it in?"
         name="condition"
       />
       <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
         onChange={onChange}
         value={origin}
         label="Where is it from?"
         name="origin"
       />
       <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
         onChange={onChange}
         value={title}
         label="What would you like to title this enchant?"
         name="title"
       />
       <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
         onChange={onChange}
         value={whereFound}
         label="Where did you find it?"

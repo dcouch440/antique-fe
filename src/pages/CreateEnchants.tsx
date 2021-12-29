@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import EnchantImageData from 'components/CreateEnchants/EnchantImageData';
+import EnchantImageData from 'components/CreateEnchants/EnchantCreate';
 import { PageWithBackplateLayout } from 'Layout';
 
 export default function CreateEnchants(): ReactElement {

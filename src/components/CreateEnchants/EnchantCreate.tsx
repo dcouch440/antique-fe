@@ -1,14 +1,17 @@
-import { Box, typography } from '@mui/system';
-import { Button, Typography, useTheme } from '@mui/material';
+import { Button, Divider, Typography, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useState } from 'react';
 
+import { Box } from '@mui/system';
 import EnchantImageList from './EnchantImageListItem';
 import EnchantInfoForm from './EnchantInfoForm';
+import EnchantTags from './EnchantTags';
 import FileInput from './FileInput';
 import FormWidthContainer from 'Layout/FormWidthContainer';
+import Header from 'components/AppHeader';
 import { IAppState } from 'store/types';
 import axios from 'axios';
+import useTags from 'hooks/useTags';
 import { v4 as uuidv4 } from 'uuid';
 import { validateImage } from 'image-validator';
 
@@ -39,6 +42,22 @@ type InfoBuilder = {
   [key: string]: { favorite: boolean; caption: string };
 };
 
+// interface IEnchantData {
+//   userId: string;
+//   condition: string;
+//   itemName: string;
+//   origin: string;
+//   title: string;
+//   whereFound: string;
+//   images: Array<{
+//     url?: string;
+//     file: File;
+//     previewImage: unknown;
+//     id: string;
+//     favorite: boolean;
+//   }>;
+// }
+
 export type RemoveImage = (id: string, index: number) => void;
 
 const mapStateToProps = ({ user: { id } }: IAppState) => ({ id });
@@ -52,15 +71,16 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
 /**
- * * EnchantImageData is used to create enchants.
+ * * EnchantCreate is used to create enchants.
  * * This component prepares id'd objects that will be sent with
  * * their respective images.
  */
 
-function EnchantImageData({ id }: Props): ReactElement {
+function EnchantCreate({ id }: Props): ReactElement {
   const [imageData, setImageData] = useState<Array<IImageData>>([]);
   // holding file state to stay consistent.
   const [fileState, setFileState] = useState([]);
+  const { tags, addTag, removeTag } = useTags();
   const theme = useTheme();
   const [enchant, setEnchant] = useState<EnchantState>({
     userId: id,
@@ -70,6 +90,7 @@ function EnchantImageData({ id }: Props): ReactElement {
     title: '',
     whereFound: '',
   });
+
   // handle change adds images to the image state and creates an object that
   // will be used to interact with the ui.
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined =
@@ -203,58 +224,67 @@ function EnchantImageData({ id }: Props): ReactElement {
 
   return (
     <>
-      <Box
+      <FormWidthContainer
         sx={{
           p: 2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          margin: '0 auto',
           backgroundColor: theme.custom.palette.secondary.slightlyLighter,
           minHeight: `calc(100% - ${theme.topBarHeight}px)`,
           '& > *': {
-            my: 2,
+            my: 3,
           },
         }}
       >
-        <FormWidthContainer>
-          <Typography color="primary" sx={{ fontSize: 46 }}>
-            Talk About it!
-          </Typography>
-        </FormWidthContainer>
+        <Header component="h1" size="xl" text="Talk About it!" />
         <EnchantInfoForm {...enchant} onChange={handleFormChange} />
-        <FormWidthContainer
+        <Header
+          component="h2"
+          size="sub"
+          text="What tags would help other find your item?"
+        />
+        <EnchantTags tags={tags} addTag={addTag} removeTag={removeTag} />
+        <Box
           sx={{
             justifyContent: 'space-between',
+            width: '100%',
+            display: 'flex',
           }}
         >
-          <Typography fontSize={24} color="primary">
-            Upload your favorite images!
-          </Typography>
-          <FileInput value={fileState} handleChange={handleChange} />
-        </FormWidthContainer>
-        {imageData?.map(({ previewImage, favorite, id, caption }, index) => (
-          <EnchantImageList
-            previewImage={previewImage}
-            favorite={favorite}
-            id={id}
-            caption={caption}
-            index={index}
-            updateFavorites={() => handleUpdateFavorite(index)}
-            removeImage={() => handleRemoveImage(id, index)}
-            updateCaption={handleUpdateCaption}
-            key={id}
+          <Header
+            component="h2"
+            size="sub"
+            text="Upload your favorite images!"
           />
-        ))}
-        <FormWidthContainer
-          sx={{ display: 'flex', justifyContent: 'flex-end' }}
+          <FileInput value={fileState} handleChange={handleChange} />
+        </Box>
+        <>
+          {imageData?.map(({ previewImage, favorite, id, caption }, index) => (
+            <EnchantImageList
+              previewImage={previewImage}
+              favorite={favorite}
+              id={id}
+              caption={caption}
+              index={index}
+              updateFavorites={() => handleUpdateFavorite(index)}
+              removeImage={() => handleRemoveImage(id, index)}
+              updateCaption={handleUpdateCaption}
+              key={id}
+            />
+          ))}
+        </>
+        <Box
+          sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}
         >
           <Button variant="contained" onClick={handleSubmit}>
             Submit
           </Button>
-        </FormWidthContainer>
-      </Box>
+        </Box>
+      </FormWidthContainer>
     </>
   );
 }
 
-export default connector(EnchantImageData);
+export default connector(EnchantCreate);
