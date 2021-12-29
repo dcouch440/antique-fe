@@ -1,12 +1,14 @@
+import { Box, typography } from '@mui/system';
+import { Button, Typography, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useState } from 'react';
-import { Typography, useTheme } from '@mui/material';
 
-import { Box } from '@mui/system';
+import EnchantImageList from './EnchantImageListItem';
+import EnchantInfoForm from './EnchantInfoForm';
 import FileInput from './FileInput';
-import ImageDisplay from './ImageDisplay';
-import MainPreviewImage from './MainPreviewImage';
-import { ScrollContainer } from 'components';
+import FormWidthContainer from 'Layout/FormWidthContainer';
+import { IAppState } from 'store/types';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { validateImage } from 'image-validator';
 
@@ -18,9 +20,28 @@ export interface IImageData {
   previewImage: unknown | string;
 }
 
+// https://www.typescriptlang.org/docs/handbook/utility-types.html
+export interface IEnchantInfo {
+  userId: string | null;
+  tags: Tags;
+  itemName: string;
+  condition: string;
+  origin: string;
+  title: string;
+  whereFound: string;
+}
+
+export type EnchantState = Omit<IEnchantInfo, 'tags'>;
+
+type Tags = Array<string> | [];
+
+type InfoBuilder = {
+  [key: string]: { favorite: boolean; caption: string };
+};
+
 export type RemoveImage = (id: string, index: number) => void;
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ user: { id } }: IAppState) => ({ id });
 
 const mapDispatchToProps = {};
 
@@ -36,13 +57,19 @@ type Props = PropsFromRedux;
  * * their respective images.
  */
 
-function EnchantImageData(): ReactElement {
+function EnchantImageData({ id }: Props): ReactElement {
   const [imageData, setImageData] = useState<Array<IImageData>>([]);
   // holding file state to stay consistent.
   const [fileState, setFileState] = useState([]);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
   const theme = useTheme();
-
+  const [enchant, setEnchant] = useState<EnchantState>({
+    userId: id,
+    itemName: '',
+    condition: '',
+    origin: '',
+    title: '',
+    whereFound: '',
+  });
   // handle change adds images to the image state and creates an object that
   // will be used to interact with the ui.
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined =
@@ -60,7 +87,7 @@ function EnchantImageData(): ReactElement {
         // snackbar error
         return;
       } else {
-        const readFiles: Promise<IImageData>[] = fs.map(async (file, index) => {
+        const readFiles: Promise<IImageData>[] = fs.map(async (file) => {
           // the id will help to identify the items on the other side.
           // these are only for uploading purposes and deletion filtering
           const id = uuidv4();
@@ -114,34 +141,22 @@ function EnchantImageData(): ReactElement {
     });
   };
 
-  // active index is the index that is going to be displayed on the main
-  // screen so the use can view their own image closely as they choose a favorite.
-  // and caption.
-  const handleSetActiveIndex = (index: number) => {
-    if (index === activeIndex) {
-      return;
-    }
-
-    setActiveIndex(index);
-  };
-
   // if a user changes their mind about uploading an image
   const handleRemoveImage = (id: string, index: number) => {
     const fs = [...fileState];
     fs.splice(index, 1);
 
     setImageData((prev) => prev.filter(({ id: prevId }) => prevId != id));
-    if (index === activeIndex) setActiveIndex(0);
     setFileState(fs);
   };
 
   // new caption will be updated
   // the onchange state is held within its component
   // and only triggers an update when the user hits submit.
-  const handleUpdateCaption = (caption: string) => {
+  const handleUpdateCaption = (caption: string, index: number) => {
     setImageData((prev) => {
-      return prev.map((data, index) => {
-        if (index === activeIndex) {
+      return prev.map((data, mapIndex: number) => {
+        if (index === mapIndex) {
           return {
             ...data,
             caption,
@@ -153,80 +168,92 @@ function EnchantImageData(): ReactElement {
     });
   };
 
+  const handleSubmit = () => {
+    const infoBuilder: InfoBuilder = {};
+    const formData = new FormData();
+
+    // convert the json to strings and send it over via form-data
+    // this way we can send over multiple files.
+    for (const { id, caption, file, favorite } of imageData) {
+      formData.append(id, file);
+      infoBuilder[id] = { caption, favorite };
+    }
+
+    // stringify data.
+    formData.append('imageInfo', JSON.stringify({ imageInfo: infoBuilder }));
+    formData.append('enchant', JSON.stringify(enchant));
+
+    // send
+    axios
+      .post('http://localhost:3001/enchants', formData)
+      .then(console.log)
+      .catch(console.log);
+  };
+
+  const handleFormChange: ReactOnChange = ({ target: { name, value } }) => {
+    if (name === 'userId') {
+      return;
+    }
+
+    setEnchant((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        p: 1,
-        height: `100%`,
-        backgroundColor: theme.custom.palette.secondary.slightlyLighter,
-      }}
-    >
+    <>
       <Box
         sx={{
-          flex: 1,
-          minHeight: '100%',
-          width: '80%',
-          position: 'relative',
+          p: 2,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          alignItems: 'center',
+          backgroundColor: theme.custom.palette.secondary.slightlyLighter,
+          minHeight: `calc(100% - ${theme.topBarHeight}px)`,
+          '& > *': {
+            my: 2,
+          },
         }}
       >
-        {imageData.length > 0 ? (
-          <MainPreviewImage
-            imageCaption={imageData[activeIndex].caption}
-            imageToDisplay={imageData[activeIndex].previewImage as string}
-            updateCaption={handleUpdateCaption}
-          />
-        ) : (
-          <Typography fontSize={25} color="primary">
-            Placeholder... Make a selection!
+        <FormWidthContainer>
+          <Typography color="primary" sx={{ fontSize: 46 }}>
+            Talk About it!
           </Typography>
-        )}
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          width: '20%',
-        }}
-      >
-        <Box
+        </FormWidthContainer>
+        <EnchantInfoForm {...enchant} onChange={handleFormChange} />
+        <FormWidthContainer
           sx={{
-            display: 'flex',
             justifyContent: 'space-between',
-            width: '100%',
-            p: 1,
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-            }}
-          >
-            <Typography fontSize={16} color="primary">
-              Pick something You Love!
-            </Typography>
-            <Typography fontSize={10} color="primary">
-              Limit 4
-            </Typography>
-          </Box>
+          <Typography fontSize={24} color="primary">
+            Upload your favorite images!
+          </Typography>
           <FileInput value={fileState} handleChange={handleChange} />
-        </Box>
-        <ScrollContainer style={{ height: '100%', width: '100%' }}>
-          <ImageDisplay
-            images={imageData}
-            removeImage={handleRemoveImage}
-            updateFavorites={handleUpdateFavorite}
-            setActiveImage={handleSetActiveIndex}
+        </FormWidthContainer>
+        {imageData?.map(({ previewImage, favorite, id, caption }, index) => (
+          <EnchantImageList
+            previewImage={previewImage}
+            favorite={favorite}
+            id={id}
+            caption={caption}
+            index={index}
+            updateFavorites={() => handleUpdateFavorite(index)}
+            removeImage={() => handleRemoveImage(id, index)}
+            updateCaption={handleUpdateCaption}
+            key={id}
           />
-        </ScrollContainer>
+        ))}
+        <FormWidthContainer
+          sx={{ display: 'flex', justifyContent: 'flex-end' }}
+        >
+          <Button variant="contained" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </FormWidthContainer>
       </Box>
-    </Box>
+    </>
   );
 }
 

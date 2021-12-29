@@ -1,0 +1,30 @@
+import { ConnectedProps, connect } from 'react-redux';
+
+import { AppSearchBar } from 'components';
+import { searchQueryUpdated } from 'store/enchant/actionCreators';
+
+/**
+ * @param {function} searchQueryUpdated Redux function used to add the current query to the store.
+ */
+
+const mapDispatchToProps = {
+  searchQueryUpdated,
+};
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux;
+
+function EnchantsSearchBar({ searchQueryUpdated }: Props): JSX.Element {
+  const handleSubmit = (e: string) => searchQueryUpdated(e);
+  const handleOnClear = () => searchQueryUpdated(null);
+  return (
+    <AppSearchBar
+      sx={{ pl: 1 }}
+      onSubmit={handleSubmit}
+      onClear={handleOnClear}
+    />
+  );
+}
+
+export default connector(EnchantsSearchBar);

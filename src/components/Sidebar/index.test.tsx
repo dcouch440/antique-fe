@@ -2,7 +2,7 @@ import {
   getFeedButton,
   getMessagesButton,
   getNavButton,
-} from './SidebarTypeSelectors/index.test';
+} from './SidebarTypeSelectorstest';
 import { render, screen } from '@testing-library/react';
 
 import MockProviders from 'components/testUtils/MockProvider';
