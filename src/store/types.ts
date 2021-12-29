@@ -3,7 +3,7 @@ import { IEnchantState } from './enchant/reducer';
 import { ISidebarState } from './sidebar/reducer';
 import { ISnackbarState } from './snackbar/reducer';
 import { ThunkAction } from 'redux-thunk';
-import { UserState } from './user/reducer/interfaces';
+import { UserState } from './user/reducer';
 
 /*
  * Holds types for use across multiple files within the store space.

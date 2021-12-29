@@ -1,34 +1,61 @@
 import { Box, useTheme } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
+import {
+  SIDEBAR_FEED,
+  SIDEBAR_MESSAGES,
+  SIDEBAR_NAVIGATION,
+} from 'constantVariables';
 
-import EnchantTopBar from './EnchantTopBar';
+import { ConnectedProps } from 'react-redux';
+import EmailIcon from '@mui/icons-material/Email';
+import MenuIcon from '@mui/icons-material/Menu';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import SidebarTypeSelector from 'components/AppSidebarTypeSelector';
+import { connect } from 'react-redux';
 
-export default function TopBar(): JSX.Element {
+const mapStateToProps = () => ({});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux;
+
+function TopBar(): JSX.Element {
   const theme = useTheme();
 
   return (
     <Box
       sx={{
-        width: '100%',
-        backgroundColor: 'secondary.main',
-        position: 'sticky',
         display: 'flex',
-        gap: 1,
-        flexDirection: ['column', 'row'],
-        justifyContent: ['center', 'space-around'],
-        top: 0,
-        p: 1,
-        background: theme.custom.palette.secondary.transparent,
-        backdropFilter: 'blur(3px)',
-        borderBottom: '1px solid ' + theme.palette.primary.main,
-        '& > div:not(:first-of-type)': {
-          mt: 1,
-        },
+        justifyContent: 'flex-end',
+        backgroundColor: theme.palette.secondary.dark,
+        borderBottom: `1px solid ${theme.palette.primary.dark}`,
       }}
+      key="SidebyTypeSectorsz"
     >
-      <Routes>
-        <Route path="/" element={<EnchantTopBar />} />
-      </Routes>
+      <SidebarTypeSelector
+        variantType="Button"
+        aria-label="Messages"
+        constantVariable={SIDEBAR_MESSAGES}
+      >
+        <EmailIcon />
+      </SidebarTypeSelector>
+      <SidebarTypeSelector
+        variantType="Button"
+        aria-label="Feed"
+        constantVariable={SIDEBAR_FEED}
+      >
+        <NotificationsActiveIcon />
+      </SidebarTypeSelector>
+      <SidebarTypeSelector
+        variantType="Button"
+        aria-label="Navigate"
+        constantVariable={SIDEBAR_NAVIGATION}
+      >
+        <MenuIcon />
+      </SidebarTypeSelector>
     </Box>
   );
 }
+
+export default connector(TopBar);

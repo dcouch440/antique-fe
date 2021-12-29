@@ -1,39 +1,68 @@
-import { ConnectedProps, connect } from 'react-redux';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 
-import { IAppState } from 'store/types';
+import AppInput from 'components/AppInput';
+import { EnchantState } from './EnchantCreate';
+import FormWidthContainer from 'Layout/FormWidthContainer';
 
-const mapStateToProps = ({ user: { id } }: IAppState) => ({ id });
-
-const mapDispatchToProps = {};
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type Props = PropsFromRedux;
-export interface IEnchantInfo {
-  userId: string | null;
-  tags: string[];
-  itemName: string;
-  condition: string;
-  origin: string;
-  title: string;
-  whereFound: string;
+interface OwnProps {
+  onChange: ReactOnChange;
 }
 
-function EnchantInfoForm({ id }: Props): ReactElement {
-  const [enchant, setEnchant] = useState<IEnchantInfo>({
-    userId: id,
-    tags: [],
-    itemName: '',
-    condition: '',
-    origin: '',
-    title: '',
-    whereFound: '',
-  });
+type Props = EnchantState & OwnProps;
 
-  return <div></div>;
+function EnchantInfoForm({
+  itemName,
+  condition,
+  origin,
+  title,
+  whereFound,
+  onChange,
+}: Props): ReactElement {
+  return (
+    <FormWidthContainer
+      component="form"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
+        onChange={onChange}
+        value={itemName}
+        label="Enchant Name"
+        name="itemName"
+      />
+      <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
+        onChange={onChange}
+        value={condition}
+        label="What condition is it in?"
+        name="condition"
+      />
+      <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
+        onChange={onChange}
+        value={origin}
+        label="Where is it from?"
+        name="origin"
+      />
+      <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
+        onChange={onChange}
+        value={title}
+        label="What would you like to title this enchant?"
+        name="title"
+      />
+      <AppInput
+        sx={{ marginBottom: 3, width: '100%' }}
+        onChange={onChange}
+        value={whereFound}
+        label="Where did you find it?"
+        name="whereFound"
+      />
+    </FormWidthContainer>
+  );
 }
 
-export default connector(EnchantInfoForm);
+export default EnchantInfoForm;
