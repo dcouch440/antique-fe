@@ -10,7 +10,7 @@ import ImageActionButton from './ImageActionButton';
 interface Props {
   updateFavorites: () => void;
   removeImage: () => void;
-  previewImage: unknown;
+  url: unknown;
   favorite: boolean;
   id: string;
   caption: string;
@@ -24,7 +24,7 @@ interface Props {
 
 export default function EnchantImageListItem({
   updateFavorites,
-  previewImage,
+  url,
   favorite,
   caption,
   removeImage,
@@ -46,11 +46,9 @@ export default function EnchantImageListItem({
       sx={{
         position: 'relative',
         display: 'flex',
-        backgroundColor: theme.custom.palette.secondary.slightlyLighter,
         height: 120,
         maxWidth: '100%',
       }}
-      key={previewImage as string}
     >
       <Box
         component="img"
@@ -62,7 +60,7 @@ export default function EnchantImageListItem({
           transition: '0.2s',
           cursor: 'pointer',
         }}
-        src={previewImage as string}
+        src={url as string}
         alt="user preview image"
       />
       <Box
@@ -84,10 +82,12 @@ export default function EnchantImageListItem({
           }}
         >
           <ImageActionButton
-            sx={{ right: 0, zIndex: 1, gap: 1 }}
+            sx={{ right: 0, zIndex: 1, gap: 1, backgroundColor: 'transparent' }}
             onClick={updateFavorites}
           >
-            <Typography color="primary">Set as display image?</Typography>
+            <Typography fontSize={12} color="primary">
+              Set as display image?
+            </Typography>
             {favorite ? (
               <FavoriteIcon color="primary" />
             ) : (

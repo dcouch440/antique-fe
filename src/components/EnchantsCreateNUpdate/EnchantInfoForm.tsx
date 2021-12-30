@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
 
 import AppInput from 'components/AppInput';
-import { EnchantState } from './EnchantCreate';
 import FormWidthContainer from 'Layout/FormWidthContainer';
+import { IEnchantInfo } from './CreateAndUpdate';
 
 interface OwnProps {
   onChange: ReactOnChange;
 }
 
-type Props = EnchantState & OwnProps;
+type Props = IEnchantInfo & OwnProps;
 
 function EnchantInfoForm({
   itemName,

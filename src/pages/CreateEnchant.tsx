@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 
-import EnchantImageData from 'components/CreateEnchants/EnchantCreate';
+import CreateAndUpdate from 'components/EnchantsCreateNUpdate/CreateAndUpdate';
 import { PageWithBackplateLayout } from 'Layout';
 
 export default function CreateEnchants(): ReactElement {
   return (
     <PageWithBackplateLayout header="Post">
-      <EnchantImageData />
+      <CreateAndUpdate newUpload />
     </PageWithBackplateLayout>
   );
 }
