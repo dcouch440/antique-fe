@@ -8,10 +8,10 @@ interface Props {
   alt: string;
 }
 
-function UserAvatar({ src, ...props }: Props): ReactElement {
+function AppUserAvatar({ src, ...props }: Props): ReactElement {
   const hasAvatar = Boolean(src);
   const url = hasAvatar ? src : bottleLogo;
   return <Avatar sx={{ backgroundColor: 'secondary' }} src={url} {...props} />;
 }
 
-export default UserAvatar;
+export default AppUserAvatar;

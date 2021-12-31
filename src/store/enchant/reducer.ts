@@ -1,4 +1,5 @@
 import {
+  ENCHANT_CLEAR_ENCHANTS,
   ENCHANT_GET_ENCHANTS,
   ENCHANT_UPDATE_SEARCH_QUERY,
   ENCHANT_UPDATE_SEARCH_TYPE,
@@ -17,6 +18,7 @@ export interface IEnchant {
   userAvatar: string;
   tags: Array<string> | [];
   likes: number;
+  itemName: string;
   images: Array<{
     id: string;
     url: string;
@@ -62,8 +64,14 @@ export default function reducer(
     case ENCHANT_GET_ENCHANTS:
       return {
         ...state,
-        enchants: [...state.enchants, payload.enchants],
+        enchants: [...state.enchants, ...payload.enchants],
         lastSeen: payload.lastSeen,
+      };
+    case ENCHANT_CLEAR_ENCHANTS:
+      return {
+        ...state,
+        enchants: [],
+        lastSeen: null,
       };
     default:
       return state;

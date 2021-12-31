@@ -1,6 +1,7 @@
+import { userLoggedIn, userLoggedOut } from './actionCreators';
+
 import { ThunkCreators } from 'store/types';
 import axios from 'axios';
-import { userLoggedIn } from './actionCreators';
 
 interface ISignup {
   username: string;
@@ -13,7 +14,7 @@ export const thunkSignup =
   async (dispatch) => {
     try {
       const { data } = await axios.post(
-        '/users/sign-up',
+        '/users',
         { username, password, email },
         { withCredentials: true }
       );
@@ -45,3 +46,31 @@ export const thunkSession = (): ThunkCreators => async (dispatch) => {
     console.error(err);
   }
 };
+
+export const thunkLogout = (): ThunkCreators => async (dispatch, getState) => {
+  try {
+    const { id } = getState().user;
+    const request = await axios.post(`/users/${id}/log-out`);
+    if (request.status === 204) {
+      dispatch(userLoggedOut());
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const thunkLogin =
+  ({ email, password }: { email: string; password: string }): ThunkCreators =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.post(
+        '/users/login',
+        { email, password },
+        { withCredentials: true }
+      );
+      console.log(data);
+      dispatch(userLoggedIn(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };

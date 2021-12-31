@@ -18,6 +18,7 @@ export default function FileInput({ handleChange }: Props): ReactElement {
         accept="image/*"
         type="file"
         onChange={handleChange}
+        value=""
       />
       <Fab
         sx={{ outline: 'none', boxShadow: 'none' }}

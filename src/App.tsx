@@ -33,8 +33,8 @@ function App({ thunkSession }: Props): JSX.Element {
       <AppSnackBar />
       <AppLayout>
         <Routes>
-          <Route path="//*" element={<Enchants />} />
-          <Route path="/enchants" element={<CreateEnchants />} />
+          <Route path="/" element={<Enchants />} />
+          <Route path="/enchants/post" element={<CreateEnchants />} />
           <Route
             path="/enchants/:enchantId/update"
             element={<UpdateEnchant />}

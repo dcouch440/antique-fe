@@ -27,9 +27,13 @@ function TopBar(): JSX.Element {
     <Box
       sx={{
         display: 'flex',
+        position: 'fixed',
+        width: '100%',
+        zIndex: 6,
         justifyContent: 'flex-end',
         backgroundColor: theme.palette.secondary.dark,
-        borderBottom: `1px solid ${theme.palette.primary.dark}`,
+        borderBottom: '1px solid ' + theme.palette.primary.dark,
+        boxShadow: 5,
       }}
       key="SidebyTypeSectorsz"
     >

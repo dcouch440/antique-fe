@@ -1,50 +1,70 @@
 import { Avatar, Box, Typography } from '@mui/material';
-import React, { ReactElement } from 'react';
+import React, {
+  ReactElement,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
-import Image from 'components/Image';
-import UserAvatar from 'components/UserAvatar';
+import AppUser from 'components/AppUser';
+import UserAvatar from 'components/AppUserAvatar';
 
-const enchantData = {
-  id: '61c91b06d8c88a7ed654a63c',
-  userId: '61c78ed61ad43f99877d5430',
-  username: 'dan',
-  userAvatar: '',
-  tags: ['bottle'],
-  likes: 0,
-  itemName: 'Poison',
-  images: [
-    {
-      id: '61c91b06d8c88a7ed654a63b',
-      url: 'https://enchants.s3.us-west-2.amazonaws.com/eacbd3ad.png',
-      favorite: true,
-      caption: 'This bottle was great.',
-    },
-  ],
-  condition: 'poor',
-  origin: 'USA',
-  title: 'The oldest bottle.',
-  whereFound: 'Yard sale',
-};
+interface IEnchant {
+  username: string;
+  userAvatar: string;
+  likes: number;
+  itemName: string;
+  images: Array<{ url: string }>;
+}
 
-function Enchant(): ReactElement {
-  const { username, userAvatar, likes, itemName, images } = enchantData;
-  if (images.length === 0 || images[0]?.url === '') {
-    return <></>;
-  }
+/**
+ * Renders a given image by first setting an images height and width to unset.
+ * After the image loads into the ref the images height and width is captured in state and it choses a span of either long or square based on its height and width.
+ */
+function Enchant({
+  username,
+  userAvatar,
+  likes,
+  itemName,
+  images,
+}: IEnchant): ReactElement {
+  const [img, setImage] = useState({ height: 0, width: 0 });
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = images[0].url;
+    image.onload = () => {
+      setImage({ height: image.height, width: image.width });
+    };
+  }, []);
+
+  if (images.length === 0 || images[0]?.url === '') return <></>;
+  if (img.height === 0 || img.width === 0) return <></>;
+
+  const getSpan = () => {
+    const heightRatio = img.height / img.width;
+    const widthRatio = img.width / img.height;
+    // if the image height ratio is 50% taller than it is wide give it two blocks.
+    if (heightRatio > 1.3) return { gridRow: 'span 2' };
+    // same for width.
+    if (widthRatio > 1.4) return { gridColumn: 'span 2' };
+    // else one block is fine.
+    else return {};
+  };
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        width: 'auto',
+        ...getSpan(),
+        borderRadius: (theme) => theme.spacing(1),
+        overflow: 'hidden',
+      }}
+    >
       <Box sx={{ position: 'absolute', width: '100%', height: '100%' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: 'absolute',
-          }}
-        >
-          <UserAvatar src={userAvatar} alt={username} />
-          <Typography color="primary">{username}</Typography>
-        </Box>
+        <AppUser username={username} userAvatar={userAvatar} />
         <Box>
           <Typography color="primary">{itemName}</Typography>
           <Typography color="primary">
@@ -52,7 +72,15 @@ function Enchant(): ReactElement {
           </Typography>
         </Box>
       </Box>
-      <Image src={images[0].url} alt={`An depiction of ${username}'s item`} />
+      <img
+        style={{
+          objectFit: 'cover',
+          height: '100%',
+          width: '100%',
+        }}
+        src={images[0].url}
+        alt={`An depiction of ${username}'s item`}
+      />
     </Box>
   );
 }

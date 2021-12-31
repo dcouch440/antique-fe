@@ -1,15 +1,22 @@
-import { TextField, styled } from '@mui/material';
+import { TextField, styled, useTheme } from '@mui/material';
 
 const StyledInput = styled(TextField)`
   && {
     position: relative;
-    border-bottom: 1px solid white;
-    color: white;
+    border-bottom: 1px solid ${({ theme }) => theme.palette.primary.dark};
+    color: ${({ theme }) => theme.palette.primary.main};
+    legend > span {
+      color: ${({ theme }) => theme.palette.primary.dark};
+    }
     * {
+      color: ${({ theme }) => theme.palette.primary.main};
       outline: none;
-      color: white;
       box-shadow: none;
       background-color: none;
+      font-size: 16px;
+      @media (${({ theme }) => theme.breakpoints.down('sm')}) {
+        font-size: ${({ theme }) => theme.custom.typography.sizes.sm}px;
+      }
     }
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
@@ -34,5 +41,6 @@ const StyledInput = styled(TextField)`
  */
 
 export default function AppInput({ ...props }): JSX.Element {
-  return <StyledInput color="primary" {...props} />;
+  const theme = useTheme();
+  return <StyledInput theme={theme} color="primary" {...props} />;
 }

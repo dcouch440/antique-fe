@@ -32,6 +32,7 @@ function EnchantInfoForm({
         value={itemName}
         label="Enchant Name"
         name="itemName"
+        required
       />
       <AppInput
         sx={{ marginBottom: 3, width: '100%' }}
@@ -53,9 +54,10 @@ function EnchantInfoForm({
         value={title}
         label="What would you like to title this enchant?"
         name="title"
+        required
       />
       <AppInput
-        sx={{ marginBottom: 3, width: '100%' }}
+        sx={{ width: '100%' }}
         onChange={onChange}
         value={whereFound}
         label="Where did you find it?"

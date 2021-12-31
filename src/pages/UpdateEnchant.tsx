@@ -5,7 +5,7 @@ import { PageWithBackplateLayout } from 'Layout';
 
 function UpdateEnchant(): ReactElement {
   return (
-    <PageWithBackplateLayout header="Update">
+    <PageWithBackplateLayout>
       <CreateAndUpdate newUpload={false} />
     </PageWithBackplateLayout>
   );

@@ -8,12 +8,16 @@ interface Props {
   sx?: SxProps;
 }
 
-function Header({ text, component, sx, size }: Props): ReactElement {
-  const fs = size === 'xl' ? 46 : size === 'sub' ? 24 : 16;
+function AppHeader({ text, component, sx, size }: Props): ReactElement {
+  const fs = size === 'xl' ? 46 : size === 'sub' ? 20 : 16;
 
   return (
     <Typography
-      sx={{ alignSelf: 'flex-start', ...sx }}
+      sx={{
+        alignSelf: 'flex-start',
+        ...sx,
+        fontSize: [Math.floor(fs * 0.9), fs, Math.floor(fs * 1.2)],
+      }}
       component={component}
       fontSize={fs}
       color="primary"
@@ -23,4 +27,4 @@ function Header({ text, component, sx, size }: Props): ReactElement {
   );
 }
 
-export default Header;
+export default AppHeader;

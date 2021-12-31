@@ -14,9 +14,10 @@ describe('user/Reducer', () => {
 
     const user: UserInfo = {
       email: 'testing',
-      userId: null,
+      id: null,
       username: 'testing',
     };
+
     store.dispatch(ac.userLoggedIn(user));
 
     for (const property in user) {

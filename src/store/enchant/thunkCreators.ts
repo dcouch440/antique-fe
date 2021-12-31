@@ -1,7 +1,7 @@
 import { IEnchant } from './reducer';
 import { ThunkCreators } from 'store/types';
 import axios from 'axios';
-import { enchantRetrieved } from './actionCreators';
+import { enchantsRetrieved } from './actionCreators';
 
 export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
   try {
@@ -9,8 +9,10 @@ export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
     const queryDate = lastSeen ?? new Date().toUTCString();
 
     const { data } = await axios.get<IEnchant[]>(
-      `/enchants?limit=15&offset=${enchants.length}&lastSeen=${queryDate}`
+      `/enchants?limit=1555&offset=${enchants.length}&lastSeen=${queryDate}`
     );
+
+    console.log(data);
 
     if (!data.length) {
       throw new Error('No antiques found');
@@ -19,7 +21,7 @@ export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
     const newLastSeen = data[data.length - 1].createdAt;
 
     dispatch(
-      enchantRetrieved({
+      enchantsRetrieved({
         enchants: data,
         lastSeen: newLastSeen,
       })

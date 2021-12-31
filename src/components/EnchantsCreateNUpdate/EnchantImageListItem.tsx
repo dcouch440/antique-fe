@@ -1,6 +1,13 @@
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControlState,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
+import AddButton from './AddButton';
 import AppInput from 'components/AppInput';
 import Close from '@mui/icons-material/Close';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -40,6 +47,9 @@ export default function EnchantImageListItem({
     updateCaption(input, index);
     setEditCaption(false);
   };
+  const handleKeyPress: (e: React.KeyboardEvent<FormControlState>) => void = ({
+    key,
+  }) => key === 'Enter' && handleUpdateOwnCaption();
 
   return (
     <Box
@@ -51,25 +61,35 @@ export default function EnchantImageListItem({
       }}
     >
       <Box
-        component="img"
         sx={{
-          height: 120,
           width: 120,
-          objectFit: 'scale-down',
+          height: 120,
+          display: 'flex',
+          justifyContent: 'center',
+          backgroundColor: theme.custom.palette.secondary.transparent,
           borderRadius: theme.spacing(1),
-          transition: '0.2s',
-          cursor: 'pointer',
         }}
-        src={url as string}
-        alt="user preview image"
-      />
+      >
+        <Box
+          component="img"
+          sx={{
+            height: 120,
+            width: 120,
+            borderRadius: theme.spacing(1),
+            objectFit: 'scale-down',
+            cursor: 'pointer',
+          }}
+          src={url as string}
+          alt="user preview image"
+        />
+      </Box>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           height: 120,
           width: 800,
-          p: 1,
+          pl: 1,
           justifyContent: 'space-between',
           maxWidth: '100%',
         }}
@@ -85,14 +105,14 @@ export default function EnchantImageListItem({
             sx={{ right: 0, zIndex: 1, gap: 1, backgroundColor: 'transparent' }}
             onClick={updateFavorites}
           >
-            <Typography fontSize={12} color="primary">
-              Set as display image?
-            </Typography>
             {favorite ? (
               <FavoriteIcon color="primary" />
             ) : (
               <FavoriteBorderIcon color="primary" />
             )}
+            <Typography fontSize={12} color="primary">
+              Set as display image?
+            </Typography>
           </ImageActionButton>
           <ImageActionButton sx={{ left: 0 }} onClick={removeImage}>
             <Close color="primary" />
@@ -110,10 +130,9 @@ export default function EnchantImageListItem({
                 flex: 1,
               }}
               variant="standard"
+              onKeyPress={handleKeyPress}
             />
-            <Button variant="contained" onClick={handleUpdateOwnCaption}>
-              Add Caption
-            </Button>
+            <AddButton onClick={handleUpdateOwnCaption} text="Add Caption" />
           </Box>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>

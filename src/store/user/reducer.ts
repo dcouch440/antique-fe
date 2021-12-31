@@ -1,9 +1,10 @@
-import { ADD_USER_TO_STORE } from 'store/actions';
+import { ADD_USER_TO_STORE, REMOVE_USER_FROM_STORE } from 'store/actions';
+
 import { AnyAction } from 'redux';
 import { TypeKeysAsString } from 'store/types';
 
 export interface User {
-  userId: UserId;
+  id: UserId;
   username: Username;
   email: Email;
 }
@@ -15,9 +16,9 @@ export type UserInfo = TypeKeysAsString<User>;
 // UserState will be expanded with extends.
 export type UserState = TypeKeysAsString<UserInfo>;
 export const userInitialState: UserState = {
-  userId: null,
-  username: 'seed user',
-  email: 'seed_user@user.com',
+  id: null,
+  username: null,
+  email: null,
 };
 
 function reducer(
@@ -28,9 +29,16 @@ function reducer(
     case ADD_USER_TO_STORE:
       return {
         ...state,
-        userId: payload.userId,
+        id: payload.id,
         username: payload.username,
         email: payload.email,
+      };
+    case REMOVE_USER_FROM_STORE:
+      return {
+        ...state,
+        id: null,
+        username: null,
+        email: null,
       };
     default:
       return state;

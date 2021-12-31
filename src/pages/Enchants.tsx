@@ -1,22 +1,61 @@
-import { ImageList, ImageListItem } from '@mui/material';
+import { ConnectedProps, connect } from 'react-redux';
+import { Suspense, lazy, useEffect } from 'react';
 
-import Enchant from 'components/enchants/Enchant';
+import { Box } from '@mui/material';
+import { IAppState } from 'store/types';
 import { PageWithBackplateLayout } from 'Layout';
+import { clearEnchants } from 'store/enchant/actionCreators';
+import { getEnchants } from 'store/enchant/thunkCreators';
 
-export default function Enchants(): JSX.Element {
+const LazyEnchant = lazy(() => import('components/enchants/Enchant'));
+
+const mapStateToProps = ({ enchant: { enchants } }: IAppState) => ({
+  enchants,
+});
+
+const mapDispatchToProps = {
+  getEnchants,
+  clearEnchants,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux;
+
+function Enchants({
+  enchants,
+  getEnchants,
+  clearEnchants,
+}: Props): JSX.Element {
+  useEffect(() => {
+    getEnchants();
+    return () => {
+      clearEnchants();
+    };
+  }, []);
+
   return (
     <PageWithBackplateLayout header="Enchants">
-      <ImageList sx={{ width: '100%', m: 0 }} variant="masonry">
-        <ImageListItem key="1">
-          <Enchant />
-        </ImageListItem>
-        <ImageListItem key={2}>
-          <Enchant />
-        </ImageListItem>
-        <ImageListItem key={3}>
-          <Enchant />
-        </ImageListItem>
-      </ImageList>
+      <Box
+        sx={{
+          p: 1,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridAutoRows: 300,
+          gridGap: (theme) => theme.spacing(1),
+          gridAutoFlow: 'dense',
+        }}
+      >
+        {enchants.map((item) => (
+          <Suspense key={item.id} fallback={<span />}>
+            <LazyEnchant {...item} />
+          </Suspense>
+        ))}
+      </Box>
     </PageWithBackplateLayout>
   );
 }
+
+export default connector(Enchants);

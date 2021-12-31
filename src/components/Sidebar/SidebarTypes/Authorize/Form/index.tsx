@@ -68,29 +68,29 @@ function Form({ handleAuth, withSignup, error, header }: Props): JSX.Element {
         }}
       >
         <Header text={header} />
-        <Input
-          ariaLabel="username"
-          label="Username"
-          name="username"
-          autoComplete="username"
-          placeholder="Username"
-          type="text"
-          onChange={handleChange}
-          value={username}
-          required
-        />
         {withSignup && (
           <Input
-            ariaLabel="e-mail address"
-            label="E-mail address"
-            type="email"
-            name="email"
-            autoComplete="email"
+            ariaLabel="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            placeholder="Username"
+            type="text"
             onChange={handleChange}
-            value={email}
+            value={username}
             required
           />
         )}
+        <Input
+          ariaLabel="e-mail address"
+          label="E-mail address"
+          type="email"
+          name="email"
+          autoComplete="email"
+          onChange={handleChange}
+          value={email}
+          required
+        />
         <Input
           ariaLabel="password"
           label="Password"

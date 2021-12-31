@@ -5,7 +5,7 @@ import { PageWithBackplateLayout } from 'Layout';
 
 export default function CreateEnchants(): ReactElement {
   return (
-    <PageWithBackplateLayout header="Post">
+    <PageWithBackplateLayout>
       <CreateAndUpdate newUpload />
     </PageWithBackplateLayout>
   );
