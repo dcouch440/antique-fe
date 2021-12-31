@@ -1,7 +1,7 @@
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import { Suspense, lazy, useEffect } from 'react';
 
-import { Box } from '@mui/material';
 import { IAppState } from 'store/types';
 import { PageWithBackplateLayout } from 'Layout';
 import { clearEnchants } from 'store/enchant/actionCreators';
@@ -29,6 +29,12 @@ function Enchants({
   getEnchants,
   clearEnchants,
 }: Props): JSX.Element {
+  const theme = useTheme();
+  const isBelowMd = useMediaQuery(theme.breakpoints.down('md'));
+  const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const isBelowLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const columns = isBelowSm ? 1 : isBelowMd ? 2 : isBelowLg ? 3 : 4;
+
   useEffect(() => {
     getEnchants();
     return () => {
@@ -42,7 +48,7 @@ function Enchants({
         sx={{
           p: 1,
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: `repeat(${columns}, 1fr)`,
           gridAutoRows: 300,
           gridGap: (theme) => theme.spacing(1),
           gridAutoFlow: 'dense',

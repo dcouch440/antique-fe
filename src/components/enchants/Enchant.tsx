@@ -1,14 +1,7 @@
-import { Avatar, Box, Typography } from '@mui/material';
-import React, {
-  ReactElement,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 import AppUser from 'components/AppUser';
-import UserAvatar from 'components/AppUserAvatar';
 
 interface IEnchant {
   username: string;
@@ -30,6 +23,10 @@ function Enchant({
   images,
 }: IEnchant): ReactElement {
   const [img, setImage] = useState({ height: 0, width: 0 });
+  // because sm screens only have 1 width.
+  // grid column must always result in 1 width if so.
+  const theme = useTheme();
+  const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const image = new Image();
@@ -45,10 +42,13 @@ function Enchant({
   const getSpan = () => {
     const heightRatio = img.height / img.width;
     const widthRatio = img.width / img.height;
-    // if the image height ratio is 50% taller than it is wide give it two blocks.
+    // if the image height ratio is 30% taller than it is wide give it two blocks.
     if (heightRatio > 1.3) return { gridRow: 'span 2' };
-    // same for width.
-    if (widthRatio > 1.4) return { gridColumn: 'span 2' };
+    // if screen is very small there is not two columns to take up.
+    if (isBelowSm) return {};
+    // if width is 50% wider than tall it is a very wide image.
+    // let it take up two columns.
+    if (widthRatio > 1.5) return { gridColumn: 'span 2' };
     // else one block is fine.
     else return {};
   };
@@ -73,11 +73,7 @@ function Enchant({
         </Box>
       </Box>
       <img
-        style={{
-          objectFit: 'cover',
-          height: '100%',
-          width: '100%',
-        }}
+        style={{ objectFit: 'cover', height: '100%', width: '100%' }}
         src={images[0].url}
         alt={`An depiction of ${username}'s item`}
       />
