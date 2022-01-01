@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import React, { ReactElement, useEffect, useState } from 'react';
 
 import AppUser from 'components/common/AppUser';
@@ -15,13 +15,7 @@ interface IEnchant {
  * Renders a given image by first setting an images height and width to unset.
  * After the image loads into the ref the images height and width is captured in state and it choses a span of either long or square based on its height and width.
  */
-function Enchant({
-  username,
-  userAvatar,
-  likes,
-  itemName,
-  images,
-}: IEnchant): ReactElement {
+function Enchant({ username, userAvatar, images }: IEnchant): ReactElement {
   const [img, setImage] = useState({ height: 0, width: 0 });
   // because sm screens only have 1 width.
   // grid column must always result in 1 width if so.

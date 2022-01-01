@@ -1,9 +1,7 @@
-import { Box, useTheme } from '@mui/system';
-import { Button, IconButton, Paper, SxProps } from '@mui/material';
+import { Button, Paper, SxProps } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import AppInput from 'components/common/AppInput';
-import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 
 interface IOwnProps {

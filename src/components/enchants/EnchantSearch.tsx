@@ -10,7 +10,6 @@ import {
 import AppSearchBar from 'components/common/AppSearchBar';
 import AppTag from 'components/common/AppTag';
 import { IAppState } from 'store/types';
-import { refreshAndGetEnchants } from 'store/enchant/thunkCreators';
 
 const mapStateToProps = ({ enchant: { searchTags } }: IAppState) => ({
   searchTags,
@@ -19,7 +18,6 @@ const mapStateToProps = ({ enchant: { searchTags } }: IAppState) => ({
 const mapDispatchToProps = {
   tagAdded,
   tagRemoved,
-  refreshAndGetEnchants,
   enchantsArrayCleared,
 };
 

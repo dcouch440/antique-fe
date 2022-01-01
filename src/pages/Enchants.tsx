@@ -1,13 +1,6 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
-import {
-  Suspense,
-  lazy,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { Suspense, lazy, useEffect, useLayoutEffect, useRef } from 'react';
 
 import EnchantTagSearch from 'components/enchants/EnchantSearch';
 import { IAppState } from 'store/types';
@@ -17,8 +10,8 @@ import { getEnchants } from 'store/enchant/thunkCreators';
 
 const LazyEnchant = lazy(() => import('components/enchants/Enchant'));
 
-const mapStateToProps = ({ enchant }: IAppState) => ({
-  enchant,
+const mapStateToProps = ({ enchant: { enchants } }: IAppState) => ({
+  enchants,
 });
 
 const mapDispatchToProps = {
@@ -35,7 +28,7 @@ type Props = PropsFromRedux;
 function Enchants({
   getEnchants,
   clearEnchantData,
-  enchant,
+  enchants,
 }: Props): JSX.Element {
   const theme = useTheme();
   const BBRef = useRef();
@@ -43,6 +36,8 @@ function Enchants({
   const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isBelowLg = useMediaQuery(theme.breakpoints.down('lg'));
   const isAboveExtraLg = useMediaQuery(theme.breakpoints.up('xl'));
+  const isVeryTallScreen = useMediaQuery(`media(max-height: 1000px)`);
+
   const columns = isBelowSm
     ? 1
     : isBelowMd
@@ -91,7 +86,7 @@ function Enchants({
           gridAutoFlow: 'dense',
         }}
       >
-        {enchant.enchants.map((item) => (
+        {enchants.map((item) => (
           <Suspense key={item.id} fallback={<span />}>
             <LazyEnchant {...item} />
           </Suspense>
