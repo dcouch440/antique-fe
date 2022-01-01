@@ -1,24 +1,26 @@
+import { Button, Typography } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   SIDEBAR_AUTH_TYPE_LOGIN,
   SIDEBAR_AUTH_TYPE_SIGNUP,
 } from 'constantVariables';
+import { thunkLogin, thunkSignup } from 'store/user/thunkCreators';
 
-import { Button } from '@mui/material';
 import Form from './Form';
 import { IAppState } from 'store/types';
 import { authTypeChanged } from 'store/sidebar/actionCreators';
-import { errorOccurred } from 'store/snackbar/actionCreators';
-import { thunkSignup } from 'store/user/thunkCreators';
+import { snackbarMessageSent } from 'store/snackbar/actionCreators';
 
-const mapStateToProps = ({ sidebar }: IAppState) => ({
+const mapStateToProps = ({ sidebar, user }: IAppState) => ({
   authType: sidebar.authType,
+  user,
 });
 
 const mapDispatchToProps = {
   authTypeChanged,
-  errorOccurred,
+  snackbarMessageSent,
   thunkSignup,
+  thunkLogin,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -43,9 +45,16 @@ function Authorize({
   authType,
   authTypeChanged,
   thunkSignup,
-  errorOccurred,
+  snackbarMessageSent,
+  thunkLogin,
+  user,
 }: Props): JSX.Element {
+  const isUserLoggedIn = Boolean(user.id);
   const isLoginForm = authType === SIDEBAR_AUTH_TYPE_LOGIN;
+
+  if (isUserLoggedIn) {
+    return <Typography color="primary">Welcome {user.username}</Typography>;
+  }
 
   const handleAuthVersionChange = () => {
     isLoginForm
@@ -53,19 +62,19 @@ function Authorize({
       : authTypeChanged(SIDEBAR_AUTH_TYPE_LOGIN);
   };
 
-  const handleLogin: HandleAuth = ({ username, password }) => {
-    username;
-    password;
+  const handleLogin: HandleAuth = ({ email, password }) => {
+    console.log('sdfsdfsdf');
+    thunkLogin({ email, password });
   };
 
-  const handleSignup: HandleAuth = async ({
+  const handleSignup: HandleAuth = ({
     username,
     password,
     confirmPassword,
     email,
   }) => {
     if (confirmPassword !== password) {
-      errorOccurred('Passwords Must Match');
+      snackbarMessageSent('Passwords Must Match');
       return;
     }
 

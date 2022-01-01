@@ -1,7 +1,10 @@
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, FormControlState, Typography, useTheme } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
-import AppInput from 'components/AppInput';
+import AddButton from './AddButton';
+import AppDescriptionSubText from 'components/common/AppDescriptionSubText';
+import AppHeader from 'components/common/AppHeader';
+import AppInput from 'components/common/AppInput';
 
 interface Props {
   tags: string[];
@@ -21,10 +24,31 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
     setInput('');
   };
 
+  const handleKeyPress: (e: React.KeyboardEvent<FormControlState>) => void = ({
+    key,
+  }) => key === 'Enter' && handleAddTag();
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <Typography></Typography>
-      <Box sx={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: 1 }}>
+      <AppHeader
+        component="h3"
+        size="sub"
+        text="What tags would help other find your item?"
+      />
+      <AppDescriptionSubText
+        text="Use relatable words that will make it easy for people to find your
+            item. Ex: Bottle, Gundamn..."
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          width: '100%',
+          flexWrap: 'wrap',
+          gap: 1,
+          pt: tags.length ? 3 : 0,
+          pb: tags.length ? 1 : 0,
+        }}
+      >
         {tags.map((tag: string, i: number) => (
           <Typography
             key={i}
@@ -33,6 +57,7 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
               width: 'fit-content',
               backgroundColor: theme.palette.primary.main,
               p: 1,
+              textAlign: 'center',
               cursor: 'pointer',
               minWidth: 80,
             }}
@@ -43,14 +68,18 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
           </Typography>
         ))}
       </Box>
-      <Box sx={{ display: 'flex', width: '100%' }}>
+      <Box
+        sx={{ display: 'flex', gap: 1, pt: tags.length ? 2 : 3, width: '100%' }}
+      >
         <AppInput
           aria-label="tags"
           value={input}
           sx={{ flex: 1 }}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
+          label="Enter a tag"
         />
-        <Button onClick={handleAddTag}>Add Tag</Button>
+        <AddButton onClick={handleAddTag} text="Add Tag" />
       </Box>
     </Box>
   );

@@ -16,8 +16,13 @@ export const CLEAR_ERROR = 'snackbar/clear-error';
 
 // user
 export const ADD_USER_TO_STORE = 'user/add-user-to-store';
+export const REMOVE_USER_FROM_STORE = 'user/remove-user-from-store';
 
 // enchant
 export const ENCHANT_UPDATE_SEARCH_TYPE = 'enchant/update-search-type';
 export const ENCHANT_UPDATE_SEARCH_QUERY = 'enchant/update-search-query';
 export const ENCHANT_GET_ENCHANTS = 'enchant/get-enchants';
+export const ENCHANT_ENCHANT_DATA = 'enchant/clear-enchants';
+export const ENCHANT_ADD_TAG = 'enchant/add-tag';
+export const ENCHANT_REMOVE_TAG = 'enchant/remove-tag';
+export const ENCHANT_ARRAY_CLEARED = 'enchant/array-cleared';

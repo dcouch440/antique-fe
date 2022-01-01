@@ -1,7 +1,7 @@
 import { Box, Button, Typography, useTheme } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
-import AppInput from 'components/AppInput';
+import AppInput from 'components/common/AppInput';
 
 interface Props {
   imageToDisplay: string;

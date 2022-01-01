@@ -4,16 +4,11 @@ import { Fab } from '@mui/material';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 
 type HandleChange = React.ChangeEventHandler<HTMLInputElement>;
-
 interface Props {
   handleChange: HandleChange;
-  value: string | number | readonly string[] | undefined;
 }
 
-export default function FileInput({
-  handleChange,
-  value,
-}: Props): ReactElement {
+export default function FileInput({ handleChange }: Props): ReactElement {
   return (
     <label htmlFor="upload-photo">
       <input
@@ -23,8 +18,7 @@ export default function FileInput({
         accept="image/*"
         type="file"
         onChange={handleChange}
-        multiple
-        value={value}
+        value=""
       />
       <Fab
         sx={{ outline: 'none', boxShadow: 'none' }}

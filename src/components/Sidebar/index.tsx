@@ -35,7 +35,7 @@ function Sidebar({ sidebarVisibility }: Props): JSX.Element {
           data-testid="Sidebar-open"
           sx={{
             position: 'fixed',
-            zIndex: 5,
+            zIndex: 9999,
             borderBottom: '1px solid ' + theme.palette.primary.main,
           }}
         >

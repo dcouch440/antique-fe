@@ -1,9 +1,3 @@
-import {
-  ButtonGroup,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import {
   ENCHANT_SEARCH_TYPE_FRIEND,
@@ -11,6 +5,7 @@ import {
   ENCHANT_SEARCH_TYPE_POPULAR,
 } from 'constantVariables';
 
+import { ButtonGroup } from '@mui/material';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import { IAppState } from 'store/types';

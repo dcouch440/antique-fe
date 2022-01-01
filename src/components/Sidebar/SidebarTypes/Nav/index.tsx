@@ -46,7 +46,7 @@ export default function Nav(): JSX.Element {
         <LazyNavigationLink
           title="Post"
           description="Deserunt id non elit tempor est velit adipisicing cupidatat."
-          path="/"
+          path="/enchants/post"
           images={[
             'https://res.cloudinary.com/dbyretay5/image/upload/v1620686977/category/art_mpxdif.webp',
             'https://res.cloudinary.com/dbyretay5/image/upload/v1620686973/category/pexels-pixabay-221327_dhphth.webp',

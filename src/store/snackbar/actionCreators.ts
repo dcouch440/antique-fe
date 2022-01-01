@@ -3,7 +3,9 @@ import { CLEAR_ERROR, UPDATE_ERROR } from 'store/actions';
 
 import { SnackBarError } from './reducer';
 
-export const errorOccurred: ActionCreators<SnackBarError> = (payload) => ({
+export const snackbarMessageSent: ActionCreators<SnackBarError> = (
+  payload
+) => ({
   type: UPDATE_ERROR,
   payload,
 });
@@ -11,6 +13,6 @@ export const errorOccurred: ActionCreators<SnackBarError> = (payload) => ({
 /**
  * clears error - setting to null
  */
-export const errorCleared: ActionCreatorsNPL = () => ({
+export const snackbarMessageCleared: ActionCreatorsNPL = () => ({
   type: CLEAR_ERROR,
 });

@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
 
-import AppInput from 'components/AppInput';
-import { EnchantState } from './EnchantCreate';
+import AppInput from 'components/common/AppInput';
 import FormWidthContainer from 'Layout/FormWidthContainer';
+import { IEnchantInfo } from './CreateAndUpdate';
 
 interface OwnProps {
   onChange: ReactOnChange;
 }
 
-type Props = EnchantState & OwnProps;
+type Props = IEnchantInfo & OwnProps;
 
 function EnchantInfoForm({
   itemName,
@@ -32,6 +32,7 @@ function EnchantInfoForm({
         value={itemName}
         label="Enchant Name"
         name="itemName"
+        required
       />
       <AppInput
         sx={{ marginBottom: 3, width: '100%' }}
@@ -53,9 +54,10 @@ function EnchantInfoForm({
         value={title}
         label="What would you like to title this enchant?"
         name="title"
+        required
       />
       <AppInput
-        sx={{ marginBottom: 3, width: '100%' }}
+        sx={{ width: '100%' }}
         onChange={onChange}
         value={whereFound}
         label="Where did you find it?"

@@ -17,7 +17,7 @@ function ImageActionButton({ onClick, children, sx }: Props): ReactElement {
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
-        borderRadius: 1,
+        borderRadius: 2,
         width: 'fit-content',
         ...sx,
       }}

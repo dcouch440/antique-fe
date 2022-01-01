@@ -1,12 +1,6 @@
-import { Box, SxProps } from '@mui/material';
-import React, { ReactElement } from 'react';
+import { Box } from '@mui/material';
+import React from 'react';
 
-interface Props {
-  src: string;
-  alt: string;
-  sx?: SxProps;
-}
-
-export default function Image({ src, ...props }: Props): ReactElement {
-  return <Box component="img" src={src} {...props} />;
+export default function Image({ ...props }): JSX.Element {
+  return <Box component="img" {...props} />;
 }

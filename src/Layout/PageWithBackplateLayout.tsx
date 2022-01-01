@@ -1,11 +1,11 @@
+import { Typography, useTheme } from '@mui/material';
+
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
-import TopBar from 'components/TopBar';
-import { useTheme } from '@mui/material';
 
 interface IPageWithBackplateLayout {
-  header: string;
+  header?: string;
   children: JSX.Element | JSX.Element[];
 }
 
@@ -20,6 +20,7 @@ function PageWithBackplateLayout({
         flex: `0 1 1750px`,
         maxWidth: ['100%', '100%', '80vw'],
         margin: '0 auto',
+        paddingTop: theme.topBarHeight + 'px',
         minHeight: `calc(100% - ${theme.topBarHeight}px)`,
         height: `calc(100% - ${theme.topBarHeight}px)`,
         '& > *': {
@@ -29,39 +30,28 @@ function PageWithBackplateLayout({
       }}
       component="main"
     >
-      {/* <Box
-        sx={{
-          borderBottom: `1px solid ${theme.custom.palette.secondary.transparent}`,
-          color: 'primary.main',
-          p: 2,
-          height: theme.headerHeight,
-          backgroundColor: 'secondary.main',
-        }}
-        component="header"
-      >
-        <img
-          style={{
-            position: 'absolute',
-            height: 'clamp(80px, 14vw, 150px)',
-            right: '1%',
-            top: 0,
-          }}
-          src={waxSeal}
-          alt="Application logo - red wax seal"
-        />
-        <Typography
-          key="header"
-          color="primary"
+      {header && (
+        <Box
           sx={{
-            fontSize: [26, 46, 64],
-            textAlign: 'center',
-            fontFamily: `${theme.custom.typography.families.cursive}`,
+            color: 'primary.main',
+            p: 1,
           }}
-          component="h1"
+          component="header"
         >
-          {header}
-        </Typography>
-      </Box> */}
+          <Typography
+            key="header"
+            color="primary"
+            sx={{
+              fontSize: [26, 46, 64],
+              textAlign: 'center',
+              fontFamily: `${theme.custom.typography.families.cursive}`,
+            }}
+            component="h1"
+          >
+            {header}
+          </Typography>
+        </Box>
+      )}
       <Box
         sx={{
           minHeight: `100%`,

@@ -9,7 +9,7 @@ import { ConnectedProps } from 'react-redux';
 import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import SidebarTypeSelector from 'components/AppSidebarTypeSelector';
+import SidebarTypeSelector from 'components/common/AppSidebarTypeSelector';
 import { connect } from 'react-redux';
 
 const mapStateToProps = () => ({});
@@ -27,9 +27,13 @@ function TopBar(): JSX.Element {
     <Box
       sx={{
         display: 'flex',
+        position: 'fixed',
+        width: '100%',
+        zIndex: 6,
         justifyContent: 'flex-end',
         backgroundColor: theme.palette.secondary.dark,
-        borderBottom: `1px solid ${theme.palette.primary.dark}`,
+        borderBottom: '1px solid ' + theme.palette.primary.dark,
+        boxShadow: 5,
       }}
       key="SidebyTypeSectorsz"
     >

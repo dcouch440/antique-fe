@@ -70,10 +70,12 @@ const themeBase = createTheme({
   palette: {
     primary: {
       main: '#ffffff',
+      dark: 'rgb(94 94 94)',
     },
     secondary: {
       main: '#171717',
       light: '#1d1d1d',
+      dark: '#0b0b0b',
     },
   },
   typography: {
@@ -95,7 +97,7 @@ const themeBase = createTheme({
         transparent: '#FAEBD723',
         lessTransparent: '#FAEBD753',
       },
-      backgroundColor: 'rgb(47 47 47)',
+      backgroundColor: '#171717',
     },
     typography: {
       sizes: {
