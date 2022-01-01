@@ -1,7 +1,10 @@
 import { ActionCreators, ActionCreatorsNPL } from 'store/types';
 import {
-  ENCHANT_CLEAR_ENCHANTS,
+  ENCHANT_ADD_TAG,
+  ENCHANT_ARRAY_CLEARED,
+  ENCHANT_ENCHANT_DATA,
   ENCHANT_GET_ENCHANTS,
+  ENCHANT_REMOVE_TAG,
   ENCHANT_UPDATE_SEARCH_QUERY,
   ENCHANT_UPDATE_SEARCH_TYPE,
 } from 'store/actions';
@@ -29,6 +32,20 @@ export const enchantsRetrieved: ActionCreators<{
   payload: { lastSeen, enchants },
 });
 
-export const clearEnchants: ActionCreatorsNPL = () => ({
-  type: ENCHANT_CLEAR_ENCHANTS,
+export const clearEnchantData: ActionCreatorsNPL = () => ({
+  type: ENCHANT_ENCHANT_DATA,
+});
+
+export const enchantsArrayCleared: ActionCreatorsNPL = () => ({
+  type: ENCHANT_ARRAY_CLEARED,
+});
+
+export const tagAdded: ActionCreators<string> = (payload) => ({
+  type: ENCHANT_ADD_TAG,
+  payload,
+});
+
+export const tagRemoved: ActionCreators<string> = (payload) => ({
+  type: ENCHANT_REMOVE_TAG,
+  payload,
 });

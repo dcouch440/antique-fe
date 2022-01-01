@@ -5,11 +5,11 @@ import { AnyAction } from 'redux';
 export type SnackBarError = string | null;
 
 export interface ISnackbarState {
-  error: SnackBarError;
+  message: SnackBarError;
 }
 
 export const errorInitialState: ISnackbarState = {
-  error: '',
+  message: '',
 };
 
 function reducer(
@@ -20,12 +20,12 @@ function reducer(
     case UPDATE_ERROR:
       return {
         ...state,
-        error: payload,
+        message: payload,
       };
     case CLEAR_ERROR:
       return {
         ...state,
-        error: null,
+        message: null,
       };
     default:
       return state;

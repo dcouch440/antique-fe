@@ -1,7 +1,7 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { ReactElement, useEffect, useState } from 'react';
 
-import AppUser from 'components/AppUser';
+import AppUser from 'components/common/AppUser';
 
 interface IEnchant {
   username: string;
@@ -59,21 +59,21 @@ function Enchant({
         position: 'relative',
         width: 'auto',
         ...getSpan(),
-        borderRadius: (theme) => theme.spacing(1),
+        borderRadius: (theme) => theme.spacing(0.5),
         overflow: 'hidden',
       }}
     >
       <Box sx={{ position: 'absolute', width: '100%', height: '100%' }}>
         <AppUser username={username} userAvatar={userAvatar} />
-        <Box>
-          <Typography color="primary">{itemName}</Typography>
-          <Typography color="primary">
-            {likes ? likes : 'Be the first to like'}
-          </Typography>
-        </Box>
       </Box>
       <img
-        style={{ objectFit: 'cover', height: '100%', width: '100%' }}
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+          height: '100%',
+          width: '100%',
+        }}
+        loading="lazy"
         src={images[0].url}
         alt={`An depiction of ${username}'s item`}
       />

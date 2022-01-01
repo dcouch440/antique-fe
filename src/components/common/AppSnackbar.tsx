@@ -3,14 +3,14 @@ import { ConnectedProps, connect } from 'react-redux';
 import { IAppState } from 'store/types';
 import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
-import { errorCleared } from 'store/snackbar/actionCreators';
+import { snackbarMessageCleared } from 'store/snackbar/actionCreators';
 
-const mapStateToProps = ({ snackbar: { error } }: IAppState) => ({
-  error,
+const mapStateToProps = ({ snackbar }: IAppState) => ({
+  snackbar,
 });
 
 const mapDispatchToProps = {
-  errorCleared,
+  snackbarMessageCleared,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -19,16 +19,16 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux;
 
-function AppSnackBar({ error, errorCleared }: Props) {
-  const showSnackbar = Boolean(error);
+function AppSnackBar({ snackbar, snackbarMessageCleared }: Props) {
+  const showSnackbar = Boolean(snackbar.message);
 
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       open={showSnackbar}
       autoHideDuration={6000}
-      onClose={errorCleared}
-      message={error}
+      onClose={snackbarMessageCleared}
+      message={snackbar.message}
     />
   );
 }

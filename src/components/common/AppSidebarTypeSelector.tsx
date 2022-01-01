@@ -7,6 +7,7 @@ import {
 
 import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
+import { thunkLogout } from 'store/user/thunkCreators';
 
 const mapStateToProps = ({
   sidebar: { sidebarVisibility },
@@ -19,6 +20,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = {
   sidebarTypeChanged,
   visibilityToggled,
+  thunkLogout,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -46,6 +48,7 @@ function AppSidebarTypeSelector({
   sidebarVisibility,
   visibilityToggled,
   variantType = 'Fab',
+  thunkLogout,
   ...props
 }: Props): JSX.Element {
   const handleClick = () => {
@@ -56,7 +59,7 @@ function AppSidebarTypeSelector({
   };
 
   const handleLogout = () => {
-    // LOGOUT FUNCTIONALITY
+    thunkLogout();
   };
 
   const handlePickCorrectHandler = () => {

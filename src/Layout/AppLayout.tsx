@@ -1,8 +1,9 @@
 import { ConnectedProps, connect } from 'react-redux';
-import { ScrollContainer, Sidebar } from 'components';
 
 import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
+import ScrollContainer from 'components/ScrollContainer';
+import Sidebar from 'components/Sidebar';
 import TopBar from 'components/TopBar';
 import { useTheme } from '@mui/material';
 

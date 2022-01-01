@@ -10,7 +10,7 @@ interface IOwnProps {
   path: string;
   title: string;
   images: string[];
-  description: string;
+  description?: string;
 }
 
 export default function NavigationLink({
@@ -64,14 +64,11 @@ export default function NavigationLink({
       {images.map((image: string, key: number) => (
         <img
           style={{
-            ...{
-              position: 'absolute',
-              opacity: 0,
-              backgroundSize: 'cover',
-              transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
-              width: '100%',
-              filter: 'grayscale(10%)',
-            },
+            position: 'absolute',
+            opacity: 0,
+            backgroundSize: 'cover',
+            transition: 'opacity 5s ease-in-out, transform 0.2s ease-in-out',
+            width: '100%',
             ...(key === int
               ? {
                   opacity: 0.8,
@@ -89,7 +86,6 @@ export default function NavigationLink({
           cursor: 'pointer',
           transition: '0.2s',
           letterSpacing: '2px',
-          backdropFilter: 'blur(3px)',
           borderRadius: 2,
           height: '100%',
           width: '100%',
@@ -102,6 +98,7 @@ export default function NavigationLink({
           sx={{
             fontWeight: 'bold',
             fontSize: 'sizes.lg',
+            backgroundColor: 'black',
             p: 1,
           }}
           component="h3"

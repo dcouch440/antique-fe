@@ -1,14 +1,8 @@
-import {
-  Box,
-  Button,
-  FormControlState,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, FormControlState, Typography, useTheme } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import AddButton from './AddButton';
-import AppInput from 'components/AppInput';
+import AppInput from 'components/common/AppInput';
 import Close from '@mui/icons-material/Close';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';

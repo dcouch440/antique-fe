@@ -50,7 +50,9 @@ export const thunkSession = (): ThunkCreators => async (dispatch) => {
 export const thunkLogout = (): ThunkCreators => async (dispatch, getState) => {
   try {
     const { id } = getState().user;
-    const request = await axios.post(`/users/${id}/log-out`);
+    const request = await axios.delete(`/users/${id}/log-out`, {
+      withCredentials: true,
+    });
     if (request.status === 204) {
       dispatch(userLoggedOut());
     }

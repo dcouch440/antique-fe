@@ -6,9 +6,10 @@ import UserAvatar from './AppUserAvatar';
 interface Props {
   username: string;
   userAvatar: string;
+  renderSubText?: string;
 }
 
-function AppUser({ username, userAvatar }: Props): ReactElement {
+function AppUser({ username, userAvatar, renderSubText }: Props): ReactElement {
   return (
     <Box
       sx={{
@@ -22,7 +23,20 @@ function AppUser({ username, userAvatar }: Props): ReactElement {
       }}
     >
       <UserAvatar src={userAvatar} alt={username} />
-      <Typography color="primary">{username}</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Typography fontWeight="bold" color="primary">
+          {username}
+        </Typography>
+        <Typography
+          sx={{
+            width: '100%',
+            fontSize: 12,
+          }}
+          color="primary"
+        >
+          {renderSubText}
+        </Typography>
+      </Box>
     </Box>
   );
 }

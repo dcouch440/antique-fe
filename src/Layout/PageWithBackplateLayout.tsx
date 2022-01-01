@@ -3,7 +3,6 @@ import { Typography, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
-import TopBar from 'components/TopBar';
 
 interface IPageWithBackplateLayout {
   header?: string;

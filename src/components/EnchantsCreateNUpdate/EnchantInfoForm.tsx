@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import AppInput from 'components/AppInput';
+import AppInput from 'components/common/AppInput';
 import FormWidthContainer from 'Layout/FormWidthContainer';
 import { IEnchantInfo } from './CreateAndUpdate';
 

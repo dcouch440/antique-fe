@@ -9,7 +9,7 @@ import { ConnectedProps } from 'react-redux';
 import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import SidebarTypeSelector from 'components/AppSidebarTypeSelector';
+import SidebarTypeSelector from 'components/common/AppSidebarTypeSelector';
 import { connect } from 'react-redux';
 
 const mapStateToProps = () => ({});

@@ -1,21 +1,19 @@
-import { Button, Typography, useTheme } from '@mui/material';
+import { Button, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import AppDescriptionSubText from 'components/AppDescriptionSubText';
-import AppDivider from 'components/AppDivider';
 import { Box } from '@mui/system';
 import EnchantImageList from './EnchantImageListItem';
 import EnchantInfoForm from './EnchantInfoForm';
 import EnchantTags from './EnchantTags';
 import FileInput from './FileInput';
 import FormWidthContainer from 'Layout/FormWidthContainer';
-import Header from 'components/AppHeader';
+import Header from 'components/common/AppHeader';
 import { IAppState } from 'store/types';
-import PageHeader from 'components/AppPageHeader';
+import PageHeader from 'components/common/AppPageHeader';
 import axios from 'axios';
-import { errorOccurred } from 'store/snackbar/actionCreators';
+import { snackbarMessageSent } from 'store/snackbar/actionCreators';
 import { validateImage } from 'image-validator';
 
 export interface IImageData {
@@ -54,7 +52,7 @@ export type RemoveImage = (id: string, index: number) => void;
 const mapStateToProps = ({ user: { id } }: IAppState) => ({ id });
 
 const mapDispatchToProps = {
-  errorOccurred,
+  snackbarMessageSent,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -72,7 +70,7 @@ type Props = PropsFromRedux & OwnProps;
 function CreateAndUpdate({
   id,
   newUpload,
-  errorOccurred,
+  snackbarMessageSent,
 }: Props): ReactElement {
   const [fileState, setFileState] = useState<Array<File>>([]);
   const theme = useTheme();
@@ -128,12 +126,12 @@ function CreateAndUpdate({
 
     // make sure its valid
     if (!(await validateImage(file))) {
-      errorOccurred('Must be an image');
+      snackbarMessageSent('Must be an image');
       return;
     }
 
     if (ext === 'webp') {
-      errorOccurred('Image format is not accepted');
+      snackbarMessageSent('Image format is not accepted');
       return;
     }
 
@@ -175,7 +173,7 @@ function CreateAndUpdate({
 
     if (enchant.images.length <= 1) {
       // snackbar error
-      errorOccurred('At least one image must be present at all times.');
+      snackbarMessageSent('At least one image must be present at all times.');
       return;
     }
 
@@ -281,7 +279,9 @@ function CreateAndUpdate({
   const handleSubmit = async () => {
     if (requestSent.current === true) return;
     if (enchant.images.length < 1) {
-      errorOccurred('At least one image must be present for this submission.');
+      snackbarMessageSent(
+        'At least one image must be present for this submission.'
+      );
       return;
     }
 
@@ -298,7 +298,7 @@ function CreateAndUpdate({
         formData.append(randomId, fileState[i]);
       }
 
-      errorOccurred('Uploading images');
+      snackbarMessageSent('Uploading images');
 
       const { data } = await axios.post<AxiosImagePostRequest>(
         '/enchants/upload',

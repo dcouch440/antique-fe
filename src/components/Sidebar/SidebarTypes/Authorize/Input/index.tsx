@@ -5,7 +5,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import AppInput from 'components/AppInput';
+import AppInput from 'components/common/AppInput';
 import React from 'react';
 
 /**

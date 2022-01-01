@@ -1,17 +1,10 @@
-import {
-  Box,
-  Button,
-  FormControlState,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, FormControlState, Typography, useTheme } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import AddButton from './AddButton';
-import AppDescriptionSubText from 'components/AppDescriptionSubText';
-import AppHeader from 'components/AppHeader';
-import AppInput from 'components/AppInput';
-import { TagSharp } from '@mui/icons-material';
+import AppDescriptionSubText from 'components/common/AppDescriptionSubText';
+import AppHeader from 'components/common/AppHeader';
+import AppInput from 'components/common/AppInput';
 
 interface Props {
   tags: string[];

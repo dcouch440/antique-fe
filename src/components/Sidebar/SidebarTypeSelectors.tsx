@@ -13,7 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import PersonIcon from '@mui/icons-material/Person';
-import SidebarTypeSelector from '../AppSidebarTypeSelector';
+import SidebarTypeSelector from 'components/common/AppSidebarTypeSelector';
 import { useTheme } from '@mui/material';
 
 const mapStateToProps = ({ user }: IAppState) => ({

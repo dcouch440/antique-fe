@@ -9,7 +9,7 @@ import { thunkLogin, thunkSignup } from 'store/user/thunkCreators';
 import Form from './Form';
 import { IAppState } from 'store/types';
 import { authTypeChanged } from 'store/sidebar/actionCreators';
-import { errorOccurred } from 'store/snackbar/actionCreators';
+import { snackbarMessageSent } from 'store/snackbar/actionCreators';
 
 const mapStateToProps = ({ sidebar, user }: IAppState) => ({
   authType: sidebar.authType,
@@ -18,7 +18,7 @@ const mapStateToProps = ({ sidebar, user }: IAppState) => ({
 
 const mapDispatchToProps = {
   authTypeChanged,
-  errorOccurred,
+  snackbarMessageSent,
   thunkSignup,
   thunkLogin,
 };
@@ -45,7 +45,7 @@ function Authorize({
   authType,
   authTypeChanged,
   thunkSignup,
-  errorOccurred,
+  snackbarMessageSent,
   thunkLogin,
   user,
 }: Props): JSX.Element {
@@ -74,7 +74,7 @@ function Authorize({
     email,
   }) => {
     if (confirmPassword !== password) {
-      errorOccurred('Passwords Must Match');
+      snackbarMessageSent('Passwords Must Match');
       return;
     }
 

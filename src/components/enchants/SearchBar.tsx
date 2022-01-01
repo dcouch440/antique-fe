@@ -1,6 +1,6 @@
 import { ConnectedProps, connect } from 'react-redux';
 
-import { AppSearchBar } from 'components';
+import AppSearchBar from 'components/common/AppSearchBar';
 import { searchQueryUpdated } from 'store/enchant/actionCreators';
 
 /**
