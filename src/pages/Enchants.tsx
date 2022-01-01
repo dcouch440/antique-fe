@@ -36,7 +36,6 @@ function Enchants({
   const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isBelowLg = useMediaQuery(theme.breakpoints.down('lg'));
   const isAboveExtraLg = useMediaQuery(theme.breakpoints.up('xl'));
-  const isVeryTallScreen = useMediaQuery(`media(max-height: 1000px)`);
 
   const columns = isBelowSm
     ? 1
