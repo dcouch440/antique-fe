@@ -54,7 +54,7 @@ Currently supported is extra wide images, tall images, and squarish images.
 
 Once information is calculated the image is fitted into a grid which adapts and builds as it goes.
   
-![Active Grid](https://res.cloudinary.com/dbyretay5/image/upload/v1641251237/enchant-repo/Enchant_Display_osmq11.png)
+<img src="https://res.cloudinary.com/dbyretay5/image/upload/v1641251237/enchant-repo/Enchant_Display_osmq11.png" />
   
 ## `Back End Tech Overview`
   - `Go language`
