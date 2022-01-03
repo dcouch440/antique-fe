@@ -12,6 +12,7 @@ Future features will include, personal DM's, user streams, and channels,
 ## `Front End Tech Overview`
   - `Typescript`
   - `React`
+  - `Redux`
   - `MongoDB`
   - `Material UI`
   - `Axios`
