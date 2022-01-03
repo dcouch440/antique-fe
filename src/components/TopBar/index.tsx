@@ -45,7 +45,7 @@ function TopBar(): JSX.Element {
           fontFamily: (theme) => theme.custom.typography.families.cursive,
         }}
       >
-        Enchanted Finds
+        Enchants
       </Typography>
       <Box>
         <AppSidebarTypeSelector

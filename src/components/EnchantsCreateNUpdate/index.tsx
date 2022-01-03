@@ -30,6 +30,7 @@ export interface IEnchantInfo {
   itemName: string;
   condition: string;
   origin: string;
+  about: string;
   title: string;
   images: Array<IImageData>;
   tags: string[];
@@ -96,12 +97,13 @@ function EnchantsCreateNUpdate({
     condition: '',
     origin: '',
     title: '',
+    about: '',
     images: [],
     tags: [],
     whereFound: '',
   });
   const [imagesToDelete, setImagesToDelete] = useState<Array<IImageData>>([]);
-  console.log(enchant.userId);
+
   // If the user is trying to creat a new post
   // exit useEffect
   useEffect(() => {
@@ -180,39 +182,6 @@ function EnchantsCreateNUpdate({
       snackbarMessageSent(`That image could not be loaded.`);
       console.error(err);
     }
-
-    // // read incoming file and set it in state.
-    // new Promise<{ result: unknown; file: File }>((resolve, reject) => {
-    //   const reader = new FileReader();
-    //   reader.readAsDataURL(file);
-    //   reader.onload = () => {
-    //     resolve({ result: reader.result, file });
-    //   };
-
-    //   reader.onerror = () => {
-    //     reject('Failed to read image');
-    //   };
-    // })
-    //   .then(({ result, file }) => {
-    //     setEnchant((prev) => ({
-    //       ...prev,
-    //       images: [
-    //         ...prev.images,
-    //         {
-    //           id: '',
-    //           caption: '',
-    //           url: result as string,
-    //           favorite: false,
-    //         },
-    //       ],
-    //     }));
-
-    //     setFileState((prev) => [...prev, file]);
-    //   })
-    //   .catch((err) => {
-    //     snackbarMessageSent(`That image could not be loaded.`);
-    //     console.error(err);
-    //   });
   };
 
   const handleRemoveImage: (index: number) => void = (index) => {

@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
+import { Typography, useTheme } from '@mui/material';
 
 import AppInput from 'components/common/AppInput';
+import AppTextArea from 'components/common/AppTextArea';
 import FormWidthContainer from 'Layout/FormWidthContainer';
 import { IEnchantInfo } from '.';
 
@@ -16,8 +18,11 @@ function EnchantInfoForm({
   origin,
   title,
   whereFound,
+  about,
   onChange,
 }: Props): ReactElement {
+  const theme = useTheme();
+
   return (
     <FormWidthContainer
       component="form"
@@ -57,11 +62,27 @@ function EnchantInfoForm({
         required
       />
       <AppInput
-        sx={{ width: '100%' }}
+        sx={{ width: '100%', marginBottom: 3 }}
         onChange={onChange}
         value={whereFound}
         label="Where did you find it?"
         name="whereFound"
+      />
+      <Typography color="primary" sx={{ width: '100%', pl: 1, pb: 1 }}>
+        About
+      </Typography>
+      <AppTextArea
+        onChange={onChange}
+        style={{
+          width: '100%',
+          maxHeight: '200px',
+          maxWidth: '100%',
+          minWidth: '100%',
+          padding: theme.spacing(1),
+        }}
+        name="about"
+        value={about}
+        placeholder="Talk About it"
       />
     </FormWidthContainer>
   );
