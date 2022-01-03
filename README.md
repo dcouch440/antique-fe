@@ -39,6 +39,22 @@ Users can return to their post at any time and use the same interface to make up
   
 ![Upload and edit](https://res.cloudinary.com/dbyretay5/image/upload/v1641242365/enchant-repo/Create_Enchants_mll1fb.png)
 
+### `Adaptive Image Grid`
+Folder
+
+```
+src/components/Enchants
+```
+
+#### `Image specific sizes`
+
+In order to present images at every size with a close relation to their aspect ratio. This application features a onload ratio finder that finds how much wider the image is than tall and vise versa.
+
+Currently supported is extra wide images, tall images, and squarish images.
+
+Once information is calculated the image is fitted into a grid which adapts and builds as it goes.
+
+![Active Grid](https://res.cloudinary.com/dbyretay5/image/upload/v1641251237/enchant-repo/Enchant_Display_osmq11.png)
 
 ## `Back End Tech Overview`
   - `Go language`
