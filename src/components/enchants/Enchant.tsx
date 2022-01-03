@@ -28,13 +28,13 @@ function Enchant({ username, userAvatar, images, id }: IEnchant): ReactElement {
   useEffect(() => {
     const image = new Image();
     image.src = images[0].url;
-    image.onload = () => {
-      setImage({ height: image.height, width: image.width });
-    };
+    image.onload = () => setImage({ height: image.height, width: image.width });
   }, []);
 
   if (images.length === 0 || images[0]?.url === '') return <></>;
   if (img.height === 0 || img.width === 0) return <></>;
+
+  const handleClick = () => nav(`/enchants/${id}`);
 
   const getSpan = () => {
     const heightRatio = img.height / img.width;
@@ -59,7 +59,7 @@ function Enchant({ username, userAvatar, images, id }: IEnchant): ReactElement {
         borderRadius: (theme) => theme.spacing(0.5),
         overflow: 'hidden',
       }}
-      onClick={() => nav(`/enchants/${id}`)}
+      onClick={handleClick}
     >
       <Box sx={{ position: 'absolute', width: '100%', height: '100%' }}>
         <AppUser username={username} userAvatar={userAvatar} />

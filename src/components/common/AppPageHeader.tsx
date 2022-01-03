@@ -8,6 +8,10 @@ interface Props {
   renderSubText?: JSX.Element;
 }
 
+/**
+ * @description Renders a full width cursive header for pages.
+ */
+
 export default function AppPageHeader({
   text,
   renderSubText,

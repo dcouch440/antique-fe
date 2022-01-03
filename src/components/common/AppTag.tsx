@@ -7,6 +7,10 @@ interface Props {
   tag: string;
 }
 
+/**
+ * @description Gives a centered and consistent look to users tags.
+ */
+
 function AppTag({ onClick, tag }: Props): ReactElement {
   return (
     <Typography

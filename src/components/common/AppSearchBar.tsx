@@ -15,9 +15,8 @@ interface IOwnProps {
 
 /**
  * * AppSearchBar collects it's input and has it's own on submit button
- * * Prevent default is called within this search bar
  * * This component is housed in a form.
- * * Stretches to the full width of it's container on large screens, 50% on large.
+ * * Prevents default within
  * * can be over ridden from props
  */
 

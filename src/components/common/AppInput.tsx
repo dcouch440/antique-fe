@@ -1,4 +1,4 @@
-import { TextField, styled, useTheme } from '@mui/material';
+import { TextField, styled } from '@mui/material';
 
 const StyledInput = styled(TextField)`
   && {
@@ -41,6 +41,5 @@ const StyledInput = styled(TextField)`
  */
 
 export default function AppInput({ ...props }): JSX.Element {
-  const theme = useTheme();
-  return <StyledInput theme={theme} color="primary" {...props} />;
+  return <StyledInput color="primary" {...props} />;
 }

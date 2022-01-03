@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, Switch } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement } from 'react';
 import {

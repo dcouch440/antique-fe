@@ -6,6 +6,10 @@ interface Props {
   text: string;
 }
 
+/**
+ * @description Renders screen adaptive text.
+ */
+
 function AppDescriptionSubText({ text }: Props): ReactElement {
   return (
     <Typography

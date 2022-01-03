@@ -9,6 +9,10 @@ interface Props {
   renderSubText?: string;
 }
 
+/**
+ * @description Displays a users avatar with username. Renders optional subtext.
+ */
+
 function AppUser({ username, userAvatar, renderSubText }: Props): ReactElement {
   return (
     <Box

@@ -19,6 +19,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux;
 
+/**
+ * Displays messages located within the store. See: Store/snackbar
+ */
+
 function AppSnackBar({ snackbar, snackbarMessageCleared }: Props) {
   const showSnackbar = Boolean(snackbar.message);
 

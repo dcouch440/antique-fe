@@ -15,7 +15,6 @@ const StyledTextArea = styled(TextareaAutosize)(
 
 function AppTextArea({ ...props }): ReactElement {
   const theme = useTheme();
-
   return <StyledTextArea theme={theme} {...props} />;
 }
 
