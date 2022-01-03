@@ -6,11 +6,9 @@ import { TypeKeysAsString } from 'store/types';
 export interface User {
   id: UserId;
   username: Username;
-  email: Email;
 }
 export type UserId = string | null;
 export type Username = string | null;
-export type Email = string | null;
 export type UserInfo = TypeKeysAsString<User>;
 
 // UserState will be expanded with extends.
@@ -31,14 +29,12 @@ function reducer(
         ...state,
         id: payload.id,
         username: payload.username,
-        email: payload.email,
       };
     case REMOVE_USER_FROM_STORE:
       return {
         ...state,
         id: null,
         username: null,
-        email: null,
       };
     default:
       return state;

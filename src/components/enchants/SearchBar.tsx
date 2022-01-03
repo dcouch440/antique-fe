@@ -20,7 +20,7 @@ function EnchantsSearchBar({ searchQueryUpdated }: Props): JSX.Element {
   const handleOnClear = () => searchQueryUpdated(null);
   return (
     <AppSearchBar
-      sx={{ pl: 1 }}
+      sx={{ maxWidth: 1000 }}
       onSubmit={handleSubmit}
       onClear={handleOnClear}
     />

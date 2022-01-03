@@ -40,6 +40,7 @@ export const thunkSession = (): ThunkCreators => async (dispatch) => {
         withCredentials: true,
       }
     );
+    console.log(data);
     dispatch(userLoggedIn(data));
   } catch (err) {
     //TODO: handle error, snackbar?

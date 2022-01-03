@@ -3,6 +3,7 @@ import {
   ENCHANT_ADD_TAG,
   ENCHANT_ARRAY_CLEARED,
   ENCHANT_ENCHANT_DATA,
+  ENCHANT_GET_ENCHANT,
   ENCHANT_GET_ENCHANTS,
   ENCHANT_REMOVE_TAG,
   ENCHANT_UPDATE_SEARCH_QUERY,
@@ -38,6 +39,11 @@ export const clearEnchantData: ActionCreatorsNPL = () => ({
 
 export const enchantsArrayCleared: ActionCreatorsNPL = () => ({
   type: ENCHANT_ARRAY_CLEARED,
+});
+
+export const enchantRetrieved: ActionCreators<IEnchant> = (payload) => ({
+  type: ENCHANT_GET_ENCHANT,
+  payload,
 });
 
 export const tagAdded: ActionCreators<string> = (payload) => ({

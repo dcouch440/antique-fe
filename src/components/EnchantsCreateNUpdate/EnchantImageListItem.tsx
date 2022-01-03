@@ -38,6 +38,7 @@ export default function EnchantImageListItem({
   const [editCaption, setEditCaption] = useState(!caption);
   const handleEditCaption = () => setEditCaption(true);
   const handleUpdateOwnCaption = () => {
+    if (input.trim() === '') return;
     updateCaption(input, index);
     setEditCaption(false);
   };

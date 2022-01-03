@@ -47,6 +47,11 @@ type AxiosImagePostRequest = Array<{
   wasSuccessful: boolean;
 }>;
 
+type FileReadResults = {
+  result: string | ArrayBuffer | null;
+  fileData: File;
+};
+
 export type RemoveImage = (id: string, index: number) => void;
 
 const mapStateToProps = ({ user: { id } }: IAppState) => ({ id });
@@ -67,7 +72,7 @@ type Props = PropsFromRedux & OwnProps;
  * * their respective images.
  */
 
-function CreateAndUpdate({
+function EnchantsCreateNUpdate({
   id,
   newUpload,
   snackbarMessageSent,
@@ -96,11 +101,15 @@ function CreateAndUpdate({
     whereFound: '',
   });
   const [imagesToDelete, setImagesToDelete] = useState<Array<IImageData>>([]);
-
+  console.log(enchant.userId);
+  // If the user is trying to creat a new post
+  // exit useEffect
   useEffect(() => {
     if (newUpload) return;
     axios
-      .get<IEnchantInfo>(`/enchants/${param.enchantId}/update`)
+      .get<IEnchantInfo>(`/enchants/${param.enchantId}/update`, {
+        withCredentials: true,
+      })
       .then(({ data }) => {
         setEnchant(data);
         setDoneLoading(true);
@@ -115,59 +124,98 @@ function CreateAndUpdate({
     }));
   };
 
-  const handleFileInputChange: ReactOnChange = async (e) => {
-    const { target } = e;
+  const handleFileInputChange: ReactOnChange = async ({ target }) => {
     // check if file exists
     if (!target.files) return;
     const file = target.files[0];
 
-    const splitFileName = file.name.split('.');
-    const ext = splitFileName[splitFileName.length - 1];
-
-    // make sure its valid
-    if (!(await validateImage(file))) {
-      snackbarMessageSent('Must be an image');
+    try {
+      // make sure its valid
+      if (!(await validateImage(file))) {
+        snackbarMessageSent('Must be an image.');
+        return;
+      }
+    } catch (err) {
+      console.error(err);
       return;
     }
 
-    if (ext === 'webp') {
-      snackbarMessageSent('Image format is not accepted');
+    // verify the format will work with the backend resizer
+    const splitFilename = file.name.split('.');
+    const ext = splitFilename[splitFilename.length - 1].toLowerCase();
+    const formats = ['jpg', 'jpeg', 'png', 'tif', 'tiff', 'bmp'];
+    if (!formats.includes(ext)) {
+      snackbarMessageSent(
+        `Unsupported format. Supported formats: ${formats.join(', ')}`
+      );
       return;
     }
 
-    // read incoming file and set it in state.
-    new Promise<{ result: unknown; file: File }>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        resolve({ result: reader.result, file });
-      };
+    try {
+      const { result, fileData } = await new Promise<FileReadResults>(
+        (resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () =>
+            resolve({ result: reader.result, fileData: file });
+          reader.onerror = () => reject('Failed to read image');
+        }
+      );
 
-      reader.onerror = () => {
-        reject('Failed to read image');
-      };
-    })
-      .then(({ result, file }) => {
-        setEnchant((prev) => ({
-          ...prev,
-          images: [
-            ...prev.images,
-            {
-              id: '',
-              caption: '',
-              url: result as string,
-              favorite: false,
-            },
-          ],
-        }));
-        //! lookup file typing
-        console.log(file);
-        setFileState((prev) => [...prev, file]);
-      })
-      .catch((err) => console.error(err));
+      setEnchant((prev) => ({
+        ...prev,
+        images: [
+          ...prev.images,
+          {
+            id: '',
+            caption: '',
+            url: result as string,
+            favorite: false,
+          },
+        ],
+      }));
+
+      setFileState((prev) => [...prev, fileData]);
+    } catch (err) {
+      snackbarMessageSent(`That image could not be loaded.`);
+      console.error(err);
+    }
+
+    // // read incoming file and set it in state.
+    // new Promise<{ result: unknown; file: File }>((resolve, reject) => {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   reader.onload = () => {
+    //     resolve({ result: reader.result, file });
+    //   };
+
+    //   reader.onerror = () => {
+    //     reject('Failed to read image');
+    //   };
+    // })
+    //   .then(({ result, file }) => {
+    //     setEnchant((prev) => ({
+    //       ...prev,
+    //       images: [
+    //         ...prev.images,
+    //         {
+    //           id: '',
+    //           caption: '',
+    //           url: result as string,
+    //           favorite: false,
+    //         },
+    //       ],
+    //     }));
+
+    //     setFileState((prev) => [...prev, file]);
+    //   })
+    //   .catch((err) => {
+    //     snackbarMessageSent(`That image could not be loaded.`);
+    //     console.error(err);
+    //   });
   };
 
-  const handleRemoveImage = (index: number) => {
+  const handleRemoveImage: (index: number) => void = (index) => {
     const currentImage = enchant.images[index];
     const isNewUpload = currentImage.id === '';
 
@@ -219,7 +267,7 @@ function CreateAndUpdate({
     }
   };
 
-  const handleAddTag = (tag: string) => {
+  const handleAddTag: (tag: string) => void = (tag) => {
     setEnchant((prev) => {
       if (prev.tags.includes(tag) || tag.trim() === '') {
         return prev;
@@ -232,14 +280,14 @@ function CreateAndUpdate({
     });
   };
 
-  const handleRemoveTag = (tag: string) => {
+  const handleRemoveTag: (tag: string) => void = (tag) => {
     setEnchant((prev) => ({
       ...prev,
       tags: prev.tags.filter((t) => t !== tag),
     }));
   };
 
-  const handleUpdateFavorite = (index: number) => {
+  const handleUpdateFavorite: (index: number) => void = (index) => {
     setEnchant((prev) => ({
       ...prev,
       images: prev.images.map((img, mapIndex) => {
@@ -269,9 +317,9 @@ function CreateAndUpdate({
             ...img,
             caption,
           };
-        } else {
-          return img;
         }
+
+        return img;
       }),
     }));
   };
@@ -285,52 +333,69 @@ function CreateAndUpdate({
       return;
     }
 
-    if (fileState.length !== 0) {
-      // upload the files and get response.
-      const formData = new FormData();
-      // referenceKeysOrder maintains the order for the multi thred backend upload and
-      // should be used as the reference to maintain imaged matching up.
-      // the response will have the property reference Keys
-      const referenceKeysOrder: string[] = [];
-      for (let i = 0; i < fileState.length; i++) {
-        const randomId = Math.floor(Math.random() * 10000000).toString();
-        referenceKeysOrder.push(randomId);
-        formData.append(randomId, fileState[i]);
-      }
+    // if fileState is zero then go ahead with the request.
+    // theres nothing special that needs to be done.
+    if (fileState.length === 0) {
+      await handleSendEnchantInformation(enchant, imagesToDelete);
+      return;
+    }
 
-      snackbarMessageSent('Uploading images');
+    // OVERVIEW
+    // images are sent viA formData in multi file format
+    // each image is attached with a uniqueKey
+    // upload the files and get response.
+    // referenceKeysOrder maintains the order for the multi thread backend upload and
+    // should be used as the reference to maintain imaged matching up.
+    // the response will have the property reference Keys
+    // after the request is returned the key order is looped through
+    // and a filter is used to find that specific image
+    // information is provided by the backend on whether the image upload was a success.
+    const formData = new FormData();
+    const referenceKeysOrder: string[] = [];
+    for (let i = 0; i < fileState.length; i++) {
+      const randomId = Math.floor(Math.random() * 10000000000).toString();
+      referenceKeysOrder.push(randomId);
+      formData.append(randomId, fileState[i]);
+    }
 
+    snackbarMessageSent('Uploading images');
+
+    try {
       const { data } = await axios.post<AxiosImagePostRequest>(
         '/enchants/upload',
-        formData
+        formData,
+        { withCredentials: true }
       );
 
+      // send the data to the database with its attached keys.
+
+      // once the index of the images in question is found.
+      // keep track of the last reference used so we can use it to
+      // find the value.
       let lastReferenceUsed = 0;
       const updatedImages: Array<IImageData | null | undefined> = enchant.images
         .map((img) => {
           // if id is empty it is a new upload.
           // so we must find the image that matches the reference key.
-          if (img.id === '') {
-            const referenceKey = referenceKeysOrder[lastReferenceUsed];
-            const imgUpload = data.filter(
-              (res) => res.referenceKey === referenceKey
-            )[0];
+          if (img.id !== '') return img;
 
-            if (imgUpload === undefined) return;
+          const referenceKey = referenceKeysOrder[lastReferenceUsed];
+          const imgUpload = data.filter(
+            (r) => r.referenceKey === referenceKey
+          )[0];
 
-            lastReferenceUsed++;
+          // if nothing is found return
+          // this would be a critical problem
+          if (imgUpload === undefined) return;
 
-            if (imgUpload.wasSuccessful === true) {
-              return {
-                ...img,
-                url: imgUpload.url,
-              };
-            } else {
-              return null;
-            }
-          } else {
-            return img;
-          }
+          lastReferenceUsed++;
+
+          if (imgUpload.wasSuccessful !== true) return null;
+
+          return {
+            ...img,
+            url: imgUpload.url,
+          };
         })
         .filter((x) => x !== null || x !== undefined);
 
@@ -346,15 +411,14 @@ function CreateAndUpdate({
         if (updatedImages?.[0]?.favorite !== undefined)
           updatedImages[0].favorite = true;
       }
+
       await handleSendEnchantInformation(
-        {
-          ...enchant,
-          images: updatedImages as Array<IImageData>,
-        },
+        { ...enchant, images: updatedImages as Array<IImageData> },
         null
       );
-    } else {
-      await handleSendEnchantInformation(enchant, imagesToDelete);
+    } catch (err) {
+      console.error(err);
+      return;
     }
   };
 
@@ -367,19 +431,29 @@ function CreateAndUpdate({
     try {
       // if its a new upload send it to the create route
       if (newUpload) {
-        const { data } = await axios.post('/enchants', enchant);
+        const { data } = await axios.post('/enchants', enchant, {
+          withCredentials: true,
+        });
         nav(`/enchants/${data.id}`);
       } else {
         // if its a patch route send it to the patch route with the correct id.
         // eslint-disable-next-line no-debugger
-        const { data } = await axios.patch(`/enchants/${enchant.id}`, {
-          enchant,
-          imagesToDelete,
-        });
+        const { data } = await axios.patch(
+          `/enchants/${enchant.id}`,
+          {
+            enchant,
+            imagesToDelete,
+          },
+          {
+            withCredentials: true,
+          }
+        );
         nav(`/enchants/${data.id}`);
       }
     } catch (err) {
       /// handle snackbar error
+      snackbarMessageSent('Failed to upload');
+      requestSent.current = false;
       console.error(err);
     }
   };
@@ -458,4 +532,4 @@ function CreateAndUpdate({
   );
 }
 
-export default connector(CreateAndUpdate);
+export default connector(EnchantsCreateNUpdate);

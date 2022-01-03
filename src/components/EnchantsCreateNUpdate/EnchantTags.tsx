@@ -20,6 +20,7 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
   };
 
   const handleAddTag = () => {
+    console.log(input, 's');
     addTag(input);
     setInput('');
   };

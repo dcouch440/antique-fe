@@ -1,15 +1,15 @@
-import { Box, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import {
   SIDEBAR_FEED,
   SIDEBAR_MESSAGES,
   SIDEBAR_NAVIGATION,
 } from 'constantVariables';
 
+import AppSidebarTypeSelector from 'components/common/AppSidebarTypeSelector';
 import { ConnectedProps } from 'react-redux';
 import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import SidebarTypeSelector from 'components/common/AppSidebarTypeSelector';
 import { connect } from 'react-redux';
 
 const mapStateToProps = () => ({});
@@ -30,34 +30,49 @@ function TopBar(): JSX.Element {
         position: 'fixed',
         width: '100%',
         zIndex: 6,
-        justifyContent: 'flex-end',
-        backgroundColor: theme.palette.secondary.dark,
-        borderBottom: '1px solid ' + theme.palette.primary.dark,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: theme.palette.primary.main,
         boxShadow: 5,
       }}
       key="SidebyTypeSectorsz"
     >
-      <SidebarTypeSelector
-        variantType="Button"
-        aria-label="Messages"
-        constantVariable={SIDEBAR_MESSAGES}
+      <Typography
+        color="secondary"
+        sx={{
+          pl: 1,
+          fontWeight: 500,
+          fontFamily: (theme) => theme.custom.typography.families.cursive,
+        }}
       >
-        <EmailIcon />
-      </SidebarTypeSelector>
-      <SidebarTypeSelector
-        variantType="Button"
-        aria-label="Feed"
-        constantVariable={SIDEBAR_FEED}
-      >
-        <NotificationsActiveIcon />
-      </SidebarTypeSelector>
-      <SidebarTypeSelector
-        variantType="Button"
-        aria-label="Navigate"
-        constantVariable={SIDEBAR_NAVIGATION}
-      >
-        <MenuIcon />
-      </SidebarTypeSelector>
+        Enchanted Finds
+      </Typography>
+      <Box>
+        <AppSidebarTypeSelector
+          variantType="Button"
+          aria-label="Messages"
+          color="secondary"
+          constantVariable={SIDEBAR_MESSAGES}
+        >
+          <EmailIcon />
+        </AppSidebarTypeSelector>
+        <AppSidebarTypeSelector
+          variantType="Button"
+          aria-label="Feed"
+          color="secondary"
+          constantVariable={SIDEBAR_FEED}
+        >
+          <NotificationsActiveIcon />
+        </AppSidebarTypeSelector>
+        <AppSidebarTypeSelector
+          variantType="Button"
+          aria-label="Navigate"
+          color="secondary"
+          constantVariable={SIDEBAR_NAVIGATION}
+        >
+          <MenuIcon />
+        </AppSidebarTypeSelector>
+      </Box>
     </Box>
   );
 }

@@ -2,7 +2,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import { Suspense, lazy, useEffect, useLayoutEffect, useRef } from 'react';
 
-import EnchantTagSearch from 'components/enchants/EnchantSearch';
+import EnchantTagSearch from 'components/enchants/EnchantTagSearch';
 import { IAppState } from 'store/types';
 import { PageWithBackplateLayout } from 'Layout';
 import { clearEnchantData } from 'store/enchant/actionCreators';

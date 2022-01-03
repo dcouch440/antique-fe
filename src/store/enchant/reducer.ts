@@ -2,6 +2,7 @@ import {
   ENCHANT_ADD_TAG,
   ENCHANT_ARRAY_CLEARED,
   ENCHANT_ENCHANT_DATA,
+  ENCHANT_GET_ENCHANT,
   ENCHANT_GET_ENCHANTS,
   ENCHANT_REMOVE_TAG,
   ENCHANT_UPDATE_SEARCH_QUERY,
@@ -39,7 +40,8 @@ export interface IEnchantState {
   searchTags: Array<string>;
   searchType: EnchantSearchType;
   searchQuery: EnchantSearchQuery;
-  enchants: IEnchant[] | [];
+  enchants: IEnchant[];
+  enchant: IEnchant | null;
   lastSeen: string | null;
 }
 
@@ -48,6 +50,7 @@ export const enchantInitialState: IEnchantState = {
   searchType: ENCHANT_SEARCH_TYPE_POPULAR,
   searchQuery: null,
   enchants: [],
+  enchant: null,
   lastSeen: null,
 };
 
@@ -72,6 +75,11 @@ export default function reducer(
         enchants: [...state.enchants, ...payload.enchants],
         lastSeen: payload.lastSeen,
       };
+    case ENCHANT_GET_ENCHANT:
+      return {
+        ...state,
+        enchant: payload,
+      };
     case ENCHANT_ENCHANT_DATA:
       return {
         ...state,
@@ -80,7 +88,6 @@ export default function reducer(
         lastSeen: null,
       };
     case ENCHANT_ADD_TAG:
-      console.log(payload);
       if (state.searchTags.includes(payload) || payload.trim() === '') {
         return state;
       }

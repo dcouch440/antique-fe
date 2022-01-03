@@ -1,7 +1,9 @@
+import { enchantRetrieved, enchantsRetrieved } from './actionCreators';
+
 import { IEnchant } from './reducer';
 import { ThunkCreators } from 'store/types';
 import axios from 'axios';
-import { enchantsRetrieved } from './actionCreators';
+import { snackbarMessageSent } from 'store/snackbar/actionCreators';
 
 export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
   try {
@@ -32,6 +34,25 @@ export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
     );
   } catch (err) {
     //TODO: handle error, snackbar?
+    dispatch(snackbarMessageSent('No results.'));
     console.error(err);
   }
 };
+
+export const getEnchant =
+  (id: string): ThunkCreators =>
+  async (dispatch) => {
+    try {
+      if (id.length === 0) throw new Error('Id param not set.');
+
+      const { data } = await axios.get<IEnchant>(`/enchants/${id}`);
+      console.log(data);
+      if (Object.keys(data).length === 0)
+        throw new Error('An empty object was returned from getEnchants.');
+
+      dispatch(enchantRetrieved(data));
+    } catch (err) {
+      dispatch(snackbarMessageSent('Could not find enchant.'));
+      console.error(err);
+    }
+  };

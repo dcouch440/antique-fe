@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, FormControlLabel, Switch } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement } from 'react';
 import {
@@ -27,7 +27,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux;
 
-function EnchantSearch({
+function EnchantTagSearch({
   searchTags,
   tagAdded,
   tagRemoved,
@@ -44,13 +44,12 @@ function EnchantSearch({
         flexDirection: 'column',
         gap: 1,
         p: 1,
-        justifyContent: 'space-between',
       }}
     >
       <AppSearchBar
         buttonContents="Add"
         placeholder="Search by tags"
-        sx={{ width: '100%' }}
+        sx={{ alignSelf: 'flex-end' }}
         onSubmit={tagAdded}
         renderExtraButton={
           <Button
@@ -71,4 +70,4 @@ function EnchantSearch({
   );
 }
 
-export default connector(EnchantSearch);
+export default connector(EnchantTagSearch);

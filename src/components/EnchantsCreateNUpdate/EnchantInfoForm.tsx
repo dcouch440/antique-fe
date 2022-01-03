@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import AppInput from 'components/common/AppInput';
 import FormWidthContainer from 'Layout/FormWidthContainer';
-import { IEnchantInfo } from './CreateAndUpdate';
+import { IEnchantInfo } from '.';
 
 interface OwnProps {
   onChange: ReactOnChange;
@@ -30,7 +30,7 @@ function EnchantInfoForm({
         sx={{ marginBottom: 3, width: '100%' }}
         onChange={onChange}
         value={itemName}
-        label="Enchant Name"
+        label="Enchant name"
         name="itemName"
         required
       />

@@ -66,11 +66,3 @@ function PageWithBackplateLayout({
 }
 
 export default PageWithBackplateLayout;
-
-PageWithBackplateLayout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  header: PropTypes.string.isRequired,
-};

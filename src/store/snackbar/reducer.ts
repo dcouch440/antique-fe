@@ -1,4 +1,4 @@
-import { CLEAR_ERROR, UPDATE_ERROR } from 'store/actions';
+import { CLEAR_MESSAGE, UPDATE_MESSAGE } from 'store/actions';
 
 import { AnyAction } from 'redux';
 
@@ -17,12 +17,12 @@ function reducer(
   { type, payload }: AnyAction
 ): ISnackbarState {
   switch (type) {
-    case UPDATE_ERROR:
+    case UPDATE_MESSAGE:
       return {
         ...state,
         message: payload,
       };
-    case CLEAR_ERROR:
+    case CLEAR_MESSAGE:
       return {
         ...state,
         message: null,

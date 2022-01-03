@@ -10,14 +10,12 @@ interface IOwnProps {
   path: string;
   title: string;
   images: string[];
-  description?: string;
 }
 
 export default function NavigationLink({
   path,
   title,
   images,
-  description,
 }: IOwnProps): JSX.Element {
   const navigate = useNavigate();
   const handleRouteChange = () => navigate(path);
@@ -87,8 +85,6 @@ export default function NavigationLink({
           transition: '0.2s',
           letterSpacing: '2px',
           borderRadius: 2,
-          height: '100%',
-          width: '100%',
           p: 1,
           bottom: 0,
         }}
@@ -98,33 +94,15 @@ export default function NavigationLink({
           sx={{
             fontWeight: 'bold',
             fontSize: 'sizes.lg',
-            backgroundColor: 'black',
+            backgroundColor: (theme) => theme.palette.secondary.main,
+            borderRadius: 2,
             p: 1,
           }}
           component="h3"
         >
           {title}
         </Typography>
-        <Divider variant="middle" color="white" />
-        <Typography
-          color="primary"
-          sx={{
-            zIndex: 1,
-            p: 1,
-            borderRadius: 2,
-            fontSize: 'sizes.lg',
-          }}
-        >
-          {description}
-        </Typography>
       </Box>
     </Box>
   );
 }
-
-NavigationLink.propTypes = {
-  path: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  images: PropTypes.array,
-  description: PropTypes.string.isRequired,
-};

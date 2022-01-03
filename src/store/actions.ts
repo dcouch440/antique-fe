@@ -11,8 +11,8 @@ export const UPDATE_MINI_MENU_DRAG_BUTTON_VISIBILITY =
   'sidebar/update-mini-menu-drag-button-visibility';
 
 // snackbar
-export const UPDATE_ERROR = 'snackbar/update-error';
-export const CLEAR_ERROR = 'snackbar/clear-error';
+export const UPDATE_MESSAGE = 'snackbar/update-message';
+export const CLEAR_MESSAGE = 'snackbar/clear-message';
 
 // user
 export const ADD_USER_TO_STORE = 'user/add-user-to-store';
@@ -26,3 +26,4 @@ export const ENCHANT_ENCHANT_DATA = 'enchant/clear-enchants';
 export const ENCHANT_ADD_TAG = 'enchant/add-tag';
 export const ENCHANT_REMOVE_TAG = 'enchant/remove-tag';
 export const ENCHANT_ARRAY_CLEARED = 'enchant/array-cleared';
+export const ENCHANT_GET_ENCHANT = 'enchant/get-enchant';

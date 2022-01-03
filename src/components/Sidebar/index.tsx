@@ -1,6 +1,6 @@
-import { Box, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 
+import { Box } from '@mui/material';
 import CloseSidebar from './CloseSidebar';
 import { IAppState } from 'store/types';
 import SidebarRouter from './SidebarRouter';
@@ -26,53 +26,44 @@ type Props = PropsFromRedux;
  */
 
 function Sidebar({ sidebarVisibility }: Props): JSX.Element {
-  const theme = useTheme();
-
   return (
     <>
       {sidebarVisibility && (
         <Box
-          data-testid="Sidebar-open"
           sx={{
+            width: ['100%', '100%', '100%', 450],
+            height: '100vh',
+            pt: 2,
+            px: 2,
+            backgroundColor: 'secondary.main',
+            zIndex: 999,
             position: 'fixed',
-            zIndex: 9999,
-            borderBottom: '1px solid ' + theme.palette.primary.main,
+            boxShadow: 5,
           }}
         >
+          <Box>
+            <CloseSidebar
+              sx={{
+                zIndex: 3,
+                right: 0,
+                top: 0,
+                m: 1,
+                position: 'absolute',
+              }}
+            />
+          </Box>
           <Box
             sx={{
-              width: ['100%', '100%', '100%', 450],
-              height: '100vh',
-              pt: 2,
-              px: 2,
-              zIndex: 2,
-              backgroundColor: 'secondary.main',
-              position: 'fixed',
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              borderRadius: '0 12px 12px 0',
             }}
           >
-            <Box>
-              <CloseSidebar
-                sx={{
-                  zIndex: 3,
-                  right: 0,
-                  top: 0,
-                  m: 1,
-                  position: 'absolute',
-                }}
-              />
-            </Box>
-            <Box
-              sx={{
-                position: 'relative',
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <SidebarTypeSelectors />
-              <SidebarRouter />
-            </Box>
+            <SidebarTypeSelectors />
+            <SidebarRouter />
           </Box>
         </Box>
       )}

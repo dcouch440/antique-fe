@@ -2,12 +2,14 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import React, { ReactElement, useEffect, useState } from 'react';
 
 import AppUser from 'components/common/AppUser';
+import { useNavigate } from 'react-router-dom';
 
 interface IEnchant {
   username: string;
   userAvatar: string;
   likes: number;
   itemName: string;
+  id: string;
   images: Array<{ url: string }>;
 }
 
@@ -15,12 +17,13 @@ interface IEnchant {
  * Renders a given image by first setting an images height and width to unset.
  * After the image loads into the ref the images height and width is captured in state and it choses a span of either long or square based on its height and width.
  */
-function Enchant({ username, userAvatar, images }: IEnchant): ReactElement {
+function Enchant({ username, userAvatar, images, id }: IEnchant): ReactElement {
   const [img, setImage] = useState({ height: 0, width: 0 });
   // because sm screens only have 1 width.
   // grid column must always result in 1 width if so.
   const theme = useTheme();
   const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const nav = useNavigate();
 
   useEffect(() => {
     const image = new Image();
@@ -56,6 +59,7 @@ function Enchant({ username, userAvatar, images }: IEnchant): ReactElement {
         borderRadius: (theme) => theme.spacing(0.5),
         overflow: 'hidden',
       }}
+      onClick={() => nav(`/enchants/${id}`)}
     >
       <Box sx={{ position: 'absolute', width: '100%', height: '100%' }}>
         <AppUser username={username} userAvatar={userAvatar} />

@@ -5,10 +5,10 @@ import { AppLayout } from 'Layout';
 import AppSnackBar from 'components/common/AppSnackbar';
 import CreateEnchants from 'pages/CreateEnchant';
 import { CssBaseline } from '@mui/material';
+import Enchant from 'pages/Enchant';
 import Enchants from 'pages/Enchants';
 import UpdateEnchant from 'pages/UpdateEnchant';
 import axiosSetup from 'config/axiosSetuo';
-import thunk from 'redux-thunk';
 import { thunkSession } from 'store/user/thunkCreators';
 import { useEffect } from 'react';
 
@@ -25,7 +25,9 @@ type Props = PropsFromRedux;
 function App({ thunkSession }: Props): JSX.Element {
   axiosSetup();
 
-  useEffect(thunkSession, [thunk]);
+  useEffect(() => {
+    thunkSession();
+  }, []);
 
   return (
     <>
@@ -39,6 +41,7 @@ function App({ thunkSession }: Props): JSX.Element {
             path="/enchants/:enchantId/update"
             element={<UpdateEnchant />}
           />
+          <Route path="/enchants/:enchantId" element={<Enchant />} />
         </Routes>
       </AppLayout>
     </>

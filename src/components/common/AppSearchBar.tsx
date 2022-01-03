@@ -45,7 +45,7 @@ export default function AppSearchBar({
         backgroundColor: 'transparent',
         alignItems: 'end',
         overflow: 'hidden',
-        width: ['100%', '50%'],
+        width: '100%',
         flex: [2, 2, 'none'],
         border: 'none',
         position: 'relative',

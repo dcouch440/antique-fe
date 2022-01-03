@@ -29,6 +29,7 @@ interface OwnProps {
   withLogout?: boolean;
   children?: ReactNode;
   variantType?: 'Fab' | 'Button';
+  color?: 'inherit' | 'primary' | 'secondary' | undefined;
 }
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
@@ -49,6 +50,7 @@ function AppSidebarTypeSelector({
   visibilityToggled,
   variantType = 'Fab',
   thunkLogout,
+  color,
   ...props
 }: Props): JSX.Element {
   const handleClick = () => {
@@ -78,7 +80,7 @@ function AppSidebarTypeSelector({
         <Fab
           {...props}
           data-testid={`AppSidebarTypeSelector-${constantVariable}`}
-          color="primary"
+          color={color}
           onClick={handlePickCorrectHandler}
         >
           {children}
@@ -88,7 +90,7 @@ function AppSidebarTypeSelector({
           <Button
             data-testid={`AppSidebarTypeSelector-${constantVariable}`}
             {...props}
-            color="primary"
+            color={color}
             onClick={handlePickCorrectHandler}
           >
             {children}
