@@ -46,7 +46,7 @@ Users can return to their post at any time and use the same interface to make up
   - `MongoDB`
   - `JWT`
 
-Backend Repo will remain private.
+Backend Repo will remain private for security purposes.
 
 ## `About Back End`
   
