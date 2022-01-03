@@ -189,7 +189,6 @@ function EnchantsCreateNUpdate({
     const isNewUpload = currentImage.id === '';
 
     if (enchant.images.length <= 1) {
-      // snackbar error
       snackbarMessageSent('At least one image must be present at all times.');
       return;
     }
@@ -210,12 +209,10 @@ function EnchantsCreateNUpdate({
         if (i === index) break;
       }
 
-      setEnchant((prev) => {
-        return {
-          ...prev,
-          images: prev.images.filter((_, i) => i !== index),
-        };
-      });
+      setEnchant((prev) => ({
+        ...prev,
+        images: prev.images.filter((_, i) => i !== index),
+      }));
 
       // remove the file from the index relative to itself.
       setFileState((prev) => {
@@ -409,13 +406,8 @@ function EnchantsCreateNUpdate({
         // eslint-disable-next-line no-debugger
         const { data } = await axios.patch(
           `/enchants/${enchant.id}`,
-          {
-            enchant,
-            imagesToDelete,
-          },
-          {
-            withCredentials: true,
-          }
+          { enchant, imagesToDelete },
+          { withCredentials: true }
         );
         nav(`/enchants/${data.id}`);
       }
@@ -486,10 +478,7 @@ function EnchantsCreateNUpdate({
           >
             <Button
               variant="contained"
-              sx={{
-                width: '100%',
-                mb: 3,
-              }}
+              sx={{ width: '100%', mb: 3 }}
               onClick={handleSubmit}
             >
               Submit

@@ -22,7 +22,7 @@ export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
       `/enchants?limit=${limit}${queryDate}${queryTags}`
     );
 
-    if (!data?.length || !data) throw new Error('No antiques found');
+    if (!data?.length || !data) throw new Error('No more Enchants found');
 
     const newLastSeen = data[data.length - 1].id;
 
@@ -33,7 +33,6 @@ export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
       })
     );
   } catch (err) {
-    //TODO: handle error, snackbar?
     dispatch(snackbarMessageSent('No results.'));
     console.error(err);
   }
