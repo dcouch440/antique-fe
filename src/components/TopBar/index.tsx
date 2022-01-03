@@ -20,6 +20,8 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux;
 
+// Top bar holds a nav open button and will feature future notifications for users.
+
 function TopBar(): JSX.Element {
   const theme = useTheme();
 

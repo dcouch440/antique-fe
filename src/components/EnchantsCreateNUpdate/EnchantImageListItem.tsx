@@ -20,7 +20,7 @@ interface Props {
 }
 
 /**
- * * Displays the preview images held within the parents state.
+ * @description Displays the preview images held within the parents state. Captions are sent in a "onSubmit" way to prevent constant re renders from the parent.
  */
 
 export default function EnchantImageListItem({

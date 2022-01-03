@@ -7,6 +7,10 @@ interface Props {
   sx?: SxProps;
 }
 
+/**
+ * @description Used as an add or delete button for images, this component keeps size consistent across buttons.
+ */
+
 function ImageActionButton({ onClick, children, sx }: Props): ReactElement {
   const theme = useTheme();
   return (

@@ -5,6 +5,10 @@ interface IHeader {
   text: string;
 }
 
+/**
+ * @description A small header that describes what type of nav the user is currently viewing.
+ */
+
 export default function Header({ text }: IHeader): JSX.Element {
   return (
     <Box

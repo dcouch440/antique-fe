@@ -7,6 +7,10 @@ interface Props {
   onClick: () => void;
 }
 
+/**
+ * @description A fixed width button that is used to multiple parts of the form.
+ */
+
 function AddButton({ text, onClick }: Props): ReactElement {
   return (
     <Button

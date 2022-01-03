@@ -27,6 +27,10 @@ interface OwnProps {
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
 
+/**
+ * @description Renders a collection of buttons that are used to switch the type of sidebar the user is viewing.
+ */
+
 function SidebarTypeSelectors({
   user,
   orientation = 'open',

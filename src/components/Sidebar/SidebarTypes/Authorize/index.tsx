@@ -41,6 +41,10 @@ export type HandleAuth = ({
   email,
 }: IHandleSignUp) => void;
 
+/**
+ * @description Handles UserLogins or signup using the same form, rendered with true or false values.
+ */
+
 function Authorize({
   authType,
   authTypeChanged,

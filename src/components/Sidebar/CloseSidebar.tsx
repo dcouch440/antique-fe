@@ -25,6 +25,10 @@ interface OwnProps {
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
 
+/**
+ * @description closes the sidebar when pressed.
+ */
+
 function CloseSidebar({ visibilityToggled, sx }: Props): JSX.Element {
   const handleClick = () => visibilityToggled();
 

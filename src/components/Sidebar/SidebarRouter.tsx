@@ -21,6 +21,10 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
+/**
+ * @description renders the appropriate sidebar menu after a user selects to change what they wish to view.
+ */
+
 export const RenderSidebarType = ({
   sidebarType,
 }: Props): JSX.Element | null => {

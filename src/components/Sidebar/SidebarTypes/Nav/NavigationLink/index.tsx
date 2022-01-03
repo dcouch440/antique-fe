@@ -1,8 +1,7 @@
-import { Divider, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { Box } from '@mui/system';
-import PropTypes from 'prop-types';
+import { Typography } from '@mui/material';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +10,10 @@ interface IOwnProps {
   title: string;
   images: string[];
 }
+
+/**
+ * @description features a morphing image along with a title that represents the link that is selected. The component will cycle through the images in the given array.
+ */
 
 export default function NavigationLink({
   path,

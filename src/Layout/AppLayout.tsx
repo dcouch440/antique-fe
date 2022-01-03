@@ -1,6 +1,3 @@
-import { ConnectedProps, connect } from 'react-redux';
-
-import { IAppState } from 'store/types';
 import { ReactNode } from 'react';
 import ScrollContainer from 'components/ScrollContainer';
 import Sidebar from 'components/Sidebar';
@@ -11,16 +8,11 @@ interface IOwnProps {
   children: ReactNode;
 }
 
-const mapStateToProps = ({ sidebar: { sidebarVisibility } }: IAppState) => ({
-  sidebarVisibility,
-});
+/**
+ * @description handle background color and adaptive height.
+ */
 
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-type Props = PropsFromRedux & IOwnProps;
-
-function AppLayout({ children }: Props): JSX.Element {
+function AppLayout({ children }: IOwnProps): JSX.Element {
   const theme = useTheme();
 
   return (
@@ -39,4 +31,4 @@ function AppLayout({ children }: Props): JSX.Element {
   );
 }
 
-export default connector(AppLayout);
+export default AppLayout;

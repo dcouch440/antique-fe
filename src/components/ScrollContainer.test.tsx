@@ -10,6 +10,8 @@ function MockComponent() {
   );
 }
 
+// Outdated
+
 describe('ScrollContainer', () => {
   it('renders content as children in a container', () => {
     render(<MockComponent />);

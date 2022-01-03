@@ -14,6 +14,11 @@ interface ICollapsibleDials {
   actions: IActions[];
 }
 
+/**
+ * @description Renders a collapsible list of Fab icons
+ * @note - Currently unused.
+ */
+
 export default function CollapsibleDials({
   actions,
   ariaLabel,

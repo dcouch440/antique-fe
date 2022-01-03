@@ -17,6 +17,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+/**
+ * @description Displays a users Enchant.  * None functional *
+ */
+
 function Enchant({ getEnchant, enchant }: PropsFromRedux): ReactElement {
   const params = useParams();
 

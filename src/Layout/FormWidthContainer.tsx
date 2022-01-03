@@ -7,6 +7,10 @@ interface Props {
   children: ReactElement | ReactElement[];
 }
 
+/**
+ * @description Used to render a consistent width for small screens and large screen when a form is present.
+ */
+
 function FormWidthContainer({ sx, children, component }: Props): ReactElement {
   return (
     <Box

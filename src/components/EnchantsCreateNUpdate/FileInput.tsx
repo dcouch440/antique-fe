@@ -8,6 +8,10 @@ interface Props {
   handleChange: HandleChange;
 }
 
+/**
+ * @description A file input with hidden values. A FileCopyIcon is used in place of a traditional input button and description set.
+ */
+
 export default function FileInput({ handleChange }: Props): ReactElement {
   return (
     <label htmlFor="upload-photo">

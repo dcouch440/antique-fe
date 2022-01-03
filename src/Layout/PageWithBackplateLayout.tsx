@@ -1,13 +1,17 @@
 import { Typography, useTheme } from '@mui/material';
 
 import { Box } from '@mui/system';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 interface IPageWithBackplateLayout {
   header?: string;
   children: JSX.Element | JSX.Element[];
 }
+
+/**
+ *
+ * @description A common wrapper for page consistency. This component takes care of page width and top padding for static navbar.
+ */
 
 function PageWithBackplateLayout({
   header,

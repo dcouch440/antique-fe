@@ -12,6 +12,10 @@ interface Props {
   addTag: (tag: string) => void;
 }
 
+/**
+ * @description Handles the display of tags and holds an internal state to prevent constant re renders in the parent while the user types.
+ */
+
 function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
   const [input, setInput] = useState('');
   const theme = useTheme();
