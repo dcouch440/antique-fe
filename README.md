@@ -13,7 +13,6 @@ Future features will include, personal DM's, user streams, and channels,
   - `Typescript`
   - `React`
   - `Redux`
-  - `MongoDB`
   - `Material UI`
   - `Axios`
   - `styled components`
@@ -32,13 +31,11 @@ src/components/EnchantsCreateNUpdate
 ```
 #### `New Uploads`
   
-Images are first uploaded concurrently via multi part form data using GO language in one request, the images are sent with upload reference keys to prevent uploads being returned out of order while being processed in independent go routines. Once AWS S3 has completed the uploads, the user images are attached to their respective information and the user images and enchant information is stored in the MongoDB database.
+Images are first uploaded concurrently via multi-part form data using GO language in one request, the images are sent with upload reference keys to prevent uploads being returned out of order while being processed in independent goroutines. Once AWS S3 has completed the uploads, the user images are attached to their respective information, and the user images and enchant information are stored in the MongoDB database.
   
 #### `Updates`
   
-Users can return to their post at any time and use the same interface to make updates if they change their mind. Users have the option to remove images, which enters the images into a queue. On submission the backend receives the information in json and removes the images in the queue at the time of update in one request. If the user chooses to upload new images and delete old images at the same time. The upload sequence will first take action and then a JSON request will be sent to the Go Server which notifies S3 to delete the images and store the new information in MongoDB.
-  
-Users can return to this page at any time to update, remove tags, change titles, or even upload more images!
+Users can return to their post at any time and use the same interface to make updates if they change their minds. Users have the option to remove images, which enters the images into a queue. On submission, the backend receives the information in JSON and removes the images in the queue at the time of update in one request. If the user chooses to upload new images and delete old images at the same time. The upload sequence will first take action and then a JSON request will be sent to the Go Server which notifies S3 to delete the images and store the new information in MongoDB.
   
 ![Upload and edit](https://res.cloudinary.com/dbyretay5/image/upload/v1641242365/enchant-repo/Create_Enchants_mll1fb.png)
 
@@ -53,5 +50,5 @@ Backend Repo will remain private.
 
 ## `About Back End`
   
-Because of the nature of MongoDB (sometimes) requiring multiple requests. Go is used to build response objects concurrently and server side sorting of small bits of information like users favorite image and retrieving userId's from items response which prepares the next request.
+Because of the nature of MongoDB (sometimes) requiring multiple requests. Go is used to build response objects concurrently and server-side sorting of small bits of information like users favorite image and retrieving userIds from items response which prepares the next request.
   
