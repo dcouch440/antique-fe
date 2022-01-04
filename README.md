@@ -1,6 +1,6 @@
 # `Enchant FE`
 
-## `About Front end`
+## `About Front End`
   
 `Enchants` (title in the works), is a platform for people to share collectable items that they love. People can share items, mark their favorite image for display and set tags for others to find them.
   
@@ -31,7 +31,7 @@ src/components/EnchantsCreateNUpdate
 ```
 #### `New Uploads`
   
-Images are first uploaded concurrently via multi-part form data using GO language in one request, the images are sent with upload reference keys to prevent uploads being returned out of order while being processed in independent goroutines. Once AWS S3 has completed the uploads, the user images are attached to their respective information, and the user images and enchant information are stored in the MongoDB database.
+Images are first uploaded concurrently via multi-part form data using GO language in one request. The images are sent with upload reference keys to prevent uploads from being returned out of order while being processed in independent goroutines. Once AWS S3 has completed the uploads, the user images are attached to their respective information, and the user images and enchant information are stored in the MongoDB database.
   
 #### `Updates`
   
