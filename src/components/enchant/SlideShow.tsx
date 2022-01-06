@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import AliceCarousel from 'react-alice-carousel';
-import Image from 'components/Image';
+import AppImage from 'components/common/AppImage';
 
 interface Props {
   images: Array<{
@@ -32,12 +32,13 @@ function SlideShow({ images }: Props): ReactElement {
   };
 
   const ImageItem = ({ url }: { url: string }) => (
-    <Image
+    <AppImage
       sx={{
         borderRadius: 1,
-        height: '100%',
+        height: 'auto',
         maxHeight: 800,
-        width: 'auto',
+        width: '100%',
+        objectFit: 'scale-down',
       }}
       src={url}
     />

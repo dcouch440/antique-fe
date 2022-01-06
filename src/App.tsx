@@ -1,12 +1,10 @@
 import { ConnectedProps, connect } from 'react-redux';
+import { Enchant, EnchantCreateAndUpdate, Enchants } from 'pages';
 import { Route, Routes } from 'react-router';
 
 import { AppLayout } from 'Layout';
 import AppSnackBar from 'components/common/AppSnackbar';
 import { CssBaseline } from '@mui/material';
-import Enchant from 'pages/Enchant';
-import EnchantCreateAndUpdate from 'pages/EnchantCreateAndUpdate';
-import Enchants from 'pages/Enchants';
 import axiosSetup from 'config/axiosSetuo';
 import { thunkSession } from 'store/user/thunkCreators';
 import { useEffect } from 'react';

@@ -2,7 +2,7 @@ import { Box, SxProps } from '@mui/material';
 import React, { ElementType, ReactElement } from 'react';
 
 interface Props {
-  component?: ElementType<any>;
+  component?: ElementType;
   sx?: SxProps;
   children: ReactElement | ReactElement[];
 }

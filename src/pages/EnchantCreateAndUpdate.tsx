@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 
-import CreateAndUpdate from 'components/EnchantsCreateNUpdate';
 import { PageWithBackplateLayout } from 'Layout';
 
 export default function EnchantCreateAndUpdate({
@@ -10,7 +9,7 @@ export default function EnchantCreateAndUpdate({
 }): ReactElement {
   return (
     <PageWithBackplateLayout>
-      <CreateAndUpdate newUpload={newUpload} />
+      <EnchantCreateAndUpdate newUpload={newUpload} />
     </PageWithBackplateLayout>
   );
 }

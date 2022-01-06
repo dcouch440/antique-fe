@@ -1,12 +1,11 @@
 import { Button, SxProps } from '@mui/material';
-
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 interface TopBarButton {
   sx?: SxProps;
 }
 
-export default function TopBarButton({ sx = {}, ...props }) {
+export default function TopBarButton({ sx = {}, ...props }): ReactElement {
   return (
     <Button
       sx={{

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import ScrollContainer from 'components/ScrollContainer';
-import Sidebar from 'components/Sidebar';
-import TopBar from 'components/TopBar';
+import { Sidebar } from 'components/Sidebar';
+import { TopBar } from 'components/TopBar';
 import { useTheme } from '@mui/material';
 
 interface IOwnProps {

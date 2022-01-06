@@ -3,7 +3,7 @@ import { SxProps, Typography } from '@mui/material';
 
 interface Props {
   text: string;
-  component: ElementType<any>;
+  component: ElementType;
   size: 'xl' | 'sub' | 'mini';
   sx?: SxProps;
 }

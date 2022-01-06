@@ -1,10 +1,9 @@
+import { AppInput, AppTextArea } from 'components/common';
 import React, { ReactElement } from 'react';
 import { Typography, useTheme } from '@mui/material';
 
-import AppInput from 'components/common/AppInput';
-import AppTextArea from 'components/common/AppTextArea';
-import FormWidthContainer from 'Layout/FormWidthContainer';
-import { IEnchantInfo } from '.';
+import { FormWidthContainer } from 'Layout';
+import { IEnchantInfo } from './EnchantsCreateNUpdate';
 
 interface OwnProps {
   onChange: ReactOnChange;

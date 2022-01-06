@@ -1,10 +1,8 @@
+import { AppDescriptionSubText, AppHeader, AppInput } from 'components/common';
 import { Box, FormControlState, Typography, useTheme } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
-import AddButton from './AddButton';
-import AppDescriptionSubText from 'components/common/AppDescriptionSubText';
-import AppHeader from 'components/common/AppHeader';
-import AppInput from 'components/common/AppInput';
+import { AddButton } from '.';
 
 interface Props {
   tags: string[];

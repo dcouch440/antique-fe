@@ -10,7 +10,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import { IAppState } from 'store/types';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import TopBarButton from 'components/TopBar/TopBarButton';
+import { TopBarButton } from 'components/TopBar';
 import { searchTypeUpdated } from 'store/enchant/actionCreators';
 import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
 
