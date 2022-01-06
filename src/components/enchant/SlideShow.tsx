@@ -1,8 +1,10 @@
-import React, { ReactElement } from 'react';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
-import Carousel from 'react-material-ui-carousel';
+import { Box, Button, Typography } from '@mui/material';
+import React, { ReactElement, useState } from 'react';
+
+import AliceCarousel from 'react-alice-carousel';
 import Image from 'components/Image';
-import styled from '@emotion/styled';
 
 interface Props {
   images: Array<{
@@ -11,23 +13,94 @@ interface Props {
   }>;
 }
 
-const StyledCarousel = styled(Carousel)`
-  width: 100%;
-`;
-
 function SlideShow({ images }: Props): ReactElement {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const slidePrev = () => {
+    if (activeIndex - 1 < 0) return;
+    setActiveIndex(activeIndex - 1);
+  };
+
+  const slideNext = () => {
+    if (activeIndex + 1 > images.length) return;
+    setActiveIndex(activeIndex + 1);
+  };
+
+  const syncActiveIndex = ({ item }: { item: number }) => {
+    console.log(item);
+    setActiveIndex(item);
+  };
+
   const ImageItem = ({ url }: { url: string }) => (
     <Image
-      sx={{ objectFit: 'scale-down', height: '100%', width: '100%' }}
+      sx={{
+        borderRadius: 1,
+        height: '100%',
+        maxHeight: 800,
+        width: 'auto',
+      }}
       src={url}
     />
   );
+
+  const items = images.map(({ url, caption }) => (
+    <Box
+      key={url}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        position: 'relative',
+      }}
+      onDragStart={(e) => e.preventDefault()}
+    >
+      <ImageItem url={url} />
+      {caption && (
+        <Typography
+          color="primary"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.custom.palette.secondary.transparent,
+            borderRadius: 1,
+            p: 1,
+            width: 'fit-content',
+            position: 'absolute',
+            left: 0,
+            top: 1,
+          }}
+        >
+          {caption}
+        </Typography>
+      )}
+    </Box>
+  ));
+
   return (
-    <StyledCarousel NextIcon={<div>Next</div>} PrevIcon="prev">
-      {images.map(({ url }) => (
-        <ImageItem url={url} key={url} />
-      ))}
-    </StyledCarousel>
+    <Box
+      sx={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        mb: 3,
+        flexDirection: 'column',
+        backgroundColor: (theme) => theme.custom.palette.secondary.transparent,
+      }}
+    >
+      <AliceCarousel
+        disableSlideInfo
+        disableDotsControls
+        touchTracking
+        disableButtonsControls
+        mouseTracking
+        activeIndex={activeIndex}
+        items={items}
+        onSlideChanged={syncActiveIndex}
+      />
+      <Box>
+        <Button onClick={slidePrev}>Prev</Button>
+        <Button onClick={slideNext}>Next</Button>
+      </Box>
+    </Box>
   );
 }
 

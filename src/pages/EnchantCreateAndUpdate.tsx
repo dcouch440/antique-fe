@@ -3,10 +3,14 @@ import React, { ReactElement } from 'react';
 import CreateAndUpdate from 'components/EnchantsCreateNUpdate';
 import { PageWithBackplateLayout } from 'Layout';
 
-export default function CreateEnchants(): ReactElement {
+export default function EnchantCreateAndUpdate({
+  newUpload,
+}: {
+  newUpload: boolean;
+}): ReactElement {
   return (
     <PageWithBackplateLayout>
-      <CreateAndUpdate newUpload />
+      <CreateAndUpdate newUpload={newUpload} />
     </PageWithBackplateLayout>
   );
 }

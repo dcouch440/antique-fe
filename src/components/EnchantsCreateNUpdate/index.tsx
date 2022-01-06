@@ -1,6 +1,7 @@
 import { Button, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import { enchantPath, enchantUpdatePath, enchantsPath } from 'config/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Box } from '@mui/system';
@@ -38,7 +39,6 @@ export interface IEnchantInfo {
 }
 
 interface OwnProps {
-  ench?: IEnchantInfo;
   newUpload: boolean;
 }
 
@@ -108,8 +108,10 @@ function EnchantsCreateNUpdate({
   // exit useEffect
   useEffect(() => {
     if (newUpload) return;
+    if (!param?.enchantId) return;
+
     axios
-      .get<IEnchantInfo>(`/enchants/${param.enchantId}/update`, {
+      .get<IEnchantInfo>(enchantUpdatePath(param.enchantId), {
         withCredentials: true,
       })
       .then(({ data }) => {
@@ -397,19 +399,19 @@ function EnchantsCreateNUpdate({
     try {
       // if its a new upload send it to the create route
       if (newUpload) {
-        const { data } = await axios.post('/enchants', enchant, {
+        const { data } = await axios.post(enchantsPath, enchant, {
           withCredentials: true,
         });
-        nav(`/enchants/${data.id}`);
+        nav(enchantPath(data.id));
       } else {
         // if its a patch route send it to the patch route with the correct id.
         // eslint-disable-next-line no-debugger
         const { data } = await axios.patch(
-          `/enchants/${enchant.id}`,
+          enchantPath(enchant.id),
           { enchant, imagesToDelete },
           { withCredentials: true }
         );
-        nav(`/enchants/${data.id}`);
+        nav(enchantPath(data.id));
       }
     } catch (err) {
       /// handle snackbar error

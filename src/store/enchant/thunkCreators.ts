@@ -33,7 +33,6 @@ export const getEnchants = (): ThunkCreators => async (dispatch, getState) => {
       })
     );
   } catch (err) {
-    dispatch(snackbarMessageSent('No results.'));
     console.error(err);
   }
 };

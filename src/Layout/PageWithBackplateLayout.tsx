@@ -56,15 +56,7 @@ function PageWithBackplateLayout({
           </Typography>
         </Box>
       )}
-      <Box
-        sx={{
-          minHeight: `100%`,
-          width: '100%',
-          flexDirection: 'column',
-        }}
-      >
-        {children}
-      </Box>
+      {children}
     </Box>
   );
 }

@@ -1,9 +1,11 @@
+import { ConnectedProps, connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
+import { visibilityToggled } from 'store/sidebar/actionCreators';
 
 interface IOwnProps {
   path: string;
@@ -11,20 +13,34 @@ interface IOwnProps {
   images: string[];
 }
 
+const mapDispatchToProps = { visibilityToggled };
+
+const connector = connect(null, mapDispatchToProps);
+
+type ReduxProps = ConnectedProps<typeof connector>;
+
+type Props = ReduxProps & IOwnProps;
+
 /**
  * @description features a morphing image along with a title that represents the link that is selected. The component will cycle through the images in the given array.
  */
 
-export default function NavigationLink({
+function NavigationLink({
   path,
   title,
   images,
-}: IOwnProps): JSX.Element {
+  visibilityToggled,
+}: Props): JSX.Element {
   const navigate = useNavigate();
-  const handleRouteChange = () => navigate(path);
   const [int, setInt] = useState(0);
-  const handleClick = throttle(handleRouteChange, 500, { trailing: false });
   const imagesLength = images.length;
+
+  const handleRouteChange = () => {
+    navigate(path);
+    visibilityToggled();
+  };
+
+  const handleClick = throttle(handleRouteChange, 500, { trailing: false });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -109,3 +125,5 @@ export default function NavigationLink({
     </Box>
   );
 }
+
+export default connector(NavigationLink);

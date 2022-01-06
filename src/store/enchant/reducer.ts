@@ -31,6 +31,7 @@ export interface IEnchant {
   }>;
   condition: string;
   origin: string;
+  about: string;
   title: string;
   whereFound: string;
   createdAt: string;

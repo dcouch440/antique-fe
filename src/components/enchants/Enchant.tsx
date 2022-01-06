@@ -2,6 +2,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import React, { ReactElement, useEffect, useState } from 'react';
 
 import AppUser from 'components/common/AppUser';
+import { enchantsPath } from 'config/paths';
 import { useNavigate } from 'react-router-dom';
 
 interface IEnchant {
@@ -33,8 +34,9 @@ function Enchant({ username, userAvatar, images, id }: IEnchant): ReactElement {
 
   if (images.length === 0 || images[0]?.url === '') return <></>;
   if (img.height === 0 || img.width === 0) return <></>;
+  if (id === undefined) console.error(new Error('Enchant ID is blank'));
 
-  const handleClick = () => nav(`/enchants/${id}`);
+  const handleClick = () => nav(enchantsPath(id));
 
   const getSpan = () => {
     const heightRatio = img.height / img.width;

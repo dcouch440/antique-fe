@@ -17,14 +17,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
-/**
- * * Renders variants of the sidebar that decides how the menu icons should behave
- * * Sidebar Open displays the entire sidebar that houses the option menu.
- * * Sidebar Closed Houses the small icons that display on the side of the screen.
- * * The small icons move to the bottom of the screen so many variations of the Boxes would be needed
- * * For now these components will be duplicated with different versions.
- */
-
 function Sidebar({ sidebarVisibility }: Props): JSX.Element {
   return (
     <>
