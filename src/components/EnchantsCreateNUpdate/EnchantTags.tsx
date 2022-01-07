@@ -1,5 +1,10 @@
-import { AppDescriptionSubText, AppHeader, AppInput } from 'components/common';
-import { Box, FormControlState, Typography, useTheme } from '@mui/material';
+import {
+  AppDescriptionSubText,
+  AppHeader,
+  AppInput,
+  AppTag,
+} from 'components/common';
+import { Box, FormControlState } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import { AddButton } from '.';
@@ -16,7 +21,6 @@ interface Props {
 
 function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
   const [input, setInput] = useState('');
-  const theme = useTheme();
   const handleChange: ReactOnChange = ({ target }) => {
     setInput(target.value);
   };
@@ -51,23 +55,8 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
           pb: tags.length ? 1 : 0,
         }}
       >
-        {tags.map((tag: string, i: number) => (
-          <Typography
-            key={i}
-            sx={{
-              borderRadius: 4,
-              width: 'fit-content',
-              backgroundColor: theme.palette.primary.main,
-              p: 1,
-              textAlign: 'center',
-              cursor: 'pointer',
-              minWidth: 80,
-            }}
-            onClick={() => removeTag(tag)}
-            color="secondary"
-          >
-            {tag}
-          </Typography>
+        {tags.map((tag: string) => (
+          <AppTag key={tag} tag={tag} onClick={() => removeTag(tag)} />
         ))}
       </Box>
       <Box

@@ -53,37 +53,30 @@ function Enchant({ getEnchant, enchant, id }: PropsFromRedux): ReactElement {
           </Box>
         )}
       </>
-      <AppUser
-        userAvatar={enchant?.userAvatar ?? ''}
-        username={enchant.username}
-        sx={{ borderRadius: 1 }}
-      />
-      <AppSpacingBox
-        sx={{
-          backgroundColor: theme.custom.palette.secondary.transparent,
-        }}
-        mb
-      >
-        <AppHeader text={enchant?.title ?? ''} size="xl" component="h1" />
-        <Typography color="primary">{enchant?.itemName ?? ''}</Typography>
-      </AppSpacingBox>
       <Box
         sx={{
           display: 'flex',
-          height: '100vh',
-          maxHeight: 1080,
           alignSelf: 'center',
           flexDirection: 'column',
         }}
       >
         <SlideShow images={enchant.images} />
+        <AppUser
+          userAvatar={enchant?.userAvatar ?? ''}
+          username={enchant.username}
+          sx={{ borderRadius: 1, mb: 3 }}
+        />
         <Box
           sx={{
             flex: 1,
             color: 'primary',
             height: '100%',
+            backgroundColor: (theme) =>
+              theme.custom.palette.secondary.transparent,
+            p: 1,
           }}
         >
+          <AppHeader text={enchant?.itemName ?? ''} size="xl" component="h2" />
           {enchant?.about && (
             <AboutSection header="About" content={enchant.about} />
           )}
@@ -95,7 +88,7 @@ function Enchant({ getEnchant, enchant, id }: PropsFromRedux): ReactElement {
           )}
           {enchant?.origin && (
             <AboutSection
-              header="Origin / backstory"
+              header="Origin / Backstory"
               content={enchant?.origin}
             />
           )}

@@ -1,9 +1,9 @@
 import { ConnectedProps, connect } from 'react-redux';
-import { Enchant, EnchantCreateAndUpdate, Enchants } from 'pages';
+import { CreateAndUpdateEnchants, Enchant, Enchants } from 'pages';
 import { Route, Routes } from 'react-router';
 
 import { AppLayout } from 'Layout';
-import AppSnackBar from 'components/common/AppSnackbar';
+import { AppSnackbar } from 'components/common';
 import { CssBaseline } from '@mui/material';
 import axiosSetup from 'config/axiosSetuo';
 import { thunkSession } from 'store/user/thunkCreators';
@@ -29,17 +29,17 @@ function App({ thunkSession }: Props): JSX.Element {
   return (
     <>
       <CssBaseline />
-      <AppSnackBar />
+      <AppSnackbar />
       <AppLayout>
         <Routes>
           <Route path="/" element={<Enchants />} />
           <Route
             path="/enchants/post"
-            element={<EnchantCreateAndUpdate newUpload />}
+            element={<CreateAndUpdateEnchants newUpload />}
           />
           <Route
             path="/enchants/:enchantId/update"
-            element={<EnchantCreateAndUpdate newUpload={false} />}
+            element={<CreateAndUpdateEnchants newUpload={false} />}
           />
           <Route path="/enchants/:enchantId" element={<Enchant />} />
         </Routes>

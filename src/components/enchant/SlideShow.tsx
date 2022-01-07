@@ -89,7 +89,6 @@ function SlideShow({ images }: Props): ReactElement {
     >
       <AliceCarousel
         disableSlideInfo
-        disableDotsControls
         touchTracking
         disableButtonsControls
         mouseTracking

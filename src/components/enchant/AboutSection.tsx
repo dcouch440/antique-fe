@@ -20,8 +20,13 @@ function AboutSection({
     <>
       <AppDivider />
       <AppSpacingBox component="section" mt={mt} mb={mb}>
-        <AppHeader text={header} size="sub" component="h2" sx={{ mb: 1 }} />
-        <Typography color="primary">{content}</Typography>
+        <AppHeader
+          text={header}
+          size="sub"
+          component="h2"
+          sx={{ mb: 1, fontWeight: 'bold' }}
+        />
+        <Typography color="primary.light">{content}</Typography>
       </AppSpacingBox>
     </>
   );

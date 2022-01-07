@@ -135,7 +135,7 @@ export default function EnchantImageListItem({
             <Typography
               fontSize={12}
               color="primary"
-              sx={{ cursor: 'pointer' }}
+              sx={{ cursor: 'pointer', pb: 1, pl: 1, pr: 1 }}
               onClick={handleEditCaption}
             >
               Edit?

@@ -11,6 +11,8 @@ import {
 
 import { AnyAction } from 'redux';
 import { ENCHANT_SEARCH_TYPE_POPULAR } from 'constantVariables';
+import convertTag from 'utils/convertTag';
+import isValidTag from 'utils/isValidTag';
 
 export type EnchantSearchType = string;
 export type EnchantSearchQuery = string | null;
@@ -32,7 +34,6 @@ export interface IEnchant {
   condition: string;
   origin: string;
   about: string;
-  title: string;
   whereFound: string;
   createdAt: string;
 }
@@ -88,14 +89,14 @@ export default function reducer(
         searchTags: [],
         lastSeen: null,
       };
-    case ENCHANT_ADD_TAG:
-      if (state.searchTags.includes(payload) || payload.trim() === '') {
-        return state;
-      }
+    case ENCHANT_ADD_TAG: {
+      const t = convertTag(payload);
+      if (!isValidTag(state.searchTags, t)) return state;
       return {
         ...state,
-        searchTags: [...state.searchTags, payload.trim()],
+        searchTags: [...state.searchTags, convertTag(payload)],
       };
+    }
     case ENCHANT_REMOVE_TAG:
       return {
         ...state,

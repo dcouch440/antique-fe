@@ -15,11 +15,18 @@ function AddButton({ text, onClick }: Props): ReactElement {
   return (
     <Button
       variant="contained"
-      sx={{ width: 130 }}
+      sx={{
+        width: [50, 120, 130],
+        fontSize: (theme) => [
+          theme.custom.typography.sizes.sm,
+          theme.custom.typography.sizes.sm,
+          theme.custom.typography.sizes.reg,
+        ],
+      }}
       size="small"
       onClick={onClick}
     >
-      {text}
+      Add
     </Button>
   );
 }

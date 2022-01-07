@@ -1,8 +1,8 @@
+import { Box, useTheme } from '@mui/material';
+
 import { ReactNode } from 'react';
-import ScrollContainer from 'components/ScrollContainer';
 import { Sidebar } from 'components/Sidebar';
 import { TopBar } from 'components/TopBar';
-import { useTheme } from '@mui/material';
 
 interface IOwnProps {
   children: ReactNode;
@@ -16,7 +16,7 @@ function AppLayout({ children }: IOwnProps): JSX.Element {
   const theme = useTheme();
 
   return (
-    <ScrollContainer
+    <Box
       style={{
         flex: 1,
         minHeight: '100%',
@@ -27,7 +27,7 @@ function AppLayout({ children }: IOwnProps): JSX.Element {
       <Sidebar />
       <TopBar />
       {children}
-    </ScrollContainer>
+    </Box>
   );
 }
 

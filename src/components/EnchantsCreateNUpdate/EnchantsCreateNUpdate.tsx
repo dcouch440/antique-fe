@@ -1,7 +1,13 @@
 import { Button, useTheme } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import { enchantPath, enchantUpdatePath, enchantsPath } from 'config/paths';
+import {
+  apiEnchantPath,
+  apiEnchantUpdatePath,
+  apiEnchantUploadPath,
+  enchantPath,
+  enchantsPath,
+} from 'config/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Box } from '@mui/system';
@@ -14,6 +20,8 @@ import Header from 'components/common/AppHeader';
 import { IAppState } from 'store/types';
 import PageHeader from 'components/common/AppPageHeader';
 import axios from 'axios';
+import convertTag from 'utils/convertTag';
+import isValidTag from 'utils/isValidTag';
 import { snackbarMessageSent } from 'store/snackbar/actionCreators';
 import { validateImage } from 'image-validator';
 
@@ -32,7 +40,6 @@ export interface IEnchantInfo {
   condition: string;
   origin: string;
   about: string;
-  title: string;
   images: Array<IImageData>;
   tags: string[];
   whereFound: string;
@@ -96,7 +103,6 @@ function EnchantsCreateNUpdate({
     itemName: '',
     condition: '',
     origin: '',
-    title: '',
     about: '',
     images: [],
     tags: [],
@@ -111,7 +117,7 @@ function EnchantsCreateNUpdate({
     if (!param?.enchantId) return;
 
     axios
-      .get<IEnchantInfo>(enchantUpdatePath(param.enchantId), {
+      .get<IEnchantInfo>(apiEnchantUpdatePath(param.enchantId), {
         withCredentials: true,
       })
       .then(({ data }) => {
@@ -121,7 +127,9 @@ function EnchantsCreateNUpdate({
       .catch(console.error);
   }, [newUpload]);
 
-  const handleEnchantInfoOnChange: ReactOnChange = ({ target }) => {
+  const handleEnchantInfoOnChange:
+    | React.ChangeEventHandler<HTMLTextAreaElement>
+    | undefined = ({ target }) => {
     setEnchant((prev) => ({
       ...prev,
       [target.name]: target.value,
@@ -135,7 +143,7 @@ function EnchantsCreateNUpdate({
 
     try {
       // make sure its valid
-      if (!(await validateImage(file))) {
+      if (!(await validateImage(file, { throw: false }))) {
         snackbarMessageSent('Must be an image.');
         return;
       }
@@ -237,13 +245,11 @@ function EnchantsCreateNUpdate({
 
   const handleAddTag: (tag: string) => void = (tag) => {
     setEnchant((prev) => {
-      if (prev.tags.includes(tag) || tag.trim() === '') {
-        return prev;
-      }
-
+      const t = convertTag(tag);
+      if (!isValidTag(prev.tags, t)) return prev;
       return {
         ...prev,
-        tags: [...prev.tags, tag.trim()],
+        tags: [...prev.tags, t],
       };
     });
   };
@@ -330,7 +336,7 @@ function EnchantsCreateNUpdate({
 
     try {
       const { data } = await axios.post<AxiosImagePostRequest>(
-        '/enchants/upload',
+        apiEnchantUploadPath,
         formData,
         { withCredentials: true }
       );
@@ -407,7 +413,7 @@ function EnchantsCreateNUpdate({
         // if its a patch route send it to the patch route with the correct id.
         // eslint-disable-next-line no-debugger
         const { data } = await axios.patch(
-          enchantPath(enchant.id),
+          apiEnchantPath(enchant.id),
           { enchant, imagesToDelete },
           { withCredentials: true }
         );
