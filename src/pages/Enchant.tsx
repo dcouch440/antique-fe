@@ -45,7 +45,7 @@ function Enchant({ getEnchant, enchant, id }: PropsFromRedux): ReactElement {
   const handleClick = () => nav(enchantUpdatePath(enchant?.id));
 
   return (
-    <PageWithBackplateLayout sx={{ px: 1, pt: 3 }}>
+    <PageWithBackplateLayout sx={{ px: 1, pt: 3, pb: 3 }}>
       <>
         {id === enchant?.userId && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -340,9 +340,7 @@ function EnchantsCreateNUpdate({
         formData,
         { withCredentials: true }
       );
-
       // send the data to the database with its attached keys.
-
       // once the index of the images in question is found.
       // keep track of the last reference used so we can use it to
       // find the value.
@@ -417,6 +415,7 @@ function EnchantsCreateNUpdate({
           { enchant, imagesToDelete },
           { withCredentials: true }
         );
+        console.log(enchantPath(data.id));
         nav(enchantPath(data.id));
       }
     } catch (err) {

@@ -4,6 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import AliceCarousel from 'react-alice-carousel';
+import { AppDivider } from 'components/common';
 import AppImage from 'components/common/AppImage';
 
 interface Props {
@@ -22,7 +23,7 @@ function SlideShow({ images }: Props): ReactElement {
   };
 
   const slideNext = () => {
-    if (activeIndex + 1 > images.length) return;
+    if (activeIndex + 1 >= images.length) return;
     setActiveIndex(activeIndex + 1);
   };
 
@@ -31,20 +32,7 @@ function SlideShow({ images }: Props): ReactElement {
     setActiveIndex(item);
   };
 
-  const ImageItem = ({ url }: { url: string }) => (
-    <AppImage
-      sx={{
-        borderRadius: 1,
-        height: 'auto',
-        maxHeight: 800,
-        width: '100%',
-        objectFit: 'scale-down',
-      }}
-      src={url}
-    />
-  );
-
-  const items = images.map(({ url, caption }) => (
+  const items = images.map(({ url }) => (
     <Box
       key={url}
       sx={{
@@ -52,27 +40,20 @@ function SlideShow({ images }: Props): ReactElement {
         alignItems: 'center',
         flexDirection: 'column',
         position: 'relative',
+        transition: '0.2s',
       }}
       onDragStart={(e) => e.preventDefault()}
     >
-      <ImageItem url={url} />
-      {caption && (
-        <Typography
-          color="primary"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.custom.palette.secondary.transparent,
-            borderRadius: 1,
-            p: 1,
-            width: 'fit-content',
-            position: 'absolute',
-            left: 0,
-            top: 1,
-          }}
-        >
-          {caption}
-        </Typography>
-      )}
+      <AppImage
+        sx={{
+          borderRadius: 1,
+          height: 'auto',
+          maxHeight: 800,
+          width: '100%',
+          objectFit: 'scale-down',
+        }}
+        src={url}
+      />
     </Box>
   ));
 
@@ -99,6 +80,14 @@ function SlideShow({ images }: Props): ReactElement {
       <Box>
         <Button onClick={slidePrev}>Prev</Button>
         <Button onClick={slideNext}>Next</Button>
+      </Box>
+      <AppDivider />
+      <Box sx={{ width: '100%', flex: 1 }}>
+        <Typography color="primary" sx={{ p: 1 }}>
+          {images[activeIndex]?.caption
+            ? images[activeIndex]?.caption
+            : 'No Caption..'}
+        </Typography>
       </Box>
     </Box>
   );
