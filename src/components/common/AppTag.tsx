@@ -22,6 +22,11 @@ function AppTag({ onClick, tag }: Props): ReactElement {
         textAlign: 'center',
         cursor: 'pointer',
         minWidth: 80,
+        fontSize: (theme) => [
+          theme.custom.typography.sizes.sm,
+          theme.custom.typography.sizes.sm,
+          theme.custom.typography.sizes.reg,
+        ],
       }}
       onClick={() => onClick(tag)}
       color="secondary"

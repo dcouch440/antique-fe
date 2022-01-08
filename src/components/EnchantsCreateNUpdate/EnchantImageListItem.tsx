@@ -33,15 +33,16 @@ export default function EnchantImageListItem({
   index,
 }: Props): ReactElement {
   const theme = useTheme();
-  const [input, setInput] = useState<string>('');
+  const [input, setInput] = useState<string>(caption);
   const handleChange: ReactOnChange = ({ target }) => setInput(target.value);
-  const [editCaption, setEditCaption] = useState(!caption);
+  const [editCaption, setEditCaption] = useState(false);
   const handleEditCaption = () => setEditCaption(true);
+
   const handleUpdateOwnCaption = () => {
-    if (input.trim() === '') return;
     updateCaption(input, index);
     setEditCaption(false);
   };
+
   const handleKeyPress: (e: React.KeyboardEvent<FormControlState>) => void = ({
     key,
   }) => key === 'Enter' && handleUpdateOwnCaption();
@@ -51,7 +52,7 @@ export default function EnchantImageListItem({
       sx={{
         position: 'relative',
         display: 'flex',
-        height: 120,
+        minHeight: 120,
         maxWidth: '100%',
       }}
     >
@@ -82,7 +83,6 @@ export default function EnchantImageListItem({
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          height: 120,
           width: 800,
           pl: 1,
           justifyContent: 'space-between',
@@ -123,6 +123,7 @@ export default function EnchantImageListItem({
                 alignSelf: 'flex-end',
                 underline: 'none',
                 flex: 1,
+                fontSize: 1,
               }}
               variant="standard"
               onKeyPress={handleKeyPress}
@@ -131,11 +132,13 @@ export default function EnchantImageListItem({
           </Box>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>
-            <Typography color="primary">{caption}</Typography>
+            <Typography color="primary">
+              {caption ? caption : 'No caption.'}
+            </Typography>
             <Typography
               fontSize={12}
               color="primary"
-              sx={{ cursor: 'pointer' }}
+              sx={{ cursor: 'pointer', pb: 1, pl: 1, pr: 1 }}
               onClick={handleEditCaption}
             >
               Edit?

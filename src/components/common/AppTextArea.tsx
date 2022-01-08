@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { TextareaAutosize, Theme, useTheme } from '@mui/material';
+import { TextareaAutosize, Theme, Typography, useTheme } from '@mui/material';
 
 import styled from '@emotion/styled';
 
@@ -8,14 +8,52 @@ const StyledTextArea = styled(TextareaAutosize)(
     border: 'none',
     borderBottom: `1px solid ${theme.palette.primary.dark}`,
     backgroundColor: 'transparent',
+    width: '100%',
+    maxWidth: '100%',
+    minWidth: '100%',
+    padding: theme.spacing(1),
     color: theme.palette.primary.main,
     fontFamily: theme.typography.fontFamily,
   })
 );
 
-function AppTextArea({ ...props }): ReactElement {
+interface IAppTextArea {
+  value: string;
+  style?: React.CSSProperties;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined;
+  name: string;
+  placeholder?: string;
+  label?: string;
+}
+
+function AppTextArea({
+  value,
+  style,
+  onChange,
+  name,
+  label,
+}: IAppTextArea): ReactElement {
   const theme = useTheme();
-  return <StyledTextArea theme={theme} {...props} />;
+  return (
+    <>
+      {label && (
+        <Typography
+          color="primary"
+          fontSize={16}
+          sx={{ width: '100%', pl: 1, pb: 1 }}
+        >
+          {label}
+        </Typography>
+      )}
+      <StyledTextArea
+        theme={theme}
+        value={value}
+        style={style}
+        onChange={onChange}
+        name={name}
+      />
+    </>
+  );
 }
 
 export default AppTextArea;

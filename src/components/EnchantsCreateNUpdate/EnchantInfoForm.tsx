@@ -1,13 +1,13 @@
+import { AppInput, AppTextArea } from 'components/common';
 import React, { ReactElement } from 'react';
 import { Typography, useTheme } from '@mui/material';
 
-import AppInput from 'components/common/AppInput';
-import AppTextArea from 'components/common/AppTextArea';
-import FormWidthContainer from 'Layout/FormWidthContainer';
-import { IEnchantInfo } from '.';
+import { Box } from '@mui/system';
+import { FormWidthContainer } from 'Layout';
+import { IEnchantInfo } from './EnchantsCreateNUpdate';
 
 interface OwnProps {
-  onChange: ReactOnChange;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined;
 }
 
 type Props = IEnchantInfo & OwnProps;
@@ -16,7 +16,6 @@ function EnchantInfoForm({
   itemName,
   condition,
   origin,
-  title,
   whereFound,
   about,
   onChange,
@@ -46,41 +45,24 @@ function EnchantInfoForm({
         label="What condition is it in?"
         name="condition"
       />
-      <AppInput
-        sx={{ marginBottom: 3, width: '100%' }}
+      <AppTextArea
+        style={{ marginBottom: theme.spacing(3) }}
         onChange={onChange}
         value={origin}
-        label="Where is it from?"
+        label="Origin / Backstory"
         name="origin"
       />
-      <AppInput
-        sx={{ marginBottom: 3, width: '100%' }}
-        onChange={onChange}
-        value={title}
-        label="What would you like to title this enchant?"
-        name="title"
-        required
-      />
-      <AppInput
-        sx={{ width: '100%', marginBottom: 3 }}
+      <AppTextArea
+        style={{ marginBottom: theme.spacing(3) }}
         onChange={onChange}
         value={whereFound}
-        label="Where did you find it?"
         name="whereFound"
+        label="Where was it found?"
       />
-      <Typography color="primary" sx={{ width: '100%', pl: 1, pb: 1 }}>
-        About
-      </Typography>
       <AppTextArea
         onChange={onChange}
-        style={{
-          width: '100%',
-          maxHeight: '200px',
-          maxWidth: '100%',
-          minWidth: '100%',
-          padding: theme.spacing(1),
-        }}
         name="about"
+        label="About"
         value={about}
         placeholder="Talk About it"
       />

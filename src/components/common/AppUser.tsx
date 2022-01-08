@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, SxProps, Typography } from '@mui/material';
 import React, { ReactElement } from 'react';
 
 import UserAvatar from './AppUserAvatar';
@@ -7,13 +7,19 @@ interface Props {
   username: string;
   userAvatar: string;
   renderSubText?: string;
+  sx?: SxProps;
 }
 
 /**
  * @description Displays a users avatar with username. Renders optional subtext.
  */
 
-function AppUser({ username, userAvatar, renderSubText }: Props): ReactElement {
+function AppUser({
+  username,
+  userAvatar,
+  renderSubText,
+  sx,
+}: Props): ReactElement {
   return (
     <Box
       sx={{
@@ -24,6 +30,8 @@ function AppUser({ username, userAvatar, renderSubText }: Props): ReactElement {
         alignItems: 'center',
         textTransform: 'capitalize',
         backgroundColor: (theme) => theme.custom.palette.secondary.transparent,
+        borderBottom: (theme) => `1px solid ${theme.palette.primary.dark}`,
+        ...sx,
       }}
     >
       <UserAvatar src={userAvatar} alt={username} />

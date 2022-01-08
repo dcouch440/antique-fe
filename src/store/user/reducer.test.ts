@@ -2,6 +2,7 @@ import * as ac from './actionCreators';
 
 import reducer, { UserInfo } from './reducer';
 
+import { act } from 'react-dom/test-utils';
 import { createStore } from 'redux';
 
 const setup = () => {
@@ -13,12 +14,13 @@ describe('user/Reducer', () => {
     const store = setup();
 
     const user: UserInfo = {
-      email: 'testing',
-      id: null,
+      id: '234234',
       username: 'testing',
     };
 
-    store.dispatch(ac.userLoggedIn(user));
+    act(() => {
+      store.dispatch(ac.userLoggedIn(user));
+    });
 
     for (const property in user) {
       const userFromState = store.getState();

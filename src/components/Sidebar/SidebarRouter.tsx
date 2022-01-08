@@ -6,11 +6,11 @@ import {
   SIDEBAR_NAVIGATION,
 } from 'constantVariables';
 
-import Authorize from './SidebarTypes/Authorize';
-import Feed from './SidebarTypes/Feed';
+import { Authorize } from './SidebarTypes';
+import { Feed } from './SidebarTypes';
 import { IAppState } from 'store/types';
-import Messages from './SidebarTypes/Messages';
-import Nav from './SidebarTypes/Nav';
+import { Messages } from './SidebarTypes';
+import { Nav } from './SidebarTypes';
 
 const mapStateToProps = ({ sidebar: { sidebarType } }: IAppState) => ({
   sidebarType,

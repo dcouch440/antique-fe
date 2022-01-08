@@ -10,13 +10,9 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import GroupIcon from '@mui/icons-material/Group';
 import { IAppState } from 'store/types';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import TopBarButton from 'components/TopBar/TopBarButton';
+import { TopBarButton } from 'components/TopBar';
 import { searchTypeUpdated } from 'store/enchant/actionCreators';
 import { swellMenuTypeUpdated } from 'store/sidebar/actionCreators';
-
-/**
- * @description Category component changes what type of search it is based on constants in the store
- */
 
 const mapStateToProps = ({ enchant: { searchType } }: IAppState) => ({
   searchType,
@@ -33,6 +29,10 @@ interface OwnProps {
 }
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & OwnProps;
+
+/**
+ * @description Category component changes what type of search it is based on constants in the store
+ */
 
 function Category({ searchType, searchTypeUpdated }: Props): JSX.Element {
   const isActive: (type: string) => string = (type) =>

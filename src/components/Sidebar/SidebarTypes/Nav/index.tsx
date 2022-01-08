@@ -17,6 +17,7 @@ export default function Nav(): JSX.Element {
         '&::-webkit-scrollbar': {
           display: 'none' /* for Chrome, Safari, and Opera */,
         },
+        pb: '112px',
       }}
     >
       <Header text="What Doing?" />

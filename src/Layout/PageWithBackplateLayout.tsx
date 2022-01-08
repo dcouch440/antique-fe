@@ -1,4 +1,4 @@
-import { Typography, useTheme } from '@mui/material';
+import { SxProps, Typography, useTheme } from '@mui/material';
 
 import { Box } from '@mui/system';
 import React from 'react';
@@ -6,6 +6,7 @@ import React from 'react';
 interface IPageWithBackplateLayout {
   header?: string;
   children: JSX.Element | JSX.Element[];
+  sx?: SxProps;
 }
 
 /**
@@ -16,6 +17,7 @@ interface IPageWithBackplateLayout {
 function PageWithBackplateLayout({
   header,
   children,
+  sx,
 }: IPageWithBackplateLayout): JSX.Element {
   const theme = useTheme();
   return (
@@ -31,6 +33,7 @@ function PageWithBackplateLayout({
           backgroundColor: 'secondary.main',
         },
         position: 'relative',
+        ...sx,
       }}
       component="main"
     >
@@ -56,15 +59,7 @@ function PageWithBackplateLayout({
           </Typography>
         </Box>
       )}
-      <Box
-        sx={{
-          minHeight: `100%`,
-          width: '100%',
-          flexDirection: 'column',
-        }}
-      >
-        {children}
-      </Box>
+      {children}
     </Box>
   );
 }
