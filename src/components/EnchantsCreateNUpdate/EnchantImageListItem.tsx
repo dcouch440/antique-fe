@@ -35,11 +35,10 @@ export default function EnchantImageListItem({
   const theme = useTheme();
   const [input, setInput] = useState<string>(caption);
   const handleChange: ReactOnChange = ({ target }) => setInput(target.value);
-  const [editCaption, setEditCaption] = useState(!caption);
+  const [editCaption, setEditCaption] = useState(false);
   const handleEditCaption = () => setEditCaption(true);
 
   const handleUpdateOwnCaption = () => {
-    if (input.trim() === '') return;
     updateCaption(input, index);
     setEditCaption(false);
   };
@@ -133,7 +132,9 @@ export default function EnchantImageListItem({
           </Box>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>
-            <Typography color="primary">{caption}</Typography>
+            <Typography color="primary">
+              {caption ? caption : 'No caption.'}
+            </Typography>
             <Typography
               fontSize={12}
               color="primary"
