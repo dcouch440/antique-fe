@@ -4,10 +4,10 @@ import {
   AppInput,
   AppTag,
 } from 'components/common';
-import { Box, FormControlState } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import { AddButton } from '.';
+import { Box } from '@mui/material';
 
 interface Props {
   tags: string[];
@@ -30,9 +30,9 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
     setInput('');
   };
 
-  const handleKeyPress: (e: React.KeyboardEvent<FormControlState>) => void = ({
-    key,
-  }) => key === 'Enter' && handleAddTag();
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    e.key === 'Enter' && handleAddTag();
+  };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -70,7 +70,7 @@ function EnchantTags({ tags, removeTag, addTag }: Props): ReactElement {
           onKeyPress={handleKeyPress}
           label="Enter a tag"
         />
-        <AddButton onClick={handleAddTag} text="Add Tag" />
+        <AddButton onClick={handleAddTag} />
       </Box>
     </Box>
   );

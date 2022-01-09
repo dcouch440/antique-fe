@@ -1,10 +1,9 @@
 import { AppInput, AppTextArea } from 'components/common';
 import React, { ReactElement } from 'react';
-import { Typography, useTheme } from '@mui/material';
 
-import { Box } from '@mui/system';
 import { FormWidthContainer } from 'Layout';
 import { IEnchantInfo } from './EnchantsCreateNUpdate';
+import { useTheme } from '@mui/material';
 
 interface OwnProps {
   onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined;

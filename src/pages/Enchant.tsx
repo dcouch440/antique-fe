@@ -1,11 +1,10 @@
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { ConnectedProps, connect } from 'react-redux';
 import React, { ReactElement, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import AboutSection from 'components/enchant/AboutSection';
 import AppHeader from 'components/common/AppHeader';
-import AppSpacingBox from 'components/common/AppSpacingBox';
 import AppUser from 'components/common/AppUser';
 import { IAppState } from 'store/types';
 import { PageWithBackplateLayout } from 'Layout';
@@ -31,7 +30,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
  */
 
 function Enchant({ getEnchant, enchant, id }: PropsFromRedux): ReactElement {
-  const theme = useTheme();
   const params = useParams();
   const nav = useNavigate();
 

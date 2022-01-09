@@ -32,7 +32,7 @@ function SlideShow({ images }: Props): ReactElement {
     setActiveIndex(item);
   };
 
-  const items = images.map(({ url }) => (
+  const items = images.map(({ url, caption }, index) => (
     <Box
       key={url}
       sx={{
@@ -53,6 +53,7 @@ function SlideShow({ images }: Props): ReactElement {
           objectFit: 'scale-down',
         }}
         src={url}
+        alt={`Image ${index} - ${caption}`}
       />
     </Box>
   ));

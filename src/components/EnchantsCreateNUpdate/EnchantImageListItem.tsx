@@ -1,4 +1,4 @@
-import { Box, FormControlState, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
 
 import AddButton from './AddButton';
@@ -43,9 +43,9 @@ export default function EnchantImageListItem({
     setEditCaption(false);
   };
 
-  const handleKeyPress: (e: React.KeyboardEvent<FormControlState>) => void = ({
-    key,
-  }) => key === 'Enter' && handleUpdateOwnCaption();
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    e.key === 'Enter' && handleUpdateOwnCaption();
+  };
 
   return (
     <Box
@@ -121,14 +121,13 @@ export default function EnchantImageListItem({
               label="Caption"
               sx={{
                 alignSelf: 'flex-end',
-                underline: 'none',
                 flex: 1,
                 fontSize: 1,
               }}
               variant="standard"
               onKeyPress={handleKeyPress}
             />
-            <AddButton onClick={handleUpdateOwnCaption} text="Add Caption" />
+            <AddButton onClick={handleUpdateOwnCaption} />
           </Box>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>

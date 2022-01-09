@@ -1,4 +1,4 @@
-import { TextField, styled } from '@mui/material';
+import { TextField, TextFieldProps, styled } from '@mui/material';
 
 const StyledInput = styled(TextField)`
   && {
@@ -28,18 +28,20 @@ const StyledInput = styled(TextField)`
     select:-webkit-autofill:hover,
     select:-webkit-autofill:focus {
       border-bottom: 1px solid #4c6779;
-      -webkit-text-fill-color: #ffffff;
+      -webkit-text-fill-color: #ffffff;\
       -webkit-box-shadow: 0 0 0px 1000px #f1f1f142 inset;
       transition: background-color 5000s ease-in-out 0s;
     }
   }
 `;
 
+type AppInputProps = TextFieldProps;
+
 /**
  * * Used for AppSearchBar and Logins etc.
  * * This is a highly stylized version of Mui's TextField.
  */
 
-export default function AppInput({ ...props }): JSX.Element {
+export default function AppInput({ ...props }: AppInputProps): JSX.Element {
   return <StyledInput color="primary" {...props} />;
 }

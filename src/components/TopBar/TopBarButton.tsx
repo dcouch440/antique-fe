@@ -3,9 +3,15 @@ import React, { ReactElement } from 'react';
 
 interface TopBarButton {
   sx?: SxProps;
+  onMouseDown: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  children: ReactElement | ReactElement[];
 }
 
-export default function TopBarButton({ sx = {}, ...props }): ReactElement {
+export default function TopBarButton({
+  sx = {},
+  onMouseDown,
+  children,
+}: TopBarButton): ReactElement {
   return (
     <Button
       sx={{
@@ -14,7 +20,9 @@ export default function TopBarButton({ sx = {}, ...props }): ReactElement {
         height: '100%',
         ...sx,
       }}
-      {...props}
-    />
+      onMouseDown={onMouseDown}
+    >
+      {children}
+    </Button>
   );
 }

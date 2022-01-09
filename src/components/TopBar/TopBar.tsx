@@ -6,19 +6,9 @@ import {
 } from 'constantVariables';
 
 import AppSidebarTypeSelector from 'components/common/AppSidebarTypeSelector';
-import { ConnectedProps } from 'react-redux';
 import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import { connect } from 'react-redux';
-
-const mapStateToProps = () => ({});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type Props = PropsFromRedux;
 
 // Top bar holds a nav open button and will feature future notifications for users.
 
@@ -79,4 +69,4 @@ function TopBar(): JSX.Element {
   );
 }
 
-export default connector(TopBar);
+export default TopBar;
