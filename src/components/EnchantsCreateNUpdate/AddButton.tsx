@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react';
 import { Button } from '@mui/material';
 
 interface Props {
-  text: string;
   onClick: () => void;
 }
 
@@ -11,7 +10,7 @@ interface Props {
  * @description A fixed width button that is used to multiple parts of the form.
  */
 
-function AddButton({ text, onClick }: Props): ReactElement {
+function AddButton({ onClick }: Props): ReactElement {
   return (
     <Button
       variant="contained"
