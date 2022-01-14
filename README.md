@@ -48,10 +48,10 @@ src/components/Enchants
 
 #### `Image specific sizes`
 
-In order to present images at every size with a close relation to their aspect ratio. This application features a onload ratio finder that finds how much wider the image is than tall and vise versa.
-
-Currently supported is extra wide images, tall images, and squarish images.
-
+In order to present images of every size with a close relation to their aspect ratio. This application features an on-load ratio finder that finds how much wider the image is than tall and vise versa.
+  
+Currently supported are extra-wide images, tall images, and squarish images.
+  
 Once information is calculated the image is fitted into a grid which adapts and builds as it goes.
   
 <img src="https://res.cloudinary.com/dbyretay5/image/upload/v1641251941/enchant-repo/Enchant_Display_ghxoku.png" />
