@@ -37,7 +37,7 @@ Images are first uploaded concurrently via multi-part form data using GO languag
   
 Users can return to their post at any time and use the same interface to make updates if they change their minds. Users have the option to remove images, which enters the images into a queue. On submission, the backend receives the information in JSON and removes the images in the queue at the time of update in one request. If the user chooses to upload new images and delete old images at the same time. The upload sequence will first take action and then a JSON request will be sent to the Go Server which notifies S3 to delete the images and store the new information in MongoDB.
   
-![Upload and edit](https://res.cloudinary.com/dbyretay5/image/upload/v1641242365/enchant-repo/Create_Enchants_mll1fb.png)
+![Upload and edit](https://res.cloudinary.com/dbyretay5/image/upload/v1642193486/enchant-repo/Enchants_form_myrrid.png)
 
 ### `Adaptive Image Grid`
 Folder
