@@ -31,4 +31,4 @@ export const apiEnchantsPath = '/enchants';
  *  '23424344322435': [File],
  * }
  */
-export const apiEnchantUploadPath = '/enchants/upload';
+export const apiEnchantUploadPath = '/upload';
