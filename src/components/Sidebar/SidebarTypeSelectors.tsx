@@ -39,7 +39,6 @@ function SidebarTypeSelectors({
   const userIsLoggedIn = Boolean(user.id);
   const isClosedVersion = orientation === 'closed';
   const authButtonText = userIsLoggedIn ? 'Logout' : 'Login';
-  console.log(user);
   return (
     <Box
       key="SidebyTypeSectorsz"

@@ -70,7 +70,6 @@ export const thunkLogin =
         { email, password },
         { withCredentials: true }
       );
-      console.log(data);
       dispatch(userLoggedIn(data));
     } catch (err) {
       console.error(err);

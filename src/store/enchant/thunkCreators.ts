@@ -44,7 +44,6 @@ export const getEnchant =
       if (id.length === 0) throw new Error('Id param not set.');
 
       const { data } = await axios.get<IEnchant>(`/enchants/${id}`);
-      console.log(data);
       if (Object.keys(data).length === 0)
         throw new Error('An empty object was returned from getEnchants.');
 

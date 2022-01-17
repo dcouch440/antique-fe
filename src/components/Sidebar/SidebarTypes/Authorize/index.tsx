@@ -67,7 +67,6 @@ function Authorize({
   };
 
   const handleLogin: HandleAuth = ({ email, password }) => {
-    console.log('sdfsdfsdf');
     thunkLogin({ email, password });
   };
 

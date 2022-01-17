@@ -28,7 +28,6 @@ function SlideShow({ images }: Props): ReactElement {
   };
 
   const syncActiveIndex = ({ item }: { item: number }) => {
-    console.log(item);
     setActiveIndex(item);
   };
 
