@@ -375,9 +375,11 @@ function EnchantsCreateNUpdate({
 
       // verify favorite image was added and successful
       let favoriteWasFound = false;
-      updatedImages.forEach((img) => {
-        if (img?.favorite) favoriteWasFound = true;
-      });
+      for (const img of updatedImages) {
+        if (!img?.favorite) continue;
+        favoriteWasFound = true;
+        break;
+      }
 
       if (!favoriteWasFound) {
         if (updatedImages?.[0]?.favorite !== undefined)
@@ -415,7 +417,6 @@ function EnchantsCreateNUpdate({
           { enchant, imagesToDelete },
           { withCredentials: true }
         );
-        console.log(enchantPath(data.id));
         nav(enchantPath(data.id));
       }
     } catch (err) {
