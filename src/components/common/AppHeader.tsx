@@ -8,6 +8,10 @@ interface Props {
   sx?: SxProps;
 }
 
+/**
+ * @description Returns a dynamic size header that will become smaller by a percentage when a screen becomes xs.
+ */
+
 function AppHeader({ text, component, sx, size }: Props): ReactElement {
   const fs = size === 'xl' ? 46 : size === 'sub' ? 20 : 16;
 

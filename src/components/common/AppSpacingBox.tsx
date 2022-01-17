@@ -8,6 +8,9 @@ interface Props {
   sx?: SxProps;
   component?: React.ElementType;
 }
+/**
+ * @description Renders a simple box that will give an application standard of 3 spacings on the top and bottom of the container
+ */
 
 function AppSpacingBox({
   mt,

@@ -1,5 +1,11 @@
 import React, { ReactElement } from 'react';
-import { TextareaAutosize, Theme, Typography, useTheme } from '@mui/material';
+import {
+  TextFieldProps,
+  TextareaAutosize,
+  Theme,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 import styled from '@emotion/styled';
 
@@ -26,13 +32,20 @@ interface IAppTextArea {
   label?: string;
 }
 
+type AppInputProps = TextFieldProps & IAppTextArea;
+
+/**
+ * @description Creates a stylized text area that is similar to AppInput.
+ * The look of the input stays consistent and grows as the user fills the input.
+ */
+
 function AppTextArea({
   value,
   style,
   onChange,
   name,
   label,
-}: IAppTextArea): ReactElement {
+}: AppInputProps): ReactElement {
   const theme = useTheme();
   return (
     <>

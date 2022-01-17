@@ -35,6 +35,7 @@ function EnchantInfoForm({
         value={itemName}
         label="Enchant name"
         name="itemName"
+        aria-label="name"
         required
       />
       <AppInput
@@ -43,6 +44,7 @@ function EnchantInfoForm({
         value={condition}
         label="What condition is it in?"
         name="condition"
+        aria-label="condition"
       />
       <AppTextArea
         style={{ marginBottom: theme.spacing(3) }}
@@ -50,6 +52,7 @@ function EnchantInfoForm({
         value={origin}
         label="Origin / Backstory"
         name="origin"
+        aria-label="origin"
       />
       <AppTextArea
         style={{ marginBottom: theme.spacing(3) }}
@@ -57,6 +60,7 @@ function EnchantInfoForm({
         value={whereFound}
         name="whereFound"
         label="Where was it found?"
+        aria-label="location-found"
       />
       <AppTextArea
         onChange={onChange}
@@ -64,6 +68,7 @@ function EnchantInfoForm({
         label="About"
         value={about}
         placeholder="Talk About it"
+        aria-label="about"
       />
     </FormWidthContainer>
   );
