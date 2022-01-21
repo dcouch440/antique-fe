@@ -62,9 +62,9 @@ Once information is calculated the image is fitted into a grid which adapts and 
   - `MongoDB`
   - `JWT`
 
-Backend Repo will remain private for security purposes.
-
 ## `About Back End`
-  
+
+Repo: https://github.com/dcouch440/enchant_be
+
 Because of the nature of MongoDB (sometimes) requiring multiple requests. Go is used to build response objects concurrently and server-side sorting of small bits of information like users favorite image and retrieving userIds from items response which prepares the next request.
   
