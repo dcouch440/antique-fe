@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router';
 import { AppLayout } from 'Layout';
 import { AppSnackbar } from 'components/common';
 import { CssBaseline } from '@mui/material';
-import axiosSetup from 'config/axiosSetuo';
+import axiosSetup from 'config/axiosSetup';
 import { thunkSession } from 'store/user/thunkCreators';
 import { useEffect } from 'react';
 
