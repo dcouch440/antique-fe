@@ -1,5 +1,5 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useLayoutEffect, useState } from 'react';
 
 import { AppUser } from 'components/common';
 import { enchantPath } from 'config/paths';
@@ -26,7 +26,7 @@ function Enchant({ username, userAvatar, images, id }: IEnchant): ReactElement {
   const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
   const nav = useNavigate();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const image = new Image();
     image.src = images[0].url;
     image.onload = () => setImage({ height: image.height, width: image.width });
